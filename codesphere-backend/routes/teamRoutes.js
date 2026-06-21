@@ -1,0 +1,11 @@
+const router = require('express').Router();
+const { createCRUD } = require('../controllers/crudFactory');
+const Team = require('../models/Team');
+const { protect } = require('../middleware/authMiddleware');
+const c = createCRUD(Team, 'image');
+router.get('/', c.getAll);
+router.get('/:id', c.getOne);
+router.post('/', protect, c.create);
+router.put('/:id', protect, c.update);
+router.delete('/:id', protect, c.remove);
+module.exports = router;
