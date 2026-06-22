@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FiFacebook, FiLinkedin, FiGithub, FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/Mywebsitelogo.png';
 import './Footer.css';
 
 export default function Footer() {
