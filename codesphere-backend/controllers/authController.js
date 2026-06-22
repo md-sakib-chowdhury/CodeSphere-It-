@@ -3,6 +3,15 @@ const jwt = require('jsonwebtoken');
 
 const genToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
+exports.checkSetup = async (req, res) => {
+    try {
+        const count = await Admin.countDocuments();
+        res.json({ setupRequired: count === 0 });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
 exports.login = async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -18,8 +27,8 @@ exports.login = async (req, res) => {
 exports.register = async (req, res) => {
     const { name, email, password } = req.body;
     try {
-        const exists = await Admin.findOne({ email });
-        if (exists) return res.status(400).json({ message: 'Admin already exists' });
+        const count = await Admin.countDocuments();
+        if (count > 0) return res.status(403).json({ message: 'Admin already set up. Contact existing admin.' });
         const admin = await Admin.create({ name, email, password });
         res.status(201).json({ token: genToken(admin._id), name: admin.name });
     } catch (err) {
