@@ -152,30 +152,25 @@
 //         </section>
 //     );
 // }
-import { useState, useEffect } from 'react';
-import { FiArrowRight, FiPlay } from 'react-icons/fi';
+import { useState, useEffect, useRef } from 'react';
+import { FiArrowRight, FiPlay, FiCode, FiShoppingCart, FiLayout, FiPenTool, FiFilm, FiCloud } from 'react-icons/fi';
 import api from '../../utils/api';
 import './Hero.css';
 
 const DEFAULT = {
-    badge: '⚡ WHY CHOOSE US',
-    heading: 'IT Service BD-',
-    typedWords: ['Skyrocket Your Business', 'Data Safety Expert', 'Business Automation', 'Custom Software'],
-    subtext: 'We take responsibility for your data safety. AMANAH IT delivers modern MERN Stack web applications, IT infrastructure, and robust cybersecurity solutions for businesses across Bangladesh.',
-    stats: [
-        { number: '50+', label: 'Happy Clients' },
-        { number: '120+', label: 'Projects Done' },
-        { number: '8+', label: 'Years Exp.' },
-        { number: '24/7', label: 'Support' },
-    ],
+    badge: 'Now accepting new projects',
+    heading: 'We Build',
+    typedWords: ['Web Applications', 'E-commerce Stores', 'SaaS Platforms', 'Custom Software', 'Digital Solutions'],
+    subtext: 'It takes years to build a reputation, and only one bad system to damage it. AMANAH IT delivers secure, modern MERN Stack solutions built for trust and growth.',
 };
 
-// Goinnovior স্টাইলের ৪টি কোর হাইলাইট মডিউল ডাটা
-const GOINNOVIOR_HIGHLIGHTS = [
-    { id: '01', title: 'IT Infrastructure' },
-    { id: '02', title: 'CyberSecurity' },
-    { id: '03', title: 'Business Automation' },
-    { id: '04', title: 'IT Consultancy' }
+const STRIP_ITEMS = [
+    { num: '01', label: 'Web Development', icon: FiCode },
+    { num: '02', label: 'E-commerce', icon: FiShoppingCart },
+    { num: '03', label: 'UI/UX Design', icon: FiLayout },
+    { num: '04', label: 'Graphic Design', icon: FiPenTool },
+    { num: '05', label: 'Animation', icon: FiFilm },
+    { num: '06', label: 'Cloud & DevOps', icon: FiCloud },
 ];
 
 export default function Hero() {
@@ -183,6 +178,7 @@ export default function Hero() {
     const [typed, setTyped] = useState('');
     const [wi, setWi] = useState(0);
     const [del, setDel] = useState(false);
+    const canvasRef = useRef(null);
 
     useEffect(() => {
         api.get('/hero').then(r => setData({ ...DEFAULT, ...r.data })).catch(() => { });
@@ -209,121 +205,126 @@ export default function Hero() {
         return () => clearTimeout(timeout);
     }, [typed, del, wi, data.typedWords]);
 
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let width, height, particles, animId;
+
+        const resize = () => {
+            width = canvas.offsetWidth;
+            height = canvas.offsetHeight;
+            canvas.width = width;
+            canvas.height = height;
+        };
+
+        const initParticles = () => {
+            const count = Math.min(60, Math.floor((width * height) / 18000));
+            particles = Array.from({ length: count }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+            }));
+        };
+
+        const draw = () => {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < 0 || p.x > width) p.vx *= -1;
+                if (p.y < 0 || p.y > height) p.vy *= -1;
+            });
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const a = particles[i], b = particles[j];
+                    const dist = Math.hypot(a.x - b.x, a.y - b.y);
+                    if (dist < 140) {
+                        ctx.strokeStyle = `rgba(34,197,94,${(1 - dist / 140) * 0.25})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            particles.forEach(p => {
+                ctx.fillStyle = 'rgba(255,255,255,0.6)';
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            animId = requestAnimationFrame(draw);
+        };
+
+        resize();
+        initParticles();
+        draw();
+
+        const onResize = () => { resize(); initParticles(); };
+        window.addEventListener('resize', onResize);
+        return () => {
+            cancelAnimationFrame(animId);
+            window.removeEventListener('resize', onResize);
+        };
+    }, []);
+
     return (
         <section className="hero" id="hero">
-            <div className="hero-bg">
-                <div className="hero-blob hero-blob-1" />
-                <div className="hero-blob hero-blob-2" />
-                <div className="hero-grid" />
-            </div>
+            <canvas ref={canvasRef} className="hero-canvas" />
+            <div className="hero-glow hero-glow-1" />
+            <div className="hero-glow hero-glow-2" />
 
             <div className="container hero-content">
-                <div className="hero-left">
-                    <div className="hero-badge">
-                        <span className="badge-dot" />
-                        {data.badge}
-                    </div>
+                <div className="hero-badge">
+                    <span className="badge-dot" />
+                    {data.badge}
+                </div>
 
-                    <h1 className="hero-h1">
-                        {data.heading}<br />
-                        <span className="hero-typed">
-                            {typed}<span className="hero-cursor" />
-                        </span>
-                    </h1>
+                <h1 className="hero-h1">
+                    {data.heading}<br />
+                    <span className="hero-typed">
+                        {typed}<span className="hero-cursor" />
+                    </span>
+                </h1>
 
-                    <p className="hero-sub">{data.subtext}</p>
+                <p className="hero-sub">{data.subtext}</p>
 
-                    <div className="hero-ctas">
-                        <a href="#contact" className="btn btn-primary hero-btn-primary">
-                            Request Consultation <FiArrowRight />
-                        </a>
-                        <a href="#portfolio" className="btn btn-outline hero-btn-outline">
-                            <FiPlay size={14} /> View Our Work
-                        </a>
-                    </div>
-
-                    <div className="hero-tags">
-                        {['React', 'Node.js', 'MongoDB', 'Cybersecurity', 'Infrastructure', 'DevOps'].map(t => (
-                            <span key={t} className="hero-tag">{t}</span>
+                <div className="hero-trust">
+                    <span className="hero-trust-label">Built With</span>
+                    <div className="hero-trust-tags">
+                        {['React', 'Node.js', 'MongoDB', 'Express'].map(t => (
+                            <span key={t} className="hero-trust-tag">{t}</span>
                         ))}
                     </div>
                 </div>
 
-                <div className="hero-right">
-                    <div className="hero-card animate-float">
-                        <div className="hero-card-header">
-                            <div className="card-dot green" />
-                            <div className="card-dot yellow" />
-                            <div className="card-dot red" />
-                            <span>Live IT Management</span>
-                        </div>
-                        <div className="hero-metrics">
-                            <div className="metric-box">
-                                <div className="metric-num">96%</div>
-                                <div className="metric-lbl">Infrastructure</div>
-                            </div>
-                            <div className="metric-box">
-                                <div className="metric-num">93%</div>
-                                <div className="metric-lbl">Cyber Security</div>
-                            </div>
-                        </div>
-                        <div className="hero-bars">
-                            {[
-                                { label: 'IT Infrastructure', pct: 96, color: 'linear-gradient(90deg,#00b4d8,#f77f00)' },
-                                { label: 'Cyber Security', pct: 93, color: 'linear-gradient(90deg,#00b4d8,#16a34a)' },
-                                { label: 'Design & Development', pct: 88, color: 'linear-gradient(90deg,#3b82f6,#22c55e)' },
-                            ].map(b => (
-                                <div key={b.label} className="bar-row">
-                                    <div className="bar-meta">
-                                        <span>{b.label}</span><span>{b.pct}%</span>
-                                    </div>
-                                    <div className="bar-track">
-                                        <div className="bar-fill" style={{ width: `${b.pct}%`, background: b.color }} />
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="hero-avatars">
-                            {['IT', 'SEC', 'DEV', 'PM'].map((a, i) => (
-                                <div key={a} className="avatar" style={{ zIndex: 4 - i }}>
-                                    {a}
-                                </div>
-                            ))}
-                            <span className="avatar-text">Certified Resources</span>
-                        </div>
-                    </div>
-
-                    <div className="float-badge fb-1">🛡️ Data Protection Active</div>
-                    <div className="float-badge fb-2">⭐ 10+ Years Expertise</div>
+                <div className="hero-ctas">
+                    <a href="#contact" className="btn btn-primary hero-btn-primary">
+                        What We Serve <FiArrowRight />
+                    </a>
+                    <a href="#portfolio" className="btn btn-outline-dark hero-btn-outline">
+                        <FiPlay size={14} /> Learn More
+                    </a>
                 </div>
             </div>
 
-            {/* Goinnovior স্টাইলের ৪টি হাইলাইট বক্স গ্রিড */}
-            <div className="container">
-                <div className="goinnovior-highlights-grid">
-                    {GOINNOVIOR_HIGHLIGHTS.map((item) => (
-                        <div key={item.id} className="goinnovior-highlight-card">
-                            <div className="card-top-row">
-                                <span className="highlight-id">{item.id}</span>
-                                <div className="highlight-arrow">→</div>
+            <div className="hero-strip">
+                <div className="container hero-strip-inner">
+                    {STRIP_ITEMS.map((item, i) => {
+                        const Icon = item.icon;
+                        return (
+                            <div key={item.label} className="strip-item">
+                                <Icon size={26} className="strip-icon" />
+                                <div className="strip-text">
+                                    <span className="strip-num">{item.num} <span className="strip-line" /></span>
+                                    <span className="strip-label">{item.label}</span>
+                                </div>
                             </div>
-                            <h4 className="highlight-title">{item.title}</h4>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* আপনার আগের বটম স্ট্যাটাস বার */}
-            <div className="hero-statsbar">
-                <div className="container">
-                    <div className="statsbar-inner">
-                        {(data.stats || DEFAULT.stats).map((s, i) => (
-                            <div key={i} className="stat-block">
-                                <div className="stat-num">{s.number}</div>
-                                <div className="stat-lbl">{s.label}</div>
-                            </div>
-                        ))}
-                    </div>
+                        );
+                    })}
                 </div>
             </div>
         </section>
