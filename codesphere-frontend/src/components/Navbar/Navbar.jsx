@@ -186,6 +186,114 @@
 //         </div>
 //     );
 // }
+// import React, { useState } from 'react';
+// import {
+//     FiPhone,
+//     FiMail,
+//     FiChevronDown,
+//     FiDownload,
+//     FiMenu
+// } from 'react-icons/fi';
+// import {
+//     FaFacebookF,
+//     FaInstagram,
+//     FaLinkedinIn,
+//     FaYoutube
+// } from 'react-icons/fa';
+// import { FaXTwitter } from 'react-icons/fa6';
+
+// import './Navbar.css';
+
+// export default function Navbar() {
+//     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+//     return (
+//         <header className="header-wrapper">
+//             {/* ১. TOP BAR (কালো ব্যাকগ্রাউন্ড) */}
+//             <div className="top-bar">
+//                 <div className="container top-bar-container">
+//                     <div className="top-bar-left">
+//                         <a href="tel:+8801844185480" className="top-info-link">
+//                             <FiPhone className="top-icon green-icon" /> +880 18 4418 5480
+//                         </a>
+//                         <a href="mailto:info@goinnovior.com" className="top-info-link">
+//                             <FiMail className="top-icon green-icon" /> info@goinnovior.com
+//                         </a>
+//                     </div>
+//                     <div className="top-bar-right">
+//                         <div className="social-links">
+//                             <a href="#" className="social-icon fb"><FaFacebookF /></a>
+//                             <a href="#" className="social-icon insta"><FaInstagram /></a>
+//                             <a href="#" className="social-icon linkin"><FaLinkedinIn /></a>
+//                             <a href="#" className="social-icon twitter"><FaXTwitter /></a>
+//                             <a href="#" className="social-icon yt"><FaYoutube /></a>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+
+//             {/* ২. MAIN NAVIGATION BAR (সাদা ফ্লোটিং বার - পজিশন উপরে নেওয়া হয়েছে) */}
+//             <div className="container main-nav-container">
+//                 <nav className="navbar-floating">
+//                     {/* লোগো সেকশন */}
+//                     <div className="nav-logo">
+//                         <a href="/" className="text-logo">
+//                             <span className="logo-amanah">Amanah</span>
+//                             <span className="logo-icon-dot"></span>
+//                             <span className="logo-it">IT</span>
+//                         </a>
+//                     </div>
+//                     {/* মেনু আইটেমসমূহ */}
+//                     <div className={`nav-menu-links ${isMenuOpen ? 'active' : ''}`}>
+//                         <a href="#explore" className="menu-item">Explore Us</a>
+
+//                         <div className="menu-item has-dropdown">
+//                             Services <FiChevronDown className="dropdown-arrow" />
+//                             <div className="dropdown-menu">
+//                                 <a href="#it-infra">IT Infrastructure</a>
+//                                 <a href="#cyber">CyberSecurity</a>
+//                                 <a href="#automation">Business Automation</a>
+//                             </div>
+//                         </div>
+
+//                         <div className="menu-item has-dropdown">
+//                             Solutions <FiChevronDown className="dropdown-arrow" />
+//                             <div className="dropdown-menu">
+//                                 <a href="#enterprise">Enterprise ERP</a>
+//                                 <a href="#cloud">Cloud Solutions</a>
+//                             </div>
+//                         </div>
+
+//                         <div className="menu-item has-dropdown">
+//                             Latest Articles <FiChevronDown className="dropdown-arrow" />
+//                             <div className="dropdown-menu">
+//                                 <a href="#blogs">Tech Blogs</a>
+//                                 <a href="#news">Company News</a>
+//                             </div>
+//                         </div>
+
+//                         <a href="#career" className="menu-item">Career</a>
+//                         <a href="#contact" className="menu-item">Contact</a>
+//                     </div>
+
+//                     {/* রাইট সাইড অ্যাকশন বাটন গ্রপ */}
+//                     <div className="nav-actions">
+//                         <a href="/brochure.pdf" download className="btn-brochure">
+//                             Brochure <FiDownload className="download-icon" />
+//                         </a>
+//                         <button className="grid-menu-btn">
+//                             <span className="grid-dot-icon"></span>
+//                         </button>
+//                         {/* মোবাইল মেনু টগল বাটন */}
+//                         <button className="mobile-toggle-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+//                             <FiMenu />
+//                         </button>
+//                     </div>
+//                 </nav>
+//             </div>
+//         </header>
+//     );
+// }
 import React, { useState } from 'react';
 import {
     FiPhone,
@@ -201,7 +309,6 @@ import {
     FaYoutube
 } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
-
 import './Navbar.css';
 
 export default function Navbar() {
@@ -232,17 +339,23 @@ export default function Navbar() {
                 </div>
             </div>
 
-            {/* ২. MAIN NAVIGATION BAR (সাদা ফ্লোটিং বার - পজিশন উপরে নেওয়া হয়েছে) */}
+            {/* ২. MAIN NAVIGATION BAR */}
             <div className="container main-nav-container">
                 <nav className="navbar-floating">
-                    {/* লোগো সেকশন */}
+                    {/* 🎯 Amanah IT কাস্টম জ্যামিতিক সিএসএস লোগো */}
                     <div className="nav-logo">
-                        <a href="/" className="text-logo">
+                        <a href="/" className="amanah-brand-logo">
                             <span className="logo-amanah">Amanah</span>
-                            <span className="logo-icon-dot"></span>
+                            {/* জ্যামিতিক ৩টি ত্রিভুজের কাস্টম আইকন */}
+                            <div className="logo-custom-triangles">
+                                <span className="triangle-top"></span>
+                                <span className="triangle-middle"></span>
+                                <span className="triangle-bottom"></span>
+                            </div>
                             <span className="logo-it">IT</span>
                         </a>
                     </div>
+
                     {/* মেনু আইটেমসমূহ */}
                     <div className={`nav-menu-links ${isMenuOpen ? 'active' : ''}`}>
                         <a href="#explore" className="menu-item">Explore Us</a>
@@ -284,7 +397,6 @@ export default function Navbar() {
                         <button className="grid-menu-btn">
                             <span className="grid-dot-icon"></span>
                         </button>
-                        {/* মোবাইল মেনু টগল বাটন */}
                         <button className="mobile-toggle-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                             <FiMenu />
                         </button>
