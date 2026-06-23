@@ -237,12 +237,12 @@ export default function Navbar() {
                 <nav className="navbar-floating">
                     {/* লোগো সেকশন */}
                     <div className="nav-logo">
-                        <a href="/">
-                            {/* 💡 এখানে আপনার কোম্পানির লোগোর ফাইলের নাম ও এক্সটেনশন দিন */}
-                            <img src="/src/assets/Mywebsitelogo.png" alt="AMANAH IT" className="site-logo" />
+                        <a href="/" className="text-logo">
+                            <span className="logo-amanah">Amanah</span>
+                            <span className="logo-icon-dot"></span>
+                            <span className="logo-it">IT</span>
                         </a>
                     </div>
-
                     {/* মেনু আইটেমসমূহ */}
                     <div className={`nav-menu-links ${isMenuOpen ? 'active' : ''}`}>
                         <a href="#explore" className="menu-item">Explore Us</a>
