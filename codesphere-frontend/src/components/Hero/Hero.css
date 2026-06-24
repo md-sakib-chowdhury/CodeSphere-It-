@@ -1,8 +1,8 @@
-.hero {
+/* .hero {
     position: relative;
     background: #0a0e0c;
     overflow: hidden;
-    padding-top: 175px;
+    padding-top: 155px;
 }
 
 .hero-canvas {
@@ -163,14 +163,14 @@
 .hero-strip {
     position: relative;
     z-index: 2;
-    padding: 2.5rem var(--px) 4rem;
+    padding: 15rem 14rem 0;
 }
 
 .hero-strip-box {
-    max-width: var(--container);
+    max-width: calc(var(--container) - 8rem);
     margin: 0 auto;
     background: linear-gradient(135deg, #27ab0c, #78bb42);
-    border-radius: var(--radius-xl);
+  
     overflow: hidden;
 }
 
@@ -185,12 +185,14 @@
     display: flex;
     align-items: center;
     gap: 0.85rem;
+    cursor: default;
 }
 
 .strip-icon {
     color: #fff;
     flex-shrink: 0;
     opacity: 0.95;
+    transition: transform 0.3s ease;
 }
 
 .strip-text {
@@ -209,16 +211,26 @@
 }
 
 .strip-line {
-    width: 24px;
+    width: 42px;
     height: 1px;
     background: rgba(255, 255, 255, 0.5);
     display: inline-block;
+    transition: transform 0.35s ease, width 0.35s ease;
 }
 
 .strip-label {
-    font-size: 0.95rem;
+    font-size: 0.98rem;
     font-weight: 600;
     color: #fff;
+}
+
+.strip-item:hover .strip-line {
+    width: 88px;
+    transform: translateX(10px);
+}
+
+.strip-item:hover .strip-icon {
+    transform: scale(2.1);
 }
 
 @media (max-width: 1023px) {
@@ -270,4 +282,316 @@
     .hero-strip-inner {
         grid-template-columns: 1fr;
     }
-}
+} */
+ .hero {
+     position: relative;
+     background: #0a0e0c;
+     overflow: visible;
+     /* স্ট্রিপটি নিচে নামানোর জন্য এটিকে অবশ্যই visible রাখতে হবে */
+     padding-top: 175px;
+ }
+
+ .hero-canvas {
+     position: absolute;
+     inset: 0;
+     width: 100%;
+     height: 100%;
+ }
+
+ .hero-glow {
+     position: absolute;
+     border-radius: 50%;
+     pointer-events: none;
+     z-index: 1;
+ }
+
+ .hero-glow-1 {
+     width: 500px;
+     height: 500px;
+     background: radial-gradient(circle, rgba(34, 197, 94, 0.12) 0%, transparent 70%);
+     top: -100px;
+     left: -100px;
+ }
+
+ .hero-glow-2 {
+     width: 450px;
+     height: 450px;
+     background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+     bottom: -50px;
+     right: -80px;
+ }
+
+ .hero-content {
+     position: relative;
+     z-index: 2;
+     padding: 5rem 0 3rem;
+     text-align: center;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
+
+ .hero-badge {
+     display: inline-flex;
+     align-items: center;
+     gap: 8px;
+     background: rgba(34, 197, 94, 0.1);
+     border: 1px solid rgba(34, 197, 94, 0.3);
+     color: #4ade80;
+     font-size: 0.8rem;
+     font-weight: 500;
+     padding: 0.4rem 1rem;
+     border-radius: var(--radius-full);
+     margin-bottom: 1.75rem;
+ }
+
+ .badge-dot {
+     width: 7px;
+     height: 7px;
+     background: #22c55e;
+     border-radius: 50%;
+     animation: pulse-ring 1.5s infinite;
+ }
+
+ .hero-h1 {
+     font-size: clamp(2.25rem, 5.5vw, 4rem);
+     font-weight: 800;
+     color: #fff;
+     line-height: 1.15;
+     margin-bottom: 1.25rem;
+     max-width: 800px;
+ }
+
+ .hero-typed {
+     background: linear-gradient(135deg, #4ade80, #22c55e);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     background-clip: text;
+ }
+
+ .hero-cursor {
+     display: inline-block;
+     width: 4px;
+     height: 0.85em;
+     background: #4ade80;
+     vertical-align: middle;
+     margin-left: 3px;
+     border-radius: 2px;
+     animation: blink 0.9s infinite;
+ }
+
+ .hero-sub {
+     font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+     color: rgba(255, 255, 255, 0.65);
+     line-height: 1.8;
+     max-width: 620px;
+     margin-bottom: 2rem;
+ }
+
+ .hero-trust {
+     display: flex;
+     align-items: center;
+     gap: 1rem;
+     flex-wrap: wrap;
+     justify-content: center;
+     margin-bottom: 2.25rem;
+ }
+
+ .hero-trust-label {
+     font-size: 0.75rem;
+     font-weight: 600;
+     letter-spacing: 0.08em;
+     text-transform: uppercase;
+     color: #4ade80;
+ }
+
+ .hero-trust-tags {
+     display: flex;
+     gap: 0.5rem;
+     flex-wrap: wrap;
+ }
+
+ .hero-trust-tag {
+     background: rgba(255, 255, 255, 0.06);
+     border: 1px solid rgba(255, 255, 255, 0.12);
+     color: rgba(255, 255, 255, 0.8);
+     font-size: 0.78rem;
+     padding: 0.3rem 0.85rem;
+     border-radius: var(--radius-full);
+     font-weight: 500;
+ }
+
+ .hero-ctas {
+     display: flex;
+     gap: 1rem;
+     flex-wrap: wrap;
+     justify-content: center;
+ }
+
+ .hero-btn-primary {
+     font-size: 0.95rem;
+     padding: 0.85rem 2rem;
+ }
+
+ .hero-btn-outline {
+     font-size: 0.95rem;
+     padding: 0.85rem 1.75rem;
+     background: transparent;
+     color: #fff;
+     border: 1.5px solid rgba(255, 255, 255, 0.25);
+ }
+
+ .hero-btn-outline:hover {
+     background: rgba(255, 255, 255, 0.08);
+     border-color: rgba(255, 255, 255, 0.4);
+ }
+
+ .hero-strip {
+     position: relative;
+     z-index: 2;
+     padding: 0 2rem;
+ }
+
+ .hero-strip-box {
+     max-width: 1200px;
+     width: 100%;
+     margin: 0 auto;
+     background: linear-gradient(135deg, #27ab0c, #78bb42);
+     overflow: hidden;
+     border-radius: 12px;
+
+     /* স্ট্রিপটিকে অনেকখানি নিচে নামানোর জন্য মার্জিন -১৪০px করা হলো */
+     margin-bottom: -140px;
+ }
+
+ .hero-strip-inner {
+     display: grid;
+     grid-template-columns: repeat(4, 1fr);
+     /* ৪টি কলাম এক লাইনে রাখার জন্য */
+     gap: 1.5rem 1rem;
+     padding: 2rem 2.25rem;
+ }
+
+ .strip-item {
+     display: flex;
+     align-items: center;
+     gap: 0.85rem;
+     cursor: default;
+ }
+
+ .strip-icon {
+     color: #fff;
+     flex-shrink: 0;
+     opacity: 0.95;
+     transition: transform 0.3s ease;
+ }
+
+ .strip-text {
+     display: flex;
+     flex-direction: column;
+     gap: 2px;
+ }
+
+ .strip-num {
+     font-size: 0.75rem;
+     color: rgba(255, 255, 255, 0.75);
+     font-weight: 600;
+     display: flex;
+     align-items: center;
+     gap: 6px;
+ }
+
+ .strip-line {
+     width: 42px;
+     height: 1px;
+     background: rgba(255, 255, 255, 0.5);
+     display: inline-block;
+     transition: transform 0.35s ease, width 0.35s ease;
+ }
+
+ .strip-label {
+     font-size: 0.98rem;
+     font-weight: 600;
+     color: #fff;
+ }
+
+ .strip-item:hover .strip-line {
+     width: 88px;
+     transform: translateX(10px);
+ }
+
+ .strip-item:hover .strip-icon {
+     transform: scale(2.1);
+ }
+
+ /* -----------------------------------------------------------------
+   ⚠️ গুরুত্বপূর্ণ: হিরোর ঠিক পরবর্তী সেকশনের কন্টেন্ট নিচে নামানোর কোড।
+   নিচের '.next-section-class' পরিবর্তন করে আপনার আসল ক্লাসের নাম বসান।
+----------------------------------------------------------------- */
+ .next-section-class {
+     padding-top: 180px !important;
+ }
+
+
+ /* রেসপন্সিভ মিডিয়া কোয়েরি */
+
+ @media (max-width: 1023px) {
+     .hero-strip-inner {
+         grid-template-columns: repeat(2, 1fr);
+     }
+ }
+
+ @media (max-width: 767px) {
+     .hero {
+         padding-top: 60px;
+     }
+
+     .hero-content {
+         padding: 3.5rem 0 3rem;
+     }
+
+     .hero-ctas {
+         flex-direction: column;
+         width: 100%;
+         max-width: 320px;
+     }
+
+     .hero-ctas .btn {
+         width: 100%;
+         justify-content: center;
+     }
+
+     .hero-strip {
+         padding: 0 var(--px);
+     }
+
+     .hero-strip-box {
+         margin-bottom: -90px;
+         /* মোবাইল স্ক্রিনে পজিশন অ্যাডজাস্টমেন্ট */
+     }
+
+     .hero-strip-inner {
+         grid-template-columns: repeat(2, 1fr);
+         gap: 1.25rem 0.75rem;
+         padding: 1.5rem;
+     }
+
+     .strip-label {
+         font-size: 0.85rem;
+     }
+
+     /* মোবাইলে পরবর্তী সেকশনের প্যাডিং অ্যাডজাস্টমেন্ট */
+     .next-section-class {
+         padding-top: 120px !important;
+     }
+ }
+
+ @media (max-width: 479px) {
+     .hero-h1 {
+         font-size: 1.85rem;
+     }
+
+     .hero-strip-inner {
+         grid-template-columns: 1fr;
+     }
+ }

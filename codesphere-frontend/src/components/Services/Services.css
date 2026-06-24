@@ -1,5 +1,10 @@
 .services {
     background: var(--gray-50);
+
+    /* --- সবুজ স্ট্রিপ থেকে কন্টেন্ট নিচে নামানোর জন্য এই প্যাডিংটি যোগ করা হয়েছে --- */
+    padding-top: 220px !important;
+    padding-bottom: 5rem;
+    /* সেকশনের নিচের দিকের ডিফল্ট প্যাডিং */
 }
 
 .section-header {
@@ -114,13 +119,32 @@
     opacity: 0.75;
 }
 
+/* --- রেসপন্সিভ মিডিয়া কোয়েরি আপডেট --- */
+
 @media (max-width: 1023px) {
+    .services {
+        padding-top: 160px !important;
+        /* ট্যাবলেট স্ক্রিনে প্যাডিং কিছুটা কমবে */
+    }
+
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
+@media (max-width: 767px) {
+    .services {
+        padding-top: 120px !important;
+        /* সাধারণ মোবাইল স্ক্রিনে প্যাডিং */
+    }
+}
+
 @media (max-width: 479px) {
+    .services {
+        padding-top: 110px !important;
+        /* একদম ছোট মোবাইল স্ক্রিনে প্যাডিং */
+    }
+
     .services-grid {
         grid-template-columns: 1fr;
     }
