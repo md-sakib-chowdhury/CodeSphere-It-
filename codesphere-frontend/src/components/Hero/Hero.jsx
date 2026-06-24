@@ -493,7 +493,7 @@ export default function Hero() {
                 </div>
             </div>
 
-            <div className="hero-strip">
+            {/* <div className="hero-strip">
                 <div className="container hero-strip-inner">
                     {services.map((item, i) => {
                         const Icon = ICONS[item.icon] || FiCode;
@@ -507,6 +507,24 @@ export default function Hero() {
                             </div>
                         );
                     })}
+                </div>
+            </div> */}
+            <div className="hero-strip">
+                <div className="hero-strip-box">
+                    <div className="hero-strip-inner">
+                        {services.map((item, i) => {
+                            const Icon = ICONS[item.icon] || FiCode;
+                            return (
+                                <div key={item._id || item.title} className="strip-item">
+                                    <Icon size={26} className="strip-icon" />
+                                    <div className="strip-text">
+                                        <span className="strip-num">{String(i + 1).padStart(2, '0')} <span className="strip-line" /></span>
+                                        <span className="strip-label">{item.title}</span>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </section>
