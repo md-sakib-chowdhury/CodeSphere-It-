@@ -1,14 +1,16 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import AdminLogin from './pages/AdminLogin'
-import Contact from './components/Contact/Contact'
+import ExploreUs from './pages/ExploreUs/ExploreUs'
+import LatestArticles from './pages/LatestArticles/LatestArticles'
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/admin" element={<AdminLogin />} />
-      <Route path="/contact" element={<Contact />} />
+      <Route path="/explore-us" element={<ExploreUs />} />
+      <Route path="/latest-articles" element={<LatestArticles />} />
     </Routes>
   )
 }
