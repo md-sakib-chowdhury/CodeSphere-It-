@@ -1,0 +1,228 @@
+.page-banner {
+    background: linear-gradient(135deg, #2b2f33, #3a3f44);
+    padding-top: 175px;
+    padding-bottom: 4rem;
+    text-align: center;
+}
+
+.breadcrumb {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+}
+
+.breadcrumb a {
+    color: var(--green-400);
+}
+
+.breadcrumb span.current {
+    color: #fff;
+    font-weight: 500;
+}
+
+.page-banner h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: #fff;
+}
+
+.explore-section {
+    padding: 5rem 0;
+}
+
+.explore-section.alt-bg {
+    background: var(--gray-50);
+}
+
+@media (max-width: 767px) {
+    .explore-section {
+        padding: 3rem 0;
+    }
+}
+
+.explore-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+}
+
+.explore-row.reverse {
+    direction: rtl;
+}
+
+.explore-row.reverse>* {
+    direction: ltr;
+}
+
+.explore-text h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+    font-weight: 800;
+    color: var(--gray-900);
+    margin-bottom: 1.25rem;
+}
+
+.explore-text p {
+    font-size: 1rem;
+    color: var(--gray-600);
+    line-height: 1.85;
+    margin-bottom: 1.1rem;
+}
+
+.explore-text ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.explore-text ul li {
+    font-size: 0.97rem;
+    color: var(--gray-600);
+    line-height: 1.7;
+}
+
+.explore-img-wrap {
+    position: relative;
+    padding: 14px;
+}
+
+.explore-img-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 70%;
+    border-top: 3px solid var(--green-500);
+    border-left: 3px solid var(--green-500);
+}
+
+.explore-img-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 70%;
+    height: 70%;
+    border-bottom: 3px solid var(--green-500);
+    border-right: 3px solid var(--green-500);
+}
+
+.explore-img-wrap img {
+    width: 100%;
+    border-radius: var(--radius-sm);
+    position: relative;
+    z-index: 1;
+}
+
+.explore-section .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.explore-cta {
+    background: linear-gradient(135deg, #16a34a, #84cc16);
+    padding: 3.5rem 0;
+}
+
+.cta-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.cta-label {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+}
+
+.cta-inner h2 {
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-weight: 800;
+    color: #fff;
+    margin-top: 0.75rem;
+    line-height: 1.3;
+}
+
+.cta-right {
+    text-align: right;
+}
+
+.cta-right p {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.cta-btn {
+    display: inline-block;
+    background: #111;
+    color: #fff;
+    font-weight: 600;
+    padding: 0.85rem 1.75rem;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.cta-btn:hover {
+    background: #000;
+    transform: translateY(-2px);
+}
+
+.scroll-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    background: var(--green-600);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    z-index: 500;
+    transition: var(--transition);
+}
+
+.scroll-top:hover {
+    background: var(--green-500);
+    transform: translateY(-3px);
+}
+
+@media (max-width: 1023px) {
+
+    .explore-row,
+    .explore-row.reverse {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .explore-row.reverse {
+        direction: ltr;
+    }
+
+    .cta-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cta-right {
+        text-align: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .page-banner {
+        padding-top: 130px;
+        padding-bottom: 3rem;
+    }
+}
