@@ -1,0 +1,142 @@
+.latest-activities {
+    background: linear-gradient(135deg, #16a34a, #84cc16);
+    padding: 5rem 0;
+}
+
+.la-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.la-label {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+}
+
+.la-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: #fff;
+    margin-top: 0.75rem;
+}
+
+.la-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #111;
+    color: #fff;
+    font-weight: 600;
+    padding: 0.85rem 1.75rem;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+.la-more-btn:hover {
+    background: #000;
+    transform: translateY(-2px);
+}
+
+.la-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+}
+
+.la-card {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: block;
+    color: inherit;
+    transition: var(--transition);
+}
+
+.la-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+}
+
+.la-card-img {
+    position: relative;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+}
+
+.la-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.la-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--green-600);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.7rem;
+    border-radius: var(--radius-sm);
+}
+
+.la-card-body {
+    padding: 1.5rem;
+}
+
+.la-card-body h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    line-height: 1.4;
+    margin-bottom: 0.6rem;
+}
+
+.la-card:hover .la-card-body h3 {
+    color: var(--green-600);
+}
+
+.la-card-body p {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin-bottom: 0.85rem;
+}
+
+.la-date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: var(--green-600);
+    font-weight: 600;
+}
+
+@media (max-width: 1023px) {
+    .la-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 767px) {
+    .latest-activities {
+        padding: 3rem 0;
+    }
+
+    .la-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .la-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
