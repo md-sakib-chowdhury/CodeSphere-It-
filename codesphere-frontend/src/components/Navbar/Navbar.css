@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://googleapis.com');
 
 .header-wrapper {
     position: fixed;
@@ -85,7 +85,6 @@
     padding: 0 20px;
     transform: translateY(-16px);
     position: relative;
-    /* ✅ mega menu anchor */
 }
 
 .navbar-floating {
@@ -97,7 +96,6 @@
     border-radius: 0px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     position: relative;
-    /* ✅ mega menu anchor fallback */
 }
 
 /* ==========================================
@@ -189,7 +187,6 @@
     pointer-events: auto;
 }
 
-/* বামের সাইডবার */
 .mega-menu-sidebar {
     display: flex;
     flex-direction: column;
@@ -229,7 +226,6 @@
     color: #4ade80;
 }
 
-/* ডানের content */
 .mega-menu-content {
     flex: 1;
     pointer-events: auto;
@@ -274,7 +270,7 @@
 }
 
 /* ==========================================
-   ACTION BUTTONS
+   🎯 ACTION BUTTONS (হুবহু স্ক্রিনশটের মতো ডিজাইন ফিক্স)
    ========================================== */
 .nav-actions {
     display: flex;
@@ -283,28 +279,39 @@
 }
 
 .btn-brochure {
-    background: #ffffff;
-    color: #16a34a;
+    /* 💡 ইমেজ রেফারেন্স অনুযায়ী সলিড উজ্জ্বল সবুজ ব্যাকগ্রাউন্ড এবং সাদা টেক্সট */
+    background: #00b300 !important;
+    color: #ffffff !important;
     text-decoration: none;
     font-size: 14px;
-    font-weight: 600;
-    padding: 10px 22px;
-    border-radius: 8px;
-    border: 1.5px solid #22c55e;
+    font-weight: 700;
+    /* টেক্সট আরও একটু বোল্ড করা হলো */
+    padding: 10px 24px;
+    border-radius: 6px;
+    /* বাটনের কোণাগুলোর রাউন্ড শেপ ছবির মতো ফিক্সড */
+    border: none !important;
+    /* কোনো বর্ডার থাকবে না */
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
 }
 
-.btn-brochure:hover {
-    background: #f0fdf4;
-    transform: translateY(-1px);
-}
-
-.brochure-arrow {
-    color: #22c55e;
+/* বাটনের ভেতরের ডাউনলোড বা অ্যারো আইকন কালার ফিক্স */
+.btn-brochure svg,
+.btn-brochure span,
+.btn-brochure .brochure-arrow {
+    color: #ffffff !important;
+    fill: #ffffff !important;
     font-size: 16px;
+    display: inline-block;
+}
+
+/* হোভার করলে বাটনটি হালকা ডার্ক গ্রিন হবে যা মডার্ন লুক দিবে */
+.btn-brochure:hover {
+    background: #009900 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 179, 0, 0.3);
 }
 
 .grid-menu-btn {
