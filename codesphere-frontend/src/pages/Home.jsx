@@ -25,6 +25,7 @@ import Navbar from '../components/Navbar/Navbar'
 import Hero from '../components/Hero/Hero'
 import Services from '../components/Services/Services'
 import WhyChooseUs from '../components/WhyChooseUs/WhyChooseUs'
+import WhatWeOffer from '../components/WhatWeOffer/WhatWeOffer'
 import Portfolio from '../components/Portfolio/Portfolio'
 import KeyCompetency from '../components/KeyCompetency/KeyCompetency'
 import StatsCards from '../components/StatsCards/StatsCards'
@@ -40,6 +41,7 @@ export default function Home() {
             <Hero />
             <Services />
             <WhyChooseUs />
+            <WhatWeOffer />
             <Portfolio />
             <KeyCompetency />
             <StatsCards />
