@@ -545,7 +545,7 @@ export default function Navbar() {
                         </li>
 
                         <li><Link to="/latest-articles" className="menu-item">Latest Articles</Link></li>
-                        <li><Link to="/career" className="menu-item">Career</Link></li>
+                  
                         <li><Link to="/contact" className="menu-item">Contact</Link></li>
                     </ul>
 
