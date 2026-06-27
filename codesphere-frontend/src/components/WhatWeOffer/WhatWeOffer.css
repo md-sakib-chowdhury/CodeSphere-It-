@@ -9,19 +9,70 @@
     align-items: center;
 }
 
+/* ==========================================================================
+   🎯 WAVE MOTION WITH SPECIFIED COLORS (#9fc52d & GREEN)
+   ========================================================================== */
 .wwo-img-wrap {
     position: relative;
     border-radius: 45% 55% 60% 40% / 50% 45% 55% 50%;
-    overflow: hidden;
-    border: 6px solid var(--green-500);
     aspect-ratio: 1/1;
+    padding: 6px;
+    /* এই প্যাডিংটি বর্ডারের উইড্থ হিসেবে কাজ করবে */
+
+    /* 💡 প্যারট গ্রিনের জায়গায় আপনার দেওয়া #9fc52d এবং মেইন সবুজের গ্রেডিয়েন্ট কম্বিনেশন */
+    background: linear-gradient(135deg, #16a34a, #9fc52d, #22c55e, #a7d134);
+    background-size: 200% 200%;
+
+    /* ঢেউয়ের মতো আঁকাবাঁকা মোশন এবং কালার চেঞ্জিং এনিমেশন */
+    animation: moveWaveShape 7s ease-in-out infinite alternate, waveGradient 4s ease infinite;
 }
 
 .wwo-img-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* ইমেজটির বর্ডার রেডিয়াসও ব্যাকগ্রাউন্ডের সাথে ম্যাচ করে ঢেউ খেলবে */
+    border-radius: 45% 55% 60% 40% / 50% 45% 55% 50%;
+    animation: moveWaveShape 7s ease-in-out infinite alternate;
+    background: #fff;
+    /* ইমেজের পেছনে সাদা ব্যাকগ্রাউন্ড গ্যাপ ফিল করতে */
 }
+
+/* কালারগুলোকে ডানে-বামে ঢেউয়ের মতো নাড়ানোর এনিমেশন */
+@keyframes waveGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* বর্ডারটির শেপ অনবরত পরিবর্তন করে সাগরের ঢেউয়ের মতো মোশন তৈরি করার কী-ফ্রেম */
+@keyframes moveWaveShape {
+    0% {
+        border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+    }
+
+    40% {
+        border-radius: 70% 30% 52% 48% / 60% 40% 60% 40%;
+    }
+
+    70% {
+        border-radius: 50% 50% 35% 65% / 40% 60% 40% 60%;
+    }
+
+    100% {
+        border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+    }
+}
+
+/* ========================================================================== */
 
 .wwo-title {
     font-size: clamp(1.75rem, 3.5vw, 2.5rem);
@@ -82,6 +133,9 @@
     padding: 0.85rem 1.85rem;
 }
 
+/* ==========================================
+   RESPONSIVE LAYOUTS
+   ========================================== */
 @media (max-width: 1023px) {
     .wwo-row {
         grid-template-columns: 1fr;
@@ -96,7 +150,7 @@
 
 @media (max-width: 479px) {
     .wwo-img-wrap {
-        border-radius: 50%;
-        border-width: 4px;
+        padding: 4px;
+        /* মোবাইলে বর্ডার সাইজ সামান্য কমানো হলো */
     }
 }
