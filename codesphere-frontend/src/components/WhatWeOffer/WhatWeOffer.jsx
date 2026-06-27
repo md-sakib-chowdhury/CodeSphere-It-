@@ -57,7 +57,7 @@ export default function WhatWeOffer() {
                         })}
                     </div>
 
-                    <a href="#services" className="btn btn-primary wwo-btn" onClick={scrollToServices}>
+                    <a href="/services" className="btn btn-primary wwo-btn">
                         Learn More Us
                     </a>
                 </div>
