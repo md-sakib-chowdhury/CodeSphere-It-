@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FiPhone, FiMail, FiMapPin } from 'react-icons/fi';
+import Footer from '../../components/Footer/Footer';
 import './Contact.css';
 
 export default function Contact() {
@@ -159,6 +160,7 @@ export default function Contact() {
                     referrerPolicy="no-referrer-when-downgrade"
                 />
             </div>
+            <Footer />
         </div>
     );
 }

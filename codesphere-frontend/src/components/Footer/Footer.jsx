@@ -61,7 +61,6 @@
 // }
 import { Link } from 'react-router-dom';
 import { FiFacebook, FiInstagram, FiLinkedin, FiTwitter, FiYoutube, FiMapPin, FiMail, FiPhone, FiArrowUp } from 'react-icons/fi';
-import logo from '../../assets/Mywebsitelogo.png';
 import './Footer.css';
 
 export default function Footer() {
@@ -71,14 +70,16 @@ export default function Footer() {
         <>
             {/* CTA banner */}
             <section className="footer-cta">
-                <div className="container footer-cta-inner">
-                    <div>
-                        <span className="section-label footer-cta-label">Request Consultation</span>
-                        <h2>Need Any IT Service or Consultations<br />Next Projects</h2>
-                    </div>
-                    <div className="footer-cta-right">
-                        <p>We Are Always With Your Business</p>
-                        <a href="#contact" className="footer-cta-btn">Request Consultation</a>
+                <div className="footer-cta-box">
+                    <div className="footer-cta-inner">
+                        <div>
+                            <span className="section-label footer-cta-label">Request Consultation</span>
+                            <h2>Need Any IT Service or Consultations<br />Next Projects</h2>
+                        </div>
+                        <div className="footer-cta-right">
+                            <p>We Are Always With Your Business</p>
+                            <a href="#contact" className="footer-cta-btn">Request Consultation</a>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -86,7 +87,11 @@ export default function Footer() {
             <footer className="footer">
                 <div className="container footer-top">
                     <div className="footer-col footer-brand">
-                        <img src={logo} alt="AMANAH IT" className="footer-logo" />
+                        <div className="footer-logo-text">
+                            <span className="fl-amanah">Amanah</span>
+                            <span className="fl-dot"></span>
+                            <span className="fl-it">IT</span>
+                        </div>
                         <p>
                             AMANAH IT has adopted the highest standards of software development and
                             consultancy quality, enabling its clients across a wide range of industries
