@@ -1,9 +1,10 @@
 .footer-cta {
-    padding: 0 var(--px) 0;
-    margin-top: -120px;
+    padding: 3rem var(--px) 0;
+    margin-top: 0;
     background: transparent;
     position: relative;
     z-index: 2;
+    margin-bottom: -90px;
 }
 
 .footer-cta-box {
@@ -68,6 +69,7 @@
     color: var(--gray-400);
     position: relative;
     z-index: 1;
+    padding-top: 90px;
 }
 
 .footer-top {
@@ -262,19 +264,22 @@
 }
 
 @media (max-width: 767px) {
-    .footer-cta {
-        margin-top: -80px;
-    }
-
     .footer-cta-box {
         padding: 2.5rem 1.5rem;
+    }
+
+    .footer-cta {
+        margin-bottom: -70px;
+    }
+
+    .footer {
+        padding-top: 70px;
     }
 }
 
 @media (max-width: 479px) {
     .footer-top {
         grid-template-columns: 1fr;
-        padding-top: 90px;
     }
 
     .footer-brand {
@@ -284,5 +289,13 @@
     .footer-bottom-inner {
         flex-direction: column;
         text-align: center;
+    }
+
+    .footer-cta {
+        margin-bottom: -60px;
+    }
+
+    .footer {
+        padding-top: 60px;
     }
 }
