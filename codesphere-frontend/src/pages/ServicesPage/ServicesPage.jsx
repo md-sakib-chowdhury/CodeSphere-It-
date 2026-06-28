@@ -108,18 +108,7 @@ export default function ServicesPage() {
                 </div>
             </section>
 
-            <section className="services-cta">
-                <div className="container cta-inner">
-                    <div>
-                        <span className="section-label cta-label">Request Consultation</span>
-                        <h2>Ready to Start Your<br />Next Project?</h2>
-                    </div>
-                    <div className="cta-right">
-                        <p>We Are Always With Your Business</p>
-                        <a href="/#contact" className="cta-btn">Request Consultation</a>
-                    </div>
-                </div>
-            </section>
+           
 
             <Footer />
 
