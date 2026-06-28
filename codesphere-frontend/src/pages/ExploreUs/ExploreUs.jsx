@@ -140,9 +140,6 @@ export default function ExploreUs() {
 
             <Footer />
 
-            <a href="#hero" className="scroll-top" aria-label="Scroll to top">
-                <FiArrowUp size={18} />
-            </a>
         </>
     );
 }
