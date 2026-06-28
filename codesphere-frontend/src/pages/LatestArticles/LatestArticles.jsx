@@ -123,18 +123,7 @@ export default function LatestArticles() {
                 </div>
             </section>
 
-            <section className="articles-cta">
-                <div className="container cta-inner">
-                    <div>
-                        <span className="section-label cta-label">Request Consultation</span>
-                        <h2>Need Any IT Service or<br />Consultation for Your Next Project?</h2>
-                    </div>
-                    <div className="cta-right">
-                        <p>We Are Always With Your Business</p>
-                        <a href="/#contact" className="cta-btn">Request Consultation</a>
-                    </div>
-                </div>
-            </section>
+           
 
             <Footer />
 
