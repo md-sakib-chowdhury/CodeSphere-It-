@@ -1,6 +1,6 @@
 .latest-activities {
     background: linear-gradient(135deg, #16a34a, #84cc16);
-    padding: 5rem 0;
+    padding: 5rem 0 2rem;
 }
 
 .la-header {
@@ -128,7 +128,7 @@
 
 @media (max-width: 767px) {
     .latest-activities {
-        padding: 3rem 0;
+        padding: 3rem 0 1.5rem;
     }
 
     .la-grid {
