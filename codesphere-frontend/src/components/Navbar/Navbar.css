@@ -15,7 +15,7 @@
 .top-bar {
     background: #000000;
     color: #ffffff;
-    padding: 32px 0;
+    padding: 14px 0;
     font-size: 13px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -23,10 +23,12 @@
 .top-bar-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    padding-top: 0;
+    padding-bottom: 32px;
 }
 
 .top-bar-left {
@@ -59,7 +61,7 @@
 
 .social-icon {
     width: 26px;
-    height: 28px;
+    height: 26px;
     background: #22c55e;
     color: #ffffff;
     border-radius: 4px;
@@ -92,7 +94,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
+    padding: 10px 30px;
     border-radius: 0px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     position: relative;
