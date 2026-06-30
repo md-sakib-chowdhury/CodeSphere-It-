@@ -28,7 +28,7 @@
     margin: 0 auto;
     padding: 0 20px;
     padding-top: 0;
-    padding-bottom: 32px;
+    padding-bottom: 28px;
 }
 
 .top-bar-left {
@@ -85,7 +85,7 @@
     max-width: 1240px;
     margin: 0 auto;
     padding: 0 20px;
-    transform: translateY(-16px);
+    transform: translateY(-32px);
     position: relative;
 }
 
@@ -94,7 +94,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 30px;
+    padding: 20px 30px;
     border-radius: 0px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     position: relative;
@@ -342,21 +342,82 @@
     color: #000;
 }
 
-/* ==========================================
-   RESPONSIVE
-   ========================================== */
+/* ==========================================================
+   RESPONSIVE — 5 BREAKPOINTS
+   1) Small Laptop / Large Tablet (993px - 1200px)
+   2) Tablet (769px - 992px)
+   3) Mobile Large (481px - 768px)
+   4) Mobile Small (361px - 480px)
+   5) Extra Small (<= 360px)
+   ========================================================== */
+
+/* ----------------------------
+   1) SMALL LAPTOP / LARGE TABLET
+   ---------------------------- */
+@media (max-width: 1200px) {
+    .nav-menu-links {
+        gap: 16px;
+    }
+
+    .menu-item {
+        font-size: 13px;
+    }
+
+    .navbar-floating {
+        padding: 16px 24px;
+    }
+
+    .btn-brochure {
+        padding: 9px 18px;
+        font-size: 13px;
+    }
+}
+
+/* ----------------------------
+   2) TABLET — mega menu collapses, hamburger appears
+   ---------------------------- */
 @media (max-width: 992px) {
     .top-bar-left {
         gap: 10px;
         font-size: 12px;
     }
 
-    .social-links {
+    .nav-menu-links {
         display: none;
     }
 
-    .nav-menu-links {
-        display: none;
+    .nav-menu-links.mobile-open {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        padding: 10px 20px 20px;
+        z-index: 2000;
+    }
+
+    .nav-menu-links.mobile-open li {
+        width: 100%;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .nav-menu-links.mobile-open .menu-item {
+        width: 100%;
+        padding: 14px 0;
+        justify-content: space-between;
+    }
+
+    .nav-menu-links.mobile-open .nav-dropdown-wrapper {
+        position: relative;
+    }
+
+    .nav-menu-links.mobile-open .mega-menu-container {
+        display: none !important;
     }
 
     .mobile-toggle-btn {
@@ -369,5 +430,190 @@
 
     .grid-menu-btn {
         display: none;
+    }
+
+    .navbar-logo-text {
+        font-size: 20px;
+    }
+
+    .navbar-floating {
+        padding: 14px 20px;
+    }
+
+    .btn-brochure {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    .main-nav-container {
+        transform: translateY(-20px);
+    }
+}
+
+/* ----------------------------
+   3) MOBILE LARGE
+   ---------------------------- */
+@media (max-width: 768px) {
+    .top-bar {
+        padding: 10px 0;
+    }
+
+    .top-bar-container {
+        padding: 0 16px;
+        padding-bottom: 18px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .top-bar-left {
+        gap: 8px;
+        font-size: 11px;
+    }
+
+    .green-icon {
+        font-size: 13px;
+    }
+
+    .social-links {
+        gap: 6px;
+    }
+
+    .social-icon {
+        width: 22px;
+        height: 22px;
+        font-size: 10px;
+    }
+
+    .main-nav-container {
+        padding: 0 16px;
+        transform: translateY(-16px);
+    }
+
+    .navbar-floating {
+        padding: 12px 16px;
+    }
+
+    .navbar-logo-text {
+        font-size: 18px;
+    }
+
+    .nav-actions {
+        gap: 10px;
+    }
+
+    .btn-brochure {
+        padding: 7px 14px;
+        font-size: 12px;
+        gap: 5px;
+    }
+
+    .btn-brochure .brochure-arrow {
+        font-size: 14px;
+    }
+
+    .mobile-toggle-btn {
+        font-size: 20px;
+    }
+}
+
+/* ----------------------------
+   4) MOBILE SMALL
+   ---------------------------- */
+@media (max-width: 480px) {
+    .top-bar {
+        padding: 8px 0;
+    }
+
+    .top-bar-container {
+        padding: 0 12px;
+        padding-bottom: 14px;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .top-bar-left {
+        gap: 6px;
+        font-size: 10px;
+    }
+
+    .top-info-link {
+        gap: 4px;
+    }
+
+    .green-icon {
+        font-size: 12px;
+    }
+
+    .social-links {
+        gap: 5px;
+    }
+
+    .social-icon {
+        width: 20px;
+        height: 20px;
+        font-size: 9px;
+    }
+
+    .main-nav-container {
+        padding: 0 12px;
+        transform: translateY(-12px);
+    }
+
+    .navbar-floating {
+        padding: 10px 14px;
+    }
+
+    .navbar-logo-text {
+        font-size: 16px;
+    }
+
+    .nav-actions {
+        gap: 8px;
+    }
+
+    .btn-brochure {
+        padding: 6px 10px;
+        font-size: 11px;
+        gap: 4px;
+        border-radius: 5px;
+    }
+
+    .btn-brochure .brochure-arrow {
+        font-size: 12px;
+    }
+
+    .mobile-toggle-btn {
+        font-size: 18px;
+    }
+}
+
+/* ----------------------------
+   5) EXTRA SMALL — very small/old devices
+   ---------------------------- */
+@media (max-width: 360px) {
+    .top-bar-container {
+        padding: 0 10px;
+    }
+
+    .top-bar-left {
+        gap: 4px;
+        font-size: 9px;
+    }
+
+    .main-nav-container {
+        padding: 0 10px;
+    }
+
+    .navbar-floating {
+        padding: 8px 12px;
+    }
+
+    .navbar-logo-text {
+        font-size: 15px;
+    }
+
+    .btn-brochure {
+        font-size: 10px;
+        padding: 5px 8px;
     }
 }
