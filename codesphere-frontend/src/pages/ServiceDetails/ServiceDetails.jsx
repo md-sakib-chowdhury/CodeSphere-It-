@@ -5,6 +5,8 @@ import {
     FiArrowRight, FiCheckCircle,
 } from 'react-icons/fi';
 import api from '../../utils/api';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
 import './ServiceDetails.css';
 
 const ICONS = { FiCode, FiShoppingCart, FiLayout, FiServer, FiCloud, FiSmartphone };
@@ -107,99 +109,107 @@ export default function ServiceDetails() {
 
     if (!service) {
         return (
-            <div className="svcd-page">
-                <section className="svcd-hero svcd-hero--notfound">
-                    <div className="container svcd-hero-content">
-                        <div className="svcd-breadcrumb">
-                            <Link to="/">Home</Link>
-                            <span className="svcd-crumb-sep">»</span>
-                            <Link to="/services">Services</Link>
+            <>
+                <Navbar />
+                <div className="svcd-page">
+                    <section className="svcd-hero svcd-hero--notfound">
+                        <div className="container svcd-hero-content">
+                            <div className="svcd-breadcrumb">
+                                <Link to="/">Home</Link>
+                                <span className="svcd-crumb-sep">»</span>
+                                <Link to="/services">Services</Link>
+                            </div>
+                            <h1 className="svcd-hero-title">Service Not Found</h1>
+                            <p className="svcd-hero-sub">
+                                We couldn't find that service. Have a look at everything we offer instead.
+                            </p>
+                            <Link to="/services" className="svcd-back-btn">Back to Services</Link>
                         </div>
-                        <h1 className="svcd-hero-title">Service Not Found</h1>
-                        <p className="svcd-hero-sub">
-                            We couldn't find that service. Have a look at everything we offer instead.
-                        </p>
-                        <Link to="/services" className="svcd-back-btn">Back to Services</Link>
-                    </div>
-                </section>
-            </div>
+                    </section>
+                </div>
+                <Footer />
+            </>
         );
     }
 
     const Icon = ICONS[service.icon] || FiCode;
 
     return (
-        <div className="svcd-page">
+        <>
+            <Navbar />
+            <div className="svcd-page">
 
-            {/* ---------- Hero banner ---------- */}
-            <section className="svcd-hero">
-                <div className="svcd-hero-bg" />
-                <div className="svcd-hero-overlay" />
-                <div className="container svcd-hero-content">
-                    <div className="svcd-breadcrumb">
-                        <Link to="/">Home</Link>
-                        <span className="svcd-crumb-sep">»</span>
-                        <Link to="/services">Services</Link>
-                        <span className="svcd-crumb-sep">»</span>
-                        <span className="svcd-crumb-current">{service.title}</span>
+                {/* ---------- Hero banner ---------- */}
+                <section className="svcd-hero">
+                    <div className="svcd-hero-bg" />
+                    <div className="svcd-hero-overlay" />
+                    <div className="container svcd-hero-content">
+                        <div className="svcd-breadcrumb">
+                            <Link to="/">Home</Link>
+                            <span className="svcd-crumb-sep">»</span>
+                            <Link to="/services">Services</Link>
+                            <span className="svcd-crumb-sep">»</span>
+                            <span className="svcd-crumb-current">{service.title}</span>
+                        </div>
+                        <h1 className="svcd-hero-title">{service.title}</h1>
                     </div>
-                    <h1 className="svcd-hero-title">{service.title}</h1>
-                </div>
-            </section>
+                </section>
 
-            {/* ---------- Content ---------- */}
-            <section className="svcd-content">
-                <div className="container svcd-content-grid">
+                {/* ---------- Content ---------- */}
+                <section className="svcd-content">
+                    <div className="container svcd-content-grid">
 
-                    <div className="svcd-main">
-                        <span className="svcd-icon-badge"><Icon size={30} /></span>
-                        <h2 className="svcd-heading">{service.summary}</h2>
-                        <p className="svcd-body">{service.body}</p>
+                        <div className="svcd-main">
+                            <span className="svcd-icon-badge"><Icon size={30} /></span>
+                            <h2 className="svcd-heading">{service.summary}</h2>
+                            <p className="svcd-body">{service.body}</p>
 
-                        {Array.isArray(service.points) && service.points.length > 0 && (
-                            <div className="svcd-points-block">
-                                <h3>What's Included</h3>
-                                <ul className="svcd-points">
-                                    {service.points.map((p, idx) => (
-                                        <li key={idx}>
-                                            <FiCheckCircle size={16} className="svcd-point-icon" />
-                                            <span>{p}</span>
+                            {Array.isArray(service.points) && service.points.length > 0 && (
+                                <div className="svcd-points-block">
+                                    <h3>What's Included</h3>
+                                    <ul className="svcd-points">
+                                        {service.points.map((p, idx) => (
+                                            <li key={idx}>
+                                                <FiCheckCircle size={16} className="svcd-point-icon" />
+                                                <span>{p}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                        </div>
+
+                        <aside className="svcd-sidebar">
+                            <div className="svcd-sidebar-card">
+                                <h4>Other Services</h4>
+                                <ul className="svcd-sidebar-list">
+                                    {services.map(s => (
+                                        <li key={s._id || s.slug}>
+                                            <Link
+                                                to={`/services/${s.slug}`}
+                                                className={s.slug === slug ? 'active' : ''}
+                                            >
+                                                {s.title}
+                                            </Link>
                                         </li>
                                     ))}
                                 </ul>
                             </div>
-                        )}
+
+                            <div className="svcd-sidebar-cta">
+                                <h4>Need this for your business?</h4>
+                                <p>Tell us what you're building and we'll get back within a day.</p>
+                                <Link to="/contact" className="svcd-sidebar-btn">
+                                    Request a Quote <FiArrowRight />
+                                </Link>
+                            </div>
+                        </aside>
+
                     </div>
+                </section>
 
-                    <aside className="svcd-sidebar">
-                        <div className="svcd-sidebar-card">
-                            <h4>Other Services</h4>
-                            <ul className="svcd-sidebar-list">
-                                {services.map(s => (
-                                    <li key={s._id || s.slug}>
-                                        <Link
-                                            to={`/services/${s.slug}`}
-                                            className={s.slug === slug ? 'active' : ''}
-                                        >
-                                            {s.title}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        <div className="svcd-sidebar-cta">
-                            <h4>Need this for your business?</h4>
-                            <p>Tell us what you're building and we'll get back within a day.</p>
-                            <Link to="/contact" className="svcd-sidebar-btn">
-                                Request a Quote <FiArrowRight />
-                            </Link>
-                        </div>
-                    </aside>
-
-                </div>
-            </section>
-
-        </div>
+            </div>
+            <Footer />
+        </>
     );
 }
