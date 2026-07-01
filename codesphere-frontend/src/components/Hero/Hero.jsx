@@ -331,6 +331,7 @@
 //     );
 // }
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { FiArrowRight, FiPlay, FiCode, FiShoppingCart, FiLayout, FiPenTool, FiFilm, FiCloud, FiSmartphone, FiTrendingUp, FiServer } from 'react-icons/fi';
 import api from '../../utils/api';
 import './Hero.css';
@@ -484,9 +485,9 @@ export default function Hero() {
                 </div>
 
                 <div className="hero-ctas">
-                    <a href="#contact" className="btn btn-primary hero-btn-primary">
+                    <Link to="/services" className="btn btn-primary hero-btn-primary">
                         What We Serve <FiArrowRight />
-                    </a>
+                    </Link>
                     <a href="#portfolio" className="btn btn-outline-dark hero-btn-outline">
                         <FiPlay size={14} /> Learn More
                     </a>
