@@ -1,0 +1,290 @@
+/* ============================================================
+   AMANAH IT — Service Detail Page
+   Same token system as ServicesPage.css for consistency
+   ============================================================ */
+
+.svcd-page {
+    --svcd-bg: #06090b;
+    --svcd-bg-alt: #0b1210;
+    --svcd-surface: #101a16;
+    --svcd-border: rgba(255, 255, 255, 0.08);
+    --svcd-blue: #2563eb;
+    --svcd-green: #22c55e;
+    --svcd-green-light: #4ade80;
+    --svcd-gradient: linear-gradient(90deg, var(--svcd-blue), var(--svcd-green));
+    --svcd-text: #f4f7f5;
+    --svcd-text-muted: #9aa8a2;
+    color: var(--svcd-text);
+    background: var(--svcd-bg);
+    min-height: 100vh;
+}
+
+.svcd-page .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ---------------- Hero banner ---------------- */
+
+.svcd-hero {
+    position: relative;
+    min-height: 260px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    padding-bottom: 48px;
+    padding-top: 120px;
+}
+
+.svcd-hero--notfound {
+    align-items: center;
+    text-align: left;
+}
+
+.svcd-hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 25%, rgba(37, 99, 235, 0.32), transparent 45%),
+        radial-gradient(circle at 85% 20%, rgba(34, 197, 94, 0.28), transparent 50%),
+        linear-gradient(180deg, #05080a 0%, #0a1210 100%);
+}
+
+.svcd-hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.16;
+    background-image:
+        linear-gradient(rgba(74, 222, 128, 0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(74, 222, 128, 0.5) 1px, transparent 1px);
+    background-size: 46px 46px;
+    mask-image: radial-gradient(circle at 75% 25%, black, transparent 70%);
+}
+
+.svcd-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(6, 9, 11, 0.2) 0%, rgba(6, 9, 11, 0.95) 100%);
+}
+
+.svcd-hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.svcd-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.svcd-breadcrumb a {
+    color: var(--svcd-green-light);
+    text-decoration: none;
+}
+
+.svcd-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.svcd-crumb-sep {
+    color: var(--svcd-text-muted);
+}
+
+.svcd-crumb-current {
+    color: #fff;
+}
+
+.svcd-hero-title {
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: #fff;
+}
+
+.svcd-hero-sub {
+    color: var(--svcd-text-muted);
+    max-width: 520px;
+    margin: 14px 0 20px;
+    line-height: 1.6;
+}
+
+.svcd-back-btn {
+    display: inline-block;
+    background: var(--svcd-gradient);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 8px;
+}
+
+/* ---------------- Content layout ---------------- */
+
+.svcd-content {
+    padding: 56px 0 80px;
+}
+
+.svcd-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+    align-items: start;
+}
+
+.svcd-icon-badge {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: var(--svcd-gradient);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.svcd-heading {
+    font-size: clamp(1.4rem, 2.8vw, 1.8rem);
+    font-weight: 700;
+    margin: 0 0 16px;
+    color: #fff;
+}
+
+.svcd-body {
+    color: var(--svcd-text-muted);
+    font-size: 1.02rem;
+    line-height: 1.8;
+    margin: 0 0 36px;
+    max-width: 640px;
+}
+
+.svcd-points-block h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 16px;
+}
+
+.svcd-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 560px;
+}
+
+.svcd-points li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--svcd-surface);
+    border: 1px solid var(--svcd-border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.94rem;
+}
+
+.svcd-point-icon {
+    color: var(--svcd-green-light);
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+/* ---------------- Sidebar ---------------- */
+
+.svcd-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.svcd-sidebar-card,
+.svcd-sidebar-cta {
+    background: var(--svcd-surface);
+    border: 1px solid var(--svcd-border);
+    border-radius: 14px;
+    padding: 22px;
+}
+
+.svcd-sidebar-card h4,
+.svcd-sidebar-cta h4 {
+    margin: 0 0 14px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.svcd-sidebar-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.svcd-sidebar-list a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--svcd-text-muted);
+    text-decoration: none;
+    font-size: 0.92rem;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.svcd-sidebar-list a:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+.svcd-sidebar-list a.active {
+    background: rgba(74, 222, 128, 0.12);
+    color: var(--svcd-green-light);
+    font-weight: 600;
+}
+
+.svcd-sidebar-cta p {
+    color: var(--svcd-text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0 0 18px;
+}
+
+.svcd-sidebar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--svcd-gradient);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    width: 100%;
+    justify-content: center;
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 860px) {
+    .svcd-content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .svcd-hero {
+        padding-top: 100px;
+        min-height: 220px;
+    }
+}
