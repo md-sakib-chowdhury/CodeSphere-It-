@@ -485,7 +485,7 @@ export default function Hero() {
                 </div>
 
                 <div className="hero-ctas">
-                    <Link to="/services" className="btn btn-primary hero-btn-primary">
+                    <Link to="/services/web-application-development" className="btn btn-primary hero-btn-primary">
                         What We Serve <FiArrowRight />
                     </Link>
                     <a href="#portfolio" className="btn btn-outline-dark hero-btn-outline">
