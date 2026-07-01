@@ -44,28 +44,17 @@
 .svcd-hero-bg {
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(circle at 18% 20%, rgba(37, 99, 235, 0.32), transparent 45%),
-        radial-gradient(circle at 85% 15%, rgba(34, 197, 94, 0.28), transparent 50%),
-        linear-gradient(180deg, #05080a 0%, #0a1210 100%);
-}
-
-.svcd-hero-bg::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: 0.14;
-    background-image:
-        linear-gradient(rgba(74, 222, 128, 0.5) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(74, 222, 128, 0.5) 1px, transparent 1px);
-    background-size: 46px 46px;
-    mask-image: radial-gradient(circle at 75% 20%, black, transparent 70%);
+    background-size: cover;
+    background-position: center;
+    background-color: #05080a;
 }
 
 .svcd-hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(6, 9, 11, 0.15) 0%, rgba(6, 9, 11, 0.96) 100%);
+    background:
+        linear-gradient(180deg, rgba(6, 9, 11, 0.55) 0%, rgba(6, 9, 11, 0.92) 100%),
+        linear-gradient(90deg, rgba(6, 12, 10, 0.55) 0%, rgba(6, 12, 10, 0.15) 55%);
 }
 
 .svcd-hero-content {
@@ -98,19 +87,6 @@
 
 .svcd-crumb-current {
     color: #fff;
-}
-
-.svcd-hero .svcd-icon-badge {
-    width: 56px;
-    height: 56px;
-    border-radius: 12px;
-    background: var(--svcd-gradient);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    box-shadow: 0 8px 24px rgba(34, 197, 94, 0.25);
 }
 
 .svcd-hero-title {
@@ -151,6 +127,19 @@
     grid-template-columns: 1fr 320px;
     gap: 48px;
     align-items: start;
+}
+
+.svcd-icon-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: var(--svcd-gradient);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.2);
 }
 
 .svcd-section-title {
