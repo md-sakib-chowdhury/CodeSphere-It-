@@ -488,9 +488,9 @@ export default function Hero() {
                     <Link to="/services/web-application-development" className="btn btn-primary hero-btn-primary">
                         What We Serve <FiArrowRight />
                     </Link>
-                    <a href="#portfolio" className="btn btn-outline-dark hero-btn-outline">
+                    <Link to="/explore-us" className="btn btn-outline-dark hero-btn-outline">
                         <FiPlay size={14} /> Learn More
-                    </a>
+                    </Link>
                 </div>
             </div>
 
