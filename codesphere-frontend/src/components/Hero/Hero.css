@@ -61,6 +61,8 @@
     font-weight: 500;
     padding: 0.4rem 1rem;
     border-radius: var(--radius-full);
+    margin-top: 20px;
+    /* 👈 নতুন — badge টা হালকা নিচে নামানো হলো */
     margin-bottom: 1.25rem;
 }
 
@@ -107,46 +109,13 @@
     margin-bottom: 1.5rem;
 }
 
-.hero-trust {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-}
-
-.hero-trust-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #4ade80;
-}
-
-.hero-trust-tags {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
-.hero-trust-tag {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.78rem;
-    padding: 0.3rem 0.85rem;
-    border-radius: var(--radius-full);
-    font-weight: 500;
-}
-
 .hero-ctas {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 1rem;
-    /* 👈 নতুন — buttons আর strip এর মাঝে সামান্য breathing room */
+    /* 👈 buttons আর strip এর মাঝে সামান্য breathing room */
 }
 
 .hero-btn-primary {

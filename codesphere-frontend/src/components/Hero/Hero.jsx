@@ -475,14 +475,7 @@ export default function Hero() {
 
                 <p className="hero-sub">{data.subtext}</p>
 
-                <div className="hero-trust">
-                    <span className="hero-trust-label">Built With</span>
-                    <div className="hero-trust-tags">
-                        {['React', 'Node.js', 'MongoDB', 'Express'].map(t => (
-                            <span key={t} className="hero-trust-tag">{t}</span>
-                        ))}
-                    </div>
-                </div>
+               
 
                 <div className="hero-ctas">
                     <Link to="/services/web-application-development" className="btn btn-primary hero-btn-primary">
