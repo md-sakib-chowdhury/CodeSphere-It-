@@ -1,301 +1,654 @@
-.hero {
+/* ============================================================
+   AMANAH IT — Services Page
+   Palette: near-black base, blue -> green signal gradient
+   ============================================================ */
+
+.svc-page {
+    --svc-bg: #070b0d;
+    --svc-bg-alt: #0a1210;
+    --svc-surface: #111c17;
+    --svc-border: rgba(255, 255, 255, 0.08);
+    --svc-blue: #2563eb;
+    --svc-green: #22c55e;
+    --svc-green-light: #4ade80;
+    --svc-gradient: linear-gradient(90deg, var(--svc-blue), var(--svc-green));
+    --svc-text: #f4f7f5;
+    --svc-text-muted: #9aa8a2;
+    color: var(--svc-text);
+    background: var(--svc-bg);
+}
+
+.svc-page .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ---------------- Hero banner ---------------- */
+
+.svc-hero {
     position: relative;
-    background: #0a0e0c;
-    overflow: visible;
-    padding-top: 90px;
-    padding-bottom: 160px;
-    /* 👈 বাড়ানো হলো — যাতে CTA buttons এর নিচে যথেষ্ট জায়গা থাকে এবং strip সেগুলো না ঢাকে */
+    min-height: 340px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    padding-bottom: 56px;
+    padding-top: 190px;
 }
 
-.hero-canvas {
+.svc-hero-bg {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 3%;
-    right: 3%;
-    width: 94%;
-    height: 100%;
+    inset: 0;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(37, 99, 235, 0.35), transparent 45%),
+        radial-gradient(circle at 85% 30%, rgba(34, 197, 94, 0.3), transparent 50%),
+        linear-gradient(180deg, #05080a 0%, #0a1210 100%);
 }
 
-.hero-glow {
+.svc-hero-bg::before {
+    content: '';
     position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
+    inset: 0;
+    opacity: 0.18;
+    background-image:
+        linear-gradient(rgba(74, 222, 128, 0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(74, 222, 128, 0.5) 1px, transparent 1px);
+    background-size: 46px 46px;
+    mask-image: radial-gradient(circle at 70% 30%, black, transparent 70%);
+}
+
+.svc-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(6, 9, 11, 0.2) 0%, rgba(6, 9, 11, 0.95) 100%);
+}
+
+.svc-hero-content {
+    position: relative;
     z-index: 1;
 }
 
-.hero-glow-1 {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(34, 197, 94, 0.12) 0%, transparent 70%);
-    top: -100px;
-    left: -100px;
-}
-
-.hero-glow-2 {
-    width: 450px;
-    height: 450px;
-    background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
-    bottom: -50px;
-    right: -80px;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 2rem 0 1.5rem;
-    text-align: center;
+.svc-breadcrumb {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.hero-badge {
-    display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid rgba(34, 197, 94, 0.3);
-    color: #4ade80;
-    font-size: 0.8rem;
-    font-weight: 500;
-    padding: 0.4rem 1rem;
-    border-radius: var(--radius-full);
-    margin-top: 20px;
-    /* 👈 নতুন — badge টা হালকা নিচে নামানো হলো */
-    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 14px;
 }
 
-.badge-dot {
-    width: 7px;
-    height: 7px;
-    background: #22c55e;
-    border-radius: 50%;
-    animation: pulse-ring 1.5s infinite;
+.svc-breadcrumb a {
+    color: var(--svc-green-light);
+    text-decoration: none;
 }
 
-.hero-h1 {
-    font-size: clamp(2.1rem, 5vw, 3.6rem);
+.svc-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.svc-crumb-sep {
+    color: var(--svc-text-muted);
+}
+
+.svc-crumb-current {
+    color: #fff;
+}
+
+.svc-hero-title {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
     font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
     color: #fff;
-    line-height: 1.15;
-    margin-bottom: 1rem;
-    max-width: 800px;
 }
 
-.hero-typed {
-    background: linear-gradient(135deg, #4ade80, #22c55e);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.hero-cursor {
-    display: inline-block;
-    width: 4px;
-    height: 0.85em;
-    background: #4ade80;
-    vertical-align: middle;
-    margin-left: 3px;
-    border-radius: 2px;
-    animation: blink 0.9s infinite;
-}
-
-.hero-sub {
-    font-size: clamp(0.9rem, 1.4vw, 1.05rem);
-    color: rgba(255, 255, 255, 0.65);
+.svc-hero-sub {
+    max-width: 560px;
+    color: var(--svc-text-muted);
+    font-size: 1.05rem;
     line-height: 1.6;
-    max-width: 620px;
-    margin-bottom: 1.5rem;
+    margin: 0;
 }
 
-.hero-ctas {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 1rem;
-    /* 👈 buttons আর strip এর মাঝে সামান্য breathing room */
+/* ---------------- Intro ---------------- */
+
+.svc-intro {
+    padding: 64px 0 16px;
+    background: var(--svc-bg);
+    text-align: center;
 }
 
-.hero-btn-primary {
-    font-size: 0.95rem;
-    padding: 0.85rem 2rem;
+.svc-intro-heading {
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 800;
+    margin: 0 auto 18px;
+    max-width: 720px;
+    text-align: center;
+    animation: svcFadeUp 0.8s ease both, svcSlideAway 6s ease-in-out 0.8s infinite;
 }
 
-.hero-btn-outline {
-    font-size: 0.95rem;
-    padding: 0.85rem 1.75rem;
-    background: transparent;
-    color: #fff;
-    border: 1.5px solid rgba(255, 255, 255, 0.25);
-}
-
-.hero-btn-outline:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.4);
-}
-
-/* -----------------------------------------------------------------
-  স্ট্রিপ এখন hero-content থেকে সম্পূর্ণ স্বাধীন (position: absolute)।
-  তাই strip এর position বদলালে hero এর heading/text/height কখনো প্রভাবিত হবে না।
------------------------------------------------------------------ */
-.hero-strip {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -90px;
-    /* 👈 এই ভ্যালু দিয়েই overlap/position কন্ট্রোল হয় */
-    z-index: 3;
-    padding: 0 2rem;
-}
-
-.hero-strip-box {
-    max-width: 1200px;
-    width: 100%;
+.svc-intro-text {
+    color: var(--svc-text-muted);
+    font-size: 1.02rem;
+    line-height: 1.75;
+    max-width: 760px;
     margin: 0 auto;
-    background: linear-gradient(135deg, #27ab0c, #78bb42);
-    overflow: hidden;
-    border-radius: 12px;
+    text-align: center;
+    animation: svcFadeUp 0.8s ease 0.15s both, svcFloat 5s ease-in-out 1s infinite;
 }
 
-.hero-strip-inner {
+@keyframes svcFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes svcFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Heading drifts up and fades out, then eases back into place —
+   a slow "leaves and returns" loop rather than a subtle float */
+@keyframes svcSlideAway {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    40% {
+        transform: translateY(-48px);
+        opacity: 0.1;
+    }
+
+    60% {
+        transform: translateY(-48px);
+        opacity: 0.1;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ---------------- Services grid ---------------- */
+
+.svc-grid-section {
+    padding: 48px 0 140px;
+    background: #ffffff;
+    position: relative;
+}
+
+.svc-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem 1.5rem;
-    /* 👈 row আর column এর মধ্যে gap বাড়ানো হলো, ২ সারি item এর জন্য breathing room */
-    padding: 2.25rem 2.5rem;
-    /* 👈 padding সামান্য বাড়ানো হলো */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
 }
 
-.strip-item {
+.svc-card {
+    background: var(--svc-surface);
+    border: 1px solid var(--svc-border);
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 12px 30px -14px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+    position: relative;
+}
+
+.svc-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(74, 222, 128, 0.4);
+    box-shadow: 0 24px 45px -18px rgba(0, 0, 0, 0.35);
+}
+
+/* Subtle index mark — small differentiator so cards don't read
+   as a plain repeated template block */
+.svc-card::before {
+    content: attr(data-index);
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.55);
+    z-index: 2;
+}
+
+.svc-card-head {
+    padding: 26px 24px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.svc-card-head::after {
+    /* soft diagonal sheen across the gradient header */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), transparent 55%);
+    pointer-events: none;
+}
+
+.svc-card.tone-a .svc-card-head {
+    background: linear-gradient(135deg, #1d4ed8, #15803d);
+}
+
+.svc-card.tone-b .svc-card-head {
+    background: linear-gradient(135deg, #166534, #22c55e);
+}
+
+.svc-card.tone-c .svc-card-head {
+    background: linear-gradient(135deg, #2563eb, #4ade80);
+}
+
+.svc-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     display: flex;
     align-items: center;
-    gap: 0.85rem;
-    cursor: default;
-}
-
-.strip-icon {
-    color: #fff;
-    flex-shrink: 0;
-    opacity: 0.95;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
     transition: transform 0.3s ease;
 }
 
-.strip-text {
+.svc-card:hover .svc-card-icon {
+    transform: scale(1.08) rotate(-3deg);
+}
+
+.svc-card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.svc-card-body {
+    padding: 22px 24px 26px;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 16px;
+    margin-top: -18px;
+    background: var(--svc-surface);
+    border-radius: 16px 16px 0 0;
+    position: relative;
+    z-index: 1;
 }
 
-.strip-num {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.75);
-    font-weight: 600;
+.svc-card-summary {
+    color: var(--svc-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.svc-card-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.svc-card-points li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 0.88rem;
+    color: #d6ded9;
+    line-height: 1.5;
+}
+
+.svc-point-icon {
+    color: var(--svc-green-light);
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.svc-card-cta {
+    display: inline-flex;
     align-items: center;
     gap: 6px;
+    margin-top: 8px;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--svc-green-light);
+    transition: gap 0.25s ease;
 }
 
-.strip-line {
-    width: 42px;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.5);
-    display: inline-block;
-    transition: transform 0.35s ease, width 0.35s ease;
+.svc-card:hover .svc-card-cta {
+    gap: 10px;
 }
 
-.strip-label {
-    font-size: 0.98rem;
-    font-weight: 600;
+/* ---------------- Mid CTA strip (overlapping) ---------------- */
+/* Slim, understated banner-style strip. Left-aligned gradient
+   text instead of a filled gradient block, so it reads as a
+   quieter transition element rather than a second "big CTA". */
+
+.svc-cta-strip {
+    background: transparent;
+    position: relative;
+    z-index: 2;
+    margin-top: -96px;
+}
+
+.svc-cta-strip-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    background: #ffffff;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated gradient border ring — a slightly larger gradient
+   rectangle sits behind the white card and rotates its colors */
+.svc-cta-strip-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2.5px;
+    border-radius: 16px;
+    background: linear-gradient(270deg, var(--svc-blue), var(--svc-green), var(--svc-blue));
+    background-size: 200% 200%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: svcBorderFlow 4s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes svcBorderFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+/* Overrides .svc-page .container's padding, which otherwise wins
+   on specificity since this element carries both classes */
+.svc-cta-strip .container.svc-cta-strip-inner {
+    padding: 44px 56px;
+}
+
+.svc-cta-strip-inner h3 {
+    margin: 0;
+    background: var(--svc-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    position: relative;
+    z-index: 1;
+}
+
+.svc-cta-strip-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--svc-gradient);
     color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 13px 26px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 10px 24px -10px rgba(34, 197, 94, 0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, gap 0.2s ease;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
 }
 
-.strip-item:hover .strip-line {
-    width: 88px;
-    transform: translateX(10px);
+.svc-cta-strip-btn:hover {
+    background: var(--svc-green);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px -8px rgba(34, 197, 94, 0.65);
+    gap: 12px;
 }
 
-.strip-item:hover .strip-icon {
-    transform: scale(2.1);
+/* ---------------- Benefits ---------------- */
+
+.svc-benefits {
+    padding: 96px 0 72px;
+    background: var(--svc-bg-alt);
 }
 
-/* -----------------------------------------------------------------
-  ⚠️ গুরুত্বপূর্ণ: হিরোর ঠিক পরবর্তী সেকশনের কন্টেন্ট নিচে নামানোর কোড।
-  নিচের '.next-section-class' পরিবর্তন করে আপনার আসল ক্লাসের নাম বসান।
-  স্ট্রিপ এখন absolute হওয়ায় পরের section টা normal flow তেই hero এর
-  ঠিক নিচ থেকে শুরু হবে, তাই strip এর overlap অংশ ঢাকার জন্য এই
-  padding-top প্রয়োজন।
------------------------------------------------------------------ */
-.next-section-class {
-    padding-top: 140px !important;
-    /* 👈 strip এ এখন ২ সারি item থাকায় height বেড়েছে, তাই এই ভ্যালুও বাড়ানো হলো */
+.svc-benefits-heading {
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 800;
+    margin: 0 0 10px;
 }
 
+.svc-benefits-sub {
+    color: var(--svc-text-muted);
+    margin: 0 0 36px;
+    max-width: 560px;
+}
 
-/* রেসপন্সিভ মিডিয়া কোয়েরি */
+.svc-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
 
-@media (max-width: 1023px) {
-    .hero-strip-inner {
+.svc-benefit-card {
+    background: var(--svc-surface);
+    border: 1px solid var(--svc-border);
+    border-radius: 14px;
+    padding: 28px;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.svc-benefit-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(74, 222, 128, 0.4);
+    box-shadow: 0 20px 40px -18px rgba(0, 0, 0, 0.45);
+}
+
+.svc-benefit-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(74, 222, 128, 0.12);
+    color: var(--svc-green-light);
+    margin-bottom: 16px;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.svc-benefit-card:hover .svc-benefit-icon {
+    transform: scale(1.12) rotate(-4deg);
+    background: rgba(74, 222, 128, 0.22);
+}
+
+.svc-benefit-card h4 {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.svc-benefit-card p {
+    margin: 0;
+    color: var(--svc-text-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+/* ---------------- Bottom CTA (standalone, own white section) ---------------- */
+/* This is the one "big" filled-gradient CTA on the page — kept
+   as the sole full-bleed gradient block so it doesn't compete
+   with the quieter mid-strip above. */
+
+.svc-bottom-cta {
+    background: #eef1f0;
+    padding: 88px 0;
+}
+
+.svc-bottom-cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    flex-wrap: wrap;
+    background: var(--svc-gradient);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-radius: 0;
+    box-shadow: 0 25px 55px -20px rgba(37, 99, 235, 0.35);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Overrides .svc-page .container's padding, same clash as the
+   mid CTA strip above */
+.svc-bottom-cta .container.svc-bottom-cta-inner {
+    padding: 88px 64px;
+}
+
+.svc-bottom-cta-inner::before {
+    /* large soft ring, purely decorative, breaks up the flat fill */
+    content: '';
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    top: -140px;
+    right: -80px;
+    pointer-events: none;
+}
+
+.svc-bottom-eyebrow {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 10px;
+}
+
+.svc-bottom-cta-inner h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+    font-weight: 800;
+    max-width: 560px;
+    line-height: 1.15;
+    position: relative;
+    z-index: 1;
+}
+
+.svc-bottom-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #05080a;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 16px 30px;
+    border-radius: 11px;
+    white-space: nowrap;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.svc-bottom-cta-btn:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 900px) {
+
+    .svc-grid,
+    .svc-benefits-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (max-width: 767px) {
-    .hero {
-        padding-top: 30px;
-        padding-bottom: 220px;
-        /* 👈 বাড়ানো হলো — মোবাইলে strip এ ৩ সারি item হওয়ায় বেশি জায়গা লাগে */
-    }
+@media (max-width: 640px) {
 
-    .hero-canvas {
-        left: 0;
-        right: 0;
-        width: 100%;
-    }
-
-    .hero-content {
-        padding: 1.5rem 0 1rem;
-    }
-
-    .hero-ctas {
-        flex-direction: column;
-        width: 100%;
-        max-width: 320px;
-        margin-bottom: 0.5rem;
-    }
-
-    .hero-ctas .btn {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .hero-strip {
-        padding: 0 var(--px);
-        bottom: -60px;
-    }
-
-    .hero-strip-inner {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem 0.75rem;
-        padding: 1.5rem;
-    }
-
-    .strip-label {
-        font-size: 0.85rem;
-    }
-
-    .next-section-class {
-        padding-top: 100px !important;
-    }
-}
-
-@media (max-width: 479px) {
-    .hero-h1 {
-        font-size: 1.85rem;
-    }
-
-    .hero-strip-inner {
+    .svc-grid,
+    .svc-benefits-grid {
         grid-template-columns: 1fr;
+    }
+
+    .svc-hero {
+        padding-top: 150px;
+        min-height: 280px;
+    }
+
+    .svc-grid-section {
+        padding-bottom: 110px;
+    }
+
+    .svc-cta-strip {
+        margin-top: -70px;
+    }
+
+    .svc-cta-strip .container.svc-cta-strip-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 34px 28px;
+    }
+
+    .svc-bottom-cta .container.svc-bottom-cta-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 36px 26px;
+    }
+
+    .svc-bottom-cta {
+        padding: 64px 0;
     }
 }
