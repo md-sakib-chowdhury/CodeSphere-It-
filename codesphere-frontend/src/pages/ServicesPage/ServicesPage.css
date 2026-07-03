@@ -124,7 +124,7 @@
     margin: 0 auto 18px;
     max-width: 720px;
     text-align: center;
-    animation: svcFadeUp 0.7s ease both;
+    animation: svcFadeUp 0.8s ease both, svcFloat 5s ease-in-out 0.8s infinite;
 }
 
 .svc-intro-text {
@@ -134,18 +134,30 @@
     max-width: 760px;
     margin: 0 auto;
     text-align: center;
-    animation: svcFadeUp 0.7s ease 0.15s both;
+    animation: svcFadeUp 0.8s ease 0.15s both, svcFloat 5s ease-in-out 1s infinite;
 }
 
 @keyframes svcFadeUp {
     from {
         opacity: 0;
-        transform: translateY(18px);
+        transform: translateY(24px);
     }
 
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes svcFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
     }
 }
 
