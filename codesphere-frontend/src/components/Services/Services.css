@@ -1,10 +1,30 @@
 .services {
     background: var(--gray-50);
+    position: relative;
+    overflow: hidden;
 
-    /* --- সবুজ স্ট্রিপ থেকে কন্টেন্ট নিচে নামানোর জন্য এই প্যাডিংটি যোগ করা হয়েছে --- */
+    /* --- সবুজ স্ট্রিপ থেকে কন্টেন্ট নিচে নামানোর জন্য এই প্যাডিংটি যোগ করা হয়েছে --- */
     padding-top: 220px !important;
     padding-bottom: 5rem;
     /* সেকশনের নিচের দিকের ডিফল্ট প্যাডিং */
+}
+
+/* subtle dot-grid texture, feels engineered rather than decorative */
+.services::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, var(--gray-200) 1px, transparent 1px);
+    background-size: 28px 28px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.services .container {
+    position: relative;
+    z-index: 1;
 }
 
 .section-header {
@@ -19,23 +39,26 @@
 .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    gap: 1.75rem;
 }
 
 .service-card {
     background: var(--white);
     border: 1px solid var(--gray-200);
     border-radius: var(--radius-lg);
-    padding: 2rem;
-    transition: var(--transition);
+    padding: 2.25rem 2rem;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.35s ease;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.85rem;
     position: relative;
     overflow: hidden;
     animation: fadeInUp 0.5s ease both;
 }
 
+/* top accent bar */
 .service-card::before {
     content: '';
     position: absolute;
@@ -46,12 +69,29 @@
     background: var(--accent);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.3s ease;
+    transition: transform 0.35s ease;
+    z-index: 2;
+}
+
+/* soft glow blob in the corner, tinted per-card via --accent */
+.service-card::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0;
+    filter: blur(40px);
+    transition: opacity 0.4s ease;
+    pointer-events: none;
 }
 
 .service-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px -12px rgba(15, 23, 42, 0.16);
     border-color: transparent;
 }
 
@@ -59,20 +99,33 @@
     transform: scaleX(1);
 }
 
+.service-card:hover::after {
+    opacity: 0.16;
+}
+
 .service-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: var(--radius-md);
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.08) rotate(-4deg);
 }
 
 .service-title {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.15rem;
+    font-weight: 700;
     color: var(--gray-900);
+    letter-spacing: -0.01em;
 }
 
 .service-desc {
@@ -85,41 +138,64 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
-    margin-top: 0.25rem;
+    gap: 0.55rem;
+    margin-top: 0.35rem;
+    padding-top: 0.9rem;
+    border-top: 1px dashed var(--gray-200);
 }
 
 .service-features li {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
     font-size: 0.8rem;
+    font-weight: 500;
     color: var(--gray-600);
 }
 
 .feature-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    border-radius: 5px;
+    background: var(--accent) !important;
+    opacity: 0.15;
+    position: relative;
+}
+
+.feature-dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 8px;
+    border-right: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    transform: translate(-50%, -60%) rotate(45deg);
+    opacity: 1;
 }
 
 .service-footer {
     margin-top: auto;
-    padding-top: 0.5rem;
+    padding-top: 0.75rem;
 }
 
 .service-link {
     font-size: 0.85rem;
-    font-weight: 600;
-    transition: var(--transition);
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: gap 0.25s ease, opacity 0.25s ease;
 }
 
 .service-link:hover {
-    opacity: 0.75;
+    opacity: 0.8;
+    gap: 0.55rem;
 }
 
-/* --- রেসপন্সিভ মিডিয়া কোয়েরি আপডেট --- */
+/* --- রেসপন্সিভ মিডিয়া কোয়েরি আপডেট --- */
 
 @media (max-width: 1023px) {
     .services {
@@ -147,5 +223,9 @@
 
     .services-grid {
         grid-template-columns: 1fr;
+    }
+
+    .service-card {
+        padding: 1.75rem 1.5rem;
     }
 }
