@@ -5,9 +5,9 @@
    ============================================================ */
 
 .svc-page {
-    --svc-bg: #06090b;
-    --svc-bg-alt: #0b1210;
-    --svc-surface: #101a16;
+    --svc-bg: #070b0d;
+    --svc-bg-alt: #0a1210;
+    --svc-surface: #111c17;
     --svc-border: rgba(255, 255, 255, 0.08);
     --svc-blue: #2563eb;
     --svc-green: #22c55e;
@@ -34,7 +34,7 @@
     align-items: flex-end;
     overflow: hidden;
     padding-bottom: 56px;
-    padding-top: 120px;
+    padding-top: 190px;
 }
 
 .svc-hero-bg {
@@ -138,7 +138,7 @@
 
 .svc-grid-section {
     padding: 48px 0 72px;
-    background: var(--svc-bg);
+    background: #ffffff;
 }
 
 .svc-grid {
@@ -251,22 +251,26 @@
 /* ---------------- Mid CTA strip ---------------- */
 
 .svc-cta-strip {
-    background: var(--svc-gradient);
+    background: #ffffff;
+    padding: 0 0 64px;
 }
 
 .svc-cta-strip-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    padding: 26px 0;
+    gap: 20px;
+    padding: 64px 40px;
     flex-wrap: wrap;
+    background: var(--svc-gradient);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px -20px rgba(34, 197, 94, 0.35);
 }
 
 .svc-cta-strip-inner h3 {
     margin: 0;
     color: #fff;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 700;
 }
 
@@ -278,13 +282,14 @@
     color: #fff;
     text-decoration: none;
     font-weight: 600;
-    padding: 12px 22px;
-    border-radius: 8px;
-    transition: opacity 0.2s ease;
+    padding: 14px 26px;
+    border-radius: 10px;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .svc-cta-strip-btn:hover {
     opacity: 0.85;
+    transform: translateY(-2px);
 }
 
 /* ---------------- Benefits ---------------- */
@@ -347,8 +352,8 @@
 /* ---------------- Bottom CTA ---------------- */
 
 .svc-bottom-cta {
-    background: var(--svc-gradient);
-    padding: 48px 0;
+    background: var(--svc-bg-alt);
+    padding: 0 0 72px;
 }
 
 .svc-bottom-cta-inner {
@@ -357,6 +362,10 @@
     justify-content: space-between;
     gap: 24px;
     flex-wrap: wrap;
+    background: var(--svc-gradient);
+    border-radius: 20px;
+    padding: 64px 40px;
+    box-shadow: 0 20px 50px -20px rgba(37, 99, 235, 0.35);
 }
 
 .svc-bottom-eyebrow {
@@ -386,13 +395,14 @@
     text-decoration: none;
     font-weight: 700;
     padding: 14px 26px;
-    border-radius: 8px;
+    border-radius: 10px;
     white-space: nowrap;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .svc-bottom-cta-btn:hover {
     opacity: 0.85;
+    transform: translateY(-2px);
 }
 
 /* ---------------- Responsive ---------------- */
@@ -413,7 +423,7 @@
     }
 
     .svc-hero {
-        padding-top: 100px;
+        padding-top: 150px;
         min-height: 280px;
     }
 
@@ -421,5 +431,6 @@
     .svc-bottom-cta-inner {
         flex-direction: column;
         align-items: flex-start;
+        padding: 40px 24px;
     }
 }
