@@ -1,7 +1,6 @@
 /* ============================================================
    AMANAH IT — Services Page
    Palette: near-black base, blue -> green signal gradient
-   (echoes the brand gradient already used in Hero.jsx)
    ============================================================ */
 
 .svc-page {
@@ -47,7 +46,6 @@
 }
 
 .svc-hero-bg::before {
-    /* subtle circuit-line texture to echo the network motif from Hero */
     content: '';
     position: absolute;
     inset: 0;
@@ -117,13 +115,16 @@
 .svc-intro {
     padding: 64px 0 16px;
     background: var(--svc-bg);
+    text-align: center;
 }
 
 .svc-intro-heading {
     font-size: clamp(1.6rem, 3vw, 2.1rem);
     font-weight: 800;
-    margin: 0 0 18px;
+    margin: 0 auto 18px;
     max-width: 720px;
+    text-align: center;
+    animation: svcFadeUp 0.7s ease both;
 }
 
 .svc-intro-text {
@@ -131,45 +132,90 @@
     font-size: 1.02rem;
     line-height: 1.75;
     max-width: 760px;
-    margin: 0;
+    margin: 0 auto;
+    text-align: center;
+    animation: svcFadeUp 0.7s ease 0.15s both;
+}
+
+@keyframes svcFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ---------------- Services grid ---------------- */
 
 .svc-grid-section {
-    padding: 48px 0 72px;
+    padding: 48px 0 140px;
     background: #ffffff;
+    position: relative;
 }
 
 .svc-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 28px;
 }
 
 .svc-card {
     background: var(--svc-surface);
     border: 1px solid var(--svc-border);
-    border-radius: 14px;
+    border-radius: 18px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     text-decoration: none;
     color: inherit;
-    transition: transform 0.25s ease, border-color 0.25s ease;
+    box-shadow: 0 12px 30px -14px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+    position: relative;
 }
 
 .svc-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(74, 222, 128, 0.35);
+    transform: translateY(-8px);
+    border-color: rgba(74, 222, 128, 0.4);
+    box-shadow: 0 24px 45px -18px rgba(0, 0, 0, 0.35);
+}
+
+/* Subtle index mark — small differentiator so cards don't read
+   as a plain repeated template block */
+.svc-card::before {
+    content: attr(data-index);
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.55);
+    z-index: 2;
 }
 
 .svc-card-head {
-    padding: 22px 22px 18px;
+    padding: 26px 24px 40px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
     color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.svc-card-head::after {
+    /* soft diagonal sheen across the gradient header */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), transparent 55%);
+    pointer-events: none;
 }
 
 .svc-card.tone-a .svc-card-head {
@@ -185,27 +231,43 @@
 }
 
 .svc-card-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.16);
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.svc-card:hover .svc-card-icon {
+    transform: scale(1.08) rotate(-3deg);
 }
 
 .svc-card-title {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     font-weight: 700;
+    letter-spacing: -0.01em;
     margin: 0;
+    position: relative;
+    z-index: 1;
 }
 
 .svc-card-body {
-    padding: 20px 22px 24px;
+    padding: 22px 24px 26px;
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
+    margin-top: -18px;
+    background: var(--svc-surface);
+    border-radius: 16px 16px 0 0;
+    position: relative;
+    z-index: 1;
 }
 
 .svc-card-summary {
@@ -221,15 +283,16 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .svc-card-points li {
     display: flex;
     align-items: flex-start;
-    gap: 8px;
+    gap: 9px;
     font-size: 0.88rem;
     color: #d6ded9;
+    line-height: 1.5;
 }
 
 .svc-point-icon {
@@ -244,58 +307,113 @@
     gap: 6px;
     margin-top: 8px;
     font-size: 0.86rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--svc-green-light);
+    transition: gap 0.25s ease;
 }
 
-/* ---------------- Mid CTA strip ---------------- */
+.svc-card:hover .svc-card-cta {
+    gap: 10px;
+}
+
+/* ---------------- Mid CTA strip (overlapping) ---------------- */
+/* Slim, understated banner-style strip. Left-aligned gradient
+   text instead of a filled gradient block, so it reads as a
+   quieter transition element rather than a second "big CTA". */
 
 .svc-cta-strip {
-    background: #ffffff;
-    padding: 0 0 64px;
+    background: transparent;
+    position: relative;
+    z-index: 2;
+    margin-top: -96px;
 }
 
 .svc-cta-strip-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
-    padding: 64px 40px;
+    gap: 24px;
     flex-wrap: wrap;
-    background: var(--svc-gradient);
-    border-radius: 20px;
-    box-shadow: 0 20px 50px -20px rgba(34, 197, 94, 0.35);
+    background: #ffffff;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated gradient border ring — a slightly larger gradient
+   rectangle sits behind the white card and rotates its colors */
+.svc-cta-strip-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2.5px;
+    border-radius: 16px;
+    background: linear-gradient(270deg, var(--svc-blue), var(--svc-green), var(--svc-blue));
+    background-size: 200% 200%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: svcBorderFlow 4s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes svcBorderFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+/* Overrides .svc-page .container's padding, which otherwise wins
+   on specificity since this element carries both classes */
+.svc-cta-strip .container.svc-cta-strip-inner {
+    padding: 44px 56px;
 }
 
 .svc-cta-strip-inner h3 {
     margin: 0;
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 700;
+    background: var(--svc-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    position: relative;
+    z-index: 1;
 }
 
 .svc-cta-strip-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #05080a;
-    color: #fff;
+    background: transparent;
+    color: #0f172a;
     text-decoration: none;
-    font-weight: 600;
-    padding: 14px 26px;
+    font-weight: 700;
+    padding: 13px 24px;
     border-radius: 10px;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    border: 1.5px solid var(--svc-green);
+    transition: background 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
 }
 
 .svc-cta-strip-btn:hover {
-    opacity: 0.85;
+    background: rgba(34, 197, 94, 0.1);
     transform: translateY(-2px);
 }
 
 /* ---------------- Benefits ---------------- */
 
 .svc-benefits {
-    padding: 72px 0;
+    padding: 96px 0 72px;
     background: var(--svc-bg-alt);
 }
 
@@ -322,6 +440,15 @@
     border: 1px solid var(--svc-border);
     border-radius: 14px;
     padding: 28px;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.svc-benefit-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(74, 222, 128, 0.4);
+    box-shadow: 0 20px 40px -18px rgba(0, 0, 0, 0.45);
 }
 
 .svc-benefit-icon {
@@ -334,6 +461,12 @@
     background: rgba(74, 222, 128, 0.12);
     color: var(--svc-green-light);
     margin-bottom: 16px;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.svc-benefit-card:hover .svc-benefit-icon {
+    transform: scale(1.12) rotate(-4deg);
+    background: rgba(74, 222, 128, 0.22);
 }
 
 .svc-benefit-card h4 {
@@ -349,23 +482,47 @@
     line-height: 1.6;
 }
 
-/* ---------------- Bottom CTA ---------------- */
+/* ---------------- Bottom CTA (standalone, own white section) ---------------- */
+/* This is the one "big" filled-gradient CTA on the page — kept
+   as the sole full-bleed gradient block so it doesn't compete
+   with the quieter mid-strip above. */
 
 .svc-bottom-cta {
-    background: var(--svc-bg-alt);
-    padding: 0 0 72px;
+    background: #eef1f0;
+    padding: 88px 0;
 }
 
 .svc-bottom-cta-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
+    gap: 28px;
     flex-wrap: wrap;
     background: var(--svc-gradient);
-    border-radius: 20px;
-    padding: 64px 40px;
-    box-shadow: 0 20px 50px -20px rgba(37, 99, 235, 0.35);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-radius: 22px;
+    box-shadow: 0 25px 55px -20px rgba(37, 99, 235, 0.35);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Overrides .svc-page .container's padding, same clash as the
+   mid CTA strip above */
+.svc-bottom-cta .container.svc-bottom-cta-inner {
+    padding: 88px 64px;
+}
+
+.svc-bottom-cta-inner::before {
+    /* large soft ring, purely decorative, breaks up the flat fill */
+    content: '';
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    top: -140px;
+    right: -80px;
+    pointer-events: none;
 }
 
 .svc-bottom-eyebrow {
@@ -375,15 +532,18 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .svc-bottom-cta-inner h2 {
     margin: 0;
     color: #fff;
-    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-size: clamp(1.7rem, 3.6vw, 2.4rem);
     font-weight: 800;
-    max-width: 520px;
+    max-width: 560px;
+    line-height: 1.15;
+    position: relative;
+    z-index: 1;
 }
 
 .svc-bottom-cta-btn {
@@ -394,10 +554,12 @@
     color: #fff;
     text-decoration: none;
     font-weight: 700;
-    padding: 14px 26px;
-    border-radius: 10px;
+    padding: 16px 30px;
+    border-radius: 11px;
     white-space: nowrap;
     transition: opacity 0.2s ease, transform 0.2s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .svc-bottom-cta-btn:hover {
@@ -427,10 +589,27 @@
         min-height: 280px;
     }
 
-    .svc-cta-strip-inner,
-    .svc-bottom-cta-inner {
+    .svc-grid-section {
+        padding-bottom: 110px;
+    }
+
+    .svc-cta-strip {
+        margin-top: -70px;
+    }
+
+    .svc-cta-strip .container.svc-cta-strip-inner {
         flex-direction: column;
         align-items: flex-start;
-        padding: 40px 24px;
+        padding: 34px 28px;
+    }
+
+    .svc-bottom-cta .container.svc-bottom-cta-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 36px 26px;
+    }
+
+    .svc-bottom-cta {
+        padding: 64px 0;
     }
 }
