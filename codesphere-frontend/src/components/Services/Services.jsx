@@ -70,15 +70,15 @@ const ICONS = { FiCode, FiShoppingCart, FiLayout, FiServer, FiCloud, FiSmartphon
 
 // Slugs here MUST match the slugs in ServiceDetails.jsx's FALLBACK_SERVICES,
 // otherwise "Learn more" will land on the Service Not Found page.
-const DEFAULTS = [
-    { _id: '1', slug: 'web-application-development', title: 'Web Application Development', description: 'Custom MERN stack web apps, dashboards, and enterprise portals built for performance and scale.', icon: 'FiCode', color: '#2563eb', features: ['React + Node.js', 'REST & GraphQL APIs', 'MongoDB', 'Auth & Roles'] },
-    { _id: '2', slug: 'ecommerce-solutions', title: 'E-commerce Solutions', description: 'Full-featured online stores with payment gateways, inventory management, and order tracking.', icon: 'FiShoppingCart', color: '#16a34a', features: ['Stripe & SSL Commerz', 'Product Management', 'Order Tracking', 'Admin Panel'] },
-    { _id: '3', slug: 'ui-ux-design', title: 'UI/UX Design', description: 'Modern, responsive interface design that converts visitors to customers across all devices.', icon: 'FiLayout', color: '#3b82f6', features: ['Figma Design', 'Mobile First', 'Prototyping', 'Design Systems'] },
-    { _id: '4', slug: 'custom-software-saas', title: 'Custom Software & SaaS', description: 'Internal tools and multi-tenant SaaS platforms built with an API-first approach.', icon: 'FiServer', color: '#22c55e', features: ['Admin Panels', 'Role-based Access', 'Subscription Billing', 'API-first Design'] },
-    { _id: '5', slug: 'deployment-cloud-hosting', title: 'Deployment & Cloud Hosting', description: 'CI/CD pipelines, cloud deployment, and monitoring on AWS, Vercel, or Render.', icon: 'FiCloud', color: '#1d4ed8', features: ['CI/CD Pipeline', 'Env & Secrets Setup', 'Uptime Monitoring', 'SSL & Domain Setup'] },
-    { _id: '6', slug: 'maintenance-support', title: 'Maintenance & Support', description: 'Ongoing bug fixes, security patches, and feature additions after launch.', icon: 'FiSmartphone', color: '#15803d', features: ['Bug Fixes', 'Security Patches', 'Feature Additions', 'Direct Communication'] },
-];
 
+const DEFAULTS = [
+    { _id: '1', slug: 'web-application-development', title: 'Web Application Development', description: 'Custom MERN stack web apps, dashboards, and enterprise portals built for performance and scale.', icon: 'FiCode', color: '#6366f1', features: ['React + Node.js', 'REST & GraphQL APIs', 'MongoDB', 'Auth & Roles'] },
+    { _id: '2', slug: 'ecommerce-solutions', title: 'E-commerce Solutions', description: 'Full-featured online stores with payment gateways, inventory management, and order tracking.', icon: 'FiShoppingCart', color: '#f59e0b', features: ['Stripe & SSL Commerz', 'Product Management', 'Order Tracking', 'Admin Panel'] },
+    { _id: '3', slug: 'ui-ux-design', title: 'UI/UX Design', description: 'Modern, responsive interface design that converts visitors to customers across all devices.', icon: 'FiLayout', color: '#ec4899', features: ['Figma Design', 'Mobile First', 'Prototyping', 'Design Systems'] },
+    { _id: '4', slug: 'custom-software-saas', title: 'Custom Software & SaaS', description: 'Internal tools and multi-tenant SaaS platforms built with an API-first approach.', icon: 'FiServer', color: '#14b8a6', features: ['Admin Panels', 'Role-based Access', 'Subscription Billing', 'API-first Design'] },
+    { _id: '5', slug: 'deployment-cloud-hosting', title: 'Deployment & Cloud Hosting', description: 'CI/CD pipelines, cloud deployment, and monitoring on AWS, Vercel, or Render.', icon: 'FiCloud', color: '#0ea5e9', features: ['CI/CD Pipeline', 'Env & Secrets Setup', 'Uptime Monitoring', 'SSL & Domain Setup'] },
+    { _id: '6', slug: 'maintenance-support', title: 'Maintenance & Support', description: 'Ongoing bug fixes, security patches, and feature additions after launch.', icon: 'FiSmartphone', color: '#84cc16', features: ['Bug Fixes', 'Security Patches', 'Feature Additions', 'Direct Communication'] },
+];
 export default function Services() {
     const [services, setServices] = useState(DEFAULTS);
 

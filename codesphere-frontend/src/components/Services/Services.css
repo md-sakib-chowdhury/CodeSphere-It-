@@ -1,10 +1,10 @@
 .services {
-    background: var(--gray-50);
+    background: #f4f5f7;
     position: relative;
     overflow: hidden;
 
     /* --- সবুজ স্ট্রিপ থেকে কন্টেন্ট নিচে নামানোর জন্য এই প্যাডিংটি যোগ করা হয়েছে --- */
-    padding-top: 220px !important;
+    padding-top: 160px !important;
     padding-bottom: 5rem;
     /* সেকশনের নিচের দিকের ডিফল্ট প্যাডিং */
 }
@@ -113,12 +113,19 @@
     flex-shrink: 0;
     position: relative;
     z-index: 1;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    background: color-mix(in srgb, var(--accent) 14%, white) !important;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 25%, transparent);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        background 0.35s ease;
 }
 
 .service-card:hover .service-icon {
     transform: scale(1.08) rotate(-4deg);
+    background: var(--accent) !important;
+}
+
+.service-card:hover .service-icon svg {
+    color: #fff !important;
 }
 
 .service-title {
@@ -126,6 +133,11 @@
     font-weight: 700;
     color: var(--gray-900);
     letter-spacing: -0.01em;
+    transition: color 0.3s ease;
+}
+
+.service-card:hover .service-title {
+    color: var(--accent);
 }
 
 .service-desc {
@@ -159,7 +171,7 @@
     min-width: 16px;
     border-radius: 5px;
     background: var(--accent) !important;
-    opacity: 0.15;
+    opacity: 1;
     position: relative;
 }
 
@@ -170,8 +182,8 @@
     left: 50%;
     width: 5px;
     height: 8px;
-    border-right: 2px solid var(--accent);
-    border-bottom: 2px solid var(--accent);
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
     transform: translate(-50%, -60%) rotate(45deg);
     opacity: 1;
 }
@@ -187,19 +199,24 @@
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
-    transition: gap 0.25s ease, opacity 0.25s ease;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    transition: gap 0.25s ease, background 0.25s ease, color 0.25s ease;
+    width: fit-content;
 }
 
 .service-link:hover {
-    opacity: 0.8;
     gap: 0.55rem;
+    background: var(--accent);
+    color: #fff !important;
 }
 
 /* --- রেসপন্সিভ মিডিয়া কোয়েরি আপডেট --- */
 
 @media (max-width: 1023px) {
     .services {
-        padding-top: 160px !important;
+        padding-top: 130px !important;
         /* ট্যাবলেট স্ক্রিনে প্যাডিং কিছুটা কমবে */
     }
 
@@ -210,14 +227,14 @@
 
 @media (max-width: 767px) {
     .services {
-        padding-top: 120px !important;
+        padding-top: 100px !important;
         /* সাধারণ মোবাইল স্ক্রিনে প্যাডিং */
     }
 }
 
 @media (max-width: 479px) {
     .services {
-        padding-top: 110px !important;
+        padding-top: 90px !important;
         /* একদম ছোট মোবাইল স্ক্রিনে প্যাডিং */
     }
 
