@@ -8,7 +8,14 @@ export default function StatsCards() {
     const [stats, setStats] = useState(DEFAULT);
 
     useEffect(() => {
-        api.get('/stats').then(r => setStats(r.data)).catch(() => { });
+        api.get('/stats').then(r => {
+            // Only trust the backend response if it actually has the new
+            // field shape (founded). Otherwise it's stale/old data —
+            // keep the honest defaults instead of showing "undefined".
+            if (r.data && r.data.founded) {
+                setStats(r.data);
+            }
+        }).catch(() => { });
     }, []);
 
     const yearsActive = new Date().getFullYear() - stats.founded;
