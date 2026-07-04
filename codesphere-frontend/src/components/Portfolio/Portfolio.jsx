@@ -102,6 +102,18 @@ const DEFAULTS = [
         bannerImg: '',
         featured: false,
     },
+    {
+        _id: '9',
+        title: 'GTCoding',
+        subtitle: 'CRUD Operation Application',
+        description:
+            'A CRUD application demonstrating Create, Read, Update, and Delete operations with efficient data management and dynamic user interaction.',
+        tags: ['React', 'CRUD', 'JavaScript', 'API'],
+        category: 'Other',
+        liveUrl: 'https://cruds-orpin.vercel.app/',
+        bannerImg: '',
+        featured: false,
+    },
 ];
 
 export default function Portfolio() {

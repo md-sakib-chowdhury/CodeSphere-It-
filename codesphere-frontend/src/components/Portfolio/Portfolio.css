@@ -13,6 +13,18 @@
     padding: 96px 0;
 }
 
+.portfolio .section-label {
+    color: var(--pf-green-light);
+}
+
+.portfolio .section-title {
+    color: #fff;
+}
+
+.portfolio .section-sub {
+    color: var(--pf-text-muted);
+}
+
 .portfolio-tabs {
     display: flex;
     gap: 0.5rem;
