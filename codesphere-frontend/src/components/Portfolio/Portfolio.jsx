@@ -1,87 +1,5 @@
-// import { useState, useEffect } from 'react';
-// import { FiExternalLink, FiGithub } from 'react-icons/fi';
-// import api from '../../utils/api';
-// import './Portfolio.css';
-
-// const CATEGORIES = ['All', 'Web', 'E-commerce', 'SaaS', 'Mobile', 'Other'];
-
-// const DEFAULTS = [
-//     { _id: '1', title: 'LifeInnovior', description: 'Full-stack SaaS mental health platform with Jitsi video sessions, Stripe payments, 3 user roles.', tags: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Jitsi'], category: 'SaaS', liveUrl: '#', featured: true },
-//     { _id: '2', title: 'Shastho Khoji', description: 'Healthcare management system connecting patients with doctors across Bangladesh.', tags: ['MERN', 'JWT', 'Cloudinary'], category: 'Web', liveUrl: '#', featured: true },
-//     { _id: '3', title: 'BanglaEats', description: 'Food delivery platform with real-time order tracking, restaurant dashboard, and customer app.', tags: ['React', 'Express', 'MongoDB'], category: 'E-commerce', liveUrl: '#', featured: false },
-//     { _id: '4', title: 'Migrant Sahay', description: 'Support platform for Bangladeshi migrant workers with agency verification and fraud reporting.', tags: ['React', 'Vite', 'Node.js'], category: 'Web', liveUrl: '#', featured: false },
-//     { _id: '5', title: 'School ERP', description: 'Complete school management system with attendance, grades, fees, and parent portal.', tags: ['MERN', 'Socket.io'], category: 'SaaS', liveUrl: '#', featured: false },
-//     { _id: '6', title: 'POS System', description: 'Point of sale system with inventory, billing, and reporting for retail businesses.', tags: ['React', 'Node.js', 'MongoDB'], category: 'Web', liveUrl: '#', featured: false },
-// ];
-
-// const COLORS = ['#2563eb', '#16a34a', '#3b82f6', '#22c55e', '#1d4ed8', '#15803d'];
-
-// export default function Portfolio() {
-//     const [projects, setProjects] = useState(DEFAULTS);
-//     const [cat, setCat] = useState('All');
-
-//     useEffect(() => {
-//         api.get('/projects').then(r => { if (r.data.length) setProjects(r.data); }).catch(() => { });
-//     }, []);
-
-//     const filtered = cat === 'All' ? projects : projects.filter(p => p.category === cat);
-
-//     return (
-//         <section className="portfolio section" id="portfolio">
-//             <div className="container">
-//                 <div className="section-header">
-//                     <span className="section-label">Our Work</span>
-//                     <h2 className="section-title">Recent <span className="grad-text">Projects</span></h2>
-//                     <p className="section-sub">Real products built for real clients — from startups to enterprises.</p>
-//                 </div>
-
-//                 <div className="portfolio-tabs">
-//                     {CATEGORIES.map(c => (
-//                         <button
-//                             key={c}
-//                             className={`tab-btn ${cat === c ? 'active' : ''}`}
-//                             onClick={() => setCat(c)}
-//                         >{c}</button>
-//                     ))}
-//                 </div>
-
-//                 <div className="portfolio-grid">
-//                     {filtered.map((p, i) => (
-//                         <div key={p._id} className={`project-card ${p.featured ? 'featured' : ''}`}>
-//                             <div className="project-img" style={{ background: `linear-gradient(135deg, ${COLORS[i % 6]}22, ${COLORS[(i + 2) % 6]}22)` }}>
-//                                 <div className="project-img-overlay">
-//                                     <div className="project-initial" style={{ color: COLORS[i % 6] }}>
-//                                         {p.title.slice(0, 2).toUpperCase()}
-//                                     </div>
-//                                 </div>
-//                                 {p.featured && <span className="featured-badge">Featured</span>}
-//                             </div>
-
-//                             <div className="project-body">
-//                                 <div className="project-cat">{p.category}</div>
-//                                 <h3 className="project-title">{p.title}</h3>
-//                                 <p className="project-desc">{p.description}</p>
-
-//                                 <div className="project-tags">
-//                                     {(p.tags || []).slice(0, 3).map(t => (
-//                                         <span key={t} className="project-tag">{t}</span>
-//                                     ))}
-//                                 </div>
-
-//                                 <div className="project-links">
-//                                     {p.liveUrl && <a href={p.liveUrl} target="_blank" rel="noopener" className="proj-link primary"><FiExternalLink size={14} /> Live Demo</a>}
-//                                     {p.githubUrl && <a href={p.githubUrl} target="_blank" rel="noopener" className="proj-link secondary"><FiGithub size={14} /> GitHub</a>}
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     ))}
-//                 </div>
-//             </div>
-//         </section>
-//     );
-// }
 import { useState, useEffect } from 'react';
-import { FiExternalLink, FiGithub } from 'react-icons/fi';
+import { FiExternalLink } from 'react-icons/fi';
 import api from '../../utils/api';
 import './Portfolio.css';
 
@@ -91,89 +9,99 @@ const DEFAULTS = [
     {
         _id: '1',
         title: 'LifeInnovior',
-        description: 'Full-stack SaaS mental health platform connecting patients with psychologists — video sessions, subscription billing, and role-based dashboards.',
-        tags: ['React', 'Node.js', 'MongoDB', 'Stripe', 'JWT'],
+        subtitle: 'Mental Health Care Platform',
+        description:
+            'LifeInnovior is a full-stack mental health care platform built with the MERN stack. It connects patients with licensed psychologists through secure video sessions powered by Jitsi Meet. Features include three user roles (Super Admin, Psychologist, Patient), Stripe payment integration, Cloudinary image storage, and Nodemailer notifications — bringing professional mental health care accessible from home.',
+        tags: ['React', 'Node.js', 'MongoDB', 'Express.js', 'JavaScript', 'CSS', 'HTML'],
         category: 'SaaS',
         liveUrl: 'https://l-ifeinnovior.vercel.app/',
+        bannerImg: '',
         featured: true,
     },
     {
         _id: '2',
         title: 'Shastho Khoji',
-        description: 'Rural healthcare access platform built for village communities across Bangladesh — designed with future government health-initiative partnership in mind.',
-        tags: ['MERN', 'JWT', 'Cloudinary'],
+        subtitle: 'Doctor Finding Platform',
+        description:
+            'Shastho Khoji is a full-stack healthcare platform built with the MERN stack, specially designed for the rural people of Bangladesh. Many village patients visit local dispensaries and often receive wrong treatment due to lack of proper medical guidance. Shastho Khoji solves this by helping them find the right specialist doctor across all 64 districts from home — easily, quickly, and reliably.',
+        tags: ['React', 'Node.js', 'MongoDB', 'Express.js', 'JavaScript'],
         category: 'Web',
         liveUrl: 'https://shastho-khoji.vercel.app/',
+        bannerImg: '',
         featured: true,
     },
     {
         _id: '3',
         title: 'Alliance Sourcing BD',
-        description: 'Corporate website for a garment sourcing and buying house, showcasing services, product lines, and client trust signals.',
-        tags: ['React', 'Node.js', 'MongoDB'],
+        subtitle: 'Apparel Sourcing Business Site',
+        description:
+            'A complete frontend business website featuring responsive layouts, service sections, and a professional design tailored for sourcing and business operations.',
+        tags: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'Frontend'],
         category: 'Web',
         liveUrl: 'https://alliance-sourcing-bd.vercel.app/',
+        bannerImg: '',
         featured: false,
     },
     {
         _id: '4',
         title: 'Codeinnovior',
-        description: 'EdTech platform offering web development and UI/UX courses with structured learning paths and enrollment flows.',
-        tags: ['React', 'Node.js', 'MongoDB'],
+        subtitle: 'EdTech Learning Platform',
+        description:
+            'A modern and responsive frontend website built with React.js. Features clean UI design, smooth navigation, mobile responsiveness, and optimized performance for an excellent user experience.',
+        tags: ['React', 'JavaScript', 'Tailwind CSS', 'Frontend'],
         category: 'SaaS',
         liveUrl: 'https://codeinnovior-9sf9.vercel.app/',
+        bannerImg: '',
         featured: false,
     },
     {
         _id: '5',
-        title: 'AdvocateGo',
-        description: 'Legal case management dashboard with search/filter, dark-light mode, and mobile-responsive sidebar navigation.',
-        tags: ['Bootstrap', 'JavaScript'],
-        category: 'SaaS',
-        liveUrl: 'https://clinquant-lebkuchen-e9b66e.netlify.app/',
+        title: 'Shopnoby',
+        subtitle: 'E-Commerce Platform',
+        description:
+            'Shopnoby is a full-stack e-commerce platform built with the MERN stack. It features product listing, shopping cart, user authentication with JWT, and secure REST API integration. Designed with a clean UI for a seamless shopping experience.',
+        tags: ['React', 'Node.js', 'MongoDB', 'Express.js', 'JavaScript', 'CSS'],
+        category: 'E-commerce',
+        liveUrl: 'https://frontend-final-project-phi.vercel.app/',
+        bannerImg: '',
         featured: false,
     },
     {
         _id: '6',
-        title: 'ShopnoBuy',
-        description: 'E-commerce storefront with product catalog, cart flow, and checkout experience built for online retail.',
-        tags: ['React', 'Node.js', 'MongoDB'],
-        category: 'E-commerce',
-        liveUrl: 'https://frontend-final-project-phi.vercel.app/',
+        title: 'RideGrounds',
+        subtitle: 'Cycling Community Platform',
+        description:
+            'A feature-rich cycling community platform built with TypeScript and React. Features include ride discovery, route exploration, community networking, equipment listings, and a blog section — all with a fully responsive design.',
+        tags: ['TypeScript', 'React', 'CSS', 'HTML', 'JavaScript'],
+        category: 'Other',
+        liveUrl: 'https://front-end-project-2nd.vercel.app/',
+        bannerImg: '',
         featured: false,
     },
     {
         _id: '7',
-        title: 'RideGrounds',
-        description: 'Community landing page for bike and ride enthusiasts, focused on clean visual storytelling and engagement.',
-        tags: ['React', 'CSS'],
-        category: 'Other',
-        liveUrl: 'https://front-end-project-2nd.vercel.app/',
+        title: 'Mesbah',
+        subtitle: 'Student Housing Platform',
+        description:
+            'A full-stack MERN application built using MongoDB, Express.js, React, and Node.js. Features include user authentication, CRUD operations, responsive design, API integration, and efficient database management to deliver a seamless user experience.',
+        tags: ['MERN Stack', 'MongoDB', 'Express.js', 'React', 'Node.js', 'Authentication', 'CRUD Operations'],
+        category: 'Web',
+        liveUrl: 'https://mesbah-tan.vercel.app/',
+        bannerImg: '',
         featured: false,
     },
     {
         _id: '8',
-        title: 'VILO Dashboard',
-        description: 'Analytics-style admin dashboard with data visualization and interactive UI components.',
-        tags: ['React', 'Chart.js'],
-        category: 'SaaS',
-        liveUrl: 'https://fastidious-bunny-b6e485.netlify.app/',
+        title: 'BanglaEats',
+        subtitle: 'Food Delivery Application',
+        description:
+            'A full-stack MERN food delivery application featuring user authentication, shopping cart functionality, product management, order processing, and a responsive user interface for seamless food ordering experiences.',
+        tags: ['MongoDB', 'Express.js', 'React', 'Node.js', 'JavaScript', 'Cart System', 'Authentication'],
+        category: 'E-commerce',
+        liveUrl: 'https://food-delivery-app-8quf.vercel.app/',
+        bannerImg: '',
         featured: false,
     },
-    {
-        _id: '9',
-        title: 'Mesbah',
-        description: 'Mess and hostel finder platform for students in Bangladesh, with roommate matching and in-app chat.',
-        tags: ['React', 'Node.js', 'MongoDB'],
-        category: 'Web',
-        liveUrl: 'https://mesbah-tan.vercel.app/',
-        featured: false,
-    },
-];
-
-const COLORS = [
-    '#2563eb', '#16a34a', '#3b82f6', '#22c55e',
-    '#1d4ed8', '#15803d', '#0ea5e9', '#059669', '#7c3aed',
 ];
 
 export default function Portfolio() {
@@ -217,33 +145,24 @@ export default function Portfolio() {
                 </div>
 
                 <div className="portfolio-grid">
-                    {filtered.map((p, i) => (
+                    {filtered.map((p) => (
                         <div key={p._id} className={`project-card ${p.featured ? 'featured' : ''}`}>
                             <div
-                                className="project-img"
-                                style={{
-                                    background: `linear-gradient(135deg, ${COLORS[i % COLORS.length]}22, ${COLORS[(i + 2) % COLORS.length]
-                                        }22)`,
-                                }}
+                                className="project-banner"
+                                style={p.bannerImg ? { backgroundImage: `url(${p.bannerImg})` } : undefined}
                             >
-                                <div className="project-img-overlay">
-                                    <div
-                                        className="project-initial"
-                                        style={{ color: COLORS[i % COLORS.length] }}
-                                    >
-                                        {p.title.slice(0, 2).toUpperCase()}
-                                    </div>
-                                </div>
+                                <div className="project-banner-overlay" />
                                 {p.featured && <span className="featured-badge">Featured</span>}
                             </div>
 
                             <div className="project-body">
                                 <div className="project-cat">{p.category}</div>
                                 <h3 className="project-title">{p.title}</h3>
+                                {p.subtitle && <p className="project-subtitle">{p.subtitle}</p>}
                                 <p className="project-desc">{p.description}</p>
 
                                 <div className="project-tags">
-                                    {(p.tags || []).slice(0, 3).map((t) => (
+                                    {(p.tags || []).map((t) => (
                                         <span key={t} className="project-tag">
                                             {t}
                                         </span>
@@ -258,17 +177,7 @@ export default function Portfolio() {
                                             rel="noopener noreferrer"
                                             className="proj-link primary"
                                         >
-                                            <FiExternalLink size={14} /> Live Demo
-                                        </a>
-                                    )}
-                                    {p.githubUrl && (
-                                        <a
-                                            href={p.githubUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="proj-link secondary"
-                                        >
-                                            <FiGithub size={14} /> GitHub
+                                            Live <FiExternalLink size={14} />
                                         </a>
                                     )}
                                 </div>
