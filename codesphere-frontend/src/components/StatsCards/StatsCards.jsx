@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import api from '../../utils/api';
 import './StatsCards.css';
 
-const DEFAULT = { clients: 50, projects: 120, experience: 8, satisfaction: 98 };
+const DEFAULT = { projects: 28, founded: 2024, techFocus: 'MERN', commitment: 100 };
 
 export default function StatsCards() {
     const [stats, setStats] = useState(DEFAULT);
@@ -11,18 +11,37 @@ export default function StatsCards() {
         api.get('/stats').then(r => setStats(r.data)).catch(() => { });
     }, []);
 
+    const yearsActive = new Date().getFullYear() - stats.founded;
+
     const cards = [
-        { value: `${stats.clients}+`, label: 'Satisfied Clients', desc: 'Trust us to consistently deliver exceptional results.', color: '#14532d' },
-        { value: `${stats.projects}+`, label: 'Projects Completed', desc: 'Our top priority: exceeding your expectations.', color: '#16a34a' },
-        { value: `${stats.experience}+`, label: 'Years of Experience', desc: 'A growing team of skilled MERN stack engineers.', color: '#65a30d' },
-        { value: `${stats.satisfaction}%`, label: 'Client Satisfaction', desc: 'Driven by honest communication and reliable delivery.', color: '#a3a517' },
+        {
+            value: `${stats.projects}+`,
+            label: 'Projects Built',
+            desc: 'Real-world MERN stack projects shipped and deployed.',
+        },
+        {
+            value: `${yearsActive || 1}+`,
+            label: 'Years of Craft',
+            desc: `Building with the MERN stack since ${stats.founded}.`,
+        },
+        {
+            value: stats.techFocus,
+            label: 'Core Stack',
+            desc: 'MongoDB, Express, React, Node — our specialty end to end.',
+        },
+        {
+            value: `${stats.commitment}%`,
+            label: 'Commitment',
+            desc: 'Every project gets our full focus, start to finish.',
+        },
     ];
 
     return (
         <section className="stats-cards section" id="stats-cards">
             <div className="container stats-cards-grid">
-                {cards.map(c => (
-                    <div key={c.label} className="stat-card-box" style={{ background: c.color }}>
+                {cards.map((c, i) => (
+                    <div key={c.label} className={`stat-card-box tone-${(i % 4) + 1}`}>
+                        <div className="stat-card-glow" />
                         <div className="stat-card-value">{c.value}</div>
                         <div className="stat-card-label">{c.label}</div>
                         <p className="stat-card-desc">{c.desc}</p>
