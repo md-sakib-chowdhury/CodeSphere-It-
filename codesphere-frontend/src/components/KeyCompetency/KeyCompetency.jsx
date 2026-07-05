@@ -71,7 +71,7 @@ export default function KeyCompetency() {
                         alt="Development team at work"
                     />
                     <div className="kc-img-caption">
-                        <strong>8+ years</strong> of combined experience in this field
+                        <strong>2+ years</strong> of combined experience in this field
                     </div>
                 </div>
             </div>
