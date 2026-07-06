@@ -11,7 +11,7 @@
     max-width: var(--container);
     margin: 0 auto;
     background: linear-gradient(135deg, #16a34a, #84cc16);
-    
+
     padding: 3.5rem 3rem;
 }
 
@@ -24,9 +24,37 @@
 }
 
 .footer-cta-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.3);
     color: #fff;
+}
+
+.footer-cta-label::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6);
+    animation: footer-dot-pulse 1.8s infinite ease-out;
+    flex-shrink: 0;
+}
+
+@keyframes footer-dot-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6);
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
 }
 
 .footer-cta-inner h2 {

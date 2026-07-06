@@ -78,7 +78,7 @@ export default function Footer() {
                         </div>
                         <div className="footer-cta-right">
                             <p>We Are Always With Your Business</p>
-                            <a href="#contact" className="footer-cta-btn">Request Consultation</a>
+                            <Link to="/contact" className="footer-cta-btn">Request Consultation</Link>
                         </div>
                     </div>
                 </div>
