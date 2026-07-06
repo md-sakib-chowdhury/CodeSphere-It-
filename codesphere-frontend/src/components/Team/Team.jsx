@@ -69,7 +69,7 @@ export default function Team() {
 
                 <div className="team-group-divider">
                     <span className="divider-line" />
-                    <h3 className="team-group-title">Executive Leaders</h3>
+                    <h3 className="team-group-title">Executive Leader</h3>
                     <span className="divider-line" />
                 </div>
 
