@@ -11,7 +11,7 @@
     max-width: var(--container);
     margin: 0 auto;
     background: linear-gradient(135deg, #16a34a, #84cc16);
-    border-radius: var(--radius-xl);
+    
     padding: 3.5rem 3rem;
 }
 
