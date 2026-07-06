@@ -72,8 +72,6 @@ import './Team.css';
 
 const EXECUTIVES_DEFAULT = [
     { _id: 'e1', name: 'Sakib Chowdhury', designation: 'Founder & CEO', bio: 'Leading AMANAH IT\'s technical vision with a MERN stack background.', image: '', linkedin: '#', github: 'https://github.com/md-sakib-chowdhury' },
-    { _id: 'e2', name: 'Executive Name', designation: 'Managing Director - Operations', bio: 'Overseeing day-to-day operations and client delivery.', image: '', linkedin: '#', github: '#' },
-    { _id: 'e3', name: 'Executive Name', designation: 'Managing Director - Operations', bio: 'Driving business growth and strategic partnerships.', image: '', linkedin: '#', github: '#' },
 ];
 
 const CORE_TEAM_DEFAULT = [
