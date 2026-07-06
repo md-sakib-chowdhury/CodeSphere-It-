@@ -9,6 +9,7 @@
     background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
         url('https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=1600&q=80') center/cover no-repeat;
     min-height: 280px;
+    padding-top: 175px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -203,6 +204,11 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+    .contact-hero {
+        padding-top: 130px;
+        min-height: 220px;
+    }
+
     .contact-info-cards {
         grid-template-columns: 1fr;
     }
