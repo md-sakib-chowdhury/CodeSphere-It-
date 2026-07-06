@@ -65,6 +65,12 @@
     grid-template-columns: repeat(4, 1fr);
 }
 
+/* Single executive card — centered, fixed width instead of stretching full row */
+.team-grid.executives {
+    grid-template-columns: 320px;
+    justify-content: center;
+}
+
 /* ---- Card ---- */
 .leader-card {
     border-radius: var(--radius-lg);
@@ -222,6 +228,12 @@
     .team-grid,
     .team-grid.core {
         grid-template-columns: 1fr;
+    }
+
+    .team-grid.executives {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+        margin: 0 auto;
     }
 
     .team-group-divider {
