@@ -123,11 +123,21 @@ export default function LatestArticles() {
                 </div>
             </section>
 
-           
+            <section className="articles-cta">
+                <div className="container cta-inner">
+                    <div className="cta-left">
+                        <span className="section-label cta-label">Our Recent Activities</span>
+                        <h2>Latest Activities From Our Team</h2>
+                    </div>
+                    <div className="cta-right">
+                        <p>Want to work with us on your next project?</p>
+                        <a href="/contact" className="cta-btn">Get In Touch</a>
+                    </div>
+                </div>
+            </section>
 
             <Footer />
 
-      
         </>
     );
 }
