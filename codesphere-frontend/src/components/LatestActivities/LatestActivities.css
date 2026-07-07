@@ -1,6 +1,11 @@
 .latest-activities {
     background: linear-gradient(135deg, #16a34a, #84cc16);
-    padding: 5rem 0 2rem;
+    padding: 3rem 0 1.5rem;
+}
+
+.latest-activities .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
 }
 
 .la-header {
@@ -20,13 +25,14 @@
     border-color: rgba(255, 255, 255, 0.3);
     color: #fff;
     position: relative;
-    padding-left: 1.8rem !important;
+    padding: 0.3rem 0.7rem !important;
+    padding-left: 1.35rem !important;
 }
 
 .la-label::before {
     content: '';
     position: absolute;
-    left: 12px;
+    left: 9px;
     top: 50%;
     transform: translateY(-50%);
     width: 6px;
@@ -161,7 +167,7 @@
 
 @media (max-width: 767px) {
     .latest-activities {
-        padding: 3rem 0 1.5rem;
+        padding: 2rem 0 1rem;
     }
 
     .la-grid {
