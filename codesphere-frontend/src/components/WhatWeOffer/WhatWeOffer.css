@@ -19,11 +19,11 @@
     padding: 6px;
     /* এই প্যাডিংটি বর্ডারের উইড্থ হিসেবে কাজ করবে */
 
-    /* 💡 প্যারট গ্রিনের জায়গায় আপনার দেওয়া #9fc52d এবং মেইন সবুজের গ্রেডিয়েন্ট কম্বিনেশন */
+    /* 💡 প্যারট গ্রিনের জায়গায় আপনার দেওয়া #9fc52d এবং মেইন সবুজের গ্রেডিয়েন্ট কম্বিনেশন */
     background: linear-gradient(135deg, #16a34a, #9fc52d, #22c55e, #a7d134);
     background-size: 200% 200%;
 
-    /* ঢেউয়ের মতো আঁকাবাঁকা মোশন এবং কালার চেঞ্জিং এনিমেশন */
+    /* ঢেউয়ের মতো আঁকাবাঁকা মোশন এবং কালার চেঞ্জিং এনিমেশন */
     animation: moveWaveShape 7s ease-in-out infinite alternate, waveGradient 4s ease infinite;
 }
 
@@ -31,14 +31,14 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* ইমেজটির বর্ডার রেডিয়াসও ব্যাকগ্রাউন্ডের সাথে ম্যাচ করে ঢেউ খেলবে */
+    /* ইমেজটির বর্ডার রেডিয়াসও ব্যাকগ্রাউন্ডের সাথে ম্যাচ করে ঢেউ খেলবে */
     border-radius: 45% 55% 60% 40% / 50% 45% 55% 50%;
     animation: moveWaveShape 7s ease-in-out infinite alternate;
     background: #fff;
     /* ইমেজের পেছনে সাদা ব্যাকগ্রাউন্ড গ্যাপ ফিল করতে */
 }
 
-/* কালারগুলোকে ডানে-বামে ঢেউয়ের মতো নাড়ানোর এনিমেশন */
+/* কালারগুলোকে ডানে-বামে ঢেউয়ের মতো নাড়ানোর এনিমেশন */
 @keyframes waveGradient {
     0% {
         background-position: 0% 50%;
@@ -53,7 +53,7 @@
     }
 }
 
-/* বর্ডারটির শেপ অনবরত পরিবর্তন করে সাগরের ঢেউয়ের মতো মোশন তৈরি করার কী-ফ্রেম */
+/* বর্ডারটির শেপ অনবরত পরিবর্তন করে সাগরের ঢেউয়ের মতো মোশন তৈরি করার কী-ফ্রেম */
 @keyframes moveWaveShape {
     0% {
         border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
@@ -73,6 +73,45 @@
 }
 
 /* ========================================================================== */
+
+/* ==========================================================================
+   🔵 PULSING DOT BEFORE "WHAT WE OFFER" LABEL (scoped to this section only)
+   ========================================================================== */
+.what-we-offer .section-label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding-left: 1.8rem;
+}
+
+.what-we-offer .section-label::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #3b82f6;
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6), 0 0 6px 1px rgba(59, 130, 246, 0.8);
+    animation: wwoPulseDot 1.8s ease-in-out infinite;
+}
+
+@keyframes wwoPulseDot {
+    0% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6), 0 0 6px 1px rgba(59, 130, 246, 0.8);
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px rgba(59, 130, 246, 0), 0 0 6px 1px rgba(59, 130, 246, 0.8);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0), 0 0 6px 1px rgba(59, 130, 246, 0.8);
+    }
+}
 
 .wwo-title {
     font-size: clamp(1.75rem, 3.5vw, 2.5rem);
