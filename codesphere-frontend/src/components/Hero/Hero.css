@@ -1,301 +1,309 @@
-.hero {
-    position: relative;
-    background: #0a0e0c;
-    overflow: visible;
-    padding-top: 90px;
-    padding-bottom: 160px;
-    /* 👈 বাড়ানো হলো — যাতে CTA buttons এর নিচে যথেষ্ট জায়গা থাকে এবং strip সেগুলো না ঢাকে */
-}
+ .hero {
+     position: relative;
+     background: #0a0e0c;
+     overflow: visible;
+     padding-top: 90px;
+     padding-bottom: 160px;
+     /* 👈 বাড়ানো হলো — যাতে CTA buttons এর নিচে যথেষ্ট জায়গা থাকে এবং strip সেগুলো না ঢাকে */
+ }
 
-.hero-canvas {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 3%;
-    right: 3%;
-    width: 94%;
-    height: 100%;
-}
+ .hero-canvas {
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     left: 3%;
+     right: 3%;
+     width: 94%;
+     height: 100%;
+ }
 
-.hero-glow {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 1;
-}
+ /* 👇 নতুন — ব্যাকগ্রাউন্ড ইমেজ মোডে টেক্সট পড়তে সহজ করার জন্য অন্ধকার ওভারলে */
+ .hero-image-overlay {
+     position: absolute;
+     inset: 0;
+     z-index: 1;
+     pointer-events: none;
+ }
 
-.hero-glow-1 {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(34, 197, 94, 0.12) 0%, transparent 70%);
-    top: -100px;
-    left: -100px;
-}
+ .hero-glow {
+     position: absolute;
+     border-radius: 50%;
+     pointer-events: none;
+     z-index: 1;
+ }
 
-.hero-glow-2 {
-    width: 450px;
-    height: 450px;
-    background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
-    bottom: -50px;
-    right: -80px;
-}
+ .hero-glow-1 {
+     width: 500px;
+     height: 500px;
+     background: radial-gradient(circle, rgba(34, 197, 94, 0.12) 0%, transparent 70%);
+     top: -100px;
+     left: -100px;
+ }
 
-.hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 2rem 0 1.5rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+ .hero-glow-2 {
+     width: 450px;
+     height: 450px;
+     background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+     bottom: -50px;
+     right: -80px;
+ }
 
-.hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid rgba(34, 197, 94, 0.3);
-    color: #4ade80;
-    font-size: 0.8rem;
-    font-weight: 500;
-    padding: 0.4rem 1rem;
-    border-radius: var(--radius-full);
-    margin-top: 20px;
-    /* 👈 নতুন — badge টা হালকা নিচে নামানো হলো */
-    margin-bottom: 1.25rem;
-}
+ .hero-content {
+     position: relative;
+     z-index: 2;
+     padding: 2rem 0 1.5rem;
+     text-align: center;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+ }
 
-.badge-dot {
-    width: 7px;
-    height: 7px;
-    background: #22c55e;
-    border-radius: 50%;
-    animation: pulse-ring 1.5s infinite;
-}
+ .hero-badge {
+     display: inline-flex;
+     align-items: center;
+     gap: 8px;
+     background: rgba(34, 197, 94, 0.1);
+     border: 1px solid rgba(34, 197, 94, 0.3);
+     color: #4ade80;
+     font-size: 0.8rem;
+     font-weight: 500;
+     padding: 0.4rem 1rem;
+     border-radius: var(--radius-full);
+     margin-top: 20px;
+     /* 👈 নতুন — badge টা হালকা নিচে নামানো হলো */
+     margin-bottom: 1.25rem;
+ }
 
-.hero-h1 {
-    font-size: clamp(2.1rem, 5vw, 3.6rem);
-    font-weight: 800;
-    color: #fff;
-    line-height: 1.15;
-    margin-bottom: 1rem;
-    max-width: 800px;
-}
+ .badge-dot {
+     width: 7px;
+     height: 7px;
+     background: #22c55e;
+     border-radius: 50%;
+     animation: pulse-ring 1.5s infinite;
+ }
 
-.hero-typed {
-    background: linear-gradient(135deg, #4ade80, #22c55e);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
+ .hero-h1 {
+     font-size: clamp(2.1rem, 5vw, 3.6rem);
+     font-weight: 800;
+     color: #fff;
+     line-height: 1.15;
+     margin-bottom: 1rem;
+     max-width: 800px;
+ }
 
-.hero-cursor {
-    display: inline-block;
-    width: 4px;
-    height: 0.85em;
-    background: #4ade80;
-    vertical-align: middle;
-    margin-left: 3px;
-    border-radius: 2px;
-    animation: blink 0.9s infinite;
-}
+ .hero-typed {
+     background: linear-gradient(135deg, #4ade80, #22c55e);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     background-clip: text;
+ }
 
-.hero-sub {
-    font-size: clamp(0.9rem, 1.4vw, 1.05rem);
-    color: rgba(255, 255, 255, 0.65);
-    line-height: 1.6;
-    max-width: 620px;
-    margin-bottom: 1.5rem;
-}
+ .hero-cursor {
+     display: inline-block;
+     width: 4px;
+     height: 0.85em;
+     background: #4ade80;
+     vertical-align: middle;
+     margin-left: 3px;
+     border-radius: 2px;
+     animation: blink 0.9s infinite;
+ }
 
-.hero-ctas {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 1rem;
-    /* 👈 buttons আর strip এর মাঝে সামান্য breathing room */
-}
+ .hero-sub {
+     font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+     color: rgba(255, 255, 255, 0.65);
+     line-height: 1.6;
+     max-width: 620px;
+     margin-bottom: 1.5rem;
+ }
 
-.hero-btn-primary {
-    font-size: 0.95rem;
-    padding: 0.85rem 2rem;
-}
+ .hero-ctas {
+     display: flex;
+     gap: 1rem;
+     flex-wrap: wrap;
+     justify-content: center;
+     margin-bottom: 1rem;
+     /* 👈 buttons আর strip এর মাঝে সামান্য breathing room */
+ }
 
-.hero-btn-outline {
-    font-size: 0.95rem;
-    padding: 0.85rem 1.75rem;
-    background: transparent;
-    color: #fff;
-    border: 1.5px solid rgba(255, 255, 255, 0.25);
-}
+ .hero-btn-primary {
+     font-size: 0.95rem;
+     padding: 0.85rem 2rem;
+ }
 
-.hero-btn-outline:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.4);
-}
+ .hero-btn-outline {
+     font-size: 0.95rem;
+     padding: 0.85rem 1.75rem;
+     background: transparent;
+     color: #fff;
+     border: 1.5px solid rgba(255, 255, 255, 0.25);
+ }
 
-/* -----------------------------------------------------------------
+ .hero-btn-outline:hover {
+     background: rgba(255, 255, 255, 0.08);
+     border-color: rgba(255, 255, 255, 0.4);
+ }
+
+ /* -----------------------------------------------------------------
   স্ট্রিপ এখন hero-content থেকে সম্পূর্ণ স্বাধীন (position: absolute)।
   তাই strip এর position বদলালে hero এর heading/text/height কখনো প্রভাবিত হবে না।
 ----------------------------------------------------------------- */
-.hero-strip {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -90px;
-    /* 👈 এই ভ্যালু দিয়েই overlap/position কন্ট্রোল হয় */
-    z-index: 3;
-    padding: 0 2rem;
-}
+ .hero-strip {
+     position: absolute;
+     left: 0;
+     right: 0;
+     bottom: -90px;
+     /* 👈 এই ভ্যালু দিয়েই overlap/position কন্ট্রোল হয় */
+     z-index: 3;
+     padding: 0 2rem;
+ }
 
-.hero-strip-box {
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    background: linear-gradient(135deg, #27ab0c, #78bb42);
-    overflow: hidden;
-    border-radius: 12px;
-}
+ .hero-strip-box {
+     max-width: 1200px;
+     width: 100%;
+     margin: 0 auto;
+     background: linear-gradient(135deg, #27ab0c, #78bb42);
+     overflow: hidden;
+     border-radius: 12px;
+ }
 
-.hero-strip-inner {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem 1.5rem;
-    /* 👈 row আর column এর মধ্যে gap বাড়ানো হলো, ২ সারি item এর জন্য breathing room */
-    padding: 2.25rem 2.5rem;
-    /* 👈 padding সামান্য বাড়ানো হলো */
-}
+ .hero-strip-inner {
+     display: grid;
+     grid-template-columns: repeat(4, 1fr);
+     gap: 2rem 1.5rem;
+     /* 👈 row আর column এর মধ্যে gap বাড়ানো হলো, ২ সারি item এর জন্য breathing room */
+     padding: 2.25rem 2.5rem;
+     /* 👈 padding সামান্য বাড়ানো হলো */
+ }
 
-.strip-item {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    cursor: default;
-}
+ .strip-item {
+     display: flex;
+     align-items: center;
+     gap: 0.85rem;
+     cursor: default;
+ }
 
-.strip-icon {
-    color: #fff;
-    flex-shrink: 0;
-    opacity: 0.95;
-    transition: transform 0.3s ease;
-}
+ .strip-icon {
+     color: #fff;
+     flex-shrink: 0;
+     opacity: 0.95;
+     transition: transform 0.3s ease;
+ }
 
-.strip-text {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
+ .strip-text {
+     display: flex;
+     flex-direction: column;
+     gap: 2px;
+ }
 
-.strip-num {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.75);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
+ .strip-num {
+     font-size: 0.75rem;
+     color: rgba(255, 255, 255, 0.75);
+     font-weight: 600;
+     display: flex;
+     align-items: center;
+     gap: 6px;
+ }
 
-.strip-line {
-    width: 42px;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.5);
-    display: inline-block;
-    transition: transform 0.35s ease, width 0.35s ease;
-}
+ .strip-line {
+     width: 42px;
+     height: 1px;
+     background: rgba(255, 255, 255, 0.5);
+     display: inline-block;
+     transition: transform 0.35s ease, width 0.35s ease;
+ }
 
-.strip-label {
-    font-size: 0.98rem;
-    font-weight: 600;
-    color: #fff;
-}
+ .strip-label {
+     font-size: 0.98rem;
+     font-weight: 600;
+     color: #fff;
+ }
 
-.strip-item:hover .strip-line {
-    width: 88px;
-    transform: translateX(10px);
-}
+ .strip-item:hover .strip-line {
+     width: 88px;
+     transform: translateX(10px);
+ }
 
-.strip-item:hover .strip-icon {
-    transform: scale(2.1);
-}
+ .strip-item:hover .strip-icon {
+     transform: scale(2.1);
+ }
 
-/* -----------------------------------------------------------------
+ /* -----------------------------------------------------------------
   ⚠️ গুরুত্বপূর্ণ: হিরোর ঠিক পরবর্তী সেকশনের কন্টেন্ট নিচে নামানোর কোড।
   নিচের '.next-section-class' পরিবর্তন করে আপনার আসল ক্লাসের নাম বসান।
   স্ট্রিপ এখন absolute হওয়ায় পরের section টা normal flow তেই hero এর
   ঠিক নিচ থেকে শুরু হবে, তাই strip এর overlap অংশ ঢাকার জন্য এই
   padding-top প্রয়োজন।
 ----------------------------------------------------------------- */
-.next-section-class {
-    padding-top: 140px !important;
-    /* 👈 strip এ এখন ২ সারি item থাকায় height বেড়েছে, তাই এই ভ্যালুও বাড়ানো হলো */
-}
+ .next-section-class {
+     padding-top: 140px !important;
+     /* 👈 strip এ এখন ২ সারি item থাকায় height বেড়েছে, তাই এই ভ্যালুও বাড়ানো হলো */
+ }
 
 
-/* রেসপন্সিভ মিডিয়া কোয়েরি */
+ /* রেসপন্সিভ মিডিয়া কোয়েরি */
 
-@media (max-width: 1023px) {
-    .hero-strip-inner {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+ @media (max-width: 1023px) {
+     .hero-strip-inner {
+         grid-template-columns: repeat(2, 1fr);
+     }
+ }
 
-@media (max-width: 767px) {
-    .hero {
-        padding-top: 30px;
-        padding-bottom: 220px;
-        /* 👈 বাড়ানো হলো — মোবাইলে strip এ ৩ সারি item হওয়ায় বেশি জায়গা লাগে */
-    }
+ @media (max-width: 767px) {
+     .hero {
+         padding-top: 30px;
+         padding-bottom: 220px;
+         /* 👈 বাড়ানো হলো — মোবাইলে strip এ ৩ সারি item হওয়ায় বেশি জায়গা লাগে */
+     }
 
-    .hero-canvas {
-        left: 0;
-        right: 0;
-        width: 100%;
-    }
+     .hero-canvas {
+         left: 0;
+         right: 0;
+         width: 100%;
+     }
 
-    .hero-content {
-        padding: 1.5rem 0 1rem;
-    }
+     .hero-content {
+         padding: 1.5rem 0 1rem;
+     }
 
-    .hero-ctas {
-        flex-direction: column;
-        width: 100%;
-        max-width: 320px;
-        margin-bottom: 0.5rem;
-    }
+     .hero-ctas {
+         flex-direction: column;
+         width: 100%;
+         max-width: 320px;
+         margin-bottom: 0.5rem;
+     }
 
-    .hero-ctas .btn {
-        width: 100%;
-        justify-content: center;
-    }
+     .hero-ctas .btn {
+         width: 100%;
+         justify-content: center;
+     }
 
-    .hero-strip {
-        padding: 0 var(--px);
-        bottom: -60px;
-    }
+     .hero-strip {
+         padding: 0 var(--px);
+         bottom: -60px;
+     }
 
-    .hero-strip-inner {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem 0.75rem;
-        padding: 1.5rem;
-    }
+     .hero-strip-inner {
+         grid-template-columns: repeat(2, 1fr);
+         gap: 1.5rem 0.75rem;
+         padding: 1.5rem;
+     }
 
-    .strip-label {
-        font-size: 0.85rem;
-    }
+     .strip-label {
+         font-size: 0.85rem;
+     }
 
-    .next-section-class {
-        padding-top: 100px !important;
-    }
-}
+     .next-section-class {
+         padding-top: 100px !important;
+     }
+ }
 
-@media (max-width: 479px) {
-    .hero-h1 {
-        font-size: 1.85rem;
-    }
+ @media (max-width: 479px) {
+     .hero-h1 {
+         font-size: 1.85rem;
+     }
 
-    .hero-strip-inner {
-        grid-template-columns: 1fr;
-    }
-}
+     .hero-strip-inner {
+         grid-template-columns: 1fr;
+     }
+ }
