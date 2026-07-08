@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
-
+const navbarRoutes = require('./routes/navbarRoutes');
 dotenv.config();
 connectDB();
 
@@ -24,7 +24,7 @@ app.use('/api/contact', require('./routes/contactRoutes'));
 app.use('/api/stats', require('./routes/statsRoutes'));
 app.use('/api/hero', require('./routes/heroRoutes'));
 app.use('/api/blogs', require('./routes/blogRoutes'));
-
+app.use('/api/navbar', navbarRoutes);
 app.get('/', (req, res) => res.json({ message: 'CodeSphere IT API Running ✅' }));
 
 const PORT = process.env.PORT || 5000;
