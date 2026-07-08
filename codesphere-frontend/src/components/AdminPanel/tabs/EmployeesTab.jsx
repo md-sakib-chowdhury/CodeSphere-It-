@@ -173,210 +173,178 @@
 //     );
 // }
 import { useState, useEffect } from 'react';
-import { FiSave, FiPlus, FiTrash2 } from 'react-icons/fi';
 import { toast } from 'react-toastify';
+import { FiUserPlus, FiTrash2, FiToggleLeft, FiToggleRight, FiX } from 'react-icons/fi';
 import api from '../../../utils/api';
+import './EmployeesTab.css';
 
-const SOCIAL_PLATFORMS = ['Facebook', 'Instagram', 'LinkedIn', 'Twitter', 'YouTube'];
+const PERMISSION_LABELS = {
+    manageNavbar: 'Navbar / Header',
+    manageHero: 'Hero Section',
+    manageServices: 'Services',
+    managePortfolio: 'Portfolio',
+    manageTeam: 'Team',
+    manageTestimonials: 'Testimonials',
+    manageContactMessages: 'Contact Messages',
+    manageStats: 'Stats',
+};
 
-export default function NavbarTab() {
-    const [data, setData] = useState({
-        logoText: '', logoAccent: '', phone: '', email: '',
-        socialLinks: [], menuLinks: [], brochureText: '', brochureLink: '',
+export default function EmployeesTab() {
+    const [employees, setEmployees] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [showForm, setShowForm] = useState(false);
+    const [form, setForm] = useState({ name: '', email: '', password: '' });
+    const [permissions, setPermissions] = useState({
+        manageNavbar: false,
+        manageHero: false,
+        manageServices: false,
+        managePortfolio: false,
+        manageTeam: false,
+        manageTestimonials: true,
+        manageContactMessages: true,
+        manageStats: false,
     });
-    const [saving, setSaving] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
 
-    useEffect(() => {
-        api.get('/navbar').then(r => setData(r.data)).catch(() => { });
-    }, []);
-
-    const updateSocial = (idx, field, value) => {
-        const links = [...data.socialLinks];
-        links[idx][field] = value;
-        setData({ ...data, socialLinks: links });
-    };
-
-    const addSocial = () => {
-        setData({ ...data, socialLinks: [...(data.socialLinks || []), { platform: 'Facebook', url: '' }] });
-    };
-
-    const removeSocial = (idx) => {
-        setData({ ...data, socialLinks: data.socialLinks.filter((_, i) => i !== idx) });
-    };
-
-    const updateMenu = (idx, field, value) => {
-        const links = [...data.menuLinks];
-        links[idx][field] = value;
-        setData({ ...data, menuLinks: links });
-    };
-
-    const addMenu = () => {
-        setData({ ...data, menuLinks: [...(data.menuLinks || []), { label: '', path: '' }] });
-    };
-
-    const removeMenu = (idx) => {
-        setData({ ...data, menuLinks: data.menuLinks.filter((_, i) => i !== idx) });
-    };
-
-    const handleSave = async () => {
-        setSaving(true);
+    const fetchEmployees = async () => {
         try {
-            await api.put('/navbar', data);
-            toast.success('Navbar updated!');
+            const { data } = await api.get('/auth/employees');
+            setEmployees(data);
         } catch {
-            toast.error('Failed to update navbar');
+            toast.error('Employee list load kora jayni');
         } finally {
-            setSaving(false);
+            setLoading(false);
         }
     };
 
+    useEffect(() => { fetchEmployees(); }, []);
+
+    const handleCreate = async (e) => {
+        e.preventDefault();
+        if (!form.name || !form.email || !form.password) {
+            toast.error('Sob field pura koro');
+            return;
+        }
+        setSubmitting(true);
+        try {
+            await api.post('/auth/employees', { ...form, permissions });
+            toast.success('Employee account toiri hoyeche');
+            setForm({ name: '', email: '', password: '' });
+            setShowForm(false);
+            fetchEmployees();
+        } catch (err) {
+            toast.error(err.response?.data?.message || 'Employee create kora jayni');
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
+    const handleToggleActive = async (id) => {
+        try {
+            await api.put(`/auth/employees/${id}/deactivate`);
+            fetchEmployees();
+            toast.success('Status update hoyeche');
+        } catch (err) {
+            toast.error(err.response?.data?.message || 'Update kora jayni');
+        }
+    };
+
+    if (loading) return <div className="emp-loading">Loading...</div>;
+
     return (
-        <div>
-            <div className="admin-page-header">
+        <div className="emp-tab">
+            <div className="emp-header">
                 <div>
-                    <h2>Navbar / Header</h2>
-                    <p>Edit logo, contact info, social links, menu, and brochure button.</p>
+                    <h2>Employee Management</h2>
+                    <p>Tomar team member der admin panel access dao ba control koro</p>
                 </div>
-                <button className="admin-btn admin-btn-primary" onClick={handleSave} disabled={saving}>
-                    <FiSave size={15} /> {saving ? 'Saving...' : 'Save Changes'}
+                <button className="emp-add-btn" onClick={() => setShowForm(true)}>
+                    <FiUserPlus size={16} /> Notun Employee
                 </button>
             </div>
 
-            {/* Logo */}
-            <div className="admin-card" style={{ marginBottom: '1.5rem' }}>
-                <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.75rem', color: 'var(--gray-900)' }}>Logo</h3>
-                <div className="admin-form-row">
-                    <div className="admin-form-group">
-                        <label>Logo Text (main part)</label>
-                        <input
-                            value={data.logoText || ''}
-                            onChange={e => setData({ ...data, logoText: e.target.value })}
-                            placeholder="Amanah"
-                        />
-                    </div>
-                    <div className="admin-form-group">
-                        <label>Logo Accent (colored part)</label>
-                        <input
-                            value={data.logoAccent || ''}
-                            onChange={e => setData({ ...data, logoAccent: e.target.value })}
-                            placeholder=".IT"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            {/* Contact info */}
-            <div className="admin-card" style={{ marginBottom: '1.5rem' }}>
-                <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.75rem', color: 'var(--gray-900)' }}>Top Bar Contact Info</h3>
-                <div className="admin-form-row">
-                    <div className="admin-form-group">
-                        <label>Phone</label>
-                        <input
-                            value={data.phone || ''}
-                            onChange={e => setData({ ...data, phone: e.target.value })}
-                            placeholder="+880 1800-000000"
-                        />
-                    </div>
-                    <div className="admin-form-group">
-                        <label>Email</label>
-                        <input
-                            value={data.email || ''}
-                            onChange={e => setData({ ...data, email: e.target.value })}
-                            placeholder="info@amanahit.com"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            {/* Social links */}
-            <div className="admin-card" style={{ marginBottom: '1.5rem' }}>
-                <div className="admin-page-header" style={{ marginBottom: '0.75rem' }}>
-                    <h3 style={{ fontSize: '1rem', fontWeight: 600, margin: 0, color: 'var(--gray-900)' }}>Social Links</h3>
-                    <button className="admin-btn admin-btn-outline admin-btn-sm" onClick={addSocial}>
-                        <FiPlus size={14} /> Add
-                    </button>
-                </div>
-                {(data.socialLinks || []).map((s, i) => (
-                    <div key={i} className="admin-form-row" style={{ marginBottom: '0.5rem', alignItems: 'end' }}>
-                        <div className="admin-form-group">
-                            <label>Platform</label>
-                            <select value={s.platform} onChange={e => updateSocial(i, 'platform', e.target.value)}>
-                                {SOCIAL_PLATFORMS.map(p => <option key={p} value={p}>{p}</option>)}
-                            </select>
+            {employees.length === 0 ? (
+                <div className="emp-empty">Kono employee add kora hoyni ekhono</div>
+            ) : (
+                <div className="emp-list">
+                    {employees.map(emp => (
+                        <div key={emp._id} className={`emp-card ${!emp.isActive ? 'inactive' : ''}`}>
+                            <div className="emp-card-main">
+                                <div className="emp-avatar">{emp.name[0].toUpperCase()}</div>
+                                <div>
+                                    <p className="emp-name">{emp.name}</p>
+                                    <p className="emp-email">{emp.email}</p>
+                                    <div className="emp-perms">
+                                        {Object.entries(emp.permissions || {})
+                                            .filter(([key, val]) => val && PERMISSION_LABELS[key])
+                                            .map(([key]) => (
+                                                <span key={key} className="emp-perm-chip">{PERMISSION_LABELS[key]}</span>
+                                            ))}
+                                    </div>
+                                </div>
+                            </div>
+                            <button
+                                className="emp-toggle-btn"
+                                onClick={() => handleToggleActive(emp._id)}
+                                title={emp.isActive ? 'Deactivate' : 'Activate'}
+                            >
+                                {emp.isActive ? <FiToggleRight size={26} color="#22c55e" /> : <FiToggleLeft size={26} color="#ef4444" />}
+                                <span>{emp.isActive ? 'Active' : 'Inactive'}</span>
+                            </button>
                         </div>
-                        <div className="admin-form-group">
-                            <label>URL</label>
+                    ))}
+                </div>
+            )}
+
+            {showForm && (
+                <div className="emp-modal-overlay" onClick={() => setShowForm(false)}>
+                    <div className="emp-modal" onClick={(e) => e.stopPropagation()}>
+                        <div className="emp-modal-header">
+                            <h3>Notun Employee Add Koro</h3>
+                            <button onClick={() => setShowForm(false)}><FiX size={20} /></button>
+                        </div>
+
+                        <form onSubmit={handleCreate} className="emp-form">
                             <input
-                                value={s.url}
-                                onChange={e => updateSocial(i, 'url', e.target.value)}
-                                placeholder="https://facebook.com/amanahit"
+                                type="text"
+                                placeholder="Naam"
+                                value={form.name}
+                                onChange={(e) => setForm({ ...form, name: e.target.value })}
                             />
-                        </div>
-                        <button className="admin-btn admin-btn-outline admin-btn-sm" onClick={() => removeSocial(i)}>
-                            <FiTrash2 size={14} />
-                        </button>
-                    </div>
-                ))}
-            </div>
-
-            {/* Menu links */}
-            <div className="admin-card" style={{ marginBottom: '1.5rem' }}>
-                <div className="admin-page-header" style={{ marginBottom: '0.75rem' }}>
-                    <h3 style={{ fontSize: '1rem', fontWeight: 600, margin: 0, color: 'var(--gray-900)' }}>Menu Links</h3>
-                    <button className="admin-btn admin-btn-outline admin-btn-sm" onClick={addMenu}>
-                        <FiPlus size={14} /> Add
-                    </button>
-                </div>
-                <p style={{ fontSize: '12px', color: 'var(--gray-500)', marginBottom: '0.75rem' }}>
-                    Note: path <code>/services</code> ba <code>/solutions</code> dile mega dropdown menu automatically dekhabe.
-                </p>
-                {(data.menuLinks || []).map((m, i) => (
-                    <div key={i} className="admin-form-row" style={{ marginBottom: '0.5rem', alignItems: 'end' }}>
-                        <div className="admin-form-group">
-                            <label>Label</label>
                             <input
-                                value={m.label}
-                                onChange={e => updateMenu(i, 'label', e.target.value)}
-                                placeholder="Home"
+                                type="email"
+                                placeholder="Email"
+                                value={form.email}
+                                onChange={(e) => setForm({ ...form, email: e.target.value })}
                             />
-                        </div>
-                        <div className="admin-form-group">
-                            <label>Path</label>
                             <input
-                                value={m.path}
-                                onChange={e => updateMenu(i, 'path', e.target.value)}
-                                placeholder="/"
+                                type="password"
+                                placeholder="Temporary Password"
+                                value={form.password}
+                                onChange={(e) => setForm({ ...form, password: e.target.value })}
                             />
-                        </div>
-                        <button className="admin-btn admin-btn-outline admin-btn-sm" onClick={() => removeMenu(i)}>
-                            <FiTrash2 size={14} />
-                        </button>
-                    </div>
-                ))}
-            </div>
 
-            {/* Brochure */}
-            <div className="admin-card">
-                <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.75rem', color: 'var(--gray-900)' }}>Brochure Button</h3>
-                <div className="admin-form-row">
-                    <div className="admin-form-group">
-                        <label>Button Text</label>
-                        <input
-                            value={data.brochureText || ''}
-                            onChange={e => setData({ ...data, brochureText: e.target.value })}
-                            placeholder="Brochure"
-                        />
-                    </div>
-                    <div className="admin-form-group">
-                        <label>PDF Link</label>
-                        <input
-                            value={data.brochureLink || ''}
-                            onChange={e => setData({ ...data, brochureLink: e.target.value })}
-                            placeholder="/brochure.pdf"
-                        />
+                            <p className="emp-form-label">Ki ki access dibe:</p>
+                            <div className="emp-perm-grid">
+                                {Object.entries(PERMISSION_LABELS).map(([key, label]) => (
+                                    <label key={key} className="emp-perm-check">
+                                        <input
+                                            type="checkbox"
+                                            checked={permissions[key]}
+                                            onChange={(e) => setPermissions({ ...permissions, [key]: e.target.checked })}
+                                        />
+                                        {label}
+                                    </label>
+                                ))}
+                            </div>
+
+                            <button type="submit" className="emp-submit-btn" disabled={submitting}>
+                                {submitting ? 'Toiri hocche...' : 'Account Toiri Koro'}
+                            </button>
+                        </form>
                     </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 }
