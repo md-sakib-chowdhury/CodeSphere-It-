@@ -1,0 +1,221 @@
+.emp-tab {
+    color: #e5e7eb;
+}
+
+.emp-loading,
+.emp-empty {
+    padding: 40px;
+    text-align: center;
+    color: #9ca3af;
+}
+
+.emp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.emp-header h2 {
+    margin: 0 0 4px 0;
+    font-size: 20px;
+}
+
+.emp-header p {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+.emp-add-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #d4af37;
+    color: #111;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.emp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.emp-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.emp-card.inactive {
+    opacity: 0.55;
+}
+
+.emp-card-main {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.emp-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #d4af37;
+    color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.emp-name {
+    margin: 0;
+    font-weight: 600;
+}
+
+.emp-email {
+    margin: 2px 0 6px 0;
+    font-size: 13px;
+    color: #9ca3af;
+}
+
+.emp-perms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.emp-perm-chip {
+    font-size: 11px;
+    background: #2a2a2a;
+    padding: 3px 8px;
+    border-radius: 20px;
+    color: #d4af37;
+}
+
+.emp-toggle-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #e5e7eb;
+    font-size: 11px;
+}
+
+/* Modal */
+.emp-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 16px;
+}
+
+.emp-modal {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.emp-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.emp-modal-header h3 {
+    margin: 0;
+    font-size: 17px;
+}
+
+.emp-modal-header button {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+}
+
+.emp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.emp-form input {
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #e5e7eb;
+    font-size: 14px;
+}
+
+.emp-form-label {
+    margin: 8px 0 2px 0;
+    font-size: 13px;
+    color: #9ca3af;
+}
+
+.emp-perm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.emp-perm-check {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #d1d5db;
+}
+
+.emp-submit-btn {
+    margin-top: 8px;
+    background: #d4af37;
+    color: #111;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.emp-submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.admin-user-role {
+    margin: 2px 0 0 0;
+    font-size: 11px;
+    color: #d4af37;
+}
