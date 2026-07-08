@@ -5,8 +5,10 @@ const heroSchema = new mongoose.Schema({
     heading: { type: String, default: 'We Build' },
     typedWords: [{ type: String }],
     subtext: { type: String },
-    primaryBtn: { type: String, default: 'Start a project' },
-    secondaryBtn: { type: String, default: 'View our work' },
+    primaryBtn: { type: String, default: 'What We Serve' },
+    primaryBtnLink: { type: String, default: '/services/web-application-development' },
+    secondaryBtn: { type: String, default: 'Learn More' },
+    secondaryBtnLink: { type: String, default: '/explore-us' },
     stats: [{
         number: String,
         label: String,
