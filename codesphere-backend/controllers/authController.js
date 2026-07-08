@@ -92,6 +92,7 @@ exports.register = async (req, res) => {
             role: admin.role,
         });
     } catch (err) {
+        console.error('REGISTER ERROR:', err); // ← এই লাইনটা যোগ করুন
         res.status(500).json({ message: err.message });
     }
 };
