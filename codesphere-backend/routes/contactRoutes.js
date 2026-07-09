@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
             to: process.env.ADMIN_EMAIL || process.env.EMAIL_USER,
             subject: `New Contact Message from ${c.name}`,
             html: `
-                <h2>Notun message eseche AMANAH IT website theke</h2>
+                <h2>New message received from AMANAH IT website</h2>
                 <p><strong>Name:</strong> ${c.name}</p>
                 <p><strong>Email:</strong> ${c.email}</p>
                 <p><strong>Phone:</strong> ${c.phone || 'N/A'}</p>
@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
                 <p><strong>Message:</strong></p>
                 <p>${c.message}</p>
                 <hr/>
-                <p>Admin panel theke reply koro: <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/admin">Admin Panel</a></p>
+                <p>Reply from the admin panel: <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/admin">Admin Panel</a></p>
             `,
         });
 
@@ -29,12 +29,15 @@ router.post('/', async (req, res) => {
             to: c.email,
             subject: 'Thank you for contacting AMANAH IT',
             html: `
-                <h2>Dhonnobad, ${c.name}!</h2>
-                <p>Amra tomar message peyechi. Amader team shighroi tomar sathe jogajog korbe.</p>
-                <p><strong>Tomar message:</strong></p>
+                <h2>Thank you, ${c.name}!</h2>
+                <p>We've received your message and appreciate you reaching out to AMANAH IT.</p>
+                <p>Our team will review your inquiry and get back to you as soon as possible, usually within 24 hours.</p>
+                <p><strong>Your message:</strong></p>
                 <p style="color:#555;">${c.message}</p>
                 <hr/>
-                <p>AMANAH IT<br/>Dhaka, Bangladesh</p>
+                <p>Best regards,<br/>
+                <strong>AMANAH IT Team</strong><br/>
+                Dhaka, Bangladesh</p>
             `,
         });
 
