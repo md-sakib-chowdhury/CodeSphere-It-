@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import {
     FiPlus, FiEdit2, FiTrash2, FiSave, FiX, FiArrowLeft,
-    FiCalendar, FiUploadCloud
+    FiCalendar, FiUploadCloud, FiSettings
 } from 'react-icons/fi';
 import api from '../../../utils/api';
 
@@ -16,14 +16,27 @@ const emptyForm = () => ({
     published: false,
 });
 
+const emptyPageSettings = () => ({
+    bannerHeading: 'Latest Articles',
+    bannerImage: '',
+    ctaLabel: 'Our Recent Activities',
+    ctaHeading: 'Latest Activities From Our Team',
+    ctaText: 'Want to work with us on your next project?',
+    ctaButtonText: 'Get In Touch',
+    ctaButtonLink: '/contact',
+});
+
 export default function BlogTab() {
-    const [view, setView] = useState('list'); // 'list' | 'form'
+    const [view, setView] = useState('list'); // 'list' | 'form' | 'settings'
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [editingId, setEditingId] = useState(null);
     const [form, setForm] = useState(emptyForm());
     const [tagInput, setTagInput] = useState('');
     const [saving, setSaving] = useState(false);
+
+    const [pageSettings, setPageSettings] = useState(emptyPageSettings());
+    const [savingSettings, setSavingSettings] = useState(false);
 
     const fetchBlogs = () => {
         setLoading(true);
@@ -33,7 +46,16 @@ export default function BlogTab() {
             .finally(() => setLoading(false));
     };
 
-    useEffect(() => { fetchBlogs(); }, []);
+    const fetchPageSettings = () => {
+        api.get('/blog-page')
+            .then(r => setPageSettings(r.data))
+            .catch(() => { });
+    };
+
+    useEffect(() => {
+        fetchBlogs();
+        fetchPageSettings();
+    }, []);
 
     const openNew = () => {
         setForm(emptyForm());
@@ -64,6 +86,19 @@ export default function BlogTab() {
         }
         const reader = new FileReader();
         reader.onload = () => setForm(f => ({ ...f, image: reader.result }));
+        reader.readAsDataURL(file);
+        e.target.value = '';
+    };
+
+    const handleBannerImageChange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) {
+            toast.error('Shudhu image file select koro');
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => setPageSettings(s => ({ ...s, bannerImage: reader.result }));
         reader.readAsDataURL(file);
         e.target.value = '';
     };
@@ -112,10 +147,136 @@ export default function BlogTab() {
         }
     };
 
+    const handleSaveSettings = async () => {
+        setSavingSettings(true);
+        try {
+            const res = await api.put('/blog-page', pageSettings);
+            setPageSettings(res.data);
+            toast.success('Page settings update hoyeche!');
+            setView('list');
+        } catch (err) {
+            toast.error('Settings save kora jayni');
+        } finally {
+            setSavingSettings(false);
+        }
+    };
+
     const formatDate = (d) =>
         d ? new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
 
-    // ============================ FORM VIEW ============================
+    // ============================ PAGE SETTINGS VIEW ============================
+    if (view === 'settings') {
+        return (
+            <div>
+                <div className="admin-page-header">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <button className="admin-btn admin-btn-outline admin-btn-sm" onClick={() => setView('list')}>
+                            <FiArrowLeft size={14} /> Back
+                        </button>
+                        <div>
+                            <h2>Latest Articles Page Settings</h2>
+                            <p>Edit the banner and bottom CTA section of the /latest-articles page.</p>
+                        </div>
+                    </div>
+                    <button className="admin-btn admin-btn-primary" onClick={handleSaveSettings} disabled={savingSettings}>
+                        <FiSave size={15} /> {savingSettings ? 'Saving...' : 'Save Settings'}
+                    </button>
+                </div>
+
+                <div className="admin-card" style={{ marginBottom: '1.5rem' }}>
+                    <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.75rem', color: 'var(--gray-900)' }}>
+                        Top Banner
+                    </h3>
+                    <div className="admin-form-group">
+                        <label>Banner Heading</label>
+                        <input
+                            value={pageSettings.bannerHeading || ''}
+                            onChange={e => setPageSettings({ ...pageSettings, bannerHeading: e.target.value })}
+                            placeholder="Latest Articles"
+                        />
+                    </div>
+                    <div className="admin-form-group">
+                        <label>Banner Background Image</label>
+                        <label
+                            htmlFor="banner-image-upload"
+                            style={{
+                                display: 'flex', alignItems: 'center', gap: '0.5rem',
+                                border: '1.5px dashed var(--gray-300, #d1d5db)', borderRadius: '8px',
+                                padding: '0.75rem 1rem', cursor: 'pointer',
+                                color: 'var(--gray-600, #4b5563)', fontSize: '0.9rem',
+                            }}
+                        >
+                            <FiUploadCloud size={16} /> Click to choose a banner image
+                        </label>
+                        <input
+                            id="banner-image-upload"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleBannerImageChange}
+                            style={{ display: 'none' }}
+                        />
+                        {pageSettings.bannerImage && (
+                            <img
+                                src={pageSettings.bannerImage}
+                                alt="Banner preview"
+                                style={{ marginTop: '0.75rem', maxWidth: '100%', maxHeight: '180px', borderRadius: '8px', objectFit: 'cover' }}
+                            />
+                        )}
+                    </div>
+                </div>
+
+                <div className="admin-card">
+                    <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.75rem', color: 'var(--gray-900)' }}>
+                        Bottom CTA Section
+                    </h3>
+                    <div className="admin-form-group">
+                        <label>Small Label</label>
+                        <input
+                            value={pageSettings.ctaLabel || ''}
+                            onChange={e => setPageSettings({ ...pageSettings, ctaLabel: e.target.value })}
+                            placeholder="Our Recent Activities"
+                        />
+                    </div>
+                    <div className="admin-form-group">
+                        <label>Heading</label>
+                        <input
+                            value={pageSettings.ctaHeading || ''}
+                            onChange={e => setPageSettings({ ...pageSettings, ctaHeading: e.target.value })}
+                            placeholder="Latest Activities From Our Team"
+                        />
+                    </div>
+                    <div className="admin-form-group">
+                        <label>Text</label>
+                        <input
+                            value={pageSettings.ctaText || ''}
+                            onChange={e => setPageSettings({ ...pageSettings, ctaText: e.target.value })}
+                            placeholder="Want to work with us on your next project?"
+                        />
+                    </div>
+                    <div className="admin-form-row">
+                        <div className="admin-form-group">
+                            <label>Button Text</label>
+                            <input
+                                value={pageSettings.ctaButtonText || ''}
+                                onChange={e => setPageSettings({ ...pageSettings, ctaButtonText: e.target.value })}
+                                placeholder="Get In Touch"
+                            />
+                        </div>
+                        <div className="admin-form-group">
+                            <label>Button Link</label>
+                            <input
+                                value={pageSettings.ctaButtonLink || ''}
+                                onChange={e => setPageSettings({ ...pageSettings, ctaButtonLink: e.target.value })}
+                                placeholder="/contact"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    // ============================ FORM VIEW (create/edit post) ============================
     if (view === 'form') {
         return (
             <div>
@@ -261,9 +422,14 @@ export default function BlogTab() {
                     <h2>Blog / Articles</h2>
                     <p>Write, edit and publish articles shown on your Latest Articles page.</p>
                 </div>
-                <button className="admin-btn admin-btn-primary" onClick={openNew}>
-                    <FiPlus size={15} /> New Post
-                </button>
+                <div style={{ display: 'flex', gap: '0.75rem' }}>
+                    <button className="admin-btn admin-btn-outline" onClick={() => setView('settings')}>
+                        <FiSettings size={15} /> Page Settings
+                    </button>
+                    <button className="admin-btn admin-btn-primary" onClick={openNew}>
+                        <FiPlus size={15} /> New Post
+                    </button>
+                </div>
             </div>
 
             {loading ? (
