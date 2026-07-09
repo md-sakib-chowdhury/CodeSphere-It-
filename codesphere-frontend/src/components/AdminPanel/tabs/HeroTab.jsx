@@ -300,7 +300,7 @@
 //     );
 // }
 import { useState, useEffect } from 'react';
-import { FiSave, FiPlus, FiX } from 'react-icons/fi';
+import { FiSave, FiPlus, FiX, FiUploadCloud } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import api from '../../../utils/api';
 
@@ -312,6 +312,7 @@ export default function HeroTab() {
     });
     const [wordInput, setWordInput] = useState('');
     const [saving, setSaving] = useState(false);
+    const [uploading, setUploading] = useState(false);
 
     useEffect(() => {
         api.get('/hero').then(r => setData(r.data)).catch(() => { });
@@ -331,6 +332,32 @@ export default function HeroTab() {
         const stats = [...data.stats];
         stats[idx][field] = value;
         setData({ ...data, stats });
+    };
+
+    // কম্পিউটার থেকে সরাসরি ইমেজ আপলোড — এটা নিজের সার্ভারে সেভ হয়, তাই স্থায়ী
+    const handleFileUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith('image/')) {
+            toast.error('Shudhu image file upload kora jabe');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('image', file);
+
+        setUploading(true);
+        try {
+            const res = await api.post('/upload', formData);
+            setData(prev => ({ ...prev, bgImage: res.data.url }));
+            toast.success('Image upload hoyeche!');
+        } catch (err) {
+            toast.error('Upload fail hoyeche, abar try koro');
+        } finally {
+            setUploading(false);
+            e.target.value = ''; // same file abar select korar jonno reset
+        }
     };
 
     const handleSave = async () => {
@@ -470,6 +497,45 @@ export default function HeroTab() {
 
                 {data.backgroundType === 'image' ? (
                     <>
+                        {/* মূল পদ্ধতি — কম্পিউটার থেকে সরাসরি আপলোড (নিজের সার্ভারে স্থায়ীভাবে সেভ হয়) */}
+                        <div className="admin-form-group">
+                            <label>Upload Image from Computer</label>
+                            <label
+                                htmlFor="hero-bg-upload"
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.5rem',
+                                    border: '1.5px dashed var(--gray-300, #d1d5db)',
+                                    borderRadius: '8px',
+                                    padding: '0.75rem 1rem',
+                                    cursor: uploading ? 'not-allowed' : 'pointer',
+                                    color: 'var(--gray-600, #4b5563)',
+                                    fontSize: '0.9rem',
+                                    opacity: uploading ? 0.6 : 1,
+                                }}
+                            >
+                                <FiUploadCloud size={16} />
+                                {uploading ? 'Uploading...' : 'Click to choose an image file'}
+                            </label>
+                            <input
+                                id="hero-bg-upload"
+                                type="file"
+                                accept="image/*"
+                                onChange={handleFileUpload}
+                                disabled={uploading}
+                                style={{ display: 'none' }}
+                            />
+                            <p style={{ fontSize: '0.78rem', color: 'var(--gray-500)', marginTop: '0.35rem' }}>
+                                এভাবে আপলোড করা ইমেজ আপনার নিজের সার্ভারে স্থায়ীভাবে থাকবে।
+                            </p>
+                        </div>
+
+                        <div style={{ textAlign: 'center', fontSize: '0.8rem', color: 'var(--gray-500)', margin: '0.5rem 0' }}>
+                            — অথবা বাইরের লিঙ্ক বসান (ঐচ্ছিক) —
+                        </div>
+
+                        {/* বিকল্প পদ্ধতি — সরাসরি URL বসানো */}
                         <div className="admin-form-group">
                             <label>Background Image URL</label>
                             <input
@@ -477,15 +543,17 @@ export default function HeroTab() {
                                 onChange={e => setData({ ...data, bgImage: e.target.value })}
                                 placeholder="https://your-image-link.jpg"
                             />
-                            {data.bgImage && (
-                                <img
-                                    src={data.bgImage}
-                                    alt="Background preview"
-                                    style={{ marginTop: '0.75rem', maxWidth: '100%', maxHeight: '160px', borderRadius: '8px', objectFit: 'cover' }}
-                                />
-                            )}
                         </div>
-                        <div className="admin-form-group">
+
+                        {data.bgImage && (
+                            <img
+                                src={data.bgImage}
+                                alt="Background preview"
+                                style={{ marginTop: '0.5rem', maxWidth: '100%', maxHeight: '160px', borderRadius: '8px', objectFit: 'cover' }}
+                            />
+                        )}
+
+                        <div className="admin-form-group" style={{ marginTop: '1rem' }}>
                             <label>Dark Overlay Strength ({Math.round((data.bgOverlayOpacity ?? 0.6) * 100)}%)</label>
                             <input
                                 type="range"
