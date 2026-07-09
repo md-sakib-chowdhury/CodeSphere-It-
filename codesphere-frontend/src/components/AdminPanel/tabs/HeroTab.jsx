@@ -581,23 +581,7 @@ export default function HeroTab() {
                 )}
             </div>
 
-            <div className="admin-card">
-                <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.75rem', color: 'var(--gray-900)' }}>
-                    Stats Bar (bottom of hero)
-                </h3>
-                {(data.stats || []).map((s, i) => (
-                    <div key={i} className="admin-form-row" style={{ marginBottom: '0.5rem' }}>
-                        <div className="admin-form-group">
-                            <label>Number</label>
-                            <input value={s.number} onChange={e => updateStat(i, 'number', e.target.value)} />
-                        </div>
-                        <div className="admin-form-group">
-                            <label>Label</label>
-                            <input value={s.label} onChange={e => updateStat(i, 'label', e.target.value)} />
-                        </div>
-                    </div>
-                ))}
-            </div>
+            
         </div>
     );
 }
