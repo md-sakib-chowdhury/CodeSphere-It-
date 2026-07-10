@@ -1,0 +1,67 @@
+const mongoose = require('mongoose');
+
+const homeSectionsSchema = new mongoose.Schema({
+    whatWeOffer: {
+        label: { type: String, default: 'What We Offer' },
+        title: { type: String, default: 'We Make Different Solutions' },
+        subtext: { type: String, default: 'From web development to cloud deployment, we offer a dynamic suite of technological services to drive your business success.' },
+        image: { type: String, default: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=700&q=80' },
+        imagePublicId: { type: String, default: '' },
+        btnText: { type: String, default: 'Learn More Us' },
+    },
+
+    keyCompetency: {
+        label: { type: String, default: 'Key Competency' },
+        title: { type: String, default: "We're Professional and More Experience" },
+        subtext: { type: String, default: 'Stay ahead with our best MERN stack development team in Bangladesh — the perfect blend of cutting-edge technologies and industry expertise.' },
+        image: { type: String, default: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80' },
+        imagePublicId: { type: String, default: '' },
+        caption: { type: String, default: '2+ years of combined experience in this field' },
+        skills: [{
+            label: { type: String },
+            value: { type: Number },
+        }],
+    },
+
+    whyChooseUs: {
+        label: { type: String, default: 'Why Choose Us' },
+        title: { type: String, default: 'IT Services BD — Skyrocket Your Business' },
+        subtext: { type: String, default: 'Unlock your business potential with our IT service expertise, reliability, and passion for delivering exceptional results.' },
+        btnText: { type: String, default: 'Learn More Us' },
+        images: [{
+            url: { type: String },
+            publicId: { type: String },
+            caption: { type: String },
+        }],
+    },
+
+    latestActivities: {
+        label: { type: String, default: 'Our Recent Activities' },
+        title: { type: String, default: 'Latest Activities' },
+        btnText: { type: String, default: 'Learn More' },
+    },
+
+    testimonialsHeader: {
+        label: { type: String, default: 'Clients Testimonials' },
+        titlePrefix: { type: String, default: 'What Our ' },
+        titleHighlight: { type: String, default: 'Clients Say' },
+        titleSuffix: { type: String, default: ' About Us' },
+    },
+
+    teamHeader: {
+        label: { type: String, default: 'Our Team' },
+        title: { type: String, default: 'Meet The Founder' },
+        subtext: { type: String, default: 'Driven by passion, guided by excellence — bringing hands-on technical leadership to every project we take on.' },
+        executiveGroupTitle: { type: String, default: 'Executive Leader' },
+        coreGroupTitle: { type: String, default: 'Core Team' },
+    },
+
+    servicesHeader: {
+        label: { type: String, default: 'What We Offer' },
+        titlePrefix: { type: String, default: 'Services That ' },
+        titleHighlight: { type: String, default: 'Drive Results' },
+        subtext: { type: String, default: 'From idea to launch — we build complete digital products with cutting-edge tech.' },
+    },
+}, { timestamps: true });
+
+module.exports = mongoose.model('HomeSections', homeSectionsSchema);
