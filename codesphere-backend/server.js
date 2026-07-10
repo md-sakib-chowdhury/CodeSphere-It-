@@ -28,6 +28,7 @@ app.use('/api/blogs', require('./routes/blogRoutes'));
 app.use('/api/navbar', navbarRoutes);
 app.use('/api/upload', require('./routes/uploadRoutes'));
 app.use('/api/blog-page', require('./routes/blogPageRoutes'));
+app.use('/api/home-sections', require('./routes/homeSectionsRoutes'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.get('/', (req, res) => res.json({ message: 'CodeSphere IT API Running ✅' }));
 
