@@ -35,6 +35,7 @@ const adminSchema = new mongoose.Schema({
         manageContactMessages: { type: Boolean, default: true },
         manageHero: { type: Boolean, default: false },
         manageNavbar: { type: Boolean, default: false },
+        manageHomeSections: { type: Boolean, default: false },
         managePortfolio: { type: Boolean, default: false },
         manageServices: { type: Boolean, default: false },
         manageTeam: { type: Boolean, default: false },
@@ -47,9 +48,10 @@ const adminSchema = new mongoose.Schema({
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin', default: null },
 }, { timestamps: true });
 
-adminSchema.pre('save', async function () {
-    if (!this.isModified('password')) return;
+adminSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) return next();
     this.password = await bcrypt.hash(this.password, 10);
+    next();
 });
 
 adminSchema.methods.matchPassword = async function (entered) {
