@@ -12,11 +12,13 @@ const blogSchema = new mongoose.Schema({
     published: { type: Boolean, default: false },
 }, { timestamps: true });
 
-blogSchema.pre('save', function (next) {
+// Synchronous middleware — no 'next' parameter needed, Mongoose detects
+// this automatically. This avoids the "next is not a function" error
+// that some Mongoose versions throw with the old callback style.
+blogSchema.pre('save', function () {
     if (!this.slug) {
         this.slug = this.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
     }
-    next();
 });
 
 module.exports = mongoose.model('Blog', blogSchema);
