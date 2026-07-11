@@ -19,6 +19,7 @@ export default function HomeSectionsTab() {
         testimonialsHeader: { label: '', titlePrefix: '', titleHighlight: '', titleSuffix: '' },
         teamHeader: { label: '', title: '', subtext: '', executiveGroupTitle: '', coreGroupTitle: '' },
         servicesHeader: { label: '', titlePrefix: '', titleHighlight: '', subtext: '' },
+        portfolioHeader: { label: '', titlePrefix: '', titleHighlight: '', subtext: '' },
     });
     const [saving, setSaving] = useState(false);
 
@@ -89,6 +90,9 @@ export default function HomeSectionsTab() {
 
     // ---------- Services Header ----------
     const updateSH = (field, value) => setData({ ...data, servicesHeader: { ...data.servicesHeader, [field]: value } });
+
+    // ---------- Portfolio Header ----------
+    const updatePH = (field, value) => setData({ ...data, portfolioHeader: { ...data.portfolioHeader, [field]: value } });
 
     return (
         <div>
@@ -344,6 +348,34 @@ export default function HomeSectionsTab() {
                 <div className="admin-form-group">
                     <label>Subtext</label>
                     <textarea rows="2" value={data.servicesHeader?.subtext || ''} onChange={e => updateSH('subtext', e.target.value)} />
+                </div>
+            </div>
+
+            {/* PORTFOLIO HEADER */}
+            <div className="admin-card" style={{ marginTop: '1.5rem' }}>
+                <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.75rem', color: 'var(--gray-900)' }}>
+                    Portfolio Section Header
+                </h3>
+                <p style={{ fontSize: '12px', color: 'var(--gray-500)', marginBottom: '0.75rem' }}>
+                    Note: actual projects "Portfolio" tab theke manage hoy — eikhane shudhu header text.
+                </p>
+                <div className="admin-form-group">
+                    <label>Label</label>
+                    <input value={data.portfolioHeader?.label || ''} onChange={e => updatePH('label', e.target.value)} />
+                </div>
+                <div className="admin-form-row">
+                    <div className="admin-form-group">
+                        <label>Title — Prefix</label>
+                        <input value={data.portfolioHeader?.titlePrefix || ''} onChange={e => updatePH('titlePrefix', e.target.value)} placeholder="Recent " />
+                    </div>
+                    <div className="admin-form-group">
+                        <label>Title — Highlighted Part</label>
+                        <input value={data.portfolioHeader?.titleHighlight || ''} onChange={e => updatePH('titleHighlight', e.target.value)} placeholder="Projects" />
+                    </div>
+                </div>
+                <div className="admin-form-group">
+                    <label>Subtext</label>
+                    <textarea rows="2" value={data.portfolioHeader?.subtext || ''} onChange={e => updatePH('subtext', e.target.value)} />
                 </div>
             </div>
         </div>
