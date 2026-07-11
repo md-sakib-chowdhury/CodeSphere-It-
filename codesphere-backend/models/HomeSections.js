@@ -62,6 +62,13 @@ const homeSectionsSchema = new mongoose.Schema({
         titleHighlight: { type: String, default: 'Drive Results' },
         subtext: { type: String, default: 'From idea to launch — we build complete digital products with cutting-edge tech.' },
     },
+
+    portfolioHeader: {
+        label: { type: String, default: 'Our Work' },
+        titlePrefix: { type: String, default: 'Recent ' },
+        titleHighlight: { type: String, default: 'Projects' },
+        subtext: { type: String, default: 'Real products built for real clients — from startups to enterprises.' },
+    },
 }, { timestamps: true });
 
 module.exports = mongoose.model('HomeSections', homeSectionsSchema);
