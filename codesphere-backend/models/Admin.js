@@ -36,6 +36,7 @@ const adminSchema = new mongoose.Schema({
         manageHero: { type: Boolean, default: false },
         manageNavbar: { type: Boolean, default: false },
         manageHomeSections: { type: Boolean, default: false },
+        manageExploreUs: { type: Boolean, default: false },
         managePortfolio: { type: Boolean, default: false },
         manageServices: { type: Boolean, default: false },
         manageTeam: { type: Boolean, default: false },
