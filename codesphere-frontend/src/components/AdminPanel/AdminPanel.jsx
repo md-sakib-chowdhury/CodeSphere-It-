@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
     FiGrid, FiLayout, FiBriefcase, FiUsers, FiMessageSquare,
-    FiMail, FiBarChart2, FiLogOut, FiMenu, FiX, FiUserPlus, FiHome, FiFileText
+    FiMail, FiBarChart2, FiLogOut, FiMenu, FiX, FiUserPlus, FiHome, FiFileText, FiCompass
 } from 'react-icons/fi';
 import { useAuth } from '../../context/AuthContext';
 
@@ -11,6 +11,7 @@ import StatsTab from './tabs/StatsTab';
 import NavbarTab from './tabs/NavbarTab';
 import HeroTab from './tabs/HeroTab';
 import HomeSectionsTab from './tabs/HomeSectionsTab';
+import ExploreUsTab from './tabs/ExploreUsTab';
 import ServicesTab from './tabs/ServicesTab';
 import PortfolioTab from './tabs/PortfolioTab';
 import TeamTab from './tabs/TeamTab';
@@ -27,6 +28,7 @@ const TABS = [
     { id: 'navbar', label: 'Navbar / Header', icon: FiLayout, permission: 'manageNavbar' },
     { id: 'hero', label: 'Hero Section', icon: FiLayout, permission: 'manageHero' },
     { id: 'homeSections', label: 'Homepage Sections', icon: FiHome, permission: 'manageHomeSections' },
+    { id: 'exploreUs', label: 'Explore Us Page', icon: FiCompass, permission: 'manageExploreUs' },
     { id: 'services', label: 'Services', icon: FiGrid, permission: 'manageServices' },
     { id: 'portfolio', label: 'Portfolio', icon: FiBriefcase, permission: 'managePortfolio' },
     { id: 'team', label: 'Team', icon: FiUsers, permission: 'manageTeam' },
@@ -56,6 +58,7 @@ export default function AdminPanel() {
             case 'navbar': return <NavbarTab />;
             case 'hero': return <HeroTab />;
             case 'homeSections': return <HomeSectionsTab />;
+            case 'exploreUs': return <ExploreUsTab />;
             case 'services': return <ServicesTab />;
             case 'portfolio': return <PortfolioTab />;
             case 'team': return <TeamTab />;
