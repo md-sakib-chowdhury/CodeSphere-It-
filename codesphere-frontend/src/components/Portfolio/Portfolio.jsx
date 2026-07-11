@@ -3,7 +3,7 @@ import { FiExternalLink } from 'react-icons/fi';
 import api from '../../utils/api';
 import './Portfolio.css';
 
-const CATEGORIES = ['All', 'Web', 'E-commerce', 'SaaS', 'Other'];
+const CATEGORIES = ['All', 'Web', 'E-commerce', 'SaaS', 'Mobile', 'Other'];
 
 const DEFAULTS = [
     {
@@ -116,9 +116,17 @@ const DEFAULTS = [
     },
 ];
 
+const DEFAULT_HEADER = {
+    label: 'Our Work',
+    titlePrefix: 'Recent ',
+    titleHighlight: 'Projects',
+    subtext: 'Real products built for real clients — from startups to enterprises.',
+};
+
 export default function Portfolio() {
     const [projects, setProjects] = useState(DEFAULTS);
     const [cat, setCat] = useState('All');
+    const [header, setHeader] = useState(DEFAULT_HEADER);
 
     useEffect(() => {
         api
@@ -127,6 +135,9 @@ export default function Portfolio() {
                 if (r.data.length) setProjects(r.data);
             })
             .catch(() => { });
+        api.get('/home-sections').then(r => {
+            if (r.data?.portfolioHeader) setHeader({ ...DEFAULT_HEADER, ...r.data.portfolioHeader });
+        }).catch(() => { });
     }, []);
 
     const filtered = cat === 'All' ? projects : projects.filter((p) => p.category === cat);
@@ -135,13 +146,11 @@ export default function Portfolio() {
         <section className="portfolio section" id="portfolio">
             <div className="container">
                 <div className="section-header">
-                    <span className="section-label">Our Work</span>
+                    <span className="section-label">{header.label}</span>
                     <h2 className="section-title">
-                        Recent <span className="grad-text">Projects</span>
+                        {header.titlePrefix}<span className="grad-text">{header.titleHighlight}</span>
                     </h2>
-                    <p className="section-sub">
-                        Real products built for real clients — from startups to enterprises.
-                    </p>
+                    <p className="section-sub">{header.subtext}</p>
                 </div>
 
                 <div className="portfolio-tabs">
@@ -161,7 +170,7 @@ export default function Portfolio() {
                         <div key={p._id} className={`project-card ${p.featured ? 'featured' : ''}`}>
                             <div
                                 className="project-banner"
-                                style={p.bannerImg ? { backgroundImage: `url(${p.bannerImg})` } : undefined}
+                                style={p.image ? { backgroundImage: `url(${p.image})` } : undefined}
                             >
                                 <div className="project-banner-overlay" />
                                 {p.featured && <span className="featured-badge">Featured</span>}
