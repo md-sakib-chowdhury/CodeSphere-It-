@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FiSave, FiPlus, FiTrash2, FiUpload } from 'react-icons/fi';
+import { FiSave, FiPlus, FiTrash2, FiUpload, FiEdit2 } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import api from '../../../utils/api';
 
@@ -9,6 +9,13 @@ const fileToBase64 = (file) => new Promise((resolve, reject) => {
     reader.onerror = reject;
     reader.readAsDataURL(file);
 });
+
+const TONE_LABELS = {
+    1: 'Tone 1 (Blue-Green)',
+    2: 'Tone 2 (Deep Blue)',
+    3: 'Tone 3 (Teal)',
+    4: 'Tone 4 (Cyan-Green)',
+};
 
 export default function HomeSectionsTab() {
     const [data, setData] = useState({
@@ -23,6 +30,7 @@ export default function HomeSectionsTab() {
         statsCards: [],
     });
     const [saving, setSaving] = useState(false);
+    const [editingStatIdx, setEditingStatIdx] = useState(null);
 
     useEffect(() => {
         api.get('/home-sections').then(r => setData(r.data)).catch(() => { });
@@ -101,8 +109,14 @@ export default function HomeSectionsTab() {
         cards[idx][field] = value;
         setData({ ...data, statsCards: cards });
     };
-    const addStatCard = () => setData({ ...data, statsCards: [...(data.statsCards || []), { value: '', label: '', desc: '' }] });
-    const removeStatCard = (idx) => setData({ ...data, statsCards: data.statsCards.filter((_, i) => i !== idx) });
+    const addStatCard = () => {
+        setData({ ...data, statsCards: [...(data.statsCards || []), { value: '', label: '', desc: '', tone: 1 }] });
+        setEditingStatIdx((data.statsCards || []).length); // notun card automatically edit mode e open hobe
+    };
+    const removeStatCard = (idx) => {
+        setData({ ...data, statsCards: data.statsCards.filter((_, i) => i !== idx) });
+        if (editingStatIdx === idx) setEditingStatIdx(null);
+    };
 
     return (
         <div>
@@ -389,7 +403,7 @@ export default function HomeSectionsTab() {
                 </div>
             </div>
 
-            {/* STATS CARDS */}
+            {/* STATS CARDS — Portfolio Projects style compact list */}
             <div className="admin-card" style={{ marginTop: '1.5rem' }}>
                 <div className="admin-page-header" style={{ marginBottom: '0.5rem' }}>
                     <div>
@@ -400,32 +414,128 @@ export default function HomeSectionsTab() {
                             Jotota khushi card add/remove korte paro — website e same design e dekhabe.
                         </p>
                     </div>
-                    <button className="admin-btn admin-btn-outline admin-btn-sm" onClick={addStatCard}>
+                    <button className="admin-btn admin-btn-primary admin-btn-sm" onClick={addStatCard}>
                         <FiPlus size={14} /> Add Card
                     </button>
                 </div>
 
+                {(data.statsCards || []).length === 0 && (
+                    <p style={{ fontSize: '13px', color: 'var(--gray-400)', padding: '1rem 0' }}>
+                        Kono card nei — "Add Card" e click kore shuru koro।
+                    </p>
+                )}
+
                 {(data.statsCards || []).map((c, i) => (
-                    <div key={i} className="admin-card" style={{ marginBottom: '0.75rem', background: 'var(--gray-50)' }}>
+                    <div
+                        key={i}
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            padding: '0.75rem 0',
+                            borderBottom: i !== data.statsCards.length - 1 ? '1px solid var(--gray-100)' : 'none',
+                            gap: '1rem',
+                        }}
+                    >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flex: 1, minWidth: 0 }}>
+                            <div
+                                style={{
+                                    width: 42, height: 42, borderRadius: 8, flexShrink: 0,
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    fontWeight: 700, fontSize: '13px', color: '#fff',
+                                    background: ['#2563eb', '#0891b2', '#059669', '#7c3aed'][(c.tone || 1) - 1],
+                                }}
+                            >
+                                {c.value ? c.value.slice(0, 4) : '—'}
+                            </div>
+                            <div style={{ minWidth: 0 }}>
+                                <div style={{ fontWeight: 600, fontSize: '14px', color: 'var(--gray-900)' }}>
+                                    {c.label || 'Untitled Card'}
+                                </div>
+                                <div style={{
+                                    fontSize: '12px', color: 'var(--gray-500)',
+                                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 480,
+                                }}>
+                                    {c.desc || 'No description'} · {TONE_LABELS[c.tone || 1]}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
+                            <button
+                                className="admin-btn admin-btn-outline admin-btn-sm"
+                                onClick={() => setEditingStatIdx(editingStatIdx === i ? null : i)}
+                                title="Edit"
+                            >
+                                <FiEdit2 size={14} />
+                            </button>
+                            <button
+                                className="admin-btn admin-btn-outline admin-btn-sm"
+                                onClick={() => removeStatCard(i)}
+                                title="Delete"
+                            >
+                                <FiTrash2 size={14} />
+                            </button>
+                        </div>
+                    </div>
+                ))}
+
+                {/* Inline edit form — shudhu currently-selected card er jonno */}
+                {editingStatIdx !== null && data.statsCards[editingStatIdx] && (
+                    <div className="admin-card" style={{ marginTop: '1rem', background: 'var(--gray-50)' }}>
+                        <h4 style={{ fontSize: '13px', fontWeight: 600, marginBottom: '0.75rem', color: 'var(--gray-700)' }}>
+                            Editing Card #{editingStatIdx + 1}
+                        </h4>
                         <div className="admin-form-row">
                             <div className="admin-form-group">
                                 <label>Value (big number)</label>
-                                <input value={c.value} onChange={e => updateStatCard(i, 'value', e.target.value)} placeholder="28+" />
+                                <input
+                                    value={data.statsCards[editingStatIdx].value}
+                                    onChange={e => updateStatCard(editingStatIdx, 'value', e.target.value)}
+                                    placeholder="28+"
+                                />
                             </div>
                             <div className="admin-form-group">
                                 <label>Label</label>
-                                <input value={c.label} onChange={e => updateStatCard(i, 'label', e.target.value)} placeholder="Projects Built" />
+                                <input
+                                    value={data.statsCards[editingStatIdx].label}
+                                    onChange={e => updateStatCard(editingStatIdx, 'label', e.target.value)}
+                                    placeholder="Projects Built"
+                                />
                             </div>
                         </div>
                         <div className="admin-form-group">
                             <label>Description</label>
-                            <input value={c.desc} onChange={e => updateStatCard(i, 'desc', e.target.value)} placeholder="Real-world MERN stack projects shipped and deployed." />
+                            <input
+                                value={data.statsCards[editingStatIdx].desc}
+                                onChange={e => updateStatCard(editingStatIdx, 'desc', e.target.value)}
+                                placeholder="Real-world MERN stack projects shipped and deployed."
+                            />
                         </div>
-                        <button className="admin-btn admin-btn-outline admin-btn-sm" onClick={() => removeStatCard(i)}>
-                            <FiTrash2 size={14} /> Remove
+                        <div className="admin-form-group">
+                            <label>Color Tone</label>
+                            <select
+                                value={data.statsCards[editingStatIdx].tone || 1}
+                                onChange={e => updateStatCard(editingStatIdx, 'tone', Number(e.target.value))}
+                                style={{
+                                    width: '100%', padding: '0.5rem 0.75rem', borderRadius: 8,
+                                    border: '1px solid var(--gray-200)', fontSize: '14px',
+                                }}
+                            >
+                                <option value={1}>Tone 1 (Blue-Green)</option>
+                                <option value={2}>Tone 2 (Deep Blue)</option>
+                                <option value={3}>Tone 3 (Teal)</option>
+                                <option value={4}>Tone 4 (Cyan-Green)</option>
+                            </select>
+                        </div>
+                        <button
+                            className="admin-btn admin-btn-primary admin-btn-sm"
+                            onClick={() => setEditingStatIdx(null)}
+                        >
+                            Done
                         </button>
                     </div>
-                ))}
+                )}
             </div>
         </div>
     );
