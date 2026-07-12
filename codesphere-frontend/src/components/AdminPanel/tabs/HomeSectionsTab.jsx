@@ -20,6 +20,7 @@ export default function HomeSectionsTab() {
         teamHeader: { label: '', title: '', subtext: '', executiveGroupTitle: '', coreGroupTitle: '' },
         servicesHeader: { label: '', titlePrefix: '', titleHighlight: '', subtext: '' },
         portfolioHeader: { label: '', titlePrefix: '', titleHighlight: '', subtext: '' },
+        statsCards: [],
     });
     const [saving, setSaving] = useState(false);
 
@@ -93,6 +94,15 @@ export default function HomeSectionsTab() {
 
     // ---------- Portfolio Header ----------
     const updatePH = (field, value) => setData({ ...data, portfolioHeader: { ...data.portfolioHeader, [field]: value } });
+
+    // ---------- Stats Cards ----------
+    const updateStatCard = (idx, field, value) => {
+        const cards = [...data.statsCards];
+        cards[idx][field] = value;
+        setData({ ...data, statsCards: cards });
+    };
+    const addStatCard = () => setData({ ...data, statsCards: [...(data.statsCards || []), { value: '', label: '', desc: '' }] });
+    const removeStatCard = (idx) => setData({ ...data, statsCards: data.statsCards.filter((_, i) => i !== idx) });
 
     return (
         <div>
@@ -377,6 +387,45 @@ export default function HomeSectionsTab() {
                     <label>Subtext</label>
                     <textarea rows="2" value={data.portfolioHeader?.subtext || ''} onChange={e => updatePH('subtext', e.target.value)} />
                 </div>
+            </div>
+
+            {/* STATS CARDS */}
+            <div className="admin-card" style={{ marginTop: '1.5rem' }}>
+                <div className="admin-page-header" style={{ marginBottom: '0.5rem' }}>
+                    <div>
+                        <h3 style={{ fontSize: '1rem', fontWeight: 600, margin: 0, color: 'var(--gray-900)' }}>
+                            Stats Cards (dark band)
+                        </h3>
+                        <p style={{ fontSize: '12px', color: 'var(--gray-500)', margin: '4px 0 0' }}>
+                            Jotota khushi card add/remove korte paro — website e same design e dekhabe.
+                        </p>
+                    </div>
+                    <button className="admin-btn admin-btn-outline admin-btn-sm" onClick={addStatCard}>
+                        <FiPlus size={14} /> Add Card
+                    </button>
+                </div>
+
+                {(data.statsCards || []).map((c, i) => (
+                    <div key={i} className="admin-card" style={{ marginBottom: '0.75rem', background: 'var(--gray-50)' }}>
+                        <div className="admin-form-row">
+                            <div className="admin-form-group">
+                                <label>Value (big number)</label>
+                                <input value={c.value} onChange={e => updateStatCard(i, 'value', e.target.value)} placeholder="28+" />
+                            </div>
+                            <div className="admin-form-group">
+                                <label>Label</label>
+                                <input value={c.label} onChange={e => updateStatCard(i, 'label', e.target.value)} placeholder="Projects Built" />
+                            </div>
+                        </div>
+                        <div className="admin-form-group">
+                            <label>Description</label>
+                            <input value={c.desc} onChange={e => updateStatCard(i, 'desc', e.target.value)} placeholder="Real-world MERN stack projects shipped and deployed." />
+                        </div>
+                        <button className="admin-btn admin-btn-outline admin-btn-sm" onClick={() => removeStatCard(i)}>
+                            <FiTrash2 size={14} /> Remove
+                        </button>
+                    </div>
+                ))}
             </div>
         </div>
     );
