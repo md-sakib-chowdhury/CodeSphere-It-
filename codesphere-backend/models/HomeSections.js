@@ -69,6 +69,12 @@ const homeSectionsSchema = new mongoose.Schema({
         titleHighlight: { type: String, default: 'Projects' },
         subtext: { type: String, default: 'Real products built for real clients — from startups to enterprises.' },
     },
+
+    statsCards: [{
+        value: { type: String },
+        label: { type: String },
+        desc: { type: String },
+    }],
 }, { timestamps: true });
 
 module.exports = mongoose.model('HomeSections', homeSectionsSchema);
