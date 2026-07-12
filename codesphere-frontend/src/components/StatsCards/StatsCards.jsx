@@ -63,10 +63,10 @@ import api from '../../utils/api';
 import './StatsCards.css';
 
 const DEFAULT_CARDS = [
-    { value: '28+', label: 'Projects Built', desc: 'Real-world MERN stack projects shipped and deployed.' },
-    { value: '2+', label: 'Years of Craft', desc: 'Building with the MERN stack since 2024.' },
-    { value: 'MERN', label: 'Core Stack', desc: 'MongoDB, Express, React, Node — our specialty end to end.' },
-    { value: '100%', label: 'Commitment', desc: 'Every project gets our full focus, start to finish.' },
+    { value: '28+', label: 'Projects Built', desc: 'Real-world MERN stack projects shipped and deployed.', tone: 1 },
+    { value: '2+', label: 'Years of Craft', desc: 'Building with the MERN stack since 2024.', tone: 2 },
+    { value: 'MERN', label: 'Core Stack', desc: 'MongoDB, Express, React, Node — our specialty end to end.', tone: 3 },
+    { value: '100%', label: 'Commitment', desc: 'Every project gets our full focus, start to finish.', tone: 4 },
 ];
 
 export default function StatsCards() {
@@ -82,7 +82,7 @@ export default function StatsCards() {
         <section className="stats-cards section" id="stats-cards">
             <div className="container stats-cards-grid">
                 {cards.map((c, i) => (
-                    <div key={c._id || i} className={`stat-card-box tone-${(i % 4) + 1}`}>
+                    <div key={c._id || i} className={`stat-card-box tone-${c.tone || (i % 4) + 1}`}>
                         <div className="stat-card-glow" />
                         <div className="stat-card-value">{c.value}</div>
                         <div className="stat-card-label">{c.label}</div>

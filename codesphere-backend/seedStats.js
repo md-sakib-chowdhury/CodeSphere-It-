@@ -1,7 +1,5 @@
 // seedStats.js
-// seedProjects.js / seedBlogs.js er same pattern — run korle Stats Cards
-// database e boshe jabe। Erpor jokhon mon chaibe, admin panel theke
-// notun card add/edit/delete kora jabe।
+// Run korle Stats Cards database e boshe jabe, tone (color) soho।
 //
 // Kivabe run korba (codesphere-backend root e, jekhane server.js ache):
 //   node seedStats.js
@@ -11,10 +9,10 @@ const mongoose = require('mongoose');
 const HomeSections = require('./models/HomeSections');
 
 const STATS_CARDS = [
-    { value: '28+', label: 'Projects Built', desc: 'Real-world MERN stack projects shipped and deployed.' },
-    { value: '2+', label: 'Years of Craft', desc: 'Building with the MERN stack since 2024.' },
-    { value: 'MERN', label: 'Core Stack', desc: 'MongoDB, Express, React, Node — our specialty end to end.' },
-    { value: '100%', label: 'Commitment', desc: 'Every project gets our full focus, start to finish.' },
+    { value: '28+', label: 'Projects Built', desc: 'Real-world MERN stack projects shipped and deployed.', tone: 1 },
+    { value: '2+', label: 'Years of Craft', desc: 'Building with the MERN stack since 2024.', tone: 2 },
+    { value: 'MERN', label: 'Core Stack', desc: 'MongoDB, Express, React, Node — our specialty end to end.', tone: 3 },
+    { value: '100%', label: 'Commitment', desc: 'Every project gets our full focus, start to finish.', tone: 4 },
 ];
 
 async function run() {
@@ -30,10 +28,10 @@ async function run() {
         } else {
             h.statsCards = STATS_CARDS;
             await h.save();
-            console.log('statsCards update hoyeche existing document e (onno field touch hoyni).');
+            console.log('statsCards update hoyeche (tone soho), onno field touch hoyni.');
         }
 
-        STATS_CARDS.forEach(c => console.log('Added:', c.label));
+        STATS_CARDS.forEach(c => console.log('Added:', c.label, '(tone', c.tone + ')'));
         console.log('Done! Shob stats card add hoye geche.');
 
         await mongoose.disconnect();
