@@ -160,6 +160,7 @@
 //         </section>
 //     );
 // }import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { FiCalendar, FiArrowRight } from 'react-icons/fi';
 import api from '../../utils/api';
 import './LatestActivities.css';
