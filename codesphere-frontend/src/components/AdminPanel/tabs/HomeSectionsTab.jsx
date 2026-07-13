@@ -22,7 +22,7 @@ export default function HomeSectionsTab() {
         whatWeOffer: { label: '', title: '', subtext: '', image: '', btnText: '' },
         keyCompetency: { label: '', title: '', subtext: '', image: '', caption: '', skills: [] },
         whyChooseUs: { label: '', title: '', subtext: '', btnText: '', images: [] },
-        latestActivities: { label: '', title: '', btnText: '' },
+        latestActivities: { label: '', title: '', btnText: '', cards: [] },
         testimonialsHeader: { label: '', titlePrefix: '', titleHighlight: '', titleSuffix: '' },
         teamHeader: { label: '', title: '', subtext: '', executiveGroupTitle: '', coreGroupTitle: '' },
         servicesHeader: { label: '', titlePrefix: '', titleHighlight: '', subtext: '' },
@@ -88,8 +88,29 @@ export default function HomeSectionsTab() {
         updateWCUImage(idx, 'url', base64);
     };
 
-    // ---------- LatestActivities ----------
+    // ---------- LatestActivities Header ----------
     const updateLA = (field, value) => setData({ ...data, latestActivities: { ...data.latestActivities, [field]: value } });
+
+    // ---------- LatestActivities Cards ----------
+    const updateLACard = (idx, field, value) => {
+        const cards = [...(data.latestActivities.cards || [])];
+        cards[idx][field] = value;
+        setData({ ...data, latestActivities: { ...data.latestActivities, cards } });
+    };
+    const addLACard = () => {
+        const cards = [...(data.latestActivities.cards || []), { image: '', tag: 'News', title: '', excerpt: '', date: '' }];
+        setData({ ...data, latestActivities: { ...data.latestActivities, cards } });
+    };
+    const removeLACard = (idx) => {
+        const cards = (data.latestActivities.cards || []).filter((_, i) => i !== idx);
+        setData({ ...data, latestActivities: { ...data.latestActivities, cards } });
+    };
+    const handleLACardImage = async (idx, e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const base64 = await fileToBase64(file);
+        updateLACard(idx, 'image', base64);
+    };
 
     // ---------- Testimonials Header ----------
     const updateTH = (field, value) => setData({ ...data, testimonialsHeader: { ...data.testimonialsHeader, [field]: value } });
@@ -111,7 +132,7 @@ export default function HomeSectionsTab() {
     };
     const addStatCard = () => {
         setData({ ...data, statsCards: [...(data.statsCards || []), { value: '', label: '', desc: '', tone: 1 }] });
-        setEditingStatIdx((data.statsCards || []).length); // notun card automatically edit mode e open hobe
+        setEditingStatIdx((data.statsCards || []).length);
     };
     const removeStatCard = (idx) => {
         setData({ ...data, statsCards: data.statsCards.filter((_, i) => i !== idx) });
@@ -267,7 +288,7 @@ export default function HomeSectionsTab() {
                     Latest Activities Header
                 </h3>
                 <p style={{ fontSize: '12px', color: 'var(--gray-500)', marginBottom: '0.75rem' }}>
-                    Note: actual blog posts "Blog / Articles" tab theke manage hoy — eikhane shudhu header text.
+                    Note: eikhane shudhu Homepage er "Latest Activities" section (3 card, dark band) control hoy। Blog/Articles tab er data alada, touch hoy na।
                 </p>
                 <div className="admin-form-row">
                     <div className="admin-form-group">
@@ -282,6 +303,58 @@ export default function HomeSectionsTab() {
                 <div className="admin-form-group">
                     <label>Title</label>
                     <input value={data.latestActivities?.title || ''} onChange={e => updateLA('title', e.target.value)} />
+                </div>
+
+                {/* Latest Activities Cards CRUD */}
+                <div style={{ marginTop: '1.25rem' }}>
+                    <div className="admin-page-header" style={{ marginBottom: '0.5rem' }}>
+                        <label style={{ fontWeight: 600 }}>Cards (Homepage e dekhano 3 ta card)</label>
+                        <button className="admin-btn admin-btn-outline admin-btn-sm" onClick={addLACard}>
+                            <FiPlus size={14} /> Add Card
+                        </button>
+                    </div>
+                    <p style={{ fontSize: '12px', color: 'var(--gray-500)', marginBottom: '0.75rem' }}>
+                        Card e click korle ba "Learn More" e click korle age moto "Latest Articles" full page e-i niye jabe — eta change hoy na।
+                    </p>
+
+                    {(data.latestActivities?.cards || []).length === 0 && (
+                        <p style={{ fontSize: '13px', color: 'var(--gray-400)', padding: '0.5rem 0' }}>
+                            Kono card nei — "Add Card" e click kore shuru koro।
+                        </p>
+                    )}
+
+                    {(data.latestActivities?.cards || []).map((c, i) => (
+                        <div key={i} className="admin-card" style={{ marginBottom: '0.75rem', background: 'var(--gray-50)' }}>
+                            {c.image && <img src={c.image} alt="" style={{ width: 140, borderRadius: 8, marginBottom: 8, display: 'block' }} />}
+                            <label className="admin-btn admin-btn-outline admin-btn-sm" style={{ width: 'fit-content', cursor: 'pointer', marginBottom: 8 }}>
+                                <FiUpload size={14} /> Upload Image
+                                <input type="file" accept="image/*" onChange={e => handleLACardImage(i, e)} style={{ display: 'none' }} />
+                            </label>
+
+                            <div className="admin-form-row">
+                                <div className="admin-form-group">
+                                    <label>Tag (chhoto badge)</label>
+                                    <input value={c.tag} onChange={e => updateLACard(i, 'tag', e.target.value)} placeholder="Security" />
+                                </div>
+                                <div className="admin-form-group">
+                                    <label>Date (display text)</label>
+                                    <input value={c.date} onChange={e => updateLACard(i, 'date', e.target.value)} placeholder="Jul 11, 2026" />
+                                </div>
+                            </div>
+                            <div className="admin-form-group">
+                                <label>Title</label>
+                                <input value={c.title} onChange={e => updateLACard(i, 'title', e.target.value)} placeholder="Securing Your Web App: A Practical Checklist" />
+                            </div>
+                            <div className="admin-form-group">
+                                <label>Excerpt</label>
+                                <textarea rows="2" value={c.excerpt} onChange={e => updateLACard(i, 'excerpt', e.target.value)} placeholder="JWT auth, input validation, rate limiting..." />
+                            </div>
+
+                            <button className="admin-btn admin-btn-outline admin-btn-sm" onClick={() => removeLACard(i)}>
+                                <FiTrash2 size={14} /> Remove
+                            </button>
+                        </div>
+                    ))}
                 </div>
             </div>
 
