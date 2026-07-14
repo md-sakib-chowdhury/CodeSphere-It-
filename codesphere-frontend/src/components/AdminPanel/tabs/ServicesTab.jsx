@@ -1,10 +1,167 @@
+// import { useState, useEffect } from 'react';
+// import { FiPlus, FiEdit2, FiTrash2, FiX } from 'react-icons/fi';
+// import { toast } from 'react-toastify';
+// import api from '../../../utils/api';
+
+// const ICON_OPTIONS = ['FiCode', 'FiShoppingCart', 'FiSmartphone', 'FiTrendingUp', 'FiLayout', 'FiServer'];
+// const EMPTY = { title: '', description: '', icon: 'FiCode', color: '#2563eb', features: [] };
+
+// export default function ServicesTab() {
+//     const [services, setServices] = useState([]);
+//     const [showModal, setShowModal] = useState(false);
+//     const [editing, setEditing] = useState(null);
+//     const [form, setForm] = useState(EMPTY);
+//     const [featureInput, setFeatureInput] = useState('');
+//     const [loading, setLoading] = useState(true);
+
+//     const load = () => api.get('/services').then(r => setServices(r.data)).catch(() => { }).finally(() => setLoading(false));
+//     useEffect(() => { load(); }, []);
+
+//     const openCreate = () => { setEditing(null); setForm(EMPTY); setShowModal(true); };
+//     const openEdit = (s) => { setEditing(s); setForm({ ...s }); setShowModal(true); };
+
+//     const addFeature = () => {
+//         if (!featureInput.trim()) return;
+//         setForm({ ...form, features: [...(form.features || []), featureInput.trim()] });
+//         setFeatureInput('');
+//     };
+//     const removeFeature = (i) => setForm({ ...form, features: form.features.filter((_, idx) => idx !== i) });
+
+//     const handleSubmit = async (e) => {
+//         e.preventDefault();
+//         try {
+//             if (editing) {
+//                 await api.put(`/services/${editing._id}`, form);
+//                 toast.success('Service updated!');
+//             } else {
+//                 await api.post('/services', form);
+//                 toast.success('Service created!');
+//             }
+//             setShowModal(false);
+//             load();
+//         } catch {
+//             toast.error('Something went wrong');
+//         }
+//     };
+
+//     const handleDelete = async (id) => {
+//         if (!confirm('Delete this service?')) return;
+//         try {
+//             await api.delete(`/services/${id}`);
+//             toast.success('Service deleted');
+//             load();
+//         } catch {
+//             toast.error('Failed to delete');
+//         }
+//     };
+
+//     return (
+//         <div>
+//             <div className="admin-page-header">
+//                 <div>
+//                     <h2>Services</h2>
+//                     <p>Manage the services displayed on your homepage.</p>
+//                 </div>
+//                 <button className="admin-btn admin-btn-primary" onClick={openCreate}>
+//                     <FiPlus size={15} /> Add Service
+//                 </button>
+//             </div>
+
+//             <div className="admin-table-wrap">
+//                 {loading ? (
+//                     <p className="admin-empty">Loading...</p>
+//                 ) : services.length === 0 ? (
+//                     <p className="admin-empty">No services yet. Add your first one!</p>
+//                 ) : (
+//                     services.map(s => (
+//                         <div key={s._id} className="admin-list-item">
+//                             <div className="admin-list-thumb" style={{ background: s.color }}>
+//                                 {s.title.slice(0, 2).toUpperCase()}
+//                             </div>
+//                             <div className="admin-list-info">
+//                                 <div className="admin-list-title">{s.title}</div>
+//                                 <div className="admin-list-sub">{s.description.slice(0, 70)}...</div>
+//                             </div>
+//                             <div className="admin-list-actions">
+//                                 <button className="admin-icon-btn" onClick={() => openEdit(s)}><FiEdit2 size={15} /></button>
+//                                 <button className="admin-icon-btn danger" onClick={() => handleDelete(s._id)}><FiTrash2 size={15} /></button>
+//                             </div>
+//                         </div>
+//                     ))
+//                 )}
+//             </div>
+
+//             {showModal && (
+//                 <div className="admin-modal-overlay" onClick={() => setShowModal(false)}>
+//                     <div className="admin-modal" onClick={e => e.stopPropagation()}>
+//                         <div className="admin-modal-header">
+//                             <h3>{editing ? 'Edit Service' : 'Add New Service'}</h3>
+//                             <button className="admin-modal-close" onClick={() => setShowModal(false)}><FiX size={16} /></button>
+//                         </div>
+//                         <form onSubmit={handleSubmit}>
+//                             <div className="admin-form-group">
+//                                 <label>Title</label>
+//                                 <input required value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} />
+//                             </div>
+//                             <div className="admin-form-group">
+//                                 <label>Description</label>
+//                                 <textarea required rows="3" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} />
+//                             </div>
+//                             <div className="admin-form-row">
+//                                 <div className="admin-form-group">
+//                                     <label>Icon</label>
+//                                     <select value={form.icon} onChange={e => setForm({ ...form, icon: e.target.value })}>
+//                                         {ICON_OPTIONS.map(ic => <option key={ic} value={ic}>{ic}</option>)}
+//                                     </select>
+//                                 </div>
+//                                 <div className="admin-form-group">
+//                                     <label>Color</label>
+//                                     <input type="color" value={form.color} onChange={e => setForm({ ...form, color: e.target.value })} />
+//                                 </div>
+//                             </div>
+//                             <div className="admin-form-group">
+//                                 <label>Features</label>
+//                                 <div className="admin-form-inline-edit" style={{ marginBottom: '0.5rem' }}>
+//                                     <input
+//                                         value={featureInput}
+//                                         onChange={e => setFeatureInput(e.target.value)}
+//                                         placeholder="e.g. React + Node.js"
+//                                         onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), addFeature())}
+//                                     />
+//                                     <button type="button" className="admin-btn admin-btn-outline admin-btn-sm" onClick={addFeature}>
+//                                         <FiPlus size={14} />
+//                                     </button>
+//                                 </div>
+//                                 <div className="admin-tags-input">
+//                                     {(form.features || []).map((f, i) => (
+//                                         <span key={i} className="admin-tag-chip">
+//                                             {f}<button type="button" onClick={() => removeFeature(i)}><FiX size={12} /></button>
+//                                         </span>
+//                                     ))}
+//                                 </div>
+//                             </div>
+//                             <div className="admin-modal-actions">
+//                                 <button type="button" className="admin-btn admin-btn-outline" onClick={() => setShowModal(false)}>Cancel</button>
+//                                 <button type="submit" className="admin-btn admin-btn-primary">{editing ? 'Update' : 'Create'}</button>
+//                             </div>
+//                         </form>
+//                     </div>
+//                 </div>
+//             )}
+//         </div>
+//     );
+// }
 import { useState, useEffect } from 'react';
-import { FiPlus, FiEdit2, FiTrash2, FiX } from 'react-icons/fi';
+import { FiPlus, FiEdit2, FiTrash2, FiX, FiUpload } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import api from '../../../utils/api';
 
-const ICON_OPTIONS = ['FiCode', 'FiShoppingCart', 'FiSmartphone', 'FiTrendingUp', 'FiLayout', 'FiServer'];
-const EMPTY = { title: '', description: '', icon: 'FiCode', color: '#2563eb', features: [] };
+const ICON_OPTIONS = ['FiCode', 'FiShoppingCart', 'FiLayout', 'FiServer', 'FiCloud', 'FiSmartphone'];
+
+const EMPTY = {
+    title: '', slug: '', icon: 'FiCode', color: '#2563eb', image: '',
+    description: '', body: '', features: [], stack: [], order: 0, isActive: true,
+};
 
 export default function ServicesTab() {
     const [services, setServices] = useState([]);
@@ -12,13 +169,26 @@ export default function ServicesTab() {
     const [editing, setEditing] = useState(null);
     const [form, setForm] = useState(EMPTY);
     const [featureInput, setFeatureInput] = useState('');
+    const [stackInput, setStackInput] = useState('');
+    const [preview, setPreview] = useState('');
     const [loading, setLoading] = useState(true);
 
-    const load = () => api.get('/services').then(r => setServices(r.data)).catch(() => { }).finally(() => setLoading(false));
+    const load = () => api.get('/services/all').then(r => setServices(r.data)).catch(() => { }).finally(() => setLoading(false));
     useEffect(() => { load(); }, []);
 
-    const openCreate = () => { setEditing(null); setForm(EMPTY); setShowModal(true); };
-    const openEdit = (s) => { setEditing(s); setForm({ ...s }); setShowModal(true); };
+    const openCreate = () => { setEditing(null); setForm(EMPTY); setPreview(''); setShowModal(true); };
+    const openEdit = (s) => { setEditing(s); setForm({ ...EMPTY, ...s }); setPreview(s.image || ''); setShowModal(true); };
+
+    const handleImage = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+            setPreview(reader.result);
+            setForm({ ...form, image: reader.result });
+        };
+        reader.readAsDataURL(file);
+    };
 
     const addFeature = () => {
         if (!featureInput.trim()) return;
@@ -26,6 +196,13 @@ export default function ServicesTab() {
         setFeatureInput('');
     };
     const removeFeature = (i) => setForm({ ...form, features: form.features.filter((_, idx) => idx !== i) });
+
+    const addStack = () => {
+        if (!stackInput.trim()) return;
+        setForm({ ...form, stack: [...(form.stack || []), stackInput.trim()] });
+        setStackInput('');
+    };
+    const removeStack = (i) => setForm({ ...form, stack: form.stack.filter((_, idx) => idx !== i) });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,7 +212,7 @@ export default function ServicesTab() {
                 toast.success('Service updated!');
             } else {
                 await api.post('/services', form);
-                toast.success('Service created!');
+                toast.success('Service added!');
             }
             setShowModal(false);
             load();
@@ -45,10 +222,10 @@ export default function ServicesTab() {
     };
 
     const handleDelete = async (id) => {
-        if (!confirm('Delete this service?')) return;
+        if (!confirm('Remove this service?')) return;
         try {
             await api.delete(`/services/${id}`);
-            toast.success('Service deleted');
+            toast.success('Service removed');
             load();
         } catch {
             toast.error('Failed to delete');
@@ -60,7 +237,7 @@ export default function ServicesTab() {
             <div className="admin-page-header">
                 <div>
                     <h2>Services</h2>
-                    <p>Manage the services displayed on your homepage.</p>
+                    <p>Manage services shown on homepage, /services listing, and each service's detail page.</p>
                 </div>
                 <button className="admin-btn admin-btn-primary" onClick={openCreate}>
                     <FiPlus size={15} /> Add Service
@@ -75,12 +252,17 @@ export default function ServicesTab() {
                 ) : (
                     services.map(s => (
                         <div key={s._id} className="admin-list-item">
-                            <div className="admin-list-thumb" style={{ background: s.color }}>
-                                {s.title.slice(0, 2).toUpperCase()}
+                            <div
+                                className="admin-list-thumb"
+                                style={{ background: `${s.color}20`, color: s.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 12 }}
+                            >
+                                {s.icon?.replace('Fi', '') || 'Icon'}
                             </div>
                             <div className="admin-list-info">
-                                <div className="admin-list-title">{s.title}</div>
-                                <div className="admin-list-sub">{s.description.slice(0, 70)}...</div>
+                                <div className="admin-list-title">
+                                    {s.title} {!s.isActive && <span style={{ color: 'var(--gray-400)', fontWeight: 400 }}>(hidden)</span>}
+                                </div>
+                                <div className="admin-list-sub">/{s.slug} · {s.description}</div>
                             </div>
                             <div className="admin-list-actions">
                                 <button className="admin-icon-btn" onClick={() => openEdit(s)}><FiEdit2 size={15} /></button>
@@ -95,37 +277,64 @@ export default function ServicesTab() {
                 <div className="admin-modal-overlay" onClick={() => setShowModal(false)}>
                     <div className="admin-modal" onClick={e => e.stopPropagation()}>
                         <div className="admin-modal-header">
-                            <h3>{editing ? 'Edit Service' : 'Add New Service'}</h3>
+                            <h3>{editing ? 'Edit Service' : 'Add Service'}</h3>
                             <button className="admin-modal-close" onClick={() => setShowModal(false)}><FiX size={16} /></button>
                         </div>
                         <form onSubmit={handleSubmit}>
-                            <div className="admin-form-group">
-                                <label>Title</label>
-                                <input required value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} />
+                            <div className="admin-form-row">
+                                <div className="admin-form-group">
+                                    <label>Title</label>
+                                    <input required value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} placeholder="Web Application Development" />
+                                </div>
+                                <div className="admin-form-group">
+                                    <label>Slug (URL) — khali rakhle title theke auto toiri hobe</label>
+                                    <input value={form.slug} onChange={e => setForm({ ...form, slug: e.target.value })} placeholder="web-application-development" />
+                                </div>
                             </div>
-                            <div className="admin-form-group">
-                                <label>Description</label>
-                                <textarea required rows="3" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} />
-                            </div>
+
                             <div className="admin-form-row">
                                 <div className="admin-form-group">
                                     <label>Icon</label>
-                                    <select value={form.icon} onChange={e => setForm({ ...form, icon: e.target.value })}>
-                                        {ICON_OPTIONS.map(ic => <option key={ic} value={ic}>{ic}</option>)}
+                                    <select
+                                        value={form.icon}
+                                        onChange={e => setForm({ ...form, icon: e.target.value })}
+                                        style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: 8, border: '1px solid var(--gray-200)', fontSize: '14px' }}
+                                    >
+                                        {ICON_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                                     </select>
                                 </div>
                                 <div className="admin-form-group">
-                                    <label>Color</label>
-                                    <input type="color" value={form.color} onChange={e => setForm({ ...form, color: e.target.value })} />
+                                    <label>Accent Color</label>
+                                    <input type="color" value={form.color} onChange={e => setForm({ ...form, color: e.target.value })} style={{ width: '100%', height: 40, padding: 2, borderRadius: 8, border: '1px solid var(--gray-200)' }} />
                                 </div>
                             </div>
+
                             <div className="admin-form-group">
-                                <label>Features</label>
+                                <label>Detail Page Hero Image</label>
+                                {preview && <img src={preview} alt="preview" style={{ width: '100%', maxWidth: 300, borderRadius: 8, marginBottom: 8, display: 'block' }} />}
+                                <label className="admin-btn admin-btn-outline admin-btn-sm" style={{ width: 'fit-content', cursor: 'pointer' }}>
+                                    <FiUpload size={14} /> Upload Image
+                                    <input type="file" accept="image/*" onChange={handleImage} style={{ display: 'none' }} />
+                                </label>
+                            </div>
+
+                            <div className="admin-form-group">
+                                <label>Description (short — homepage card, listing card, details hero e dekhay)</label>
+                                <textarea rows="2" required value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} placeholder="Custom, full-stack web apps built on the MERN stack." />
+                            </div>
+
+                            <div className="admin-form-group">
+                                <label>Body (long — shudhu detail page e dekhay)</label>
+                                <textarea rows="4" value={form.body} onChange={e => setForm({ ...form, body: e.target.value })} placeholder="Full paragraph describing the service in detail..." />
+                            </div>
+
+                            <div className="admin-form-group">
+                                <label>Features (homepage card + listing + "What's Included")</label>
                                 <div className="admin-form-inline-edit" style={{ marginBottom: '0.5rem' }}>
                                     <input
                                         value={featureInput}
                                         onChange={e => setFeatureInput(e.target.value)}
-                                        placeholder="e.g. React + Node.js"
+                                        placeholder="e.g. React front-ends with fast interfaces"
                                         onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), addFeature())}
                                     />
                                     <button type="button" className="admin-btn admin-btn-outline admin-btn-sm" onClick={addFeature}>
@@ -140,6 +349,40 @@ export default function ServicesTab() {
                                     ))}
                                 </div>
                             </div>
+
+                            <div className="admin-form-group">
+                                <label>Tech Stack Tags (shudhu detail page "Built With")</label>
+                                <div className="admin-form-inline-edit" style={{ marginBottom: '0.5rem' }}>
+                                    <input
+                                        value={stackInput}
+                                        onChange={e => setStackInput(e.target.value)}
+                                        placeholder="e.g. React"
+                                        onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), addStack())}
+                                    />
+                                    <button type="button" className="admin-btn admin-btn-outline admin-btn-sm" onClick={addStack}>
+                                        <FiPlus size={14} />
+                                    </button>
+                                </div>
+                                <div className="admin-tags-input">
+                                    {(form.stack || []).map((t, i) => (
+                                        <span key={i} className="admin-tag-chip">
+                                            {t}<button type="button" onClick={() => removeStack(i)}><FiX size={12} /></button>
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="admin-form-row">
+                                <div className="admin-form-group">
+                                    <label>Order (choto number age dekhabe)</label>
+                                    <input type="number" value={form.order} onChange={e => setForm({ ...form, order: Number(e.target.value) })} />
+                                </div>
+                                <div className="admin-form-group" style={{ display: 'flex', alignItems: 'center', gap: 8, paddingTop: 24 }}>
+                                    <input type="checkbox" checked={form.isActive} onChange={e => setForm({ ...form, isActive: e.target.checked })} id="svc-active" />
+                                    <label htmlFor="svc-active" style={{ margin: 0 }}>Visible on website</label>
+                                </div>
+                            </div>
+
                             <div className="admin-modal-actions">
                                 <button type="button" className="admin-btn admin-btn-outline" onClick={() => setShowModal(false)}>Cancel</button>
                                 <button type="submit" className="admin-btn admin-btn-primary">{editing ? 'Update' : 'Create'}</button>
