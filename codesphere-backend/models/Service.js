@@ -28,11 +28,10 @@ const serviceSchema = new mongoose.Schema({
     isActive: { type: Boolean, default: true },
 }, { timestamps: true });
 
-serviceSchema.pre('save', function (next) {
+serviceSchema.pre('save', function () {
     if (!this.slug && this.title) {
         this.slug = this.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
     }
-    next();
 });
 
 module.exports = mongoose.model('Service', serviceSchema);
