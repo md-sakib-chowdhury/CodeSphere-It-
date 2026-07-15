@@ -218,14 +218,14 @@ export default function AdminPanel() {
                 <button className="admin-burger" onClick={() => setSidebarOpen(!sidebarOpen)}>
                     {sidebarOpen ? <FiX size={22} /> : <FiMenu size={22} />}
                 </button>
-                <span className="admin-topbar-title">AMANAH<span className="admin-brand-dot">.</span>IT Admin</span>
+                <span className="admin-topbar-title"><span>AMANAH</span><span className="admin-brand-dot">.</span><span>IT</span> Admin</span>
             </div>
 
             <aside className={`admin-sidebar ${sidebarOpen ? 'open' : ''}`}>
                 <div className="admin-sidebar-brand">
                     <div className="admin-logo-box">A</div>
                     <div className="admin-brand-text">
-                        <h3>AMANAH<span className="admin-brand-dot">.</span>IT</h3>
+                        <h3><span>AMANAH</span><span className="admin-brand-dot">.</span><span>IT</span></h3>
                         <span>Admin Dashboard</span>
                     </div>
                 </div>
