@@ -1,3 +1,15 @@
+// const mongoose = require('mongoose');
+
+// const contactSchema = new mongoose.Schema({
+//     name: { type: String, required: true },
+//     email: { type: String, required: true },
+//     phone: { type: String },
+//     subject: { type: String },
+//     message: { type: String, required: true },
+//     status: { type: String, enum: ['new', 'read', 'replied'], default: 'new' },
+// }, { timestamps: true });
+
+// module.exports = mongoose.model('Contact', contactSchema);
 const mongoose = require('mongoose');
 
 const contactSchema = new mongoose.Schema({
@@ -6,6 +18,12 @@ const contactSchema = new mongoose.Schema({
     phone: { type: String },
     subject: { type: String },
     message: { type: String, required: true },
+    companyName: { type: String },
+    companyAddress: { type: String },
+    officialWebsite: { type: String },
+    numberOfEmployee: { type: String },
+    communicationPreference: { type: String },
+    iAm: { type: String },
     status: { type: String, enum: ['new', 'read', 'replied'], default: 'new' },
 }, { timestamps: true });
 
