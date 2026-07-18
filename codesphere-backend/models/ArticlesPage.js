@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const articlesPageSchema = new mongoose.Schema({
     bannerTitle: { type: String, default: 'Latest Articles' },
     breadcrumbCurrent: { type: String, default: 'Blog' },
+    bannerImage: { type: String, default: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&q=80' },
+    bannerImagePublicId: { type: String, default: '' },
 
     cta: {
         label: { type: String, default: 'Our Recent Activities' },
