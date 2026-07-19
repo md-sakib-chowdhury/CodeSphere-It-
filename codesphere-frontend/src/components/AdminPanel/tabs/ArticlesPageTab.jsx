@@ -1,7 +1,14 @@
 import { useState, useEffect } from 'react';
-import { FiSave } from 'react-icons/fi';
+import { FiSave, FiUpload } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import api from '../../../utils/api';
+
+const fileToBase64 = (file) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+});
 
 export default function ArticlesPageTab() {
     const [data, setData] = useState({
@@ -30,6 +37,13 @@ export default function ArticlesPageTab() {
         }
     };
 
+    const handleImage = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const base64 = await fileToBase64(file);
+        setData({ ...data, bannerImage: base64 });
+    };
+
     return (
         <div>
             <div className="admin-page-header">
@@ -55,6 +69,14 @@ export default function ArticlesPageTab() {
                         <label>Breadcrumb Text</label>
                         <input value={data.breadcrumbCurrent || ''} onChange={e => setData({ ...data, breadcrumbCurrent: e.target.value })} placeholder="Blog" />
                     </div>
+                </div>
+                <div className="admin-form-group" style={{ marginTop: '1rem' }}>
+                    <label>Banner Background Image</label>
+                    {data.bannerImage && <img src={data.bannerImage} alt="" style={{ width: 200, borderRadius: 8, marginBottom: 8, display: 'block' }} />}
+                    <label className="admin-btn admin-btn-outline admin-btn-sm" style={{ width: 'fit-content', cursor: 'pointer' }}>
+                        <FiUpload size={14} /> Upload Image
+                        <input type="file" accept="image/*" onChange={handleImage} style={{ display: 'none' }} />
+                    </label>
                 </div>
             </div>
 
