@@ -11,6 +11,7 @@ export default function FooterTab() {
         logoText: '', logoAccent: '', description: '',
         socialLinks: [], serviceLinks: [], quickLinks: [],
         address: '', email: '', phone: '', copyrightText: '',
+        developedByText: '', developedByName: '', developedByLink: '',
     });
     const [saving, setSaving] = useState(false);
 
@@ -217,11 +218,32 @@ export default function FooterTab() {
             </div>
 
             {/* Copyright */}
-            <div className="admin-card">
+            <div className="admin-card" style={{ marginBottom: '1.5rem' }}>
                 <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.75rem', color: 'var(--gray-900)' }}>Copyright Text</h3>
                 <div className="admin-form-group">
                     <label>Text (© year automatically age theke jog hoy)</label>
                     <input value={data.copyrightText || ''} onChange={e => setData({ ...data, copyrightText: e.target.value })} placeholder="AMANAH IT. All rights reserved." />
+                </div>
+            </div>
+
+            {/* Developed By */}
+            <div className="admin-card">
+                <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.75rem', color: 'var(--gray-900)' }}>
+                    "Design & Developed By" Line (footer er sobcheye niche)
+                </h3>
+                <div className="admin-form-row">
+                    <div className="admin-form-group">
+                        <label>Text</label>
+                        <input value={data.developedByText || ''} onChange={e => setData({ ...data, developedByText: e.target.value })} placeholder="Design & Developed By" />
+                    </div>
+                    <div className="admin-form-group">
+                        <label>Company/Name (green color e dekhabe)</label>
+                        <input value={data.developedByName || ''} onChange={e => setData({ ...data, developedByName: e.target.value })} placeholder="AMANAH IT" />
+                    </div>
+                </div>
+                <div className="admin-form-group">
+                    <label>Link (optional — click korle kothay jabe)</label>
+                    <input value={data.developedByLink || ''} onChange={e => setData({ ...data, developedByLink: e.target.value })} placeholder="https://amanahit.com" />
                 </div>
             </div>
         </div>
