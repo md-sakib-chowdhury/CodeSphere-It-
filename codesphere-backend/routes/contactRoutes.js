@@ -155,7 +155,8 @@ const emailWrapper = (bodyHtml) => `
 
     <div style="background: #f8fafc; padding: 24px 28px; border-top: 1px solid #e2e8f0;">
         <p style="margin: 0 0 8px; font-size: 13px; color: #64748b;">
-            <strong style="color: #0a1628;">AMANAH IT</strong> — Trust • Innovate • Deliver
+            <strong style="color: #0a1628;">AMANAH IT</strong>
+            <span style="color: #2563eb; letter-spacing: 1px; text-transform: uppercase; font-size: 11px;"> — Trust • Innovate • Deliver</span>
         </p>
         <p style="margin: 0 0 12px; font-size: 13px; color: #64748b;">
             Dhaka, Bangladesh &nbsp;|&nbsp; <a href="mailto:info@amanahit.com" style="color: #2563eb; text-decoration: none;">info@amanahit.com</a>
@@ -176,7 +177,7 @@ router.post('/', async (req, res) => {
             <h2 style="margin: 0 0 20px; color: #0a1628; font-size: 20px;">📩 New Contact Message</h2>
 
             <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-                <tr><td style="padding: 8px 0; color: #64748b; width: 160px;">Name</td><td style="padding: 8px 0; font-weight: 600;">${c.name}</td></tr>
+                <tr><td style="padding: 8px 0; color: #64748b; width: 160px;">Name</td><td style="padding: 8px 0; font-weight: 600; color: #0a1628;">${c.name}</td></tr>
                 <tr><td style="padding: 8px 0; color: #64748b;">Email</td><td style="padding: 8px 0;">${c.email}</td></tr>
                 <tr><td style="padding: 8px 0; color: #64748b;">Phone</td><td style="padding: 8px 0;">${c.phone || 'N/A'}</td></tr>
                 <tr><td style="padding: 8px 0; color: #64748b;">Company</td><td style="padding: 8px 0;">${c.companyName || 'N/A'}</td></tr>
@@ -212,7 +213,7 @@ router.post('/', async (req, res) => {
                 We've received your message and appreciate you reaching out to AMANAH IT.
             </p>
             <p style="font-size: 15px; line-height: 1.7; color: #334155;">
-                Our team will review your inquiry and get back to you as soon as possible, usually within <strong>24 hours</strong>.
+                Our team will review your inquiry and get back to you as soon as possible, usually within <strong style="color: #2563eb;">24 hours</strong>.
             </p>
 
             <div style="margin-top: 20px; padding: 16px; background: #f1f5f9; border-left: 3px solid #2563eb; border-radius: 4px;">
