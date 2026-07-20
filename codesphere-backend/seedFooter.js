@@ -39,6 +39,9 @@ const data = {
     email: 'hello@amanahit.com',
     phone: '+880 1XXX-XXXXXX',
     copyrightText: 'AMANAH IT. All rights reserved.',
+    developedByText: 'Design & Developed By',
+    developedByName: 'AMANAH IT',
+    developedByLink: '',
 };
 
 const run = async () => {

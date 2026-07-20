@@ -201,7 +201,7 @@ const DEFAULT_FOOTER = {
     phone: '+880 1XXX-XXXXXX',
     copyrightText: 'AMANAH IT. All rights reserved.',
     developedByText: 'Design & Developed By',
-    developedByName: 'AMANAH IT',
+    developedByName: 'Amanah.IT',
     developedByLink: '',
 };
 
@@ -280,13 +280,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="footer-bottom">
-                    <div className="container footer-bottom-inner">
-                        <p>© {year} {f.copyrightText}</p>
-                    </div>
-                </div>
-
-                <div style={{ textAlign: 'center', padding: '14px 0', fontSize: '13px', color: 'rgba(255,255,255,0.55)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                <div style={{ textAlign: 'center', padding: '18px 0', fontSize: '13px', color: 'rgba(255,255,255,0.55)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
                     © {year} {f.developedByText}{' '}
                     {f.developedByLink ? (
                         <a href={f.developedByLink} target="_blank" rel="noopener noreferrer" style={{ color: '#22c55e', fontWeight: 600, textDecoration: 'none' }}>
