@@ -560,6 +560,11 @@ const DEFAULT_PAGE = {
     addressLine1: 'House-774, Road-11, Avenue-02',
     addressLine2: 'Mirpur DOHS, Dhaka-1216',
     mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.3!2d90.3667!3d23.8245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDQ5JzI4LjIiTiA5MMKwMjInMDAuMSJF!5e0!3m2!1sen!2sbd!4v1234567890',
+    serviceTypes: [
+        'Product', 'IT Consultancy', 'Managed IT', 'Digital Marketing',
+        'Brand & Promotion', 'Domain & Hosting', 'Technology Training',
+        'Offshore Development', 'Others',
+    ],
 };
 
 export default function Contact() {
@@ -709,14 +714,7 @@ export default function Contact() {
                     <div className="cf-group">
                         <label>Service Type</label>
                         <select name="serviceType" value={form.serviceType} onChange={handleChange}>
-                            <option>Product</option>
-                            <option>IT Consultancy</option>
-                            <option>Managed IT</option>
-                            <option>Digital Marketing</option>
-                            <option>Brand & Promotion</option>
-                            <option>Domain & Hosting</option>
-                            <option>Technology Training</option>
-                            <option>Offshore Development</option>
+                            {(page.serviceTypes || []).map(s => <option key={s}>{s}</option>)}
                         </select>
                     </div>
                     <div className="cf-group">
