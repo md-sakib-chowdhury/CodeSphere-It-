@@ -38,7 +38,7 @@ const footerSchema = new mongoose.Schema({
     copyrightText: { type: String, default: 'AMANAH IT. All rights reserved.' },
 
     developedByText: { type: String, default: 'Design & Developed By' },
-    developedByName: { type: String, default: 'AMANAH IT' },
+    developedByName: { type: String, default: 'Amanah.IT' },
     developedByLink: { type: String, default: '' },
 }, { timestamps: true });
 
