@@ -36,6 +36,10 @@ const footerSchema = new mongoose.Schema({
     phone: { type: String, default: '+880 1XXX-XXXXXX' },
 
     copyrightText: { type: String, default: 'AMANAH IT. All rights reserved.' },
+
+    developedByText: { type: String, default: 'Design & Developed By' },
+    developedByName: { type: String, default: 'AMANAH IT' },
+    developedByLink: { type: String, default: '' },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Footer', footerSchema);
