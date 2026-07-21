@@ -40,7 +40,7 @@ const data = {
     phone: '+880 1XXX-XXXXXX',
     copyrightText: 'AMANAH IT. All rights reserved.',
     developedByText: 'Design & Developed By',
-    developedByName: 'AMANAH IT',
+    developedByName: 'Amanah.IT',
     developedByLink: '',
 };
 
