@@ -956,6 +956,365 @@
 //         </div>
 //     );
 // }
+// import { useState, useEffect, useRef } from 'react';
+// import { Link, useLocation } from 'react-router-dom';
+// import {
+//     FiPhone, FiMail, FiFacebook, FiInstagram, FiLinkedin,
+//     FiTwitter, FiYoutube, FiChevronDown, FiMenu, FiX, FiDownload
+// } from 'react-icons/fi';
+// import api from '../../utils/api';
+// import './Navbar.css';
+
+// const SERVICES_DATA = {
+//     'it-consultancy': {
+//         label: 'IT Consultancy',
+//         items: [
+//             { title: 'IT Strategy and Planning', desc: 'Assisting clients in aligning their IT initiatives with their overall business objectives.' },
+//             { title: 'IT Project Management', desc: 'Managing and overseeing IT projects from initiation to completion.' },
+//             { title: 'Software Development and Integration', desc: 'Assisting clients in developing custom software solutions.' },
+//             { title: 'Data Analytics and Business Intelligence', desc: 'Helping clients make data-driven decisions by implementing analytics solutions.' },
+//         ]
+//     },
+//     'managed-it': {
+//         label: 'Managed IT',
+//         items: [
+//             { title: '24/7 Infrastructure Monitoring', desc: 'Round-the-clock monitoring to keep your systems running smoothly.' },
+//             { title: 'Network & Server Management', desc: 'Proactive management of your network and server infrastructure.' },
+//             { title: 'Helpdesk Support', desc: 'Responsive helpdesk support for your team whenever issues arise.' },
+//             { title: 'Backup & Disaster Recovery', desc: 'Reliable backup solutions to protect your business data.' },
+//         ]
+//     },
+//     'digital-marketing': {
+//         label: 'Digital Marketing',
+//         items: [
+//             { title: 'SEO Optimization', desc: 'Rank higher on search engines and attract organic traffic.' },
+//             { title: 'Social Media Marketing', desc: 'Engage your audience across platforms with curated content.' },
+//             { title: 'PPC & Ad Campaigns', desc: 'Targeted paid campaigns that maximize your return on investment.' },
+//             { title: 'Content Marketing', desc: 'Compelling content strategies that build brand authority.' },
+//         ]
+//     },
+//     'brand-promotion': {
+//         label: 'Brand & Promotion',
+//         items: [
+//             { title: 'Brand Identity Design', desc: 'Distinct visual identity that reflects your business values.' },
+//             { title: 'Promotional Campaigns', desc: 'Creative campaigns to boost visibility and engagement.' },
+//         ]
+//     },
+//     'domain-hosting': {
+//         label: 'Domain & Hosting',
+//         items: [
+//             { title: 'Domain Registration', desc: 'Secure the perfect domain name for your brand.' },
+//             { title: 'Cloud Hosting', desc: 'Secure cloud hosting with 99.9% uptime guarantee.' },
+//             { title: 'CI/CD Pipeline', desc: 'Automated deployment pipelines for faster and reliable releases.' },
+//         ]
+//     },
+//     'technology-training': {
+//         label: 'Technology Training',
+//         items: [
+//             { title: 'Corporate IT Training', desc: 'Upskill your team with hands-on technology training programs.' },
+//             { title: 'Developer Workshops', desc: 'In-depth workshops on modern frameworks and best practices.' },
+//         ]
+//     },
+//     'offshore-development': {
+//         label: 'Offshore Development',
+//         items: [
+//             { title: 'Dedicated Development Teams', desc: 'Scalable offshore teams working as an extension of your business.' },
+//             { title: 'Cost-Effective Outsourcing', desc: 'High-quality development at competitive offshore rates.' },
+//         ]
+//     },
+// };
+
+// const SOLUTIONS_DATA = {
+//     'startup': {
+//         label: 'For Startups',
+//         items: [
+//             { title: 'MVP Development', desc: 'Launch your product fast with a minimum viable product built to scale.' },
+//             { title: 'Product Strategy', desc: 'From idea to execution — we help you plan your digital product roadmap.' },
+//         ]
+//     },
+//     'enterprise': {
+//         label: 'For Enterprise',
+//         items: [
+//             { title: 'Digital Transformation', desc: 'Modernize legacy systems and digitize business operations.' },
+//             { title: 'ERP Integration', desc: 'Seamlessly integrate ERP systems for better operational efficiency.' },
+//         ]
+//     },
+//     'ecommerce': {
+//         label: 'E-Commerce',
+//         items: [
+//             { title: 'Online Store Setup', desc: 'Complete e-commerce setup from design to payment integration.' },
+//             { title: 'Inventory Management', desc: 'Smart inventory tools to keep your stock always in control.' },
+//         ]
+//     },
+//     'education': {
+//         label: 'Education & Training',
+//         items: [
+//             { title: 'LMS Development', desc: 'Custom learning management systems for online education platforms.' },
+//             { title: 'Corporate Training Portal', desc: 'Internal training portals to upskill your workforce.' },
+//         ]
+//     },
+// };
+
+// // Social platform naam theke icon component e map kora
+// const SOCIAL_ICONS = {
+//     Facebook: FiFacebook,
+//     Instagram: FiInstagram,
+//     LinkedIn: FiLinkedin,
+//     Twitter: FiTwitter,
+//     YouTube: FiYoutube,
+// };
+
+// const DEFAULT_NAV = {
+//     logoText: 'Amanah',
+//     logoAccent: '.IT',
+//     phone: '+880 1800-000000',
+//     email: 'info@amanahit.com',
+//     socialLinks: [
+//         { platform: 'Facebook', url: 'https://facebook.com/amanahit' },
+//         { platform: 'Instagram', url: 'https://instagram.com/amanahit' },
+//         { platform: 'LinkedIn', url: 'https://linkedin.com/company/amanahit' },
+//         { platform: 'Twitter', url: 'https://twitter.com/amanahit' },
+//         { platform: 'YouTube', url: 'https://youtube.com/@amanahit' },
+//     ],
+//     menuLinks: [
+//         { label: 'Home', path: '/' },
+//         { label: 'Explore Us', path: '/explore-us' },
+//         { label: 'Latest Articles', path: '/latest-articles' },
+//         { label: 'Contact', path: '/contact' },
+//     ],
+//     brochureText: 'Brochure',
+//     brochureLink: '/brochure.pdf',
+// };
+
+// export default function Navbar() {
+//     const [nav, setNav] = useState(DEFAULT_NAV);
+//     const [open, setOpen] = useState(false);
+//     const [scrolled, setScrolled] = useState(false);
+//     const [servicesOpen, setServicesOpen] = useState(false);
+//     const [solutionsOpen, setSolutionsOpen] = useState(false);
+//     const [activeServiceTab, setActiveServiceTab] = useState('it-consultancy');
+//     const [activeSolutionTab, setActiveSolutionTab] = useState('startup');
+//     const location = useLocation();
+
+//     const servicesTimer = useRef(null);
+//     const solutionsTimer = useRef(null);
+
+//     useEffect(() => {
+//         api.get('/navbar').then(r => setNav({ ...DEFAULT_NAV, ...r.data })).catch(() => { });
+//     }, []);
+
+//     const openServices = () => {
+//         clearTimeout(servicesTimer.current);
+//         clearTimeout(solutionsTimer.current);
+//         setSolutionsOpen(false);
+//         setServicesOpen(true);
+//     };
+//     const closeServices = () => {
+//         servicesTimer.current = setTimeout(() => setServicesOpen(false), 150);
+//     };
+//     const keepServices = () => {
+//         clearTimeout(servicesTimer.current);
+//     };
+
+//     const openSolutions = () => {
+//         clearTimeout(solutionsTimer.current);
+//         clearTimeout(servicesTimer.current);
+//         setServicesOpen(false);
+//         setSolutionsOpen(true);
+//     };
+//     const closeSolutions = () => {
+//         solutionsTimer.current = setTimeout(() => setSolutionsOpen(false), 150);
+//     };
+//     const keepSolutions = () => {
+//         clearTimeout(solutionsTimer.current);
+//     };
+
+//     useEffect(() => {
+//         const onScroll = () => setScrolled(window.scrollY > 20);
+//         window.addEventListener('scroll', onScroll);
+//         return () => window.removeEventListener('scroll', onScroll);
+//     }, []);
+
+//     useEffect(() => {
+//         setOpen(false);
+//         setServicesOpen(false);
+//         setSolutionsOpen(false);
+//     }, [location]);
+
+//     return (
+//         <div className="header-wrapper">
+//             {/* Top Bar */}
+//             <div className="top-bar">
+//                 <div className="top-bar-container">
+//                     <div className="top-bar-left">
+//                         <a href={`tel:${(nav.phone || '').replace(/\s/g, '')}`} className="top-info-link">
+//                             <FiPhone className="green-icon" /> {nav.phone}
+//                         </a>
+//                         <a href={`mailto:${nav.email}`} className="top-info-link">
+//                             <FiMail className="green-icon" /> {nav.email}
+//                         </a>
+//                     </div>
+
+//                     <div className="social-links">
+//                         {(nav.socialLinks || []).map(({ platform, url }) => {
+//                             const Icon = SOCIAL_ICONS[platform] || FiFacebook;
+//                             return (
+//                                 <a
+//                                     key={platform}
+//                                     href={url}
+//                                     className="social-icon"
+//                                     target="_blank"
+//                                     rel="noopener noreferrer"
+//                                     aria-label={platform}
+//                                 >
+//                                     <Icon />
+//                                 </a>
+//                             );
+//                         })}
+//                     </div>
+//                 </div>
+//             </div>
+
+//             {/* Main Nav */}
+//             <div className="main-nav-container">
+//                 <nav className={`navbar-floating ${scrolled ? 'scrolled' : ''}`}>
+
+//                     {/* Logo */}
+//                     <Link to="/" className="navbar-logo-text" onClick={() => { setServicesOpen(false); setSolutionsOpen(false); }}>
+//                         {nav.logoText}<span className="logo-dot">{nav.logoAccent}</span>
+//                     </Link>
+
+//                     <ul className={`nav-menu-links ${open ? 'mobile-open' : ''}`}>
+//                         {(nav.menuLinks || []).map((link) => {
+//                             // Services ar Solutions link gula mega menu er jonno special treatment lagbe
+//                             if (link.path === '/services') {
+//                                 return (
+//                                     <li
+//                                         key="services"
+//                                         className="nav-dropdown-wrapper"
+//                                         onMouseEnter={openServices}
+//                                         onMouseLeave={closeServices}
+//                                     >
+//                                         <Link to="/services" className="menu-item dropdown-trigger">
+//                                             {link.label} <FiChevronDown className={`dropdown-arrow ${servicesOpen ? 'rotate' : ''}`} />
+//                                         </Link>
+
+//                                         {servicesOpen && (
+//                                             <div
+//                                                 className="mega-menu-container"
+//                                                 onMouseEnter={keepServices}
+//                                                 onMouseLeave={closeServices}
+//                                             >
+//                                                 <div className="mega-menu-inner">
+//                                                     <div className="mega-menu-sidebar">
+//                                                         {Object.keys(SERVICES_DATA).map((tabKey) => (
+//                                                             <button
+//                                                                 type="button"
+//                                                                 key={tabKey}
+//                                                                 className={`sidebar-item ${activeServiceTab === tabKey ? 'active' : ''}`}
+//                                                                 onMouseEnter={() => setActiveServiceTab(tabKey)}
+//                                                                 onClick={() => setActiveServiceTab(tabKey)}
+//                                                             >
+//                                                                 {SERVICES_DATA[tabKey].label}
+//                                                             </button>
+//                                                         ))}
+//                                                     </div>
+//                                                     <div className="mega-menu-content">
+//                                                         <div className="content-grid-wrapper">
+//                                                             {SERVICES_DATA[activeServiceTab].items.map((item, index) => (
+//                                                                 <Link to="/services" key={index} className="content-item-box">
+//                                                                     <h4>{item.title}</h4>
+//                                                                     <p>{item.desc}</p>
+//                                                                 </Link>
+//                                                             ))}
+//                                                         </div>
+//                                                     </div>
+//                                                 </div>
+//                                             </div>
+//                                         )}
+//                                     </li>
+//                                 );
+//                             }
+
+//                             if (link.path === '/solutions') {
+//                                 return (
+//                                     <li
+//                                         key="solutions"
+//                                         className="nav-dropdown-wrapper"
+//                                         onMouseEnter={openSolutions}
+//                                         onMouseLeave={closeSolutions}
+//                                     >
+//                                         <Link to="/solutions" className="menu-item dropdown-trigger">
+//                                             {link.label} <FiChevronDown className={`dropdown-arrow ${solutionsOpen ? 'rotate' : ''}`} />
+//                                         </Link>
+
+//                                         {solutionsOpen && (
+//                                             <div
+//                                                 className="mega-menu-container"
+//                                                 onMouseEnter={keepSolutions}
+//                                                 onMouseLeave={closeSolutions}
+//                                             >
+//                                                 <div className="mega-menu-inner">
+//                                                     <div className="mega-menu-sidebar">
+//                                                         {Object.keys(SOLUTIONS_DATA).map((tabKey) => (
+//                                                             <button
+//                                                                 type="button"
+//                                                                 key={tabKey}
+//                                                                 className={`sidebar-item ${activeSolutionTab === tabKey ? 'active' : ''}`}
+//                                                                 onMouseEnter={() => setActiveSolutionTab(tabKey)}
+//                                                                 onClick={() => setActiveSolutionTab(tabKey)}
+//                                                             >
+//                                                                 {SOLUTIONS_DATA[tabKey].label}
+//                                                             </button>
+//                                                         ))}
+//                                                     </div>
+//                                                     <div className="mega-menu-content">
+//                                                         <div className="content-grid-wrapper">
+//                                                             {SOLUTIONS_DATA[activeSolutionTab].items.map((item, index) => (
+//                                                                 <Link to="/solutions" key={index} className="content-item-box">
+//                                                                     <h4>{item.title}</h4>
+//                                                                     <p>{item.desc}</p>
+//                                                                 </Link>
+//                                                             ))}
+//                                                         </div>
+//                                                     </div>
+//                                                 </div>
+//                                             </div>
+//                                         )}
+//                                     </li>
+//                                 );
+//                             }
+
+//                             return (
+//                                 <li key={link.path}>
+//                                     <Link to={link.path} className="menu-item">{link.label}</Link>
+//                                 </li>
+//                             );
+//                         })}
+//                     </ul>
+
+//                     <div className="nav-actions">
+//                         <a
+//                             href={nav.brochureLink}
+//                             className="btn-brochure"
+//                             target="_blank"
+//                             rel="noopener noreferrer"
+//                             download
+//                         >
+//                             {nav.brochureText} <FiDownload className="brochure-arrow" />
+//                         </a>
+//                         <button className="grid-menu-btn" aria-label="Grid menu">
+//                             <span className="grid-dot-icon"></span>
+//                         </button>
+//                         <button className="mobile-toggle-btn" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+//                             {open ? <FiX /> : <FiMenu />}
+//                         </button>
+//                     </div>
+//                 </nav>
+//             </div>
+//         </div>
+//     );
+// }
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -964,96 +1323,6 @@ import {
 } from 'react-icons/fi';
 import api from '../../utils/api';
 import './Navbar.css';
-
-const SERVICES_DATA = {
-    'it-consultancy': {
-        label: 'IT Consultancy',
-        items: [
-            { title: 'IT Strategy and Planning', desc: 'Assisting clients in aligning their IT initiatives with their overall business objectives.' },
-            { title: 'IT Project Management', desc: 'Managing and overseeing IT projects from initiation to completion.' },
-            { title: 'Software Development and Integration', desc: 'Assisting clients in developing custom software solutions.' },
-            { title: 'Data Analytics and Business Intelligence', desc: 'Helping clients make data-driven decisions by implementing analytics solutions.' },
-        ]
-    },
-    'managed-it': {
-        label: 'Managed IT',
-        items: [
-            { title: '24/7 Infrastructure Monitoring', desc: 'Round-the-clock monitoring to keep your systems running smoothly.' },
-            { title: 'Network & Server Management', desc: 'Proactive management of your network and server infrastructure.' },
-            { title: 'Helpdesk Support', desc: 'Responsive helpdesk support for your team whenever issues arise.' },
-            { title: 'Backup & Disaster Recovery', desc: 'Reliable backup solutions to protect your business data.' },
-        ]
-    },
-    'digital-marketing': {
-        label: 'Digital Marketing',
-        items: [
-            { title: 'SEO Optimization', desc: 'Rank higher on search engines and attract organic traffic.' },
-            { title: 'Social Media Marketing', desc: 'Engage your audience across platforms with curated content.' },
-            { title: 'PPC & Ad Campaigns', desc: 'Targeted paid campaigns that maximize your return on investment.' },
-            { title: 'Content Marketing', desc: 'Compelling content strategies that build brand authority.' },
-        ]
-    },
-    'brand-promotion': {
-        label: 'Brand & Promotion',
-        items: [
-            { title: 'Brand Identity Design', desc: 'Distinct visual identity that reflects your business values.' },
-            { title: 'Promotional Campaigns', desc: 'Creative campaigns to boost visibility and engagement.' },
-        ]
-    },
-    'domain-hosting': {
-        label: 'Domain & Hosting',
-        items: [
-            { title: 'Domain Registration', desc: 'Secure the perfect domain name for your brand.' },
-            { title: 'Cloud Hosting', desc: 'Secure cloud hosting with 99.9% uptime guarantee.' },
-            { title: 'CI/CD Pipeline', desc: 'Automated deployment pipelines for faster and reliable releases.' },
-        ]
-    },
-    'technology-training': {
-        label: 'Technology Training',
-        items: [
-            { title: 'Corporate IT Training', desc: 'Upskill your team with hands-on technology training programs.' },
-            { title: 'Developer Workshops', desc: 'In-depth workshops on modern frameworks and best practices.' },
-        ]
-    },
-    'offshore-development': {
-        label: 'Offshore Development',
-        items: [
-            { title: 'Dedicated Development Teams', desc: 'Scalable offshore teams working as an extension of your business.' },
-            { title: 'Cost-Effective Outsourcing', desc: 'High-quality development at competitive offshore rates.' },
-        ]
-    },
-};
-
-const SOLUTIONS_DATA = {
-    'startup': {
-        label: 'For Startups',
-        items: [
-            { title: 'MVP Development', desc: 'Launch your product fast with a minimum viable product built to scale.' },
-            { title: 'Product Strategy', desc: 'From idea to execution — we help you plan your digital product roadmap.' },
-        ]
-    },
-    'enterprise': {
-        label: 'For Enterprise',
-        items: [
-            { title: 'Digital Transformation', desc: 'Modernize legacy systems and digitize business operations.' },
-            { title: 'ERP Integration', desc: 'Seamlessly integrate ERP systems for better operational efficiency.' },
-        ]
-    },
-    'ecommerce': {
-        label: 'E-Commerce',
-        items: [
-            { title: 'Online Store Setup', desc: 'Complete e-commerce setup from design to payment integration.' },
-            { title: 'Inventory Management', desc: 'Smart inventory tools to keep your stock always in control.' },
-        ]
-    },
-    'education': {
-        label: 'Education & Training',
-        items: [
-            { title: 'LMS Development', desc: 'Custom learning management systems for online education platforms.' },
-            { title: 'Corporate Training Portal', desc: 'Internal training portals to upskill your workforce.' },
-        ]
-    },
-};
 
 // Social platform naam theke icon component e map kora
 const SOCIAL_ICONS = {
@@ -1067,6 +1336,7 @@ const SOCIAL_ICONS = {
 const DEFAULT_NAV = {
     logoText: 'Amanah',
     logoAccent: '.IT',
+    logoImage: '',
     phone: '+880 1800-000000',
     email: 'info@amanahit.com',
     socialLinks: [
@@ -1082,6 +1352,8 @@ const DEFAULT_NAV = {
         { label: 'Latest Articles', path: '/latest-articles' },
         { label: 'Contact', path: '/contact' },
     ],
+    servicesMenu: [],
+    solutionsMenu: [],
     brochureText: 'Brochure',
     brochureLink: '/brochure.pdf',
 };
@@ -1092,8 +1364,8 @@ export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [servicesOpen, setServicesOpen] = useState(false);
     const [solutionsOpen, setSolutionsOpen] = useState(false);
-    const [activeServiceTab, setActiveServiceTab] = useState('it-consultancy');
-    const [activeSolutionTab, setActiveSolutionTab] = useState('startup');
+    const [activeServiceTab, setActiveServiceTab] = useState(0);
+    const [activeSolutionTab, setActiveSolutionTab] = useState(0);
     const location = useLocation();
 
     const servicesTimer = useRef(null);
@@ -1141,6 +1413,9 @@ export default function Navbar() {
         setSolutionsOpen(false);
     }, [location]);
 
+    const hasServicesMenu = (nav.servicesMenu || []).length > 0;
+    const hasSolutionsMenu = (nav.solutionsMenu || []).length > 0;
+
     return (
         <div className="header-wrapper">
             {/* Top Bar */}
@@ -1181,7 +1456,11 @@ export default function Navbar() {
 
                     {/* Logo */}
                     <Link to="/" className="navbar-logo-text" onClick={() => { setServicesOpen(false); setSolutionsOpen(false); }}>
-                        {nav.logoText}<span className="logo-dot">{nav.logoAccent}</span>
+                        {nav.logoImage ? (
+                            <img src={nav.logoImage} alt={nav.logoText} style={{ height: 36, width: 'auto' }} />
+                        ) : (
+                            <>{nav.logoText}<span className="logo-dot">{nav.logoAccent}</span></>
+                        )}
                     </Link>
 
                     <ul className={`nav-menu-links ${open ? 'mobile-open' : ''}`}>
@@ -1192,14 +1471,14 @@ export default function Navbar() {
                                     <li
                                         key="services"
                                         className="nav-dropdown-wrapper"
-                                        onMouseEnter={openServices}
-                                        onMouseLeave={closeServices}
+                                        onMouseEnter={hasServicesMenu ? openServices : undefined}
+                                        onMouseLeave={hasServicesMenu ? closeServices : undefined}
                                     >
                                         <Link to="/services" className="menu-item dropdown-trigger">
-                                            {link.label} <FiChevronDown className={`dropdown-arrow ${servicesOpen ? 'rotate' : ''}`} />
+                                            {link.label} {hasServicesMenu && <FiChevronDown className={`dropdown-arrow ${servicesOpen ? 'rotate' : ''}`} />}
                                         </Link>
 
-                                        {servicesOpen && (
+                                        {hasServicesMenu && servicesOpen && (
                                             <div
                                                 className="mega-menu-container"
                                                 onMouseEnter={keepServices}
@@ -1207,21 +1486,21 @@ export default function Navbar() {
                                             >
                                                 <div className="mega-menu-inner">
                                                     <div className="mega-menu-sidebar">
-                                                        {Object.keys(SERVICES_DATA).map((tabKey) => (
+                                                        {nav.servicesMenu.map((cat, idx) => (
                                                             <button
                                                                 type="button"
-                                                                key={tabKey}
-                                                                className={`sidebar-item ${activeServiceTab === tabKey ? 'active' : ''}`}
-                                                                onMouseEnter={() => setActiveServiceTab(tabKey)}
-                                                                onClick={() => setActiveServiceTab(tabKey)}
+                                                                key={idx}
+                                                                className={`sidebar-item ${activeServiceTab === idx ? 'active' : ''}`}
+                                                                onMouseEnter={() => setActiveServiceTab(idx)}
+                                                                onClick={() => setActiveServiceTab(idx)}
                                                             >
-                                                                {SERVICES_DATA[tabKey].label}
+                                                                {cat.label}
                                                             </button>
                                                         ))}
                                                     </div>
                                                     <div className="mega-menu-content">
                                                         <div className="content-grid-wrapper">
-                                                            {SERVICES_DATA[activeServiceTab].items.map((item, index) => (
+                                                            {(nav.servicesMenu[activeServiceTab]?.items || []).map((item, index) => (
                                                                 <Link to="/services" key={index} className="content-item-box">
                                                                     <h4>{item.title}</h4>
                                                                     <p>{item.desc}</p>
@@ -1241,14 +1520,14 @@ export default function Navbar() {
                                     <li
                                         key="solutions"
                                         className="nav-dropdown-wrapper"
-                                        onMouseEnter={openSolutions}
-                                        onMouseLeave={closeSolutions}
+                                        onMouseEnter={hasSolutionsMenu ? openSolutions : undefined}
+                                        onMouseLeave={hasSolutionsMenu ? closeSolutions : undefined}
                                     >
                                         <Link to="/solutions" className="menu-item dropdown-trigger">
-                                            {link.label} <FiChevronDown className={`dropdown-arrow ${solutionsOpen ? 'rotate' : ''}`} />
+                                            {link.label} {hasSolutionsMenu && <FiChevronDown className={`dropdown-arrow ${solutionsOpen ? 'rotate' : ''}`} />}
                                         </Link>
 
-                                        {solutionsOpen && (
+                                        {hasSolutionsMenu && solutionsOpen && (
                                             <div
                                                 className="mega-menu-container"
                                                 onMouseEnter={keepSolutions}
@@ -1256,21 +1535,21 @@ export default function Navbar() {
                                             >
                                                 <div className="mega-menu-inner">
                                                     <div className="mega-menu-sidebar">
-                                                        {Object.keys(SOLUTIONS_DATA).map((tabKey) => (
+                                                        {nav.solutionsMenu.map((cat, idx) => (
                                                             <button
                                                                 type="button"
-                                                                key={tabKey}
-                                                                className={`sidebar-item ${activeSolutionTab === tabKey ? 'active' : ''}`}
-                                                                onMouseEnter={() => setActiveSolutionTab(tabKey)}
-                                                                onClick={() => setActiveSolutionTab(tabKey)}
+                                                                key={idx}
+                                                                className={`sidebar-item ${activeSolutionTab === idx ? 'active' : ''}`}
+                                                                onMouseEnter={() => setActiveSolutionTab(idx)}
+                                                                onClick={() => setActiveSolutionTab(idx)}
                                                             >
-                                                                {SOLUTIONS_DATA[tabKey].label}
+                                                                {cat.label}
                                                             </button>
                                                         ))}
                                                     </div>
                                                     <div className="mega-menu-content">
                                                         <div className="content-grid-wrapper">
-                                                            {SOLUTIONS_DATA[activeSolutionTab].items.map((item, index) => (
+                                                            {(nav.solutionsMenu[activeSolutionTab]?.items || []).map((item, index) => (
                                                                 <Link to="/solutions" key={index} className="content-item-box">
                                                                     <h4>{item.title}</h4>
                                                                     <p>{item.desc}</p>
