@@ -565,6 +565,22 @@ const DEFAULT_PAGE = {
         'Brand & Promotion', 'Domain & Hosting', 'Technology Training',
         'Offshore Development', 'Others',
     ],
+    formLabels: {
+        email: 'Email',
+        companyName: 'Company Name',
+        fullName: 'Full Name',
+        companyAddress: 'Company Address',
+        phone: 'Phone Number',
+        officialWebsite: 'Official Website',
+        numberOfEmployee: 'Numbers of Employee',
+        communicationPreference: 'Communication Preference',
+        serviceType: 'Service Type',
+        iAm: 'I am...',
+        message: 'Message',
+        submitBtn: 'Submit',
+        submittingBtn: 'Sending...',
+        successMessage: '✅ Message sent! We will get back to you soon.',
+    },
 };
 
 export default function Contact() {
@@ -672,39 +688,39 @@ export default function Contact() {
             {/* Form */}
             <div className="contact-form-section">
                 {success && (
-                    <div className="contact-success">✅ Message sent! We will get back to you soon.</div>
+                    <div className="contact-success">{page.formLabels.successMessage}</div>
                 )}
                 <form className="contact-form-grid" onSubmit={handleSubmit}>
                     <div className="cf-group">
-                        <label>Email <span className="req">*</span></label>
+                        <label>{page.formLabels.email} <span className="req">*</span></label>
                         <input type="email" name="email" value={form.email} onChange={handleChange} required />
                     </div>
                     <div className="cf-group">
-                        <label>Company Name</label>
+                        <label>{page.formLabels.companyName}</label>
                         <input type="text" name="companyName" value={form.companyName} onChange={handleChange} />
                     </div>
                     <div className="cf-group">
-                        <label>Full Name <span className="req">*</span></label>
+                        <label>{page.formLabels.fullName} <span className="req">*</span></label>
                         <input type="text" name="fullName" value={form.fullName} onChange={handleChange} required />
                     </div>
                     <div className="cf-group">
-                        <label>Company Address</label>
+                        <label>{page.formLabels.companyAddress}</label>
                         <input type="text" name="companyAddress" value={form.companyAddress} onChange={handleChange} />
                     </div>
                     <div className="cf-group">
-                        <label>Phone Number <span className="req">*</span></label>
+                        <label>{page.formLabels.phone} <span className="req">*</span></label>
                         <input type="tel" name="phone" value={form.phone} onChange={handleChange} required />
                     </div>
                     <div className="cf-group">
-                        <label>Official Website</label>
+                        <label>{page.formLabels.officialWebsite}</label>
                         <input type="url" name="officialWebsite" value={form.officialWebsite} onChange={handleChange} />
                     </div>
                     <div className="cf-group">
-                        <label>Numbers of Employee</label>
+                        <label>{page.formLabels.numberOfEmployee}</label>
                         <input type="number" name="numberOfEmployee" value={form.numberOfEmployee} onChange={handleChange} />
                     </div>
                     <div className="cf-group">
-                        <label>Communication Preference</label>
+                        <label>{page.formLabels.communicationPreference}</label>
                         <select name="communicationPreference" value={form.communicationPreference} onChange={handleChange}>
                             <option>Email</option>
                             <option>Phone</option>
@@ -712,13 +728,13 @@ export default function Contact() {
                         </select>
                     </div>
                     <div className="cf-group">
-                        <label>Service Type</label>
+                        <label>{page.formLabels.serviceType}</label>
                         <select name="serviceType" value={form.serviceType} onChange={handleChange}>
                             {(page.serviceTypes || []).map(s => <option key={s}>{s}</option>)}
                         </select>
                     </div>
                     <div className="cf-group">
-                        <label>I am...</label>
+                        <label>{page.formLabels.iAm}</label>
                         <select name="iAm" value={form.iAm} onChange={handleChange}>
                             <option>Customer</option>
                             <option>Business Owner</option>
@@ -727,12 +743,12 @@ export default function Contact() {
                         </select>
                     </div>
                     <div className="cf-group cf-full">
-                        <label>Message</label>
+                        <label>{page.formLabels.message}</label>
                         <textarea name="message" rows="5" value={form.message} onChange={handleChange} />
                     </div>
                     <div className="cf-full cf-submit-row">
                         <button type="submit" className="cf-submit-btn" disabled={loading}>
-                            {loading ? 'Sending...' : 'Submit'}
+                            {loading ? page.formLabels.submittingBtn : page.formLabels.submitBtn}
                         </button>
                     </div>
                 </form>
