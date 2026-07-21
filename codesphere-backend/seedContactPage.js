@@ -23,6 +23,22 @@ const data = {
         'Offshore Development',
         'Others',
     ],
+    formLabels: {
+        email: 'Email',
+        companyName: 'Company Name',
+        fullName: 'Full Name',
+        companyAddress: 'Company Address',
+        phone: 'Phone Number',
+        officialWebsite: 'Official Website',
+        numberOfEmployee: 'Numbers of Employee',
+        communicationPreference: 'Communication Preference',
+        serviceType: 'Service Type',
+        iAm: 'I am...',
+        message: 'Message',
+        submitBtn: 'Submit',
+        submittingBtn: 'Sending...',
+        successMessage: '✅ Message sent! We will get back to you soon.',
+    },
 };
 
 const run = async () => {
