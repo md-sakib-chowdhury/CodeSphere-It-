@@ -126,6 +126,9 @@
     line-height: 1.8;
     margin-bottom: 2rem;
     max-width: 480px;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
 }
 
 .wwo-list {
