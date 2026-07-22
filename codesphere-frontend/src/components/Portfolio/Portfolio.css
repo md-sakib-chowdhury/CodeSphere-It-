@@ -196,6 +196,9 @@
     color: rgba(233, 204, 109, 0.75);
     line-height: 1.55;
     margin: 0.2rem 0 0;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
 }
 
 .project-tags {
