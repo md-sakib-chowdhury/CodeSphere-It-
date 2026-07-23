@@ -161,6 +161,65 @@
     transform: rotate(180deg);
 }
 
+/* Row wrapper for label + mobile toggle button */
+.menu-item-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Mobile-only dropdown toggle button (hidden on desktop) */
+.mobile-dropdown-toggle {
+    display: none;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 999px;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-size: 13px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.mobile-dropdown-toggle svg {
+    transition: transform 0.2s ease;
+}
+
+.mobile-dropdown-toggle svg.rotate {
+    transform: rotate(180deg);
+}
+
+/* Mobile accordion submenu (category label list) — hidden by default, shown only on mobile when expanded */
+.mobile-submenu {
+    display: none;
+    flex-direction: column;
+    padding-left: 4px;
+}
+
+.mobile-submenu.open {
+    display: flex;
+}
+
+.mobile-submenu-item {
+    padding: 10px 0;
+    font-size: 13.5px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.mobile-submenu-item:last-child {
+    border-bottom: none;
+}
+
+.mobile-submenu-item:hover {
+    color: #22c55e;
+}
+
 /* ==========================================
    MEGA MENU
    ========================================== */
@@ -414,10 +473,34 @@
 
     .nav-menu-links.mobile-open .nav-dropdown-wrapper {
         position: relative;
+        display: flex;
+        flex-direction: column;
     }
 
     .nav-menu-links.mobile-open .mega-menu-container {
         display: none !important;
+    }
+
+    /* Mobile e desktop-only arrow (Link er ভিতরে thaka) hide kore, alada toggle button dekhano */
+    .nav-menu-links.mobile-open .desktop-only-arrow {
+        display: none;
+    }
+
+    .nav-menu-links.mobile-open .mobile-dropdown-toggle {
+        display: flex;
+    }
+
+    .nav-menu-links.mobile-open .menu-item-row {
+        padding: 14px 0;
+    }
+
+    .nav-menu-links.mobile-open .menu-item-row .menu-item {
+        padding: 0;
+        width: auto;
+    }
+
+    .nav-menu-links.mobile-open .mobile-submenu {
+        padding-bottom: 8px;
     }
 
     .mobile-toggle-btn {
