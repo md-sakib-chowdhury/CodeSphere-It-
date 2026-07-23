@@ -1315,6 +1315,285 @@
 //         </div>
 //     );
 // }
+// import { useState, useEffect, useRef } from 'react';
+// import { Link, useLocation } from 'react-router-dom';
+// import {
+//     FiPhone, FiMail, FiFacebook, FiInstagram, FiLinkedin,
+//     FiTwitter, FiYoutube, FiChevronDown, FiMenu, FiX, FiDownload
+// } from 'react-icons/fi';
+// import api from '../../utils/api';
+// import './Navbar.css';
+
+// // Social platform naam theke icon component e map kora
+// const SOCIAL_ICONS = {
+//     Facebook: FiFacebook,
+//     Instagram: FiInstagram,
+//     LinkedIn: FiLinkedin,
+//     Twitter: FiTwitter,
+//     YouTube: FiYoutube,
+// };
+
+// const DEFAULT_NAV = {
+//     logoText: 'Amanah',
+//     logoAccent: '.IT',
+//     logoImage: '',
+//     phone: '+880 1800-000000',
+//     email: 'info@amanahit.com',
+//     socialLinks: [
+//         { platform: 'Facebook', url: 'https://facebook.com/amanahit' },
+//         { platform: 'Instagram', url: 'https://instagram.com/amanahit' },
+//         { platform: 'LinkedIn', url: 'https://linkedin.com/company/amanahit' },
+//         { platform: 'Twitter', url: 'https://twitter.com/amanahit' },
+//         { platform: 'YouTube', url: 'https://youtube.com/@amanahit' },
+//     ],
+//     menuLinks: [
+//         { label: 'Home', path: '/' },
+//         { label: 'Explore Us', path: '/explore-us' },
+//         { label: 'Latest Articles', path: '/latest-articles' },
+//         { label: 'Contact', path: '/contact' },
+//     ],
+//     servicesMenu: [],
+//     solutionsMenu: [],
+//     brochureText: 'Brochure',
+//     brochureLink: '/brochure.pdf',
+// };
+
+// export default function Navbar() {
+//     const [nav, setNav] = useState(DEFAULT_NAV);
+//     const [open, setOpen] = useState(false);
+//     const [scrolled, setScrolled] = useState(false);
+//     const [servicesOpen, setServicesOpen] = useState(false);
+//     const [solutionsOpen, setSolutionsOpen] = useState(false);
+//     const [activeServiceTab, setActiveServiceTab] = useState(0);
+//     const [activeSolutionTab, setActiveSolutionTab] = useState(0);
+//     const location = useLocation();
+
+//     const servicesTimer = useRef(null);
+//     const solutionsTimer = useRef(null);
+
+//     useEffect(() => {
+//         api.get('/navbar').then(r => setNav({ ...DEFAULT_NAV, ...r.data })).catch(() => { });
+//     }, []);
+
+//     const openServices = () => {
+//         clearTimeout(servicesTimer.current);
+//         clearTimeout(solutionsTimer.current);
+//         setSolutionsOpen(false);
+//         setServicesOpen(true);
+//     };
+//     const closeServices = () => {
+//         servicesTimer.current = setTimeout(() => setServicesOpen(false), 150);
+//     };
+//     const keepServices = () => {
+//         clearTimeout(servicesTimer.current);
+//     };
+
+//     const openSolutions = () => {
+//         clearTimeout(solutionsTimer.current);
+//         clearTimeout(servicesTimer.current);
+//         setServicesOpen(false);
+//         setSolutionsOpen(true);
+//     };
+//     const closeSolutions = () => {
+//         solutionsTimer.current = setTimeout(() => setSolutionsOpen(false), 150);
+//     };
+//     const keepSolutions = () => {
+//         clearTimeout(solutionsTimer.current);
+//     };
+
+//     useEffect(() => {
+//         const onScroll = () => setScrolled(window.scrollY > 20);
+//         window.addEventListener('scroll', onScroll);
+//         return () => window.removeEventListener('scroll', onScroll);
+//     }, []);
+
+//     useEffect(() => {
+//         setOpen(false);
+//         setServicesOpen(false);
+//         setSolutionsOpen(false);
+//     }, [location]);
+
+//     const hasServicesMenu = (nav.servicesMenu || []).length > 0;
+//     const hasSolutionsMenu = (nav.solutionsMenu || []).length > 0;
+
+//     return (
+//         <div className="header-wrapper">
+//             {/* Top Bar */}
+//             <div className="top-bar">
+//                 <div className="top-bar-container">
+//                     <div className="top-bar-left">
+//                         <a href={`tel:${(nav.phone || '').replace(/\s/g, '')}`} className="top-info-link">
+//                             <FiPhone className="green-icon" /> {nav.phone}
+//                         </a>
+//                         <a href={`mailto:${nav.email}`} className="top-info-link">
+//                             <FiMail className="green-icon" /> {nav.email}
+//                         </a>
+//                     </div>
+
+//                     <div className="social-links">
+//                         {(nav.socialLinks || []).map(({ platform, url }) => {
+//                             const Icon = SOCIAL_ICONS[platform] || FiFacebook;
+//                             return (
+//                                 <a
+//                                     key={platform}
+//                                     href={url}
+//                                     className="social-icon"
+//                                     target="_blank"
+//                                     rel="noopener noreferrer"
+//                                     aria-label={platform}
+//                                 >
+//                                     <Icon />
+//                                 </a>
+//                             );
+//                         })}
+//                     </div>
+//                 </div>
+//             </div>
+
+//             {/* Main Nav */}
+//             <div className="main-nav-container">
+//                 <nav className={`navbar-floating ${scrolled ? 'scrolled' : ''}`}>
+
+//                     {/* Logo */}
+//                     <Link to="/" className="navbar-logo-text" onClick={() => { setServicesOpen(false); setSolutionsOpen(false); }}>
+//                         {nav.logoImage ? (
+//                             <img src={nav.logoImage} alt={nav.logoText} style={{ height: 36, width: 'auto' }} />
+//                         ) : (
+//                             <>{nav.logoText}<span className="logo-dot">{nav.logoAccent}</span></>
+//                         )}
+//                     </Link>
+
+//                     <ul className={`nav-menu-links ${open ? 'mobile-open' : ''}`}>
+//                         {(nav.menuLinks || []).map((link) => {
+//                             // Services ar Solutions link gula mega menu er jonno special treatment lagbe
+//                             if (link.path === '/services') {
+//                                 return (
+//                                     <li
+//                                         key="services"
+//                                         className="nav-dropdown-wrapper"
+//                                         onMouseEnter={hasServicesMenu ? openServices : undefined}
+//                                         onMouseLeave={hasServicesMenu ? closeServices : undefined}
+//                                     >
+//                                         <Link to="/services" className="menu-item dropdown-trigger">
+//                                             {link.label} {hasServicesMenu && <FiChevronDown className={`dropdown-arrow ${servicesOpen ? 'rotate' : ''}`} />}
+//                                         </Link>
+
+//                                         {hasServicesMenu && servicesOpen && (
+//                                             <div
+//                                                 className="mega-menu-container"
+//                                                 onMouseEnter={keepServices}
+//                                                 onMouseLeave={closeServices}
+//                                             >
+//                                                 <div className="mega-menu-inner">
+//                                                     <div className="mega-menu-sidebar">
+//                                                         {nav.servicesMenu.map((cat, idx) => (
+//                                                             <button
+//                                                                 type="button"
+//                                                                 key={idx}
+//                                                                 className={`sidebar-item ${activeServiceTab === idx ? 'active' : ''}`}
+//                                                                 onMouseEnter={() => setActiveServiceTab(idx)}
+//                                                                 onClick={() => setActiveServiceTab(idx)}
+//                                                             >
+//                                                                 {cat.label}
+//                                                             </button>
+//                                                         ))}
+//                                                     </div>
+//                                                     <div className="mega-menu-content">
+//                                                         <div className="content-grid-wrapper">
+//                                                             {(nav.servicesMenu[activeServiceTab]?.items || []).map((item, index) => (
+//                                                                 <Link to="/services" key={index} className="content-item-box">
+//                                                                     <h4>{item.title}</h4>
+//                                                                     <p>{item.desc}</p>
+//                                                                 </Link>
+//                                                             ))}
+//                                                         </div>
+//                                                     </div>
+//                                                 </div>
+//                                             </div>
+//                                         )}
+//                                     </li>
+//                                 );
+//                             }
+
+//                             if (link.path === '/solutions') {
+//                                 return (
+//                                     <li
+//                                         key="solutions"
+//                                         className="nav-dropdown-wrapper"
+//                                         onMouseEnter={hasSolutionsMenu ? openSolutions : undefined}
+//                                         onMouseLeave={hasSolutionsMenu ? closeSolutions : undefined}
+//                                     >
+//                                         <Link to="/solutions" className="menu-item dropdown-trigger">
+//                                             {link.label} {hasSolutionsMenu && <FiChevronDown className={`dropdown-arrow ${solutionsOpen ? 'rotate' : ''}`} />}
+//                                         </Link>
+
+//                                         {hasSolutionsMenu && solutionsOpen && (
+//                                             <div
+//                                                 className="mega-menu-container"
+//                                                 onMouseEnter={keepSolutions}
+//                                                 onMouseLeave={closeSolutions}
+//                                             >
+//                                                 <div className="mega-menu-inner">
+//                                                     <div className="mega-menu-sidebar">
+//                                                         {nav.solutionsMenu.map((cat, idx) => (
+//                                                             <button
+//                                                                 type="button"
+//                                                                 key={idx}
+//                                                                 className={`sidebar-item ${activeSolutionTab === idx ? 'active' : ''}`}
+//                                                                 onMouseEnter={() => setActiveSolutionTab(idx)}
+//                                                                 onClick={() => setActiveSolutionTab(idx)}
+//                                                             >
+//                                                                 {cat.label}
+//                                                             </button>
+//                                                         ))}
+//                                                     </div>
+//                                                     <div className="mega-menu-content">
+//                                                         <div className="content-grid-wrapper">
+//                                                             {(nav.solutionsMenu[activeSolutionTab]?.items || []).map((item, index) => (
+//                                                                 <Link to="/solutions" key={index} className="content-item-box">
+//                                                                     <h4>{item.title}</h4>
+//                                                                     <p>{item.desc}</p>
+//                                                                 </Link>
+//                                                             ))}
+//                                                         </div>
+//                                                     </div>
+//                                                 </div>
+//                                             </div>
+//                                         )}
+//                                     </li>
+//                                 );
+//                             }
+
+//                             return (
+//                                 <li key={link.path}>
+//                                     <Link to={link.path} className="menu-item">{link.label}</Link>
+//                                 </li>
+//                             );
+//                         })}
+//                     </ul>
+
+//                     <div className="nav-actions">
+//                         <a
+//                             href={nav.brochureLink}
+//                             className="btn-brochure"
+//                             target="_blank"
+//                             rel="noopener noreferrer"
+//                             download
+//                         >
+//                             {nav.brochureText} <FiDownload className="brochure-arrow" />
+//                         </a>
+//                         <button className="grid-menu-btn" aria-label="Grid menu">
+//                             <span className="grid-dot-icon"></span>
+//                         </button>
+//                         <button className="mobile-toggle-btn" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+//                             {open ? <FiX /> : <FiMenu />}
+//                         </button>
+//                     </div>
+//                 </nav>
+//             </div>
+//         </div>
+//     );
+// }
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -1366,6 +1645,9 @@ export default function Navbar() {
     const [solutionsOpen, setSolutionsOpen] = useState(false);
     const [activeServiceTab, setActiveServiceTab] = useState(0);
     const [activeSolutionTab, setActiveSolutionTab] = useState(0);
+    // Mobile-only accordion expand state (alada state, desktop hover er sathe conflict na hoy)
+    const [mobileServicesExpanded, setMobileServicesExpanded] = useState(false);
+    const [mobileSolutionsExpanded, setMobileSolutionsExpanded] = useState(false);
     const location = useLocation();
 
     const servicesTimer = useRef(null);
@@ -1411,6 +1693,8 @@ export default function Navbar() {
         setOpen(false);
         setServicesOpen(false);
         setSolutionsOpen(false);
+        setMobileServicesExpanded(false);
+        setMobileSolutionsExpanded(false);
     }, [location]);
 
     const hasServicesMenu = (nav.servicesMenu || []).length > 0;
@@ -1474,10 +1758,23 @@ export default function Navbar() {
                                         onMouseEnter={hasServicesMenu ? openServices : undefined}
                                         onMouseLeave={hasServicesMenu ? closeServices : undefined}
                                     >
-                                        <Link to="/services" className="menu-item dropdown-trigger">
-                                            {link.label} {hasServicesMenu && <FiChevronDown className={`dropdown-arrow ${servicesOpen ? 'rotate' : ''}`} />}
-                                        </Link>
+                                        <div className="menu-item-row">
+                                            <Link to="/services" className="menu-item dropdown-trigger">
+                                                {link.label} {hasServicesMenu && <FiChevronDown className="dropdown-arrow desktop-only-arrow" />}
+                                            </Link>
+                                            {hasServicesMenu && (
+                                                <button
+                                                    type="button"
+                                                    className="mobile-dropdown-toggle"
+                                                    onClick={(e) => { e.preventDefault(); setMobileServicesExpanded(v => !v); }}
+                                                    aria-label="Toggle Services submenu"
+                                                >
+                                                    <FiChevronDown className={mobileServicesExpanded ? 'rotate' : ''} />
+                                                </button>
+                                            )}
+                                        </div>
 
+                                        {/* Desktop hover mega menu (CSS diye mobile e hide kora) */}
                                         {hasServicesMenu && servicesOpen && (
                                             <div
                                                 className="mega-menu-container"
@@ -1511,6 +1808,17 @@ export default function Navbar() {
                                                 </div>
                                             </div>
                                         )}
+
+                                        {/* Mobile accordion submenu — shudhu category label list */}
+                                        {hasServicesMenu && (
+                                            <div className={`mobile-submenu ${mobileServicesExpanded ? 'open' : ''}`}>
+                                                {nav.servicesMenu.map((cat, idx) => (
+                                                    <Link key={idx} to="/services" className="mobile-submenu-item">
+                                                        {cat.label}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        )}
                                     </li>
                                 );
                             }
@@ -1523,9 +1831,21 @@ export default function Navbar() {
                                         onMouseEnter={hasSolutionsMenu ? openSolutions : undefined}
                                         onMouseLeave={hasSolutionsMenu ? closeSolutions : undefined}
                                     >
-                                        <Link to="/solutions" className="menu-item dropdown-trigger">
-                                            {link.label} {hasSolutionsMenu && <FiChevronDown className={`dropdown-arrow ${solutionsOpen ? 'rotate' : ''}`} />}
-                                        </Link>
+                                        <div className="menu-item-row">
+                                            <Link to="/solutions" className="menu-item dropdown-trigger">
+                                                {link.label} {hasSolutionsMenu && <FiChevronDown className="dropdown-arrow desktop-only-arrow" />}
+                                            </Link>
+                                            {hasSolutionsMenu && (
+                                                <button
+                                                    type="button"
+                                                    className="mobile-dropdown-toggle"
+                                                    onClick={(e) => { e.preventDefault(); setMobileSolutionsExpanded(v => !v); }}
+                                                    aria-label="Toggle Solutions submenu"
+                                                >
+                                                    <FiChevronDown className={mobileSolutionsExpanded ? 'rotate' : ''} />
+                                                </button>
+                                            )}
+                                        </div>
 
                                         {hasSolutionsMenu && solutionsOpen && (
                                             <div
@@ -1558,6 +1878,16 @@ export default function Navbar() {
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        )}
+
+                                        {hasSolutionsMenu && (
+                                            <div className={`mobile-submenu ${mobileSolutionsExpanded ? 'open' : ''}`}>
+                                                {nav.solutionsMenu.map((cat, idx) => (
+                                                    <Link key={idx} to="/solutions" className="mobile-submenu-item">
+                                                        {cat.label}
+                                                    </Link>
+                                                ))}
                                             </div>
                                         )}
                                     </li>
