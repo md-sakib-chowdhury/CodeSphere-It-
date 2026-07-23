@@ -200,10 +200,6 @@
     padding-left: 4px;
 }
 
-.mobile-submenu.open {
-    display: flex;
-}
-
 .mobile-submenu-item {
     padding: 10px 0;
     font-size: 13.5px;
@@ -501,6 +497,10 @@
 
     .nav-menu-links.mobile-open .mobile-submenu {
         padding-bottom: 8px;
+    }
+
+    .mobile-submenu.open {
+        display: flex;
     }
 
     .mobile-toggle-btn {

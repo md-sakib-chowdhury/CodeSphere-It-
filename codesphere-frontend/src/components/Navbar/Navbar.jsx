@@ -1750,6 +1750,8 @@ export default function Navbar() {
                     <ul className={`nav-menu-links ${open ? 'mobile-open' : ''}`}>
                         {(nav.menuLinks || []).map((link) => {
                             // Services ar Solutions link gula mega menu er jonno special treatment lagbe
+                            // NOTE: label ekhon <Link> na, <span> — kono device e click korle redirect hobe na,
+                            // shudhu dropdown/accordion show-hide hobe.
                             if (link.path === '/services') {
                                 return (
                                     <li
@@ -1759,9 +1761,12 @@ export default function Navbar() {
                                         onMouseLeave={hasServicesMenu ? closeServices : undefined}
                                     >
                                         <div className="menu-item-row">
-                                            <Link to="/services" className="menu-item dropdown-trigger">
+                                            <span
+                                                className="menu-item dropdown-trigger"
+                                                onClick={() => hasServicesMenu && setMobileServicesExpanded(v => !v)}
+                                            >
                                                 {link.label} {hasServicesMenu && <FiChevronDown className="dropdown-arrow desktop-only-arrow" />}
-                                            </Link>
+                                            </span>
                                             {hasServicesMenu && (
                                                 <button
                                                     type="button"
@@ -1832,9 +1837,12 @@ export default function Navbar() {
                                         onMouseLeave={hasSolutionsMenu ? closeSolutions : undefined}
                                     >
                                         <div className="menu-item-row">
-                                            <Link to="/solutions" className="menu-item dropdown-trigger">
+                                            <span
+                                                className="menu-item dropdown-trigger"
+                                                onClick={() => hasSolutionsMenu && setMobileSolutionsExpanded(v => !v)}
+                                            >
                                                 {link.label} {hasSolutionsMenu && <FiChevronDown className="dropdown-arrow desktop-only-arrow" />}
-                                            </Link>
+                                            </span>
                                             {hasSolutionsMenu && (
                                                 <button
                                                     type="button"
