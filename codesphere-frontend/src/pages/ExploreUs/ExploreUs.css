@@ -2,7 +2,7 @@
     background: linear-gradient(135deg, #2b2f33, #3a3f44);
     padding-top: 175px;
     padding-bottom: 4rem;
-    min-height: 420px;
+    min-height: 468px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -249,6 +249,6 @@
     .page-banner {
         padding-top: 130px;
         padding-bottom: 3rem;
-        min-height: 280px;
+        min-height: 328px;
     }
 }
