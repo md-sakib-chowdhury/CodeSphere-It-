@@ -435,7 +435,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
     FiGrid, FiLayout, FiBriefcase, FiUsers, FiMessageSquare,
-    FiMail, FiBarChart2, FiLogOut, FiMenu, FiX, FiUserPlus, FiHome, FiFileText, FiCompass
+    FiMail, FiBarChart2, FiLogOut, FiMenu, FiX, FiUserPlus, FiHome, FiFileText, FiCompass, FiImage
 } from 'react-icons/fi';
 import { useAuth } from '../../context/AuthContext';
 
@@ -451,6 +451,7 @@ import ServicesTab from './tabs/ServicesTab';
 import PortfolioTab from './tabs/PortfolioTab';
 import TeamTab from './tabs/TeamTab';
 import BlogTab from './tabs/BlogTab';
+import GalleryTab from './tabs/GalleryTab';
 import TestimonialsTab from './tabs/TestimonialsTab';
 import ContactTab from './tabs/ContactTab';
 import EmployeesTab from './tabs/EmployeesTab';
@@ -470,6 +471,7 @@ const TABS = [
     { id: 'team', label: 'Team', icon: FiUsers, permission: 'manageTeam' },
     { id: 'blog', label: 'Blog / Articles', icon: FiFileText, permission: 'manageBlog' },
     { id: 'articlesPage', label: 'Latest Articles Page', icon: FiFileText, permission: 'manageArticlesPage' },
+    { id: 'gallery', label: 'Gallery', icon: FiImage, permission: 'manageGallery' },
     { id: 'testimonials', label: 'Testimonials', icon: FiMessageSquare, permission: 'manageTestimonials' },
     { id: 'contact', label: 'Messages', icon: FiMail, permission: 'manageContactMessages' },
     { id: 'contactPage', label: 'Contact Page', icon: FiMail, permission: 'manageContactPage' },
@@ -503,6 +505,7 @@ export default function AdminPanel() {
             case 'team': return <TeamTab />;
             case 'blog': return <BlogTab />;
             case 'articlesPage': return <ArticlesPageTab />;
+            case 'gallery': return <GalleryTab />;
             case 'testimonials': return <TestimonialsTab />;
             case 'contact': return <ContactTab />;
             case 'contactPage': return <ContactPageTab />;

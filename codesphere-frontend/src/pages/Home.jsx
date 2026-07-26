@@ -21,13 +21,41 @@
 //         </>
 //     )
 // }
+// import Navbar from '../components/Navbar/Navbar'
+// import Hero from '../components/Hero/Hero'
+// import Services from '../components/Services/Services'
+// import Portfolio from '../components/Portfolio/Portfolio'
+// import Team from '../components/Team/Team'
+// import Testimonials from '../components/Testimonials/Testimonials'
+// import Contact from '../components/Contact/Contact'
+// import Footer from '../components/Footer/Footer'
+
+// export default function Home() {
+//     return (
+//         <>
+//             <Navbar />
+//             <Hero />
+//             <Services />
+//             <Portfolio />
+//             <Team />
+//             <Testimonials />
+//             <Contact />
+//             <Footer />
+//         </>
+//     )
+// }
 import Navbar from '../components/Navbar/Navbar'
 import Hero from '../components/Hero/Hero'
 import Services from '../components/Services/Services'
+import WhyChooseUs from '../components/WhyChooseUs/WhyChooseUs'
+import WhatWeOffer from '../components/WhatWeOffer/WhatWeOffer'
 import Portfolio from '../components/Portfolio/Portfolio'
-import Team from '../components/Team/Team'
+import KeyCompetency from '../components/KeyCompetency/KeyCompetency'
+import StatsCards from '../components/StatsCards/StatsCards'
+
 import Testimonials from '../components/Testimonials/Testimonials'
-import Contact from '../components/Contact/Contact'
+import LatestActivities from '../components/LatestActivities/LatestActivities'
+import GallerySection from '../components/GallerySection/GallerySection'
 import Footer from '../components/Footer/Footer'
 
 export default function Home() {
@@ -36,10 +64,15 @@ export default function Home() {
             <Navbar />
             <Hero />
             <Services />
+            <WhyChooseUs />
+            <WhatWeOffer />
             <Portfolio />
-            <Team />
+            <KeyCompetency />
+            <StatsCards />
+
             <Testimonials />
-            <Contact />
+            <LatestActivities />
+            <GallerySection />
             <Footer />
         </>
     )
