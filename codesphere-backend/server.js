@@ -33,6 +33,7 @@ app.use('/api/explore-page', require('./routes/explorePageRoutes'));
 app.use('/api/contact-page', require('./routes/contactPageRoutes'));
 app.use('/api/articles-page', require('./routes/articlesPageRoutes'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/api/gallery', require('./routes/galleryRoutes'));
 app.use('/api/footer', require('./routes/footerRoutes'));
 app.get('/', (req, res) => res.json({ message: 'CodeSphere IT API Running ✅' }));
 
