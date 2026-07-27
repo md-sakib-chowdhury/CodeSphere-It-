@@ -42,34 +42,21 @@
 .gallery-preview-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 1rem;
-    width: 100%;
-    box-sizing: border-box;
-    overflow: hidden;
-    /* safety net so nothing can ever bleed past the container */
+    gap: 1.1rem;
 }
 
 .gallery-preview-item {
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 4 / 3;
     border-radius: var(--radius-sm);
     overflow: hidden;
-    min-width: 0;
-    /* lets grid tracks shrink below content's natural width */
-    width: 100%;
-    box-sizing: border-box;
-    background: #f5f5f5;
-    /* fills empty space around any image that doesn't fill the box */
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .gallery-preview-item img {
     width: 100%;
     height: 100%;
-    max-width: 100%;
-    object-fit: contain;
-    /* THE FIX: shows the FULL image always, never crops — works for portrait, landscape, or wide logos */
+    object-fit: cover;
+    object-position: top center;
+    /* keep the top (face/head) visible, crop from bottom instead */
     transition: transform 0.4s ease;
     display: block;
 }
