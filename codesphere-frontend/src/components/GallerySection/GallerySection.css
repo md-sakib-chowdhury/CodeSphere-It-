@@ -41,19 +41,19 @@
 }
 
 .gallery-preview .container {
-    max-width: 1400px;
+    max-width: 1600px;
 }
 
 .gallery-preview-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.3rem;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.2rem;
 }
 
 .gallery-preview-item {
-    width: 1.5in;
-    height: 1.5in;
-    border-radius: 16px;
+    aspect-ratio: 1 / 1;
+    border-radius: 0;
+    border: 1px solid #e5e7eb;
     overflow: hidden;
 }
 
@@ -67,8 +67,22 @@
     transition: transform 0.4s ease;
 }
 
+/* Logo images stay fully visible instead of being cropped */
+.gallery-preview-item img[src*="logo" i],
+.gallery-preview-item img[src*="amanah" i] {
+    object-fit: contain;
+    padding: 10px;
+    background: #fff;
+}
+
 .gallery-preview-item:hover img {
     transform: scale(1.06);
+}
+
+@media (max-width: 1023px) {
+    .gallery-preview-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 @media (max-width: 639px) {
@@ -77,8 +91,8 @@
     }
 
     .gallery-preview-grid {
+        grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
-        justify-content: center;
     }
 
     .gallery-preview-header {

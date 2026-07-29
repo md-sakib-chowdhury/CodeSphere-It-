@@ -43,18 +43,19 @@
 }
 
 .gallery-page-section .container {
-    max-width: 1400px;
+    max-width: 1600px;
 }
 
 .gallery-full-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 2rem;
+    gap: 1.2rem;
 }
 
 .gallery-full-item {
-    aspect-ratio: 4 / 3;
-    border-radius: 16px;
+    aspect-ratio: 1 / 1;
+    border-radius: 0;
+    border: 1px solid #e5e7eb;
     overflow: hidden;
 }
 
@@ -65,6 +66,14 @@
     object-position: top center;
     transition: transform 0.4s ease;
     display: block;
+}
+
+/* Logo images stay fully visible instead of being cropped */
+.gallery-full-item img[src*="logo" i],
+.gallery-full-item img[src*="amanah" i] {
+    object-fit: contain;
+    padding: 10px;
+    background: #fff;
 }
 
 .gallery-full-item:hover img {
