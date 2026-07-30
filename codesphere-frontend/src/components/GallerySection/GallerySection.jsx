@@ -106,7 +106,7 @@ import { Link } from 'react-router-dom';
 import api from '../../utils/api';
 import './GallerySection.css';
 
-// Real image kom thakle ei gula diye slot bhorat kora hobe (6 porjonto)
+// Real image kom thakle ei gula diye slot bhorat kora hobe (12 porjonto)
 const PLACEHOLDER_IMAGES = [
     'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=500&q=80',
     'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&q=80',
@@ -114,9 +114,17 @@ const PLACEHOLDER_IMAGES = [
     'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=500&q=80',
     'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=500&q=80',
     'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=500&q=80',
-].map((url, i) => ({ _id: `placeholder-${i}`, url }));
+];
 
-const TOTAL_SLOTS = 6;
+const TOTAL_SLOTS = 12; // 6 per row x 2 rows
+
+// Placeholder list-ta 6-ta URL, dorkar hole cycle kore repeat kore 12 porjonto banano hoy
+function buildPlaceholders(count) {
+    return Array.from({ length: count }, (_, i) => ({
+        _id: `placeholder-${i}`,
+        url: PLACEHOLDER_IMAGES[i % PLACEHOLDER_IMAGES.length],
+    }));
+}
 
 // Khub wide image (jemon horizontal logo banner) hole "contain" e switch kore,
 // jate full image dekha jai, kono crop na hoy. Normal photo gula "cover"-e thake.
@@ -131,18 +139,19 @@ function handleImageLoad(e) {
 }
 
 export default function GallerySection() {
-    const [images, setImages] = useState(PLACEHOLDER_IMAGES);
+    const [images, setImages] = useState(buildPlaceholders(TOTAL_SLOTS));
 
     useEffect(() => {
         api.get('/gallery').then(r => {
             const real = r.data || [];
             if (real.length >= TOTAL_SLOTS) {
                 // real image e shob slot bhorat, placeholder lagbe na
+                // ekhane shudhu first 12-ta dekhano hocche; 12-er beshi thakle baki gula shudhu /gallery page-e dekha jabe
                 setImages(real.slice(0, TOTAL_SLOTS));
             } else {
                 // real image gula age, baki slot placeholder diye bhorat
                 const needed = TOTAL_SLOTS - real.length;
-                setImages([...real, ...PLACEHOLDER_IMAGES.slice(0, needed)]);
+                setImages([...real, ...buildPlaceholders(needed)]);
             }
         }).catch(() => { });
     }, []);
