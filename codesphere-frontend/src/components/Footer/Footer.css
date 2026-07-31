@@ -307,11 +307,23 @@
     .footer-cta-box {
         padding: 2.5rem 1.5rem;
     }
+
+    .footer-top {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    .footer-bottom-inner {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
 }
 
 @media (max-width: 479px) {
     .footer-top {
         grid-template-columns: 1fr;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
     .footer-brand {
@@ -321,6 +333,8 @@
     .footer-bottom-inner {
         flex-direction: column;
         text-align: center;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
     .footer-cta {

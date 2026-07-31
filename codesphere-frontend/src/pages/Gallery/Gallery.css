@@ -18,7 +18,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(20, 22, 24, 0.55);
+    background: rgba(20, 22, 24, 0.3);
     z-index: 0;
 }
 

@@ -148,6 +148,7 @@ function handleImageLoad(e) {
 export default function GalleryPage() {
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [bannerImage, setBannerImage] = useState(null); // null hole default gradient dekhabe
 
     useEffect(() => { window.scrollTo(0, 0); }, []);
 
@@ -158,11 +159,26 @@ export default function GalleryPage() {
             .finally(() => setLoading(false));
     }, []);
 
+    useEffect(() => {
+        // Backend-e emon ekta endpoint dhoray nichi jeta admin panel theke set kora
+        // banner image URL ferot dey. Nijer actual endpoint diye eta replace koro
+        // (jemon /settings, /site-settings, /gallery-banner ityadi).
+        api.get('/settings/gallery-banner')
+            .then(r => {
+                if (r.data?.imageUrl) setBannerImage(r.data.imageUrl);
+            })
+            .catch(() => { }); // fail korle default gradient e thakbe
+    }, []);
+
+    const bannerStyle = bannerImage
+        ? { '--hero-bg-image': `url(${bannerImage})` }
+        : undefined;
+
     return (
         <>
             <Navbar />
 
-            <section className="gallery-hero-banner">
+            <section className="gallery-hero-banner" style={bannerStyle}>
                 <div className="container">
                     <div className="breadcrumb">
                         <a href="/">Home</a> <span>»</span> <span className="current">Gallery</span>
