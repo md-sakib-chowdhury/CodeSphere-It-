@@ -1,12 +1,30 @@
 .gallery-hero-banner {
     background: linear-gradient(135deg, #2b2f33, #3a3f44);
+    background-image: var(--hero-bg-image, none);
+    background-size: cover;
+    background-position: center;
+    position: relative;
     padding-top: 175px;
     padding-bottom: 4rem;
-    min-height: 320px;
+    min-height: 480px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
+}
+
+/* Dark overlay so text stays readable when a custom background image is set */
+.gallery-hero-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 22, 24, 0.55);
+    z-index: 0;
+}
+
+.gallery-hero-banner .container {
+    position: relative;
+    z-index: 1;
 }
 
 .gallery-hero-banner .breadcrumb {
@@ -96,7 +114,7 @@
     .gallery-hero-banner {
         padding-top: 130px;
         padding-bottom: 3rem;
-        min-height: 220px;
+        min-height: 320px;
     }
 }
 
