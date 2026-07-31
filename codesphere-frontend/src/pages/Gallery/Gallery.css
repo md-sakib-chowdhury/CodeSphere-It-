@@ -112,9 +112,40 @@
 
 @media (max-width: 767px) {
     .gallery-hero-banner {
-        padding-top: 130px;
-        padding-bottom: 3rem;
-        min-height: 320px;
+        padding-top: 110px;
+        padding-bottom: 2.5rem;
+        min-height: 260px;
+    }
+
+    .gallery-hero-banner .breadcrumb {
+        font-size: 0.8rem;
+    }
+
+    .gallery-hero-banner .container {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-hero-banner {
+        padding-top: 95px;
+        padding-bottom: 2rem;
+        min-height: 220px;
+    }
+
+    .gallery-hero-banner h1 {
+        font-size: 1.75rem;
+    }
+
+    .gallery-hero-banner .breadcrumb {
+        font-size: 0.75rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .gallery-hero-banner .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }
 
