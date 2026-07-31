@@ -35,6 +35,7 @@ app.use('/api/articles-page', require('./routes/articlesPageRoutes'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/gallery', require('./routes/galleryRoutes'));
 app.use('/api/footer', require('./routes/footerRoutes'));
+app.use('/api/settings', require('./routes/settingsRoutes'));
 app.get('/', (req, res) => res.json({ message: 'CodeSphere IT API Running ✅' }));
 
 const PORT = process.env.PORT || 5000;

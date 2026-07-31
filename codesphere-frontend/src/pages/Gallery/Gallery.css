@@ -1,6 +1,6 @@
 .gallery-hero-banner {
-    background: linear-gradient(135deg, #2b2f33, #3a3f44);
-    background-image: var(--hero-bg-image, none);
+    background-color: #2b2f33;
+    background-image: var(--hero-bg-image, linear-gradient(135deg, #2b2f33, #3a3f44));
     background-size: cover;
     background-position: center;
     position: relative;
