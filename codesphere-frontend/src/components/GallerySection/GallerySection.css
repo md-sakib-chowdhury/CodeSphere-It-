@@ -29,6 +29,7 @@
     animation: gallery-dot-pulse 1.8s infinite ease-out;
     flex-shrink: 0;
     display: inline-block;
+    margin-right: 6px;
 }
 
 @keyframes gallery-dot-pulse {
