@@ -20,6 +20,31 @@
     margin-top: 0.5rem;
 }
 
+.section-label-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.6);
+    animation: gallery-dot-pulse 1.8s infinite ease-out;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+@keyframes gallery-dot-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.6);
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px rgba(37, 99, 235, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+    }
+}
+
 .gallery-see-more-btn {
     display: inline-flex;
     align-items: center;
