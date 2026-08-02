@@ -37,6 +37,12 @@
     padding: 5rem 0;
 }
 
+.explore-section .container,
+.page-banner .container {
+    padding-left: 1in;
+    padding-right: 1in;
+}
+
 .explore-section.alt-bg {
     background: var(--gray-50);
 }
@@ -44,6 +50,12 @@
 @media (max-width: 767px) {
     .explore-section {
         padding: 3rem 0;
+    }
+
+    .explore-section .container,
+    .page-banner .container {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
     }
 }
 
@@ -74,6 +86,10 @@
     color: var(--gray-600);
     line-height: 1.85;
     margin-bottom: 1.1rem;
+}
+
+.explore-text p:last-child {
+    margin-bottom: 0;
 }
 
 .explore-text ul {
@@ -238,6 +254,12 @@
         direction: ltr;
     }
 
+    .explore-img-wrap img {
+        object-fit: contain;
+        background: var(--gray-50);
+        max-height: 320px;
+    }
+
     .cta-inner {
         flex-direction: column;
         text-align: center;
@@ -253,10 +275,10 @@
         padding-top: 130px;
         padding-bottom: 3rem;
         min-height: 328px;
-        /* Custom uploaded banner image gula mobile-e onek zoom/crop hoye jete pare
-           (cover ratio mismatch), tai background-size ektu boro rekhe left-right theke
-           kom crop hoy emon position rakha hocche */
-        background-size: 140% auto;
-        background-position: center center;
+        /* Pura area image diye fill hoy, kono gap thake na — image-er dujon side-e
+           halka crop hote pare, kintu blank space thakbe na */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
     }
 }
