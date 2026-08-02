@@ -1,5 +1,8 @@
 .page-banner {
-    background: linear-gradient(135deg, #2b2f33, #3a3f44);
+    background-color: #2b2f33;
+    background-image: var(--page-banner-image, linear-gradient(135deg, #2b2f33, #3a3f44));
+    background-size: cover;
+    background-position: center;
     padding-top: 175px;
     padding-bottom: 4rem;
     min-height: 468px;
@@ -250,5 +253,10 @@
         padding-top: 130px;
         padding-bottom: 3rem;
         min-height: 328px;
+        /* Custom uploaded banner image gula mobile-e onek zoom/crop hoye jete pare
+           (cover ratio mismatch), tai background-size ektu boro rekhe left-right theke
+           kom crop hoy emon position rakha hocche */
+        background-size: 140% auto;
+        background-position: center center;
     }
 }
