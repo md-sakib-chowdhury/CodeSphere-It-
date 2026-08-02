@@ -2,10 +2,12 @@
     background-color: #2b2f33;
     background-image: var(--page-banner-image, linear-gradient(135deg, #2b2f33, #3a3f44));
     background-size: cover;
-    background-position: center;
-    padding-top: 175px;
-    padding-bottom: 4rem;
-    min-height: 468px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    padding-top: clamp(95px, 18vw, 175px);
+    padding-bottom: clamp(2rem, 5vw, 4rem);
+    min-height: clamp(220px, 45vw, 468px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -57,6 +59,60 @@
         padding-left: 1.25rem;
         padding-right: 1.25rem;
     }
+
+    .breadcrumb {
+        font-size: 0.8rem;
+    }
+
+    .explore-row {
+        gap: 1.5rem;
+    }
+
+    .explore-text ul {
+        gap: 0.5rem;
+    }
+
+    /* Mobile-e pura banner image dekhate "contain" use kora hocche (crop na hoye) —
+       image-er charpashe blank space thakle white color diye fill kore dey */
+    .page-banner {
+        background-color: #fff;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .explore-section {
+        padding: 2.25rem 0;
+    }
+
+    .explore-section .container,
+    .page-banner .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .breadcrumb {
+        font-size: 0.75rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .explore-text p,
+    .explore-text ul li {
+        font-size: 0.92rem;
+        line-height: 1.7;
+    }
+
+    .explore-img-wrap {
+        padding: 10px;
+    }
+
+    .explore-img-wrap::before,
+    .explore-img-wrap::after {
+        width: 55%;
+        height: 55%;
+    }
 }
 
 .explore-row {
@@ -86,6 +142,8 @@
     color: var(--gray-600);
     line-height: 1.85;
     margin-bottom: 1.1rem;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .explore-text p:last-child {
@@ -154,7 +212,7 @@
 
 .explore-img-wrap img {
     width: 100%;
-    max-height: 420px;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
     border-radius: var(--radius-sm);
     position: relative;
@@ -254,12 +312,6 @@
         direction: ltr;
     }
 
-    .explore-img-wrap img {
-        object-fit: contain;
-        background: var(--gray-50);
-        max-height: 320px;
-    }
-
     .cta-inner {
         flex-direction: column;
         text-align: center;
@@ -267,18 +319,5 @@
 
     .cta-right {
         text-align: center;
-    }
-}
-
-@media (max-width: 767px) {
-    .page-banner {
-        padding-top: 130px;
-        padding-bottom: 3rem;
-        min-height: 328px;
-        /* Pura area image diye fill hoy, kono gap thake na — image-er dujon side-e
-           halka crop hote pare, kintu blank space thakbe na */
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
     }
 }
