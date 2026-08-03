@@ -1,13 +1,43 @@
 .page-banner {
     background-color: #2b2f33;
-    background-image: var(--page-banner-image, linear-gradient(135deg, #2b2f33, #3a3f44));
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
+    background-image: linear-gradient(135deg, #2b2f33, #3a3f44);
     padding-top: clamp(95px, 18vw, 175px);
     padding-bottom: clamp(2rem, 5vw, 4rem);
     min-height: clamp(220px, 45vw, 468px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Real-image banner — height follows the uploaded image's own aspect ratio,
+   so it's never cropped and never leaves a gap, on any device */
+.page-banner-img {
+    position: relative;
+    min-height: 0;
+    padding: 0;
+    display: block;
+    overflow: hidden;
+}
+
+.page-banner-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.page-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 22, 24, 0.5);
+}
+
+.page-banner-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -70,15 +100,6 @@
 
     .explore-text ul {
         gap: 0.5rem;
-    }
-
-    /* Mobile-e pura banner image dekhate "contain" use kora hocche (crop na hoye) —
-       image-er charpashe blank space thakle white color diye fill kore dey */
-    .page-banner {
-        background-color: #fff;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
     }
 }
 
