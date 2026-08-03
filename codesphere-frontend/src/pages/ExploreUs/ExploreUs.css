@@ -1,23 +1,21 @@
 .page-banner {
     background-color: #2b2f33;
     background-image: linear-gradient(135deg, #2b2f33, #3a3f44);
-    padding-top: clamp(95px, 18vw, 175px);
+    padding-top: clamp(125px, 22vw, 175px);
     padding-bottom: clamp(2rem, 5vw, 4rem);
-    min-height: clamp(220px, 45vw, 468px);
+    min-height: clamp(260px, 45vw, 468px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
 }
 
-/* Real-image banner — height follows the uploaded image's own aspect ratio,
-   so it's never cropped and never leaves a gap, on any device */
+/* Mobile default — image pura/uncropped dekhano hoy (natural height) */
 .page-banner-img {
     position: relative;
-    min-height: 0;
-    padding: 0;
+    padding: 0 !important;
+    min-height: 0 !important;
     display: block;
-    overflow: hidden;
 }
 
 .page-banner-photo {
@@ -26,10 +24,23 @@
     display: block;
 }
 
+/* Tablet+/desktop — fixed height, cover (halka crop, kintu consistent size) */
+@media (min-width: 768px) {
+    .page-banner-img {
+        height: clamp(280px, 40vw, 460px);
+        overflow: hidden;
+    }
+
+    .page-banner-photo {
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
 .page-banner-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(20, 22, 24, 0.5);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .page-banner-content {
@@ -42,27 +53,29 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    padding: clamp(90px, 18vw, 120px) 1rem 1rem;
+    box-sizing: border-box;
 }
 
 .breadcrumb {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.6);
     margin-bottom: 1rem;
+}
+
+.breadcrumb span.current {
+    color: #111;
+    font-weight: 500;
 }
 
 .breadcrumb a {
     color: var(--green-400);
 }
 
-.breadcrumb span.current {
-    color: #fff;
-    font-weight: 500;
-}
-
 .page-banner h1 {
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 800;
-    color: #fff;
+    color: #111;
 }
 
 .explore-section {
