@@ -918,27 +918,33 @@ export default function ExploreUs() {
         }).catch(() => { });
     }, []);
 
-    // Banner image thakle seta CSS variable-e boshano hocche (overlay soho, text readable rakhar jonno);
-    // background-size/position CSS file-e thake (clamp()-based, Latest Articles-er moto proven method).
-    // Image na thakle .page-banner er default CSS gradient e fallback hobe.
-    const bannerStyle = data.bannerImage
-        ? {
-            '--page-banner-image': `linear-gradient(rgba(20, 22, 24, 0.4), rgba(20, 22, 24, 0.4)), url(${data.bannerImage})`,
-        }
-        : undefined;
-
+    // Banner image thakle real <img> tag hisebe render kora hocche — mobile-e natural
+    // height (kono crop na), desktop-e fixed height+cover (CSS-e handle kora).
     return (
         <>
             <Navbar />
 
-            <section className="page-banner" style={bannerStyle}>
-                <div className="container">
-                    <div className="breadcrumb">
-                        <a href="/">Home</a> <span>»</span> <span className="current">{data.bannerTitle}</span>
+            {data.bannerImage ? (
+                <section className="page-banner page-banner-img">
+                    <img src={data.bannerImage} alt={data.bannerTitle} className="page-banner-photo" />
+                    <div className="page-banner-overlay"></div>
+                    <div className="container page-banner-content">
+                        <div className="breadcrumb">
+                            <a href="/">Home</a> <span>»</span> <span className="current">{data.bannerTitle}</span>
+                        </div>
+                        <h1>{data.bannerTitle}</h1>
                     </div>
-                    <h1>{data.bannerTitle}</h1>
-                </div>
-            </section>
+                </section>
+            ) : (
+                <section className="page-banner">
+                    <div className="container">
+                        <div className="breadcrumb">
+                            <a href="/">Home</a> <span>»</span> <span className="current">{data.bannerTitle}</span>
+                        </div>
+                        <h1>{data.bannerTitle}</h1>
+                    </div>
+                </section>
+            )}
 
             <section className="explore-section">
                 <div className="container explore-row">
