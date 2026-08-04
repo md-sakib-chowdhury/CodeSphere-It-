@@ -1,72 +1,29 @@
 .page-banner {
     background-color: #2b2f33;
-    background-image: linear-gradient(135deg, #2b2f33, #3a3f44);
-    padding-top: clamp(125px, 22vw, 175px);
-    padding-bottom: clamp(2rem, 5vw, 4rem);
-    min-height: clamp(260px, 45vw, 468px);
+    background-image: var(--page-banner-image, linear-gradient(135deg, #2b2f33, #3a3f44));
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: clamp(95px, 18vw, 175px);
+    padding-bottom: clamp(1.5rem, 4vw, 4rem);
+    min-height: clamp(280px, 45vw, 468px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-}
-
-/* Mobile default — image pura/uncropped dekhano hoy (natural height) */
-.page-banner-img {
-    position: relative;
-    padding: 0 !important;
-    min-height: 0 !important;
-    display: block;
-}
-
-.page-banner-photo {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Tablet+/desktop — fixed height, cover (halka crop, kintu consistent size) */
-@media (min-width: 768px) {
-    .page-banner-img {
-        height: clamp(280px, 40vw, 460px);
-        overflow: hidden;
-    }
-
-    .page-banner-photo {
-        height: 100%;
-        object-fit: cover;
-    }
-}
-
-.page-banner-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.page-banner-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    padding: clamp(90px, 18vw, 120px) 1rem 1rem;
-    box-sizing: border-box;
 }
 
 .breadcrumb {
     font-size: 0.9rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(255, 255, 255, 0.75);
     margin-bottom: 1rem;
 }
 
 .breadcrumb span.current {
-    color: #111;
+    color: #fff;
     font-weight: 500;
 }
+
 
 .breadcrumb a {
     color: var(--green-400);
@@ -75,7 +32,7 @@
 .page-banner h1 {
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 800;
-    color: #111;
+    color: #fff;
 }
 
 .explore-section {
