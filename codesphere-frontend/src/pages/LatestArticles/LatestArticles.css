@@ -3,6 +3,10 @@
     background-position: center;
     padding-top: 140px;
     padding-bottom: 2.5rem;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
 }
 
@@ -189,7 +193,7 @@
     /* change this to match your site's .container width */
     margin: 3rem auto;
     /* centers it + adds vertical breathing room */
-    
+
 }
 
 .articles-cta .container {
@@ -336,6 +340,7 @@ span.cta-label::before {
     .articles-banner {
         padding-top: 110px;
         padding-bottom: 2rem;
+        min-height: 280px;
     }
 
     .articles-col-side {
