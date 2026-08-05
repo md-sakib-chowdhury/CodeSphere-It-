@@ -929,19 +929,19 @@ export default function ExploreUs() {
                     <img src={data.bannerImage} alt={data.bannerTitle} className="page-banner-photo" />
                     <div className="page-banner-overlay"></div>
                     <div className="container page-banner-content">
+                        <h1>{data.bannerTitle}</h1>
                         <div className="breadcrumb">
                             <a href="/">Home</a> <span>»</span> <span className="current">{data.bannerTitle}</span>
                         </div>
-                        <h1>{data.bannerTitle}</h1>
                     </div>
                 </section>
             ) : (
                 <section className="page-banner">
                     <div className="container">
+                        <h1>{data.bannerTitle}</h1>
                         <div className="breadcrumb">
                             <a href="/">Home</a> <span>»</span> <span className="current">{data.bannerTitle}</span>
                         </div>
-                        <h1>{data.bannerTitle}</h1>
                     </div>
                 </section>
             )}
