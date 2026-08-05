@@ -10,7 +10,9 @@
     text-align: center;
 }
 
-/* Mobile default — image pura/uncropped dekhano hoy (natural height) */
+/* FINAL DESIGN: image pura/uncropped upore dekhano hoy (natural height,
+   shob device-e same), text (breadcrumb+heading) alada solid block-e nichey —
+   tai full-image r perfect-text-visibility duita-i guaranteed, kono conflict nai */
 .page-banner-img {
     position: relative;
     padding: 0 !important;
@@ -22,19 +24,6 @@
     width: 100%;
     height: auto;
     display: block;
-}
-
-/* Tablet+/desktop — fixed height, cover (halka crop, kintu consistent size) */
-@media (min-width: 768px) {
-    .page-banner-img {
-        height: clamp(280px, 40vw, 460px);
-        overflow: hidden;
-    }
-
-    .page-banner-photo {
-        height: 100%;
-        object-fit: cover;
-    }
 }
 
 .page-banner-overlay {
@@ -53,8 +42,16 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    padding: clamp(90px, 18vw, 120px) 1rem 1rem;
+    padding: clamp(90px, 17vw, 130px) 1rem 1rem;
     box-sizing: border-box;
+}
+
+.page-banner-content .breadcrumb {
+    margin-bottom: 0.75rem;
+}
+
+.page-banner-content h1 {
+    font-size: clamp(1.75rem, 6vw, 3rem);
 }
 
 .breadcrumb {
