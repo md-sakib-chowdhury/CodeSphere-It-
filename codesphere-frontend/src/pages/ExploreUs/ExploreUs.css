@@ -26,6 +26,21 @@
     display: block;
 }
 
+/* Boro screen-e (desktop) height cap kora hocche, nahole wide screen-e
+   image onek beshi lomba hoye jai. Mobile-e ei rule apply hoy na — oikhane
+   full/natural image thake. */
+@media (min-width: 1024px) {
+    .page-banner-img {
+        height: 420px;
+        overflow: hidden;
+    }
+
+    .page-banner-photo {
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
 .page-banner-overlay {
     position: absolute;
     inset: 0;
