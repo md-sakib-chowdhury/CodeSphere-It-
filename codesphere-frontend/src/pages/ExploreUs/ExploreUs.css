@@ -22,23 +22,20 @@
 
 .page-banner-photo {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
 }
 
-/* Boro screen-e (desktop) height cap kora hocche, nahole wide screen-e
-   image onek beshi lomba hoye jai. Mobile-e ei rule apply hoy na — oikhane
-   full/natural image thake. */
-@media (min-width: 1024px) {
-    .page-banner-img {
-        height: 420px;
-        overflow: hidden;
-    }
-
-    .page-banner-photo {
-        height: 100%;
-        object-fit: cover;
-    }
+/* Latest Articles-r exact same size — shob device-e consistent.
+   Minimum height (180px) choto rakha hocche jate mobile-e box-er shape
+   desktop-r shape-r kachakachi thake, crop kom noticeable hoy */
+.page-banner-img {
+    position: relative;
+    padding: 0 !important;
+    min-height: 0 !important;
+    height: clamp(180px, 45vw, 460px) !important;
+    overflow: hidden;
 }
 
 .page-banner-overlay {
@@ -62,11 +59,18 @@
 }
 
 .page-banner-content .breadcrumb {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0;
+    margin-top: 0.75rem;
 }
 
 .page-banner-content h1 {
     font-size: clamp(1.75rem, 6vw, 3rem);
+}
+
+@media (max-width: 480px) {
+    .page-banner-content {
+        padding-top: 115px;
+    }
 }
 
 .breadcrumb {
