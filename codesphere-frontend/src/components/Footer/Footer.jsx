@@ -300,16 +300,17 @@
 // }
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FiFacebook, FiInstagram, FiLinkedin, FiTwitter, FiYoutube, FiMapPin, FiMail, FiPhone, FiArrowUp } from 'react-icons/fi';
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { FiMapPin, FiMail, FiPhone, FiArrowUp } from 'react-icons/fi';
 import api from '../../utils/api';
 import './Footer.css';
 
 const SOCIAL_ICONS = {
-    Facebook: FiFacebook,
-    Instagram: FiInstagram,
-    LinkedIn: FiLinkedin,
-    Twitter: FiTwitter,
-    YouTube: FiYoutube,
+    Facebook: FaFacebookF,
+    Instagram: FaInstagram,
+    LinkedIn: FaLinkedinIn,
+    Twitter: FaTwitter,
+    YouTube: FaYoutube,
 };
 
 const DEFAULT_FOOTER = {
