@@ -171,9 +171,14 @@
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1;
     transition: var(--transition);
+}
+
+.footer-socials a svg {
+    fill: #fff;
+    color: #fff;
 }
 
 .footer-socials a:hover {
