@@ -17,10 +17,11 @@
 
 .footer-cta-inner {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 2rem;
+    text-align: center;
+    gap: 1.25rem;
 }
 
 .footer-cta-label {
@@ -66,7 +67,7 @@
 }
 
 .footer-cta-right {
-    text-align: right;
+    text-align: center;
 }
 
 .footer-cta-right p {
@@ -104,7 +105,7 @@
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
     gap: 4rem;
-    padding: 4rem 1.25rem 2.5rem;
+    padding: 4rem clamp(1.25rem, 6vw, 5rem) 2.5rem;
 }
 
 .footer-brand {
@@ -241,8 +242,8 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 0.5rem;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-left: clamp(1.25rem, 6vw, 5rem);
+    padding-right: clamp(1.25rem, 6vw, 5rem);
 }
 
 .footer-bottom-inner p {
@@ -293,15 +294,6 @@
 
     .footer-brand {
         grid-column: span 2;
-    }
-
-    .footer-cta-inner {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .footer-cta-right {
-        text-align: center;
     }
 }
 
