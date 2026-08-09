@@ -94,7 +94,7 @@
 
 .footer {
     background: #0a0e0c;
-    color: var(--gray-400);
+    color: #fff;
     position: relative;
     z-index: 1;
     padding-top: 90px;
@@ -103,8 +103,8 @@
 .footer-top {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    gap: 2.5rem;
-    padding: 4rem 0 2.5rem;
+    gap: 4rem;
+    padding: 4rem 1.25rem 2.5rem;
 }
 
 .footer-brand {
@@ -144,7 +144,7 @@
 .footer-brand p {
     font-size: 0.85rem;
     line-height: 1.75;
-    color: var(--gray-400);
+    color: #fff;
     text-align: justify;
     text-justify: inter-word;
     hyphens: auto;
@@ -191,7 +191,7 @@
 .footer-col {
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
+    gap: 1.1rem;
 }
 
 .footer-col h4 {
@@ -206,7 +206,7 @@
 
 .footer-col a {
     font-size: 0.875rem;
-    color: var(--gray-400);
+    color: #fff;
     transition: var(--transition);
     width: fit-content;
 }
@@ -220,7 +220,7 @@
     align-items: flex-start;
     gap: 0.6rem;
     font-size: 0.875rem;
-    color: var(--gray-400);
+    color: #fff;
     line-height: 1.5;
 }
 
@@ -241,16 +241,18 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 0.5rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
 }
 
 .footer-bottom-inner p {
     font-size: 0.8rem;
-    color: var(--gray-400);
+    color: #fff;
 }
 
 .footer-bottom-links a {
     font-size: 0.8rem;
-    color: var(--gray-400);
+    color: #fff;
 }
 
 .footer-bottom-links a:hover {
@@ -315,16 +317,6 @@
 
     .footer-cta-box {
         padding: 2.5rem 1.5rem;
-    }
-
-    .footer-top {
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-    }
-
-    .footer-bottom-inner {
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
     }
 }
 
