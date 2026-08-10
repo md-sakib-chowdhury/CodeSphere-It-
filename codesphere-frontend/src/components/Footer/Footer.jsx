@@ -744,7 +744,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div style={{ textAlign: 'center', padding: '18px 0', fontSize: '13px', color: 'rgba(255,255,255,0.55)', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                <div style={{ textAlign: 'center', padding: '18px 0', fontSize: '13px', color: 'rgba(255,255,255,0.55)', borderTop: '1px solid rgba(255,255,255,0.9)' }}>
                     © {year} {f.developedByText}{' '}
                     {f.developedByLink ? (
                         <a href={f.developedByLink} target="_blank" rel="noopener noreferrer" style={{ color: '#22c55e', fontWeight: 600, textDecoration: 'none' }}>
