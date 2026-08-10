@@ -17,11 +17,10 @@
 
 .footer-cta-inner {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    text-align: center;
-    gap: 1.25rem;
+    flex-wrap: wrap;
+    gap: 2rem;
 }
 
 .footer-cta-label {
@@ -67,7 +66,7 @@
 }
 
 .footer-cta-right {
-    text-align: center;
+    text-align: right;
 }
 
 .footer-cta-right p {
@@ -294,6 +293,15 @@
 
     .footer-brand {
         grid-column: span 2;
+    }
+
+    .footer-cta-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-cta-right {
+        text-align: center;
     }
 }
 
