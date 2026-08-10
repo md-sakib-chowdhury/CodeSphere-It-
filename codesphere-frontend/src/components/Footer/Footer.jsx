@@ -454,6 +454,163 @@
 //         </>
 //     );
 // }
+// import { useState, useEffect } from 'react';
+// import { Link } from 'react-router-dom';
+// import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaYoutube } from 'react-icons/fa';
+// import { FiMapPin, FiMail, FiPhone, FiArrowUp } from 'react-icons/fi';
+// import api from '../../utils/api';
+// import './Footer.css';
+
+// const SOCIAL_ICONS = {
+//     Facebook: FaFacebookF,
+//     Instagram: FaInstagram,
+//     LinkedIn: FaLinkedinIn,
+//     Twitter: FaTwitter,
+//     YouTube: FaYoutube,
+// };
+
+// const DEFAULT_FOOTER = {
+//     cta: {
+//         label: 'Request Consultation',
+//         title: 'Need Any IT Service or Consultations\nNext Projects',
+//         subtitle: 'We Are Always With Your Business',
+//         btnText: 'Request Consultation',
+//         btnLink: '/contact',
+//     },
+//     logoText: 'Amanah',
+//     logoAccent: 'IT',
+//     description: 'AMANAH IT has adopted the highest standards of software development and consultancy quality, enabling its clients across a wide range of industries to transform into a truly digital, data-driven business.',
+//     socialLinks: [
+//         { platform: 'Facebook', url: '#' },
+//         { platform: 'Instagram', url: '#' },
+//         { platform: 'LinkedIn', url: '#' },
+//         { platform: 'Twitter', url: '#' },
+//         { platform: 'YouTube', url: '#' },
+//     ],
+//     serviceLinks: [
+//         { label: 'Web Development', path: '/services' },
+//         { label: 'E-commerce Solutions', path: '/services' },
+//         { label: 'UI/UX Design', path: '/services' },
+//         { label: 'Digital Marketing', path: '/services' },
+//         { label: 'Mobile App Development', path: '/services' },
+//         { label: 'Cloud & Deployment', path: '/services' },
+//         { label: 'Domain & Hosting', path: '/services' },
+//     ],
+//     quickLinks: [
+//         { label: 'Explore Us', path: '/explore-us' },
+//         { label: 'Portfolio', path: '/#portfolio' },
+//         { label: 'Team', path: '/#team' },
+//         { label: 'Testimonials', path: '/#testimonials' },
+//         { label: 'Latest Articles', path: '/latest-articles' },
+//     ],
+//     address: 'Dhaka, Bangladesh',
+//     email: 'hello@amanahit.com',
+//     phone: '+880 1XXX-XXXXXX',
+//     copyrightText: 'AMANAH IT. All rights reserved.',
+//     developedByText: 'Design & Developed By',
+//     developedByName: 'Amanah.IT',
+//     developedByLink: '',
+// };
+
+// export default function Footer() {
+//     const [f, setF] = useState(DEFAULT_FOOTER);
+//     const year = new Date().getFullYear();
+
+//     useEffect(() => {
+//         api.get('/footer').then(r => setF({ ...DEFAULT_FOOTER, ...r.data })).catch(() => { });
+//     }, []);
+
+//     return (
+//         <>
+//             {/* CTA banner */}
+//             <section className="footer-cta">
+//                 <div className="footer-cta-box">
+//                     <div className="footer-cta-inner">
+//                         <div>
+//                             <span className="section-label footer-cta-label">{f.cta.label}</span>
+//                             <h2>
+//                                 {f.cta.title.split('\n').map((line, i, arr) => (
+//                                     <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+//                                 ))}
+//                             </h2>
+//                         </div>
+//                         <div className="footer-cta-right">
+//                             <p>{f.cta.subtitle}</p>
+//                             <Link to={f.cta.btnLink} className="footer-cta-btn">{f.cta.btnText}</Link>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </section>
+
+//             <footer className="footer">
+//                 <div className="container footer-top">
+//                     <div className="footer-col footer-brand">
+//                         <div className="footer-logo-text">
+//                             <span className="fl-amanah">{f.logoText}</span>
+//                             <span className="fl-dot"></span>
+//                             <span className="fl-it">{f.logoAccent}</span>
+//                         </div>
+//                         <p>{f.description}</p>
+//                         <div className="footer-socials">
+//                             {(f.socialLinks || []).map(({ platform, url }) => {
+//                                 const Icon = SOCIAL_ICONS[platform] || FaFacebookF;
+//                                 return (
+//                                     <a key={platform} href={url} target="_blank" rel="noopener noreferrer" aria-label={platform}>
+//                                         <Icon />
+//                                     </a>
+//                                 );
+//                             })}
+//                         </div>
+//                     </div>
+
+//                     <div className="footer-col">
+//                         <h4>Services</h4>
+//                         {(f.serviceLinks || []).map((link, i) => (
+//                             <Link key={i} to={link.path}>{link.label}</Link>
+//                         ))}
+//                     </div>
+
+//                     <div className="footer-col">
+//                         <h4>Quick Links</h4>
+//                         {(f.quickLinks || []).map((link, i) => (
+//                             link.path.startsWith('/#')
+//                                 ? <a key={i} href={link.path}>{link.label}</a>
+//                                 : <Link key={i} to={link.path}>{link.label}</Link>
+//                         ))}
+//                     </div>
+
+//                     <div className="footer-col">
+//                         <h4>Get In Touch</h4>
+//                         <p className="footer-contact-item"><FiMapPin size={14} /> {f.address}</p>
+//                         <p className="footer-contact-item"><FiMail size={14} /> {f.email}</p>
+//                         <p className="footer-contact-item"><FiPhone size={14} /> {f.phone}</p>
+//                     </div>
+//                 </div>
+
+//                 <div style={{ textAlign: 'center', padding: '18px 0', fontSize: '13px', color: 'rgba(255,255,255,0.55)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+//                     © {year} {f.developedByText}{' '}
+//                     {f.developedByLink ? (
+//                         <a href={f.developedByLink} target="_blank" rel="noopener noreferrer" style={{ color: '#22c55e', fontWeight: 600, textDecoration: 'none' }}>
+//                             {f.developedByName}
+//                         </a>
+//                     ) : (
+//                         <span style={{ color: '#22c55e', fontWeight: 600 }}>{f.developedByName}</span>
+//                     )}
+//                 </div>
+//             </footer>
+
+//             {/* Scroll-to-top: window.scrollTo() use kora hocche, #hero anchor link na —
+//                 tai shob page-e (jekhane #hero element nai) kaj korbe */}
+//             <button
+//                 onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+//                 className="footer-scroll-top"
+//                 aria-label="Scroll to top"
+//             >
+//                 <FiArrowUp size={18} />
+//             </button>
+//         </>
+//     );
+// }
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaYoutube } from 'react-icons/fa';
@@ -587,7 +744,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div style={{ textAlign: 'center', padding: '18px 0', fontSize: '13px', color: 'rgba(255,255,255,0.55)', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+                <div style={{ textAlign: 'center', padding: '18px 0', fontSize: '13px', color: 'rgba(255,255,255,0.55)', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
                     © {year} {f.developedByText}{' '}
                     {f.developedByLink ? (
                         <a href={f.developedByLink} target="_blank" rel="noopener noreferrer" style={{ color: '#22c55e', fontWeight: 600, textDecoration: 'none' }}>
