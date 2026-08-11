@@ -336,6 +336,11 @@
         text-align: center;
         padding-left: 1rem;
         padding-right: 1rem;
+        padding-bottom: 60px;
+    }
+
+    .footer-copyright {
+        padding-bottom: 60px !important;
     }
 
     .footer-cta {
