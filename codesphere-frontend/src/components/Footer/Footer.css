@@ -104,7 +104,9 @@
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
     gap: 4rem;
-    padding: 4rem clamp(1.25rem, 6vw, 5rem) 2.5rem;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 4rem var(--px) 2.5rem;
 }
 
 .footer-brand {
@@ -241,8 +243,10 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 0.5rem;
-    padding-left: clamp(1.25rem, 6vw, 5rem);
-    padding-right: clamp(1.25rem, 6vw, 5rem);
+    max-width: var(--container);
+    margin: 0 auto;
+    padding-left: var(--px);
+    padding-right: var(--px);
 }
 
 .footer-bottom-inner p {
@@ -340,7 +344,10 @@
     }
 
     .footer-copyright {
-        padding-bottom: 60px !important;
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+        padding-right: 70px !important;
+        box-sizing: border-box;
     }
 
     .footer-cta {
@@ -352,7 +359,7 @@
     }
 
     .footer-scroll-top {
-        right: 16px;
+        right: 12px;
         bottom: 16px;
     }
 }
