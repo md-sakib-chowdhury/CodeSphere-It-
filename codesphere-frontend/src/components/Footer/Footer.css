@@ -104,9 +104,30 @@
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
     gap: 4rem;
-    max-width: var(--container);
-    margin: 0 auto;
-    padding: 4rem var(--px) 2.5rem;
+    padding: 4rem 1.25rem 2.5rem;
+}
+
+/* Large device-e footer-content-er edge CTA banner-er shathe exact match korano hocche */
+@media (min-width: 1024px) {
+    .footer-top {
+        padding-left: var(--px);
+        padding-right: var(--px);
+        gap: 6rem;
+        grid-template-columns: 1.3fr 1fr 1fr 1fr;
+    }
+}
+
+/* Shudhu full-width/boro desktop screen-e brand section-take left-e shift kora hocche,
+   jate minimized/medium desktop width-e content banner-er baire na jai */
+@media (min-width: 1280px) {
+    .footer-brand {
+        margin-left: -1.5rem;
+    }
+
+    .footer-brand p,
+    .footer-socials {
+        margin-left: -0.75rem;
+    }
 }
 
 .footer-brand {
@@ -149,7 +170,6 @@
     color: #fff;
     text-align: justify;
     text-justify: inter-word;
-    hyphens: auto;
 }
 
 .footer-socials {
@@ -243,10 +263,15 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 0.5rem;
-    max-width: var(--container);
-    margin: 0 auto;
-    padding-left: var(--px);
-    padding-right: var(--px);
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+    .footer-bottom-inner {
+        padding-left: var(--px);
+        padding-right: var(--px);
+    }
 }
 
 .footer-bottom-inner p {
