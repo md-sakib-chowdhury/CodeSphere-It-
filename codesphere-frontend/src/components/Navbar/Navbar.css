@@ -102,9 +102,9 @@
     transition: transform 0.35s ease;
 }
 
-/* Top-bar hide hole navbar-ke upore pull kora ar dorkar nai — natural spacing-e thakbe */
+/* Top-bar hide hole navbar-ke upore pull kora ar dorkar nai — top-e flush thakbe, kono gap na */
 .top-bar-hidden+.main-nav-container {
-    transform: translateY(10px);
+    transform: translateY(0);
 }
 
 .navbar-floating {
