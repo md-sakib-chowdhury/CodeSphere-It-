@@ -1684,6 +1684,7 @@ export default function Navbar() {
     };
 
     useEffect(() => {
+        // scrollY > 20 hole "scrolled" true — eta e top-bar hide korte use hocche
         const onScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener('scroll', onScroll);
         return () => window.removeEventListener('scroll', onScroll);
@@ -1702,8 +1703,8 @@ export default function Navbar() {
 
     return (
         <div className="header-wrapper">
-            {/* Top Bar */}
-            <div className="top-bar">
+            {/* Top Bar — scroll korle hide hoy, top-e fire gele abar dekha jai */}
+            <div className={`top-bar ${scrolled ? 'top-bar-hidden' : ''}`}>
                 <div className="top-bar-container">
                     <div className="top-bar-left">
                         <a href={`tel:${(nav.phone || '').replace(/\s/g, '')}`} className="top-info-link">
