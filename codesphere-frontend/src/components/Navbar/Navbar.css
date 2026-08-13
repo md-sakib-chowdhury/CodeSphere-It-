@@ -18,6 +18,18 @@
     padding: 14px 0;
     font-size: 13px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    max-height: 200px;
+    transition: max-height 0.35s ease, opacity 0.3s ease, padding-top 0.35s ease, padding-bottom 0.35s ease, border-color 0.35s ease;
+}
+
+/* Scroll kore niche gele ei class add hoy — top-bar collapse/hide hoye jai */
+.top-bar-hidden {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+    border-bottom-color: transparent;
 }
 
 .top-bar-container {
@@ -87,6 +99,7 @@
     padding: 0 20px;
     transform: translateY(-32px);
     position: relative;
+    transition: transform 0.35s ease;
 }
 
 .navbar-floating {
