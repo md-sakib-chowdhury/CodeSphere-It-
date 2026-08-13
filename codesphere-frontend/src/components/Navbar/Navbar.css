@@ -102,6 +102,11 @@
     transition: transform 0.35s ease;
 }
 
+/* Top-bar hide hole navbar-ke upore pull kora ar dorkar nai — natural spacing-e thakbe */
+.top-bar-hidden+.main-nav-container {
+    transform: translateY(10px);
+}
+
 .navbar-floating {
     background: #ffffff;
     display: flex;
