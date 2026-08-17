@@ -1072,7 +1072,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="footer-copyright" style={{ textAlign: 'center', padding: '18px 0', fontSize: '13px', color: 'rgba(255,255,255,0.55)', borderTop: '1px solid rgba(255,255,255,0.9)' }}>
+                <div className="footer-copyright" style={{ textAlign: 'center', padding: '18px 0', fontSize: '13px', color: '#fff', borderTop: '1px solid rgba(255,255,255,0.9)' }}>
                     © {year} {f.developedByText}{' '}
                     {f.developedByLink ? (
                         <a href={f.developedByLink} target="_blank" rel="noopener noreferrer" style={{ fontWeight: 600, textDecoration: 'none' }}>
