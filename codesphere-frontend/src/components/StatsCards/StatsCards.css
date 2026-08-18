@@ -127,9 +127,12 @@
     position: relative;
     z-index: 1;
     width: 100%;
+    max-width: 26ch;
+    margin-left: auto;
+    margin-right: auto;
 
-    text-align: justify;
-    text-justify: inter-word;
+    text-align: center;
+    text-wrap: balance;
 
     flex-grow: 1;
     display: flex;
