@@ -1,19 +1,19 @@
 .stats-cards {
     background: #070b0d;
-    padding: 80px 0;
+    padding: clamp(48px, 8vw, 80px) 0;
 }
 
 .stats-cards-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+    gap: clamp(1rem, 2.5vw, 1.5rem);
     align-items: stretch;
 }
 
 .stat-card-box {
     position: relative;
     border-radius: 18px;
-    padding: 2.2rem 1.75rem;
+    padding: clamp(1.5rem, 3vw, 2.2rem) clamp(1.1rem, 2.5vw, 1.75rem);
     overflow: hidden;
     isolation: isolate;
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -85,30 +85,33 @@
     transition: opacity 0.35s ease;
 }
 
-.stat-card-box:hover {
+.stat-card-box:hover,
+.stat-card-box:focus-within {
     transform: translateY(-8px);
     border-color: rgba(74, 222, 128, 0.5);
     box-shadow: 0 24px 50px -18px rgba(34, 197, 94, 0.35);
 }
 
-.stat-card-box:hover .stat-card-glow {
-    opacity: 1.4;
+.stat-card-box:hover .stat-card-glow,
+.stat-card-box:focus-within .stat-card-glow {
+    opacity: 1;
 }
 
 .stat-card-value {
-    font-size: 2.4rem;
+    font-size: clamp(1.7rem, 1.15rem + 2vw, 2.4rem);
     font-weight: 800;
     background: linear-gradient(90deg, #60a5fa, #4ade80);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     line-height: 1.1;
+    letter-spacing: -0.01em;
     position: relative;
     z-index: 1;
 }
 
 .stat-card-label {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 0.82rem + 0.3vw, 1rem);
     font-weight: 700;
     color: #f4f7f5;
     margin-top: 0.4rem;
@@ -117,7 +120,7 @@
 }
 
 .stat-card-desc {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 0.76rem + 0.15vw, 0.85rem);
     color: #9aa8a2;
     line-height: 1.55;
     margin: 0.6rem 0 0;
@@ -130,12 +133,21 @@
     justify-content: center;
 }
 
+/* ---------- Large desktop refinement ---------- */
+@media (min-width: 1440px) {
+    .stats-cards-grid {
+        gap: 1.75rem;
+    }
+}
+
+/* ---------- Tablet / small laptop ---------- */
 @media (max-width: 1023px) {
     .stats-cards-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
+/* ---------- Large phones / small tablets ---------- */
 @media (max-width: 639px) {
     .stats-cards {
         padding: 56px 0;
@@ -149,4 +161,55 @@
     .stat-card-box {
         padding: 1.8rem 1.4rem;
     }
+}
+
+/* ---------- Very small phones ---------- */
+@media (max-width: 380px) {
+    .stat-card-box {
+        padding: 1.5rem 1.1rem;
+        border-radius: 14px;
+    }
+
+    .stat-card-glow {
+        width: 110px;
+        height: 110px;
+        top: -40px;
+        right: -40px;
+    }
+}
+
+/* ---------- Touch devices: skip hover-lift, keep tap feedback ---------- */
+@media (hover: none) {
+    .stat-card-box:hover {
+        transform: none;
+    }
+
+    .stat-card-box:active {
+        transform: scale(0.98);
+        border-color: rgba(74, 222, 128, 0.5);
+    }
+}
+
+/* ---------- Accessibility: respect reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+
+    .stat-card-box,
+    .stat-card-glow {
+        transition: none;
+    }
+
+    .stat-card-box::before {
+        animation: none;
+        opacity: 0.16;
+    }
+
+    .stat-card-box:hover {
+        transform: none;
+    }
+}
+
+/* ---------- Keyboard focus visibility ---------- */
+.stat-card-box:focus-visible {
+    outline: 2px solid #4ade80;
+    outline-offset: 3px;
 }
