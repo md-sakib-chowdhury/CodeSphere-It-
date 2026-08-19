@@ -1,26 +1,47 @@
 .latest-activities {
     position: relative;
     background: #fff;
-    padding: clamp(2rem, 4vw, 3rem) 0 clamp(1.5rem, 3vw, 2.25rem);
+    padding: clamp(0.5rem, 1vw, 0.75rem) 0 0;
 }
 
-/* green band — fixed height, ends right at the image bottom (the red-mark line),
-   independent of the cards' actual layout height */
-.latest-activities::before {
+/* header band — sized to its own exact natural height, no guessing */
+.la-header {
+    position: relative;
+    z-index: 1;
+}
+
+.la-header::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: clamp(344px, 43vw, 450px);
-    background: linear-gradient(135deg, #16a34a, #84cc16);
-    z-index: 0;
+    top: calc(-1 * clamp(0.5rem, 1vw, 0.75rem));
+    bottom: -3rem;
+    /* reaches down through the header's own margin-bottom, to where the grid starts */
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #22c55e, #a3e635);
+    z-index: -1;
 }
 
-.la-header,
+/* image band — height computed to match the image row exactly (column width × aspect
+   ratio), for each breakpoint's column count/gap/aspect, so it ends right at the
+   image's own bottom edge, not a guess */
 .la-grid {
     position: relative;
     z-index: 1;
+}
+
+.la-grid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    /* mobile default: 1 column, aspect 16/10 */
+    height: calc(62.5vw + 5px);
+    background: linear-gradient(135deg, #22c55e, #a3e635);
+    z-index: -1;
 }
 
 .latest-activities .container {
@@ -103,9 +124,6 @@
     transform: translateY(-2px);
 }
 
-/* ==========================================================================
-   🟩 OVERLAP EFFECT — image pokes past the green band, text sits on white
-   ========================================================================== */
 .la-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -114,17 +132,18 @@
 
 .la-card {
     background: #fff;
-    border-radius: var(--radius-lg);
+    border-radius: 0;
     overflow: hidden;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     color: inherit;
     transition: var(--transition);
-    box-shadow: 0 20px 45px -18px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
 .la-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-xl);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.16);
 }
 
 .la-card-img {
@@ -137,6 +156,12 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.la-card:hover .la-card-img img {
+    transform: scale(1.04) rotate(2deg);
 }
 
 .la-tag {
@@ -153,7 +178,10 @@
 
 .la-card-body {
     padding: 1.5rem;
-    background: #fff;
+    background: #f4f6f5;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .la-card-body h3 {
@@ -182,21 +210,47 @@
     font-size: 0.78rem;
     color: var(--green-600);
     font-weight: 600;
+    margin-top: auto;
+}
+
+/* ---- bigger cards on large screens ---- */
+@media (min-width: 1024px) {
+    .la-card-img {
+        aspect-ratio: 4 / 3;
+    }
+
+    .la-card-body {
+        padding: 2rem;
+    }
+
+    .la-card-body h3 {
+        font-size: 1.15rem;
+    }
+
+    .la-card-body p {
+        font-size: 0.9rem;
+    }
+
+    .la-grid::before {
+        /* 3 columns, 4:3 image aspect — matches exactly at any width up to the 1200px container cap */
+        height: clamp(256px, calc(25vw), 300px);
+    }
 }
 
 @media (max-width: 1023px) {
     .la-grid {
         grid-template-columns: 1fr 1fr;
     }
+
+    .la-grid::before {
+        /* 2 columns, 16:10 image aspect */
+        height: clamp(244px, calc(31.25vw), 324px);
+    }
 }
 
 @media (max-width: 767px) {
     .latest-activities {
-        padding: 2rem 0 1.5rem;
-    }
-
-    .latest-activities::before {
-        height: clamp(280px, 60vw, 340px);
+        padding: 2rem 0 1rem;
     }
 
     .la-grid {
@@ -210,11 +264,17 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .la-card {
+
+    .la-card,
+    .la-card-img img {
         transition: none;
     }
 
     .la-card:hover {
+        transform: none;
+    }
+
+    .la-card:hover .la-card-img img {
         transform: none;
     }
 }
