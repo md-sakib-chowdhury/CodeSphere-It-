@@ -232,8 +232,8 @@
     }
 
     .la-grid::before {
-        /* 3 columns, 4:3 image aspect — matches exactly at any width up to the 1200px container cap */
-        height: clamp(256px, calc(25vw), 300px);
+        /* 3 columns, 4:3 image aspect — scales further before capping, for wider laptop/desktop windows */
+        height: clamp(256px, calc(25vw), 420px);
     }
 }
 
@@ -244,7 +244,7 @@
 
     .la-grid::before {
         /* 2 columns, 16:10 image aspect */
-        height: clamp(244px, calc(31.25vw), 324px);
+        height: clamp(244px, calc(31.25vw), 400px);
     }
 }
 
