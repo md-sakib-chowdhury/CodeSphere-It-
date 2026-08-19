@@ -1,6 +1,8 @@
 .latest-activities {
+    position: relative;
     background: linear-gradient(135deg, #16a34a, #84cc16);
-    padding: 3rem 0 1.5rem;
+    padding: clamp(2rem, 4vw, 3rem) 0 clamp(1.25rem, 3vw, 2rem);
+    /* small bottom padding — shorter green band, only a small peek-through overlap */
 }
 
 .latest-activities .container {
@@ -83,10 +85,20 @@
     transform: translateY(-2px);
 }
 
+/* ==========================================================================
+   🟩 OVERLAP EFFECT — image pokes past the green band, text sits on white
+   ========================================================================== */
 .la-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.75rem;
+    position: relative;
+    z-index: 2;
+
+    /* small peek-through overlap: image edge crosses the green band's
+       bottom edge, but not so far that the card body reaches the next section */
+    transform: translateY(clamp(28px, 4vw, 48px));
+    margin-bottom: calc(-1 * clamp(28px, 4vw, 48px));
 }
 
 .la-card {
@@ -96,6 +108,7 @@
     display: block;
     color: inherit;
     transition: var(--transition);
+    box-shadow: 0 20px 45px -18px rgba(0, 0, 0, 0.4);
 }
 
 .la-card:hover {
@@ -129,6 +142,7 @@
 
 .la-card-body {
     padding: 1.5rem;
+    background: #fff;
 }
 
 .la-card-body h3 {
@@ -159,6 +173,12 @@
     font-weight: 600;
 }
 
+/* small safety buffer so the peeking card edge never touches
+   whatever section comes right after this one */
+.latest-activities+* {
+    margin-top: clamp(20px, 3vw, 32px);
+}
+
 @media (max-width: 1023px) {
     .la-grid {
         grid-template-columns: 1fr 1fr;
@@ -167,15 +187,31 @@
 
 @media (max-width: 767px) {
     .latest-activities {
-        padding: 2rem 0 1rem;
+        padding: 2rem 0 0;
     }
 
     .la-grid {
         grid-template-columns: 1fr;
+        transform: translateY(24px);
+        margin-bottom: -24px;
     }
 
     .la-header {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .latest-activities+* {
+        margin-top: 24px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .la-card {
+        transition: none;
+    }
+
+    .la-card:hover {
+        transform: none;
     }
 }
