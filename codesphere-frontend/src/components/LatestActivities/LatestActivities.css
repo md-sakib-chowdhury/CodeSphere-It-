@@ -23,12 +23,14 @@
     z-index: -1;
 }
 
-/* image band — height computed to match the image row exactly (column width × aspect
-   ratio), for each breakpoint's column count/gap/aspect, so it ends right at the
-   image's own bottom edge, not a guess */
+/* image band — height computed to match the image row exactly, using container
+   query units (cqw) tied to .la-grid's OWN actual rendered width. This is not a
+   viewport guess: it's mathematically exact regardless of container max-width,
+   page layout, or browser window size (normal or minimized). */
 .la-grid {
     position: relative;
     z-index: 1;
+    container-type: inline-size;
 }
 
 .la-grid::before {
@@ -38,8 +40,8 @@
     left: 50%;
     width: 100vw;
     transform: translateX(-50%);
-    /* mobile default: 1 column, aspect 16/10 */
-    height: calc(62.5vw + 5px);
+    /* mobile default: 1 column, 0 gaps, aspect 16/10 → height = column-width × 10/16 */
+    height: calc(62.5cqw);
     background: linear-gradient(135deg, #22c55e, #a3e635);
     z-index: -1;
 }
@@ -232,8 +234,9 @@
     }
 
     .la-grid::before {
-        /* 3 columns, 4:3 image aspect — scales further before capping, for wider laptop/desktop windows */
-        height: clamp(256px, calc(25vw), 420px);
+        /* 3 columns, 2 gaps of 1.75rem, aspect 4:3 →
+           height = ((100cqw - 2×1.75rem) / 3) × (3/4) = (100cqw - 3.5rem) × 0.25 */
+        height: calc((100cqw - 3.5rem) * 0.25);
     }
 }
 
@@ -243,8 +246,9 @@
     }
 
     .la-grid::before {
-        /* 2 columns, 16:10 image aspect */
-        height: clamp(244px, calc(31.25vw), 400px);
+        /* 2 columns, 1 gap of 1.75rem, aspect 16:10 →
+           height = ((100cqw - 1.75rem) / 2) × (10/16) = (100cqw - 1.75rem) × 0.3125 */
+        height: calc((100cqw - 1.75rem) * 0.3125);
     }
 }
 
