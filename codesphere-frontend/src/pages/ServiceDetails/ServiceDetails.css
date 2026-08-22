@@ -227,8 +227,9 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    background: #ffffff;
+    background: #eef3fe;
     border: 1px solid var(--svcd-border);
+    border-left: 3px solid var(--svcd-point-accent, #2563eb);
     border-radius: 10px;
     padding: 14px 16px;
     box-shadow: 0 4px 14px rgba(15, 21, 18, 0.04);
@@ -242,6 +243,42 @@
     border-color: var(--svcd-border-hover);
     box-shadow: 0 10px 22px rgba(15, 21, 18, 0.08);
     transform: translateY(-2px);
+}
+
+.svcd-points li:nth-child(4n+1) {
+    background: #eef3fe;
+    --svcd-point-accent: #2563eb;
+}
+
+.svcd-points li:nth-child(4n+2) {
+    background: #eaf8ee;
+    --svcd-point-accent: #16a34a;
+}
+
+.svcd-points li:nth-child(4n+3) {
+    background: #f2eefd;
+    --svcd-point-accent: #7c3aed;
+}
+
+.svcd-points li:nth-child(4n+4) {
+    background: #fdefe6;
+    --svcd-point-accent: #ea580c;
+}
+
+.svcd-points li:nth-child(4n+1) .svcd-point-icon {
+    background: #2563eb;
+}
+
+.svcd-points li:nth-child(4n+2) .svcd-point-icon {
+    background: #16a34a;
+}
+
+.svcd-points li:nth-child(4n+3) .svcd-point-icon {
+    background: #7c3aed;
+}
+
+.svcd-points li:nth-child(4n+4) .svcd-point-icon {
+    background: #ea580c;
 }
 
 .svcd-point-icon {
@@ -299,9 +336,18 @@
     top: 100px;
 }
 
-.svcd-sidebar-card,
+.svcd-sidebar-card {
+    background: linear-gradient(165deg, #ffffff 0%, #eef3fe 100%);
+    border: 1px solid var(--svcd-border);
+    border-radius: 14px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(15, 21, 18, 0.05);
+}
+
 .svcd-sidebar-cta {
-    background: #ffffff;
+    background: linear-gradient(165deg, #ffffff 0%, #eaf8ee 100%);
     border: 1px solid var(--svcd-border);
     border-radius: 14px;
     padding: 24px;
@@ -415,25 +461,17 @@
 .svcd-process {
     position: relative;
     padding: clamp(48px, 7vw, 72px) 0;
-    background: linear-gradient(135deg, #16a34a, #84cc16);
+    background-color: #f1f7f3;
     background-image:
-        radial-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px),
-        linear-gradient(135deg, #16a34a, #84cc16);
-    background-size: 22px 22px, 100% 100%;
+        linear-gradient(rgba(15, 21, 18, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 21, 18, 0.05) 1px, transparent 1px),
+        radial-gradient(circle at 10% 15%, rgba(226, 232, 240, 0.9), transparent 45%),
+        radial-gradient(circle at 15% 90%, rgba(74, 222, 128, 0.45), transparent 55%),
+        radial-gradient(circle at 55% 100%, rgba(34, 197, 94, 0.4), transparent 55%),
+        radial-gradient(circle at 92% 85%, rgba(56, 189, 248, 0.55), transparent 55%);
+    background-size: 64px 64px, 64px 64px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
     margin-top: clamp(32px, 5vw, 48px);
     overflow: hidden;
-}
-
-.svcd-process::before {
-    content: '';
-    position: absolute;
-    top: -80px;
-    right: -80px;
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 70%);
-    pointer-events: none;
 }
 
 .svcd-process .container {
@@ -442,20 +480,36 @@
 
 .svcd-process-title {
     text-align: left;
-    color: #fff;
-    background: rgba(255, 255, 255, 0.16);
-    border-color: rgba(255, 255, 255, 0.35);
+    color: #000000;
+    background: #ffffff;
+    border-color: var(--svcd-border);
     margin-bottom: clamp(28px, 4vw, 40px);
 }
 
+@keyframes svcd-pulse-dot {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.55;
+    }
+}
+
 .svcd-process-title::before {
-    background: #fff;
+    background: #ffffff;
+    box-shadow: 0 0 0 1.5px rgba(15, 21, 18, 0.25);
+    animation: svcd-pulse-dot 1.6s ease-in-out infinite;
 }
 
 /* optional — only takes effect if a <p className="svcd-process-subtitle"> is
    added under the heading in JSX; harmless if unused */
 .svcd-process-subtitle {
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--svcd-text-muted);
     font-size: 0.95rem;
     margin: -20px 0 clamp(28px, 4vw, 40px);
     max-width: 460px;
@@ -465,17 +519,22 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: clamp(14px, 2vw, 20px);
+    position: relative;
 }
 
+/* Solid 4-color cards — matched to the same palette used for the
+   points grid above (blue / green / purple / orange), no
+   translucency or blur anywhere in the card. */
 .svcd-process-card {
     background: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 14px;
+    border: 1px solid var(--svcd-border);
+    border-radius: 18px;
     padding: clamp(22px, 3vw, 28px) clamp(18px, 2.5vw, 22px);
     position: relative;
+    z-index: 1;
     overflow: hidden;
-    box-shadow: 0 14px 32px rgba(6, 20, 10, 0.18);
-    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 8px 20px rgba(15, 21, 18, 0.06);
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
 .svcd-process-card::before {
@@ -490,22 +549,22 @@
 
 .svcd-process-grid .svcd-process-card:nth-child(4n+1) {
     --svcd-accent: #2563eb;
-    background: linear-gradient(165deg, #ffffff 0%, #eef3fe 100%);
+    background: #eef3fe;
 }
 
 .svcd-process-grid .svcd-process-card:nth-child(4n+2) {
     --svcd-accent: #16a34a;
-    background: linear-gradient(165deg, #ffffff 0%, #eaf8ee 100%);
+    background: #eaf8ee;
 }
 
 .svcd-process-grid .svcd-process-card:nth-child(4n+3) {
     --svcd-accent: #7c3aed;
-    background: linear-gradient(165deg, #ffffff 0%, #f2eefd 100%);
+    background: #f2eefd;
 }
 
 .svcd-process-grid .svcd-process-card:nth-child(4n+4) {
     --svcd-accent: #ea580c;
-    background: linear-gradient(165deg, #ffffff 0%, #fdefe6 100%);
+    background: #fdefe6;
 }
 
 .svcd-process-card:hover {
@@ -514,6 +573,8 @@
     transform: translateY(-4px);
 }
 
+/* Step badge — solid accent color (like the points icon circles),
+   not the previous 12%-tint "glass" look. */
 .svcd-process-step {
     display: inline-flex;
     align-items: center;
@@ -521,9 +582,9 @@
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background: #f4f6f5;
-    background: color-mix(in srgb, var(--svcd-accent, var(--svcd-green-light)) 12%, #ffffff);
-    color: var(--svcd-accent, var(--svcd-green-light));
+    background: var(--svcd-accent, var(--svcd-green-light));
+    border: none;
+    color: #fff;
     font-size: 1rem;
     font-weight: 800;
     margin-bottom: 18px;
@@ -531,17 +592,23 @@
 }
 
 .svcd-process-card h4 {
-    margin: 0 0 8px;
-    font-size: 1.05rem;
-    font-weight: 700;
+    margin: 0 0 10px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
     color: var(--svcd-text);
 }
 
 .svcd-process-card p {
     margin: 0;
     color: var(--svcd-text-muted);
-    font-size: 0.9rem;
-    line-height: 1.65;
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1.7;
+    letter-spacing: 0.005em;
+    min-height: calc(1.7em * 3);
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 /* ---------------- Bottom CTA ---------------- */
