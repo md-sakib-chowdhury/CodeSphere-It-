@@ -501,8 +501,8 @@
 }
 
 .svcd-process-title::before {
-    background: #ffffff;
-    box-shadow: 0 0 0 1.5px rgba(15, 21, 18, 0.25);
+    background: #000000;
+    box-shadow: none;
     animation: svcd-pulse-dot 1.6s ease-in-out infinite;
 }
 
