@@ -834,6 +834,303 @@
 //         </>
 //     );
 // }
+// import { useState, useEffect } from 'react';
+// import { useParams, Link } from 'react-router-dom';
+// import {
+//     FiCode, FiShoppingCart, FiLayout, FiServer, FiCloud, FiSmartphone,
+//     FiArrowRight, FiCheckCircle,
+// } from 'react-icons/fi';
+// import api from '../../utils/api';
+// import Navbar from '../../components/Navbar/Navbar';
+// import Footer from '../../components/Footer/Footer';
+// import './ServiceDetails.css';
+
+// const ICONS = { FiCode, FiShoppingCart, FiLayout, FiServer, FiCloud, FiSmartphone };
+
+// // Fallback services — same shape as backend, keyed by slug.
+// const FALLBACK_SERVICES = [
+//     {
+//         _id: '1', slug: 'web-application-development', icon: 'FiCode',
+//         title: 'Web Application Development',
+//         image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&q=80',
+//         description: 'Custom, full-stack web apps built on the MERN stack.',
+//         body: 'We design and build web applications from the ground up using React, Node.js, Express, and MongoDB. Every project starts with the actual workflow your business runs on — not a generic template — so the final product fits how your team already works.',
+//         features: [
+//             'React front-ends with fast, accessible interfaces',
+//             'Node.js & Express APIs built for scale',
+//             'MongoDB data modeling for real business logic',
+//             'Authentication, roles, and access control',
+//         ],
+//         stack: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Vercel'],
+//     },
+//     {
+//         _id: '2', slug: 'ecommerce-solutions', icon: 'FiShoppingCart',
+//         title: 'E-commerce Solutions',
+//         image: 'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=1600&q=80',
+//         description: 'Storefronts that are built to convert and easy to manage.',
+//         body: 'From product catalog to checkout, we build online stores that are fast on mobile and simple to manage from the back end. Payment gateways, inventory tracking, and order management are built in from day one, not bolted on later.',
+//         features: [
+//             'Custom checkout, cart & payment gateway integration',
+//             'Inventory and order management dashboards',
+//             'Fast, mobile-first shopping experience',
+//             'Discounts, coupons, and order status tracking',
+//         ],
+//         stack: ['React', 'Node.js', 'MongoDB', 'Stripe', 'SSLCommerz'],
+//     },
+//     {
+//         _id: '3', slug: 'ui-ux-design', icon: 'FiLayout',
+//         title: 'UI/UX Design',
+//         image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1600&q=80',
+//         description: 'Interfaces designed around how people actually use them.',
+//         body: 'Good interfaces get out of the way. We start with wireframes and prototypes to validate the flow before writing any code, then build a design system so every new screen stays consistent with the last.',
+//         features: [
+//             'Wireframes and prototypes before a line of code',
+//             'Design systems that keep products consistent',
+//             'Usability-first, not decoration-first',
+//             'Mobile-first responsive layouts',
+//         ],
+//         stack: ['Figma', 'React', 'CSS Grid', 'Design Tokens'],
+//     },
+//     {
+//         _id: '4', slug: 'custom-software-saas', icon: 'FiServer',
+//         title: 'Custom Software & SaaS',
+//         image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=80',
+//         description: 'Internal tools and multi-tenant platforms built from scratch.',
+//         body: "Whether it's an internal tool for your team or a multi-tenant SaaS product for customers, we build with an API-first approach so the platform can grow without a rewrite. Role-based access and billing are handled from the start.",
+//         features: [
+//             'Admin panels, dashboards, and internal tools',
+//             'Role-based access and subscription billing',
+//             'API-first architecture for future integrations',
+//             'Multi-tenant data isolation',
+//         ],
+//         stack: ['React', 'Node.js', 'Express', 'MongoDB', 'Stripe'],
+//     },
+//     {
+//         _id: '5', slug: 'deployment-cloud-hosting', icon: 'FiCloud',
+//         title: 'Deployment & Cloud Hosting',
+//         image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1600&q=80',
+//         description: 'From local build to production, handled end-to-end.',
+//         body: 'We handle the full path from a working build on your machine to a live, monitored production environment — CI/CD pipelines, environment variables, secrets, and uptime checks all set up before we hand over the keys.',
+//         features: [
+//             'CI/CD pipelines with Vercel, Render & MongoDB Atlas',
+//             'Environment configuration & secrets management',
+//             'Monitoring and uptime support after launch',
+//             'Custom domain & SSL setup',
+//         ],
+//         stack: ['Vercel', 'Render', 'MongoDB Atlas', 'GitHub Actions'],
+//     },
+//     {
+//         _id: '6', slug: 'maintenance-support', icon: 'FiSmartphone',
+//         title: 'Maintenance & Support',
+//         image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&q=80',
+//         description: 'Software that keeps working after we ship it.',
+//         body: "Launch day isn't the finish line. We stay on for bug fixes, security patches, and new features as your business needs change — and you talk directly to the people who built it, not a support queue.",
+//         features: [
+//             'Bug fixes and security patches',
+//             'Feature additions as your business grows',
+//             'Direct communication, no ticket queues',
+//             'Regular dependency and security updates',
+//         ],
+//         stack: ['Git', 'GitHub', 'Node.js', 'MongoDB'],
+//     },
+// ];
+
+// const DEFAULT_PROCESS = {
+//     heading: 'How We Work',
+//     steps: [
+//         { step: '01', title: 'Discovery', text: 'We map out your workflow, users, and constraints before any design or code.' },
+//         { step: '02', title: 'Design & Build', text: 'Wireframes, then a working build in short, reviewable milestones.' },
+//         { step: '03', title: 'Test & Launch', text: 'QA across devices, then deployment to production with monitoring in place.' },
+//         { step: '04', title: 'Support', text: 'We stay reachable after launch for fixes and new features.' },
+//     ],
+// };
+
+// const DEFAULT_SIDEBAR_CTA = {
+//     heading: 'Need this for your business?',
+//     text: "Tell us what you're building and we'll get back within a day.",
+//     buttonText: 'Request a Quote',
+//     buttonLink: '/contact',
+// };
+
+// const DEFAULT_BOTTOM_CTA = {
+//     eyebrow: 'Get Started',
+//     headingPrefix: 'Ready to Build ',
+//     buttonText: 'Start a Project',
+//     buttonLink: '/contact',
+// };
+
+// export default function ServiceDetails() {
+//     const { slug } = useParams();
+//     const [services, setServices] = useState(FALLBACK_SERVICES);
+//     const [process, setProcess] = useState(DEFAULT_PROCESS);
+//     const [sidebarCta, setSidebarCta] = useState(DEFAULT_SIDEBAR_CTA);
+//     const [bottomCta, setBottomCta] = useState(DEFAULT_BOTTOM_CTA);
+
+//     useEffect(() => {
+//         api.get('/services')
+//             .then(r => { if (r.data?.length) setServices(r.data); })
+//             .catch(() => { /* keep fallback content */ });
+
+//         api.get('/home-sections')
+//             .then(r => {
+//                 const d = r.data || {};
+//                 if (d.serviceDetailProcess) setProcess({ ...DEFAULT_PROCESS, ...d.serviceDetailProcess });
+//                 if (d.serviceDetailSidebarCta) setSidebarCta({ ...DEFAULT_SIDEBAR_CTA, ...d.serviceDetailSidebarCta });
+//                 if (d.serviceDetailBottomCta) setBottomCta({ ...DEFAULT_BOTTOM_CTA, ...d.serviceDetailBottomCta });
+//             })
+//             .catch(() => { /* keep defaults */ });
+//     }, []);
+
+//     const service = services.find(s => s.slug === slug);
+
+//     if (!service) {
+//         return (
+//             <>
+//                 <Navbar />
+//                 <div className="svcd-page">
+//                     <section className="svcd-hero svcd-hero--notfound">
+//                         <div className="container svcd-hero-content">
+//                             <div className="svcd-breadcrumb">
+//                                 <Link to="/">Home</Link>
+//                                 <span className="svcd-crumb-sep">»</span>
+//                                 <Link to="/services">Services</Link>
+//                             </div>
+//                             <h1 className="svcd-hero-title">Service Not Found</h1>
+//                             <p className="svcd-hero-sub">
+//                                 We couldn't find that service. Have a look at everything we offer instead.
+//                             </p>
+//                             <Link to="/services" className="svcd-back-btn">Back to Services</Link>
+//                         </div>
+//                     </section>
+//                 </div>
+//                 <Footer />
+//             </>
+//         );
+//     }
+
+//     const Icon = ICONS[service.icon] || FiCode;
+//     const otherServices = services.filter(s => s.slug !== slug);
+
+//     return (
+//         <>
+//             <Navbar />
+//             <div className="svcd-page">
+
+//                 {/* ---------- Hero banner ---------- */}
+//                 <section className="svcd-hero">
+//                     <div
+//                         className="svcd-hero-bg"
+//                         style={{ backgroundImage: `url(${service.image})` }}
+//                     />
+//                     <div className="svcd-hero-overlay" />
+//                     <div className="container svcd-hero-content">
+//                         <div className="svcd-breadcrumb">
+//                             <Link to="/">Home</Link>
+//                             <span className="svcd-crumb-sep">»</span>
+//                             <Link to="/services">Services</Link>
+//                             <span className="svcd-crumb-sep">»</span>
+//                             <span className="svcd-crumb-current">{service.title}</span>
+//                         </div>
+//                         <h1 className="svcd-hero-title">{service.title}</h1>
+//                         <p className="svcd-hero-sub">{service.description}</p>
+//                     </div>
+//                 </section>
+
+//                 {/* ---------- Content ---------- */}
+//                 <section className="svcd-content">
+//                     <div className="container svcd-content-grid">
+
+//                         <div className="svcd-main">
+//                             <span className="svcd-icon-badge"><Icon size={24} /></span>
+//                             <h2 className="svcd-section-title">Overview</h2>
+//                             <p className="svcd-body">{service.body}</p>
+
+//                             {Array.isArray(service.features) && service.features.length > 0 && (
+//                                 <div className="svcd-points-block">
+//                                     <h3>What's Included</h3>
+//                                     <ul className="svcd-points">
+//                                         {service.features.map((f, idx) => (
+//                                             <li key={idx}>
+//                                                 <FiCheckCircle size={16} className="svcd-point-icon" />
+//                                                 <span>{f}</span>
+//                                             </li>
+//                                         ))}
+//                                     </ul>
+//                                 </div>
+//                             )}
+
+//                             {Array.isArray(service.stack) && service.stack.length > 0 && (
+//                                 <div className="svcd-stack-block">
+//                                     <h3>Built With</h3>
+//                                     <div className="svcd-stack-tags">
+//                                         {service.stack.map(t => (
+//                                             <span key={t} className="svcd-stack-tag">{t}</span>
+//                                         ))}
+//                                     </div>
+//                                 </div>
+//                             )}
+//                         </div>
+
+//                         <aside className="svcd-sidebar">
+//                             <div className="svcd-sidebar-card">
+//                                 <h4>Other Services</h4>
+//                                 <ul className="svcd-sidebar-list">
+//                                     {otherServices.map(s => (
+//                                         <li key={s._id || s.slug}>
+//                                             <Link to={`/services/${s.slug}`}>
+//                                                 {s.title}
+//                                             </Link>
+//                                         </li>
+//                                     ))}
+//                                 </ul>
+//                             </div>
+
+//                             <div className="svcd-sidebar-cta">
+//                                 <h4>{sidebarCta.heading}</h4>
+//                                 <p>{sidebarCta.text}</p>
+//                                 <Link to={sidebarCta.buttonLink || '/contact'} className="svcd-sidebar-btn">
+//                                     {sidebarCta.buttonText} <FiArrowRight />
+//                                 </Link>
+//                             </div>
+//                         </aside>
+
+//                     </div>
+//                 </section>
+
+//                 {/* ---------- Process ---------- */}
+//                 <section className="svcd-process">
+//                     <div className="container">
+//                         <h2 className="svcd-section-title svcd-process-title">{process.heading}</h2>
+//                         <div className="svcd-process-grid">
+//                             {(process.steps || []).map(p => (
+//                                 <div key={p.step} className="svcd-process-card">
+//                                     <span className="svcd-process-step">{p.step}</span>
+//                                     <h4>{p.title}</h4>
+//                                     <p>{p.text}</p>
+//                                 </div>
+//                             ))}
+//                         </div>
+//                     </div>
+//                 </section>
+
+//                 {/* ---------- Bottom CTA ---------- */}
+//                 <section className="svcd-bottom-cta">
+//                     <div className="container svcd-bottom-cta-inner">
+//                         <div>
+//                             <span className="svcd-bottom-eyebrow">{bottomCta.eyebrow}</span>
+//                             <h2>{bottomCta.headingPrefix}{service.title}?</h2>
+//                         </div>
+//                         <Link to={bottomCta.buttonLink || '/contact'} className="svcd-bottom-cta-btn">
+//                             {bottomCta.buttonText} <FiArrowRight />
+//                         </Link>
+//                     </div>
+//                 </section>
+
+//             </div>
+//             <Footer />
+//         </>
+//     );
+// }
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
@@ -945,6 +1242,23 @@ const DEFAULT_PROCESS = {
     ],
 };
 
+// Generic, site-wide "why work with us" section — same on every service page
+// unless overridden from the CMS, same pattern as DEFAULT_PROCESS above.
+const DEFAULT_BENEFITS = {
+    heading: 'Benefits',
+    intro: "As a modern business, you need to be agile, responsive, and always connected. With Amanah IT's managed services, you can take control of your technology and stay ahead of the curve. Here's what you get:",
+    items: [
+        { title: 'Proactive Maintenance', text: 'We monitor your systems and resolve potential issues before they cause downtime or other problems.' },
+        { title: 'Cost Savings', text: 'Outsourcing to us can be more cost-effective than hiring and maintaining a full in-house team.' },
+        { title: 'Scalability', text: 'Your setup scales with you as your business grows, without a rebuild every time.' },
+        { title: 'Enhanced Security', text: 'Comprehensive security practices help protect your data and systems from cyber threats.' },
+        { title: 'Increased Efficiency', text: 'We streamline your operations so your team can focus on core business activities.' },
+        { title: 'Direct Support', text: 'Fast, direct support when something needs attention — no ticket queues, no runaround.' },
+    ],
+    // optional full-width banner image under the grid — leave blank to hide it
+    image: '',
+};
+
 const DEFAULT_SIDEBAR_CTA = {
     heading: 'Need this for your business?',
     text: "Tell us what you're building and we'll get back within a day.",
@@ -963,6 +1277,7 @@ export default function ServiceDetails() {
     const { slug } = useParams();
     const [services, setServices] = useState(FALLBACK_SERVICES);
     const [process, setProcess] = useState(DEFAULT_PROCESS);
+    const [benefits, setBenefits] = useState(DEFAULT_BENEFITS);
     const [sidebarCta, setSidebarCta] = useState(DEFAULT_SIDEBAR_CTA);
     const [bottomCta, setBottomCta] = useState(DEFAULT_BOTTOM_CTA);
 
@@ -975,6 +1290,7 @@ export default function ServiceDetails() {
             .then(r => {
                 const d = r.data || {};
                 if (d.serviceDetailProcess) setProcess({ ...DEFAULT_PROCESS, ...d.serviceDetailProcess });
+                if (d.serviceDetailBenefits) setBenefits({ ...DEFAULT_BENEFITS, ...d.serviceDetailBenefits });
                 if (d.serviceDetailSidebarCta) setSidebarCta({ ...DEFAULT_SIDEBAR_CTA, ...d.serviceDetailSidebarCta });
                 if (d.serviceDetailBottomCta) setBottomCta({ ...DEFAULT_BOTTOM_CTA, ...d.serviceDetailBottomCta });
             })
@@ -1096,6 +1412,34 @@ export default function ServiceDetails() {
 
                     </div>
                 </section>
+
+                {/* ---------- Benefits ---------- */}
+                {Array.isArray(benefits.items) && benefits.items.length > 0 && (
+                    <section className="svcd-benefits">
+                        <div className="container">
+                            <h2 className="svcd-benefits-heading">{benefits.heading}</h2>
+                            {benefits.intro && (
+                                <p className="svcd-benefits-intro">{benefits.intro}</p>
+                            )}
+                            <div className="svcd-benefits-grid">
+                                {benefits.items.map((b, idx) => (
+                                    <div key={idx} className="svcd-benefit-card">
+                                        <span className="svcd-benefit-icon">
+                                            <FiCheckCircle size={30} />
+                                        </span>
+                                        <h3>{b.title}</h3>
+                                        <p>{b.text}</p>
+                                    </div>
+                                ))}
+                            </div>
+                            {benefits.image && (
+                                <div className="svcd-benefits-banner">
+                                    <img src={benefits.image} alt={benefits.heading} />
+                                </div>
+                            )}
+                        </div>
+                    </section>
+                )}
 
                 {/* ---------- Process ---------- */}
                 <section className="svcd-process">
