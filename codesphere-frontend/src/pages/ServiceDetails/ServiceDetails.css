@@ -473,13 +473,44 @@
     border-radius: 14px;
     padding: clamp(22px, 3vw, 28px) clamp(18px, 2.5vw, 22px);
     position: relative;
+    overflow: hidden;
     box-shadow: 0 14px 32px rgba(6, 20, 10, 0.18);
     transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+.svcd-process-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--svcd-accent, var(--svcd-gradient));
+}
+
+.svcd-process-grid .svcd-process-card:nth-child(4n+1) {
+    --svcd-accent: #2563eb;
+    background: linear-gradient(165deg, #ffffff 0%, #eef3fe 100%);
+}
+
+.svcd-process-grid .svcd-process-card:nth-child(4n+2) {
+    --svcd-accent: #16a34a;
+    background: linear-gradient(165deg, #ffffff 0%, #eaf8ee 100%);
+}
+
+.svcd-process-grid .svcd-process-card:nth-child(4n+3) {
+    --svcd-accent: #7c3aed;
+    background: linear-gradient(165deg, #ffffff 0%, #f2eefd 100%);
+}
+
+.svcd-process-grid .svcd-process-card:nth-child(4n+4) {
+    --svcd-accent: #ea580c;
+    background: linear-gradient(165deg, #ffffff 0%, #fdefe6 100%);
+}
+
 .svcd-process-card:hover {
-    border-color: var(--svcd-border-hover);
-    box-shadow: 0 14px 28px rgba(15, 21, 18, 0.1);
+    border-color: var(--svcd-accent, var(--svcd-border-hover));
+    box-shadow: 0 18px 34px -8px color-mix(in srgb, var(--svcd-accent, #16a34a) 35%, transparent);
     transform: translateY(-4px);
 }
 
@@ -490,8 +521,9 @@
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background: #ffffff;
-    color: var(--svcd-green-light);
+    background: #f4f6f5;
+    background: color-mix(in srgb, var(--svcd-accent, var(--svcd-green-light)) 12%, #ffffff);
+    color: var(--svcd-accent, var(--svcd-green-light));
     font-size: 1rem;
     font-weight: 800;
     margin-bottom: 18px;
@@ -510,8 +542,6 @@
     color: var(--svcd-text-muted);
     font-size: 0.9rem;
     line-height: 1.65;
-    text-align: justify;
-    text-justify: inter-word;
 }
 
 /* ---------------- Bottom CTA ---------------- */
