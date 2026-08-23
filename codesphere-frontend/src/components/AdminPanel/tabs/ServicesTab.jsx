@@ -109,11 +109,11 @@ export default function ServicesTab() {
         api.get('/home-sections').then(r => {
             const d = r.data || {};
             if (d.servicesPageHeader) setPageHeader({ ...DEFAULT_PAGE_HEADER, ...d.servicesPageHeader });
-            if (d.servicesPageBenefits) setBenefits({ ...DEFAULT_BENEFITS, ...d.servicesPageBenefits });
+            if (d.servicesPageBenefits?.items?.length) setBenefits({ ...DEFAULT_BENEFITS, ...d.servicesPageBenefits });
             if (d.servicesPageCtaStrip) setCtaStrip({ ...DEFAULT_CTA_STRIP, ...d.servicesPageCtaStrip });
             if (d.servicesPageBottomCta) setServicesBottomCta({ ...DEFAULT_SERVICES_BOTTOM_CTA, ...d.servicesPageBottomCta });
-            if (d.serviceDetailProcess) setProcessData({ ...DEFAULT_PROCESS, ...d.serviceDetailProcess });
-            if (d.serviceDetailBenefits) {
+            if (d.serviceDetailProcess?.steps?.length) setProcessData({ ...DEFAULT_PROCESS, ...d.serviceDetailProcess });
+            if (d.serviceDetailBenefits?.items?.length) {
                 const merged = { ...DEFAULT_DETAIL_BENEFITS, ...d.serviceDetailBenefits };
                 setDetailBenefits(merged);
                 setDetailBenefitsPreview(merged.image || '');
