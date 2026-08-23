@@ -538,6 +538,15 @@
     object-fit: cover;
 }
 
+.svcd-benefits-closing {
+    margin: clamp(24px, 3.5vw, 32px) 0 0;
+    padding: 4px 0 4px 20px;
+    border-left: 3px solid var(--svcd-green-light);
+    color: var(--svcd-text-muted);
+    font-size: clamp(0.96rem, 1.3vw, 1.05rem);
+    line-height: 1.75;
+}
+
 @media (max-width: 900px) {
     .svcd-benefits-grid {
         grid-template-columns: repeat(2, 1fr);
