@@ -1294,8 +1294,8 @@ export default function ServiceDetails() {
         api.get('/home-sections')
             .then(r => {
                 const d = r.data || {};
-                if (d.serviceDetailProcess) setProcess({ ...DEFAULT_PROCESS, ...d.serviceDetailProcess });
-                if (d.serviceDetailBenefits) setBenefits({ ...DEFAULT_BENEFITS, ...d.serviceDetailBenefits });
+                if (d.serviceDetailProcess?.steps?.length) setProcess({ ...DEFAULT_PROCESS, ...d.serviceDetailProcess });
+                if (d.serviceDetailBenefits?.items?.length) setBenefits({ ...DEFAULT_BENEFITS, ...d.serviceDetailBenefits });
                 if (d.serviceDetailSidebarCta) setSidebarCta({ ...DEFAULT_SIDEBAR_CTA, ...d.serviceDetailSidebarCta });
                 if (d.serviceDetailBottomCta) setBottomCta({ ...DEFAULT_BOTTOM_CTA, ...d.serviceDetailBottomCta });
             })
