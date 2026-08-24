@@ -1135,7 +1135,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
     FiCode, FiShoppingCart, FiLayout, FiServer, FiCloud, FiSmartphone,
-    FiArrowRight, FiCheckCircle,
+    FiArrowRight, FiCheckCircle, FiZap, FiShield, FiHeadphones, FiTrendingUp, FiClock,
 } from 'react-icons/fi';
 import api from '../../utils/api';
 import Navbar from '../../components/Navbar/Navbar';
@@ -1143,6 +1143,7 @@ import Footer from '../../components/Footer/Footer';
 import './ServiceDetails.css';
 
 const ICONS = { FiCode, FiShoppingCart, FiLayout, FiServer, FiCloud, FiSmartphone };
+const BENEFIT_ICONS = { FiZap, FiShield, FiHeadphones, FiCheckCircle, FiTrendingUp, FiClock };
 
 // Fallback services — same shape as backend, keyed by slug.
 const FALLBACK_SERVICES = [
@@ -1248,15 +1249,15 @@ const DEFAULT_BENEFITS = {
     heading: 'Benefits',
     intro: "In today's fast-paced corporate landscape, modern enterprises must remain agile, responsive, and seamlessly interconnected. Our comprehensive IT Management Services empower you to take absolute control of your technological infrastructure, driving operational efficiency and keeping you ahead of the competition. Discover the strategic advantages of implementing our IT Management Services:",
     items: [
-        { title: 'Proactive Maintenance', text: 'We utilize advanced proactive monitoring to continuously track your systems, resolving potential infrastructure issues before they cause costly downtime.' },
-        { title: 'Cost Optimization', text: 'Outsourcing your technology management is significantly more cost-effective than hiring, training, and maintaining a full-time, in-house IT department.' },
-        { title: 'Seamless Scalability', text: 'Our flexible IT solutions adapt instantly to your operational needs, helping you effortlessly scale your technology infrastructure as your business grows.' },
-        { title: 'Advanced Cyber Security', text: 'Deliver comprehensive, multi-layered security solutions designed to safeguard your critical data, user endpoints, and networks from evolving cyber threats.' },
-        { title: 'Elite Technical Expertise', text: 'Gain instant, on-demand access to a dedicated team of certified IT professionals possessing specialized knowledge across diverse technological domains.' },
-        { title: 'Operational Efficiency', text: 'Streamline your internal workflows and eliminate daily technical distractions, allowing your team to focus entirely on driving core business revenue.' },
-        { title: 'Maximized System Uptime', text: 'Through continuous health checks and rapid remote intervention, we maximize your system availability while reducing unexpected disruptions to a minimum.' },
-        { title: '24/7 Dedicated Support', text: 'Benefit from round-the-clock technical support and rapid response times, ensuring critical business issues are resolved swiftly at any hour.' },
-        { title: 'Intelligent Automation', text: 'Integrate advanced AI workflows and cloud-based automations into your daily systems to accelerate decision-making and eliminate repetitive tasks.' },
+        { icon: 'FiClock', title: 'Proactive Maintenance', text: 'We utilize advanced proactive monitoring to continuously track your systems, resolving potential infrastructure issues before they cause costly downtime.' },
+        { icon: 'FiTrendingUp', title: 'Cost Optimization', text: 'Outsourcing your technology management is significantly more cost-effective than hiring, training, and maintaining a full-time, in-house IT department.' },
+        { icon: 'FiZap', title: 'Seamless Scalability', text: 'Our flexible IT solutions adapt instantly to your operational needs, helping you effortlessly scale your technology infrastructure as your business grows.' },
+        { icon: 'FiShield', title: 'Advanced Cyber Security', text: 'Deliver comprehensive, multi-layered security solutions designed to safeguard your critical data, user endpoints, and networks from evolving cyber threats.' },
+        { icon: 'FiCheckCircle', title: 'Elite Technical Expertise', text: 'Gain instant, on-demand access to a dedicated team of certified IT professionals possessing specialized knowledge across diverse technological domains.' },
+        { icon: 'FiZap', title: 'Operational Efficiency', text: 'Streamline your internal workflows and eliminate daily technical distractions, allowing your team to focus entirely on driving core business revenue.' },
+        { icon: 'FiClock', title: 'Maximized System Uptime', text: 'Through continuous health checks and rapid remote intervention, we maximize your system availability while reducing unexpected disruptions to a minimum.' },
+        { icon: 'FiHeadphones', title: '24/7 Dedicated Support', text: 'Benefit from round-the-clock technical support and rapid response times, ensuring critical business issues are resolved swiftly at any hour.' },
+        { icon: 'FiTrendingUp', title: 'Intelligent Automation', text: 'Integrate advanced AI workflows and cloud-based automations into your daily systems to accelerate decision-making and eliminate repetitive tasks.' },
     ],
     // optional full-width banner image under the grid — leave blank to hide it
     image: '',
@@ -1456,15 +1457,18 @@ export default function ServiceDetails() {
                                 <p className="svcd-benefits-intro">{benefits.intro}</p>
                             )}
                             <div className="svcd-benefits-grid">
-                                {benefits.items.map((b, idx) => (
-                                    <div key={idx} className="svcd-benefit-card">
-                                        <span className="svcd-benefit-icon">
-                                            <FiCheckCircle size={30} />
-                                        </span>
-                                        <h3>{b.title}</h3>
-                                        <p>{b.text}</p>
-                                    </div>
-                                ))}
+                                {benefits.items.map((b, idx) => {
+                                    const BIcon = BENEFIT_ICONS[b.icon] || FiCheckCircle;
+                                    return (
+                                        <div key={idx} className="svcd-benefit-card">
+                                            <span className="svcd-benefit-icon">
+                                                <BIcon size={22} />
+                                            </span>
+                                            <h3>{b.title}</h3>
+                                            <p>{b.text}</p>
+                                        </div>
+                                    );
+                                })}
                             </div>
                             {benefits.image && (
                                 <div className="svcd-benefits-banner">
