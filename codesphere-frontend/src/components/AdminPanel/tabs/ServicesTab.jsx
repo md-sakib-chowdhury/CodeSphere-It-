@@ -58,9 +58,9 @@ const DEFAULT_DETAIL_BENEFITS = {
     heading: 'Benefits',
     intro: "In today's fast-paced corporate landscape, modern enterprises must remain agile, responsive, and seamlessly interconnected. Our comprehensive IT Management Services empower you to take absolute control of your technological infrastructure, driving operational efficiency and keeping you ahead of the competition. Discover the strategic advantages of implementing our IT Management Services:",
     items: [
-        { title: 'Proactive Maintenance', text: 'We utilize advanced proactive monitoring to continuously track your systems, resolving potential infrastructure issues before they cause costly downtime.' },
-        { title: 'Cost Optimization', text: 'Outsourcing your technology management is significantly more cost-effective than hiring, training, and maintaining a full-time, in-house IT department.' },
-        { title: 'Seamless Scalability', text: 'Our flexible IT solutions adapt instantly to your operational needs, helping you effortlessly scale your technology infrastructure as your business grows.' },
+        { icon: 'FiClock', title: 'Proactive Maintenance', text: 'We utilize advanced proactive monitoring to continuously track your systems, resolving potential infrastructure issues before they cause costly downtime.' },
+        { icon: 'FiTrendingUp', title: 'Cost Optimization', text: 'Outsourcing your technology management is significantly more cost-effective than hiring, training, and maintaining a full-time, in-house IT department.' },
+        { icon: 'FiZap', title: 'Seamless Scalability', text: 'Our flexible IT solutions adapt instantly to your operational needs, helping you effortlessly scale your technology infrastructure as your business grows.' },
     ],
     image: '',
     closingText: "At Amanah IT, we're dedicated to providing top-notch technology solutions that help businesses thrive in today's fast-paced digital world. With tailored solutions and an expert team behind you, you can focus on growing your business while we handle your technology needs. Don't let IT challenges hold you back — contact us today and let's build something great together.",
@@ -245,7 +245,7 @@ export default function ServicesTab() {
         setDetailBenefits({ ...detailBenefits, items });
     };
     const addDetailBenefitItem = () => {
-        setDetailBenefits({ ...detailBenefits, items: [...(detailBenefits.items || []), { title: '', text: '' }] });
+        setDetailBenefits({ ...detailBenefits, items: [...(detailBenefits.items || []), { icon: 'FiCheckCircle', title: '', text: '' }] });
     };
     const removeDetailBenefitItem = (i) => {
         setDetailBenefits({ ...detailBenefits, items: detailBenefits.items.filter((_, idx) => idx !== i) });
@@ -492,9 +492,17 @@ export default function ServicesTab() {
                         <label>Benefit Cards</label>
                         {(detailBenefits.items || []).map((item, i) => (
                             <div key={i} style={{ border: '1px solid var(--gray-200)', borderRadius: 8, padding: '0.75rem', marginBottom: '0.75rem' }}>
-                                <div className="admin-form-group">
-                                    <label>Title</label>
-                                    <input value={item.title} onChange={e => updateDetailBenefitItem(i, 'title', e.target.value)} />
+                                <div className="admin-form-row">
+                                    <div className="admin-form-group">
+                                        <label>Icon</label>
+                                        <select value={item.icon} onChange={e => updateDetailBenefitItem(i, 'icon', e.target.value)} style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: 8, border: '1px solid var(--gray-200)' }}>
+                                            {BENEFIT_ICON_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                                        </select>
+                                    </div>
+                                    <div className="admin-form-group">
+                                        <label>Title</label>
+                                        <input value={item.title} onChange={e => updateDetailBenefitItem(i, 'title', e.target.value)} />
+                                    </div>
                                 </div>
                                 <div className="admin-form-group">
                                     <label>Text</label>
