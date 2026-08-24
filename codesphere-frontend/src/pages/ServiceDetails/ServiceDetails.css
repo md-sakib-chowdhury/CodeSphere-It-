@@ -525,7 +525,8 @@
 }
 
 .svcd-benefits-banner {
-    margin-top: clamp(28px, 4vw, 40px);
+    clear: both;
+    margin-top: clamp(48px, 7vw, 72px);
     border-radius: 18px;
     overflow: hidden;
     box-shadow: 0 12px 30px rgba(15, 21, 18, 0.1);
@@ -534,8 +535,15 @@
 .svcd-benefits-banner img {
     display: block;
     width: 100%;
-    height: clamp(220px, 30vw, 340px);
+    height: clamp(320px, 40vw, 560px);
     object-fit: cover;
+    object-position: center;
+}
+
+@media (max-width: 640px) {
+    .svcd-benefits-banner img {
+        height: clamp(220px, 65vw, 340px);
+    }
 }
 
 .svcd-benefits-closing {
