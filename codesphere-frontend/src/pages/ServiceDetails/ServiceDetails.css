@@ -488,8 +488,8 @@
 .svcd-benefit-card {
     background: var(--svcd-surface);
     border: 1px solid var(--svcd-border);
-    border-radius: 14px;
-    padding: clamp(22px, 3vw, 28px) clamp(20px, 2.5vw, 24px);
+    border-radius: 16px;
+    padding: clamp(24px, 3vw, 30px) clamp(22px, 2.5vw, 26px);
     box-shadow: 0 6px 18px rgba(15, 21, 18, 0.05);
     position: relative;
     overflow: hidden;
@@ -506,24 +506,42 @@
     background: var(--svcd-benefit-accent, var(--svcd-gradient));
 }
 
+.svcd-benefit-card::after {
+    content: counter(svcd-benefit-count);
+    counter-increment: svcd-benefit-count;
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--svcd-benefit-accent, var(--svcd-green-light));
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.svcd-benefits-grid {
+    counter-reset: svcd-benefit-count;
+}
+
 .svcd-benefits-grid .svcd-benefit-card:nth-child(4n+1) {
     --svcd-benefit-accent: #2563eb;
-    background: #eef3fe;
+    background: linear-gradient(165deg, #ffffff 0%, #eef3fe 100%);
 }
 
 .svcd-benefits-grid .svcd-benefit-card:nth-child(4n+2) {
     --svcd-benefit-accent: #16a34a;
-    background: #eaf8ee;
+    background: linear-gradient(165deg, #ffffff 0%, #eaf8ee 100%);
 }
 
 .svcd-benefits-grid .svcd-benefit-card:nth-child(4n+3) {
     --svcd-benefit-accent: #7c3aed;
-    background: #f2eefd;
+    background: linear-gradient(165deg, #ffffff 0%, #f2eefd 100%);
 }
 
 .svcd-benefits-grid .svcd-benefit-card:nth-child(4n+4) {
     --svcd-benefit-accent: #ea580c;
-    background: #fdefe6;
+    background: linear-gradient(165deg, #ffffff 0%, #fdefe6 100%);
 }
 
 .svcd-benefit-card:hover {
@@ -536,23 +554,32 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background: var(--svcd-benefit-accent, var(--svcd-green-light));
     color: #fff;
-    margin-bottom: 18px;
-    box-shadow: 0 8px 18px rgba(6, 20, 10, 0.15);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    box-shadow:
+        0 8px 18px rgba(6, 20, 10, 0.18),
+        0 0 0 6px color-mix(in srgb, var(--svcd-benefit-accent, #16a34a) 12%, transparent);
 }
 
 .svcd-benefit-card h3 {
-    font-size: 1.1rem;
+    position: relative;
+    z-index: 1;
+    font-size: 1.12rem;
     font-weight: 700;
-    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+    margin: 0 0 12px;
     color: var(--svcd-text);
 }
 
 .svcd-benefit-card p {
+    position: relative;
+    z-index: 1;
     color: var(--svcd-text-muted);
     font-size: 0.92rem;
     line-height: 1.7;
