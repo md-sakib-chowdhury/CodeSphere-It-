@@ -246,39 +246,39 @@
 }
 
 .svcd-points li:nth-child(4n+1) {
-    background: #eef3fe;
-    --svcd-point-accent: #2563eb;
-}
-
-.svcd-points li:nth-child(4n+2) {
-    background: #eaf8ee;
+    background: #eafbf1;
     --svcd-point-accent: #16a34a;
 }
 
+.svcd-points li:nth-child(4n+2) {
+    background: #e7f9f3;
+    --svcd-point-accent: #059669;
+}
+
 .svcd-points li:nth-child(4n+3) {
-    background: #f2eefd;
-    --svcd-point-accent: #7c3aed;
+    background: #e6f7f5;
+    --svcd-point-accent: #0d9488;
 }
 
 .svcd-points li:nth-child(4n+4) {
-    background: #fdefe6;
-    --svcd-point-accent: #ea580c;
+    background: #f3fbe8;
+    --svcd-point-accent: #65a30d;
 }
 
 .svcd-points li:nth-child(4n+1) .svcd-point-icon {
-    background: #2563eb;
-}
-
-.svcd-points li:nth-child(4n+2) .svcd-point-icon {
     background: #16a34a;
 }
 
+.svcd-points li:nth-child(4n+2) .svcd-point-icon {
+    background: #059669;
+}
+
 .svcd-points li:nth-child(4n+3) .svcd-point-icon {
-    background: #7c3aed;
+    background: #0d9488;
 }
 
 .svcd-points li:nth-child(4n+4) .svcd-point-icon {
-    background: #ea580c;
+    background: #65a30d;
 }
 
 .svcd-point-icon {
@@ -525,23 +525,23 @@
 }
 
 .svcd-benefits-grid .svcd-benefit-card:nth-child(4n+1) {
-    --svcd-benefit-accent: #2563eb;
-    background: linear-gradient(165deg, #ffffff 0%, #eef3fe 100%);
+    --svcd-benefit-accent: #16a34a;
+    background: linear-gradient(165deg, #ffffff 0%, #eafbf1 100%);
 }
 
 .svcd-benefits-grid .svcd-benefit-card:nth-child(4n+2) {
-    --svcd-benefit-accent: #16a34a;
-    background: linear-gradient(165deg, #ffffff 0%, #eaf8ee 100%);
+    --svcd-benefit-accent: #059669;
+    background: linear-gradient(165deg, #ffffff 0%, #e7f9f3 100%);
 }
 
 .svcd-benefits-grid .svcd-benefit-card:nth-child(4n+3) {
-    --svcd-benefit-accent: #7c3aed;
-    background: linear-gradient(165deg, #ffffff 0%, #f2eefd 100%);
+    --svcd-benefit-accent: #0d9488;
+    background: linear-gradient(165deg, #ffffff 0%, #e6f7f5 100%);
 }
 
 .svcd-benefits-grid .svcd-benefit-card:nth-child(4n+4) {
-    --svcd-benefit-accent: #ea580c;
-    background: linear-gradient(165deg, #ffffff 0%, #fdefe6 100%);
+    --svcd-benefit-accent: #65a30d;
+    background: linear-gradient(165deg, #ffffff 0%, #f3fbe8 100%);
 }
 
 .svcd-benefit-card:hover {
@@ -649,7 +649,7 @@
         radial-gradient(circle at 10% 15%, rgba(226, 232, 240, 0.9), transparent 45%),
         radial-gradient(circle at 15% 90%, rgba(74, 222, 128, 0.45), transparent 55%),
         radial-gradient(circle at 55% 100%, rgba(34, 197, 94, 0.4), transparent 55%),
-        radial-gradient(circle at 92% 85%, rgba(56, 189, 248, 0.55), transparent 55%);
+        radial-gradient(circle at 92% 85%, rgba(13, 148, 136, 0.5), transparent 55%);
     background-size: 64px 64px, 64px 64px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
     margin-top: clamp(32px, 5vw, 48px);
     overflow: hidden;
@@ -703,9 +703,8 @@
     position: relative;
 }
 
-/* Solid 4-color cards — matched to the same palette used for the
-   points grid above (blue / green / purple / orange), no
-   translucency or blur anywhere in the card. */
+/* Green-toned cards — same visual language as the Benefits section
+   below (gradient tint background, glow ring on the step badge). */
 .svcd-process-card {
     background: #ffffff;
     border: 1px solid var(--svcd-border);
@@ -729,23 +728,23 @@
 }
 
 .svcd-process-grid .svcd-process-card:nth-child(4n+1) {
-    --svcd-accent: #2563eb;
-    background: #eef3fe;
+    --svcd-accent: #16a34a;
+    background: linear-gradient(165deg, #ffffff 0%, #eafbf1 100%);
 }
 
 .svcd-process-grid .svcd-process-card:nth-child(4n+2) {
-    --svcd-accent: #16a34a;
-    background: #eaf8ee;
+    --svcd-accent: #059669;
+    background: linear-gradient(165deg, #ffffff 0%, #e7f9f3 100%);
 }
 
 .svcd-process-grid .svcd-process-card:nth-child(4n+3) {
-    --svcd-accent: #7c3aed;
-    background: #f2eefd;
+    --svcd-accent: #0d9488;
+    background: linear-gradient(165deg, #ffffff 0%, #e6f7f5 100%);
 }
 
 .svcd-process-grid .svcd-process-card:nth-child(4n+4) {
-    --svcd-accent: #ea580c;
-    background: #fdefe6;
+    --svcd-accent: #65a30d;
+    background: linear-gradient(165deg, #ffffff 0%, #f3fbe8 100%);
 }
 
 .svcd-process-card:hover {
@@ -754,14 +753,14 @@
     transform: translateY(-4px);
 }
 
-/* Step badge — solid accent color (like the points icon circles),
-   not the previous 12%-tint "glass" look. */
+/* Step badge — solid accent color with a soft glow ring, matching
+   the Benefits icon treatment. */
 .svcd-process-step {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: var(--svcd-accent, var(--svcd-green-light));
     border: none;
@@ -769,7 +768,9 @@
     font-size: 1rem;
     font-weight: 800;
     margin-bottom: 18px;
-    box-shadow: 0 8px 18px rgba(6, 20, 10, 0.2);
+    box-shadow:
+        0 8px 18px rgba(6, 20, 10, 0.2),
+        0 0 0 6px color-mix(in srgb, var(--svcd-accent, #16a34a) 12%, transparent);
 }
 
 .svcd-process-card h4 {
