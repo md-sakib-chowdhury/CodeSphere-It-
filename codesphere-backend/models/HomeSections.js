@@ -389,6 +389,7 @@ const homeSectionsSchema = new mongoose.Schema({
         heading: { type: String, default: 'Benefits' },
         intro: { type: String, default: '' },
         items: [{
+            icon: { type: String, default: 'FiCheckCircle' },
             title: { type: String },
             text: { type: String },
         }],
