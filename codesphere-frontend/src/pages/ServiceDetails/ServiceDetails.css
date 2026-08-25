@@ -11,10 +11,10 @@
     --svcd-surface-2: #f4f6f5;
     --svcd-border: rgba(15, 21, 18, 0.1);
     --svcd-border-hover: rgba(34, 197, 94, 0.4);
-    --svcd-blue: #2563eb;
-    --svcd-green: #22c55e;
+    --svcd-blue: #059669;
+    --svcd-green: #16a34a;
     --svcd-green-light: #16a34a;
-    --svcd-gradient: linear-gradient(90deg, var(--svcd-blue), var(--svcd-green));
+    --svcd-gradient: linear-gradient(90deg, #0d9488, #16a34a);
     --svcd-text: #0f1512;
     --svcd-text-muted: #5b6862;
     color: var(--svcd-text);
@@ -139,7 +139,11 @@
 
 .svcd-content {
     padding: clamp(48px, 7vw, 72px) 0 clamp(16px, 3vw, 24px);
-    background: var(--svcd-bg);
+    background-color: #eff6f1;
+    background-image:
+        linear-gradient(rgba(15, 21, 18, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 21, 18, 0.05) 1px, transparent 1px);
+    background-size: 64px 64px, 64px 64px;
 }
 
 .svcd-content-grid {
@@ -229,7 +233,7 @@
     gap: 12px;
     background: #eef3fe;
     border: 1px solid var(--svcd-border);
-    border-left: 3px solid var(--svcd-point-accent, #2563eb);
+    border-left: 3px solid var(--svcd-point-accent, #16a34a);
     border-radius: 10px;
     padding: 14px 16px;
     box-shadow: 0 4px 14px rgba(15, 21, 18, 0.04);
@@ -401,8 +405,9 @@
     opacity: 0;
     transform: translateX(-4px);
     transition: opacity 0.2s ease, transform 0.2s ease;
-    color: var(--svcd-green-light);
-    font-weight: 700;
+    color: #16a34a;
+    font-weight: 900;
+    font-size: 1.15em;
 }
 
 .svcd-sidebar-list a:hover::after {
@@ -642,7 +647,7 @@
 .svcd-process {
     position: relative;
     padding: clamp(48px, 7vw, 72px) 0;
-    background-color: var(--svcd-bg-alt);
+    background-color: #eff6f1;
     background-image:
         linear-gradient(rgba(15, 21, 18, 0.05) 1px, transparent 1px),
         linear-gradient(90deg, rgba(15, 21, 18, 0.05) 1px, transparent 1px);
