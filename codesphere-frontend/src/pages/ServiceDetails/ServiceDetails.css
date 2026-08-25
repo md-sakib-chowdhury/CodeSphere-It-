@@ -139,11 +139,7 @@
 
 .svcd-content {
     padding: clamp(48px, 7vw, 72px) 0 clamp(16px, 3vw, 24px);
-    background-color: #eff6f1;
-    background-image:
-        linear-gradient(rgba(15, 21, 18, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(15, 21, 18, 0.05) 1px, transparent 1px);
-    background-size: 64px 64px, 64px 64px;
+    background: var(--svcd-bg);
 }
 
 .svcd-content-grid {
