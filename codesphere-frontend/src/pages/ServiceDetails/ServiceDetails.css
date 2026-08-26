@@ -624,6 +624,8 @@
     color: var(--svcd-text-muted);
     font-size: clamp(0.96rem, 1.3vw, 1.05rem);
     line-height: 1.75;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 @media (max-width: 900px) {
