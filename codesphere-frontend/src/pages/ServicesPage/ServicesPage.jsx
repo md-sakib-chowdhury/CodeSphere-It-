@@ -629,7 +629,7 @@ export default function ServicesPage() {
             <Navbar />
             <div className="svc-page">
 
-                {/* ---------- Hero banner ---------- */}
+                {/* ---------- Hero banner (now also holds the intro heading/text) ---------- */}
                 <section className="svc-hero">
                     <div className="svc-hero-bg" />
                     <div className="svc-hero-overlay" />
@@ -641,14 +641,11 @@ export default function ServicesPage() {
                         </div>
                         <h1 className="svc-hero-title">{pageHeader.heroTitle}</h1>
                         <p className="svc-hero-sub">{pageHeader.heroSubtitle}</p>
-                    </div>
-                </section>
 
-                {/* ---------- Intro ---------- */}
-                <section className="svc-intro">
-                    <div className="container">
-                        <h2 className="svc-intro-heading">{pageHeader.introHeading}</h2>
-                        <p className="svc-intro-text">{pageHeader.introText}</p>
+                        <div className="svc-hero-intro">
+                            <h2 className="svc-intro-heading">{pageHeader.introHeading}</h2>
+                            <p className="svc-intro-text">{pageHeader.introText}</p>
+                        </div>
                     </div>
                 </section>
 
