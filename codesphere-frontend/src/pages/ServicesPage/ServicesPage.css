@@ -1,19 +1,20 @@
 /* ============================================================
    AMANAH IT — Services Page
-   Palette: near-black base, blue -> green signal gradient
+   Palette: white base, green/teal shade signal gradient
+   (matches the light Service Detail page theme)
    ============================================================ */
 
 .svc-page {
-    --svc-bg: #070b0d;
-    --svc-bg-alt: #0a1210;
-    --svc-surface: #111c17;
-    --svc-border: rgba(255, 255, 255, 0.08);
-    --svc-blue: #2563eb;
-    --svc-green: #22c55e;
-    --svc-green-light: #4ade80;
-    --svc-gradient: linear-gradient(90deg, var(--svc-blue), var(--svc-green));
-    --svc-text: #f4f7f5;
-    --svc-text-muted: #9aa8a2;
+    --svc-bg: #ffffff;
+    --svc-bg-alt: #eff6f1;
+    --svc-surface: #ffffff;
+    --svc-border: rgba(15, 21, 18, 0.1);
+    --svc-border-hover: rgba(34, 197, 94, 0.4);
+    --svc-green: #16a34a;
+    --svc-green-light: #16a34a;
+    --svc-gradient: linear-gradient(90deg, #0d9488, #16a34a);
+    --svc-text: #0f1512;
+    --svc-text-muted: #5b6862;
     color: var(--svc-text);
     background: var(--svc-bg);
 }
@@ -25,6 +26,9 @@
 }
 
 /* ---------------- Hero banner ---------------- */
+/* Kept as a filled green gradient (not near-black) — still gives
+   the page a strong opening banner without breaking the site's
+   white/green palette. */
 
 .svc-hero {
     position: relative;
@@ -39,20 +43,17 @@
 .svc-hero-bg {
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(circle at 15% 20%, rgba(37, 99, 235, 0.35), transparent 45%),
-        radial-gradient(circle at 85% 30%, rgba(34, 197, 94, 0.3), transparent 50%),
-        linear-gradient(180deg, #05080a 0%, #0a1210 100%);
+    background: linear-gradient(135deg, #0d9488 0%, #16a34a 55%, #65a30d 100%);
 }
 
 .svc-hero-bg::before {
     content: '';
     position: absolute;
     inset: 0;
-    opacity: 0.18;
+    opacity: 0.15;
     background-image:
-        linear-gradient(rgba(74, 222, 128, 0.5) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(74, 222, 128, 0.5) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.6) 1px, transparent 1px);
     background-size: 46px 46px;
     mask-image: radial-gradient(circle at 70% 30%, black, transparent 70%);
 }
@@ -60,7 +61,7 @@
 .svc-hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(6, 9, 11, 0.2) 0%, rgba(6, 9, 11, 0.95) 100%);
+    background: linear-gradient(180deg, rgba(6, 12, 10, 0.05) 0%, rgba(6, 12, 10, 0.35) 100%);
 }
 
 .svc-hero-content {
@@ -78,7 +79,7 @@
 }
 
 .svc-breadcrumb a {
-    color: var(--svc-green-light);
+    color: #fff;
     text-decoration: none;
 }
 
@@ -87,7 +88,7 @@
 }
 
 .svc-crumb-sep {
-    color: var(--svc-text-muted);
+    color: rgba(255, 255, 255, 0.65);
 }
 
 .svc-crumb-current {
@@ -100,14 +101,16 @@
     letter-spacing: -0.02em;
     margin: 0 0 12px;
     color: #fff;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
 }
 
 .svc-hero-sub {
     max-width: 560px;
-    color: var(--svc-text-muted);
+    color: rgba(255, 255, 255, 0.9);
     font-size: 1.05rem;
     line-height: 1.6;
     margin: 0;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* ---------------- Intro ---------------- */
@@ -124,7 +127,8 @@
     margin: 0 auto 18px;
     max-width: 720px;
     text-align: center;
-    animation: svcFadeUp 0.8s ease both, svcFloat 5s ease-in-out 0.8s infinite;
+    color: var(--svc-text);
+    animation: svcFadeUp 0.8s ease both;
 }
 
 .svc-intro-text {
@@ -134,7 +138,7 @@
     max-width: 760px;
     margin: 0 auto;
     text-align: center;
-    animation: svcFadeUp 0.8s ease 0.15s both, svcFloat 5s ease-in-out 1s infinite;
+    animation: svcFadeUp 0.8s ease 0.15s both;
 }
 
 @keyframes svcFadeUp {
@@ -149,23 +153,11 @@
     }
 }
 
-@keyframes svcFloat {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-8px);
-    }
-}
-
 /* ---------------- Services grid ---------------- */
 
 .svc-grid-section {
-    padding: 48px 0 140px;
-    background: #ffffff;
+    padding: 48px 0 100px;
+    background: var(--svc-bg);
     position: relative;
 }
 
@@ -184,7 +176,7 @@
     flex-direction: column;
     text-decoration: none;
     color: inherit;
-    box-shadow: 0 12px 30px -14px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 12px 30px -14px rgba(15, 21, 18, 0.15);
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
         box-shadow 0.3s ease,
         border-color 0.3s ease;
@@ -193,8 +185,8 @@
 
 .svc-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(74, 222, 128, 0.4);
-    box-shadow: 0 24px 45px -18px rgba(0, 0, 0, 0.35);
+    border-color: var(--svc-border-hover);
+    box-shadow: 0 24px 45px -18px rgba(15, 21, 18, 0.22);
 }
 
 /* Subtle index mark — small differentiator so cards don't read
@@ -207,7 +199,7 @@
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.05em;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.65);
     z-index: 2;
 }
 
@@ -230,16 +222,18 @@
     pointer-events: none;
 }
 
+/* 4-way green-shade rotation — mirrors the accent palette used
+   throughout the Service Detail page (green / emerald / teal / lime) */
 .svc-card.tone-a .svc-card-head {
-    background: linear-gradient(135deg, #1d4ed8, #15803d);
+    background: linear-gradient(135deg, #16a34a, #059669);
 }
 
 .svc-card.tone-b .svc-card-head {
-    background: linear-gradient(135deg, #166534, #22c55e);
+    background: linear-gradient(135deg, #059669, #0d9488);
 }
 
 .svc-card.tone-c .svc-card-head {
-    background: linear-gradient(135deg, #2563eb, #4ade80);
+    background: linear-gradient(135deg, #0d9488, #65a30d);
 }
 
 .svc-card-icon {
@@ -247,7 +241,7 @@
     height: 48px;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -303,7 +297,7 @@
     align-items: flex-start;
     gap: 9px;
     font-size: 0.88rem;
-    color: #d6ded9;
+    color: var(--svc-text);
     line-height: 1.5;
 }
 
@@ -329,15 +323,12 @@
 }
 
 /* ---------------- Mid CTA strip (overlapping) ---------------- */
-/* Slim, understated banner-style strip. Left-aligned gradient
-   text instead of a filled gradient block, so it reads as a
-   quieter transition element rather than a second "big CTA". */
 
 .svc-cta-strip {
     background: transparent;
     position: relative;
     z-index: 2;
-    margin-top: -96px;
+    margin-top: -70px;
 }
 
 .svc-cta-strip-inner {
@@ -347,22 +338,21 @@
     gap: 24px;
     flex-wrap: wrap;
     background: #ffffff;
-    border: none;
+    border: 1px solid var(--svc-border);
     border-radius: 16px;
-    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 30px 60px -20px rgba(15, 21, 18, 0.18);
     position: relative;
     overflow: hidden;
 }
 
-/* Animated gradient border ring — a slightly larger gradient
-   rectangle sits behind the white card and rotates its colors */
+/* Animated gradient border ring — green/teal shades only */
 .svc-cta-strip-inner::before {
     content: '';
     position: absolute;
     inset: 0;
     padding: 2.5px;
     border-radius: 16px;
-    background: linear-gradient(270deg, var(--svc-blue), var(--svc-green), var(--svc-blue));
+    background: linear-gradient(270deg, #0d9488, #16a34a, #0d9488);
     background-size: 200% 200%;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
@@ -381,8 +371,6 @@
     }
 }
 
-/* Overrides .svc-page .container's padding, which otherwise wins
-   on specificity since this element carries both classes */
 .svc-cta-strip .container.svc-cta-strip-inner {
     padding: 44px 56px;
 }
@@ -405,7 +393,7 @@
     align-items: center;
     gap: 8px;
     background: transparent;
-    color: #0f172a;
+    color: var(--svc-text);
     text-decoration: none;
     font-weight: 700;
     padding: 13px 24px;
@@ -418,7 +406,7 @@
 }
 
 .svc-cta-strip-btn:hover {
-    background: rgba(34, 197, 94, 0.1);
+    background: rgba(22, 163, 74, 0.08);
     transform: translateY(-2px);
 }
 
@@ -433,6 +421,7 @@
     font-size: clamp(1.6rem, 3vw, 2.1rem);
     font-weight: 800;
     margin: 0 0 10px;
+    color: var(--svc-text);
 }
 
 .svc-benefits-sub {
@@ -459,8 +448,8 @@
 
 .svc-benefit-card:hover {
     transform: translateY(-6px);
-    border-color: rgba(74, 222, 128, 0.4);
-    box-shadow: 0 20px 40px -18px rgba(0, 0, 0, 0.45);
+    border-color: var(--svc-border-hover);
+    box-shadow: 0 20px 40px -18px rgba(15, 21, 18, 0.15);
 }
 
 .svc-benefit-icon {
@@ -470,7 +459,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(74, 222, 128, 0.12);
+    background: rgba(22, 163, 74, 0.1);
     color: var(--svc-green-light);
     margin-bottom: 16px;
     transition: transform 0.3s ease, background 0.3s ease;
@@ -478,13 +467,14 @@
 
 .svc-benefit-card:hover .svc-benefit-icon {
     transform: scale(1.12) rotate(-4deg);
-    background: rgba(74, 222, 128, 0.22);
+    background: rgba(22, 163, 74, 0.18);
 }
 
 .svc-benefit-card h4 {
     margin: 0 0 8px;
     font-size: 1.05rem;
     font-weight: 700;
+    color: var(--svc-text);
 }
 
 .svc-benefit-card p {
@@ -494,13 +484,12 @@
     line-height: 1.6;
 }
 
-/* ---------------- Bottom CTA (standalone, own white section) ---------------- */
-/* This is the one "big" filled-gradient CTA on the page — kept
-   as the sole full-bleed gradient block so it doesn't compete
-   with the quieter mid-strip above. */
+/* ---------------- Bottom CTA ---------------- */
+/* Same green-to-lime diagonal used on the Service Detail page's
+   bottom CTA — no blue, sharp corners, one consistent brand block. */
 
 .svc-bottom-cta {
-    background: #eef1f0;
+    background: var(--svc-bg-alt);
     padding: 88px 0;
 }
 
@@ -510,16 +499,13 @@
     justify-content: space-between;
     gap: 28px;
     flex-wrap: wrap;
-    background: var(--svc-gradient);
-    border: 2px solid rgba(255, 255, 255, 0.35);
-    border-radius: 22px;
-    box-shadow: 0 25px 55px -20px rgba(37, 99, 235, 0.35);
+    background: linear-gradient(135deg, #16a34a, #84cc16);
+    border-radius: 0;
+    box-shadow: 0 25px 55px -20px rgba(22, 163, 74, 0.35);
     position: relative;
     overflow: hidden;
 }
 
-/* Overrides .svc-page .container's padding, same clash as the
-   mid CTA strip above */
 .svc-bottom-cta .container.svc-bottom-cta-inner {
     padding: 88px 64px;
 }
@@ -531,7 +517,7 @@
     width: 320px;
     height: 320px;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     top: -140px;
     right: -80px;
     pointer-events: none;
@@ -543,7 +529,7 @@
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 10px;
 }
 
@@ -562,7 +548,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #05080a;
+    background: #0f1512;
     color: #fff;
     text-decoration: none;
     font-weight: 700;
@@ -602,11 +588,11 @@
     }
 
     .svc-grid-section {
-        padding-bottom: 110px;
+        padding-bottom: 90px;
     }
 
     .svc-cta-strip {
-        margin-top: -70px;
+        margin-top: -60px;
     }
 
     .svc-cta-strip .container.svc-cta-strip-inner {
@@ -623,5 +609,26 @@
 
     .svc-bottom-cta {
         padding: 64px 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .svc-card,
+    .svc-benefit-card,
+    .svc-card-icon,
+    .svc-benefit-icon,
+    .svc-cta-strip-btn,
+    .svc-bottom-cta-btn {
+        transition: none;
+    }
+
+    .svc-cta-strip-inner::before {
+        animation: none;
+    }
+
+    .svc-intro-heading,
+    .svc-intro-text {
+        animation: none;
     }
 }
