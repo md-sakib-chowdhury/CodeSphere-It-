@@ -32,12 +32,11 @@
 
 .svc-hero {
     position: relative;
-    min-height: 340px;
+    min-height: 480px;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     overflow: hidden;
-    padding-bottom: 56px;
-    padding-top: 190px;
+    padding: 190px 0 64px;
 }
 
 .svc-hero-bg {
@@ -50,7 +49,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    opacity: 0.15;
+    opacity: 0.16;
     background-image:
         linear-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.6) 1px, transparent 1px);
@@ -58,24 +57,40 @@
     mask-image: radial-gradient(circle at 70% 30%, black, transparent 70%);
 }
 
+.svc-hero-bg::after {
+    /* soft decorative glow orbs, purely visual */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 88% 15%, rgba(255, 255, 255, 0.18), transparent 40%),
+        radial-gradient(circle at 8% 85%, rgba(255, 255, 255, 0.12), transparent 45%);
+    pointer-events: none;
+}
+
 .svc-hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(6, 12, 10, 0.05) 0%, rgba(6, 12, 10, 0.35) 100%);
+    background: linear-gradient(180deg, rgba(6, 12, 10, 0.05) 0%, rgba(6, 12, 10, 0.4) 100%);
 }
 
 .svc-hero-content {
     position: relative;
     z-index: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .svc-breadcrumb {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     font-size: 0.9rem;
     font-weight: 600;
-    margin-bottom: 14px;
+    margin-bottom: 20px;
 }
 
 .svc-breadcrumb a {
@@ -99,46 +114,46 @@
     font-size: clamp(2.2rem, 5vw, 3.4rem);
     font-weight: 800;
     letter-spacing: -0.02em;
-    margin: 0 0 12px;
+    margin: 0 0 14px;
     color: #fff;
     text-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
 }
 
 .svc-hero-sub {
-    max-width: 560px;
-    color: rgba(255, 255, 255, 0.9);
+    max-width: 620px;
+    color: rgba(255, 255, 255, 0.92);
     font-size: 1.05rem;
     line-height: 1.6;
-    margin: 0;
+    margin: 0 0 40px;
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* ---------------- Intro ---------------- */
-
-.svc-intro {
-    padding: 64px 0 16px;
-    background: var(--svc-bg);
-    text-align: center;
+/* Intro heading/text now lives inside the hero, as a floating
+   pill-style card so it reads as part of the banner, not a
+   separate flat section below it. */
+.svc-hero-intro {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    border-radius: 18px;
+    padding: clamp(24px, 4vw, 36px) clamp(24px, 5vw, 48px);
+    max-width: 780px;
+    animation: svcFadeUp 0.8s ease both, svcFloat 5s ease-in-out 0.8s infinite;
 }
 
 .svc-intro-heading {
-    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
     font-weight: 800;
-    margin: 0 auto 18px;
-    max-width: 720px;
-    text-align: center;
-    color: var(--svc-text);
-    animation: svcFadeUp 0.8s ease both;
+    margin: 0 0 12px;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
 }
 
 .svc-intro-text {
-    color: var(--svc-text-muted);
-    font-size: 1.02rem;
-    line-height: 1.75;
-    max-width: 760px;
-    margin: 0 auto;
-    text-align: center;
-    animation: svcFadeUp 0.8s ease 0.15s both;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.98rem;
+    line-height: 1.7;
+    margin: 0;
 }
 
 @keyframes svcFadeUp {
@@ -150,6 +165,18 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes svcFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
     }
 }
 
@@ -194,13 +221,14 @@
 .svc-card::before {
     content: attr(data-index);
     position: absolute;
-    top: 18px;
-    right: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: rgba(255, 255, 255, 0.65);
+    top: 14px;
+    right: 18px;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.28);
     z-index: 2;
+    line-height: 1;
 }
 
 .svc-card-head {
@@ -240,13 +268,14 @@
     width: 48px;
     height: 48px;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     z-index: 1;
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.08);
     transition: transform 0.3s ease;
 }
 
@@ -455,19 +484,33 @@
 .svc-benefit-icon {
     width: 48px;
     height: 48px;
-    border-radius: 10px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(22, 163, 74, 0.1);
-    color: var(--svc-green-light);
+    background: var(--svc-benefit-accent, var(--svc-green-light));
+    color: #fff;
     margin-bottom: 16px;
-    transition: transform 0.3s ease, background 0.3s ease;
+    box-shadow:
+        0 8px 18px rgba(6, 20, 10, 0.18),
+        0 0 0 6px color-mix(in srgb, var(--svc-benefit-accent, #16a34a) 12%, transparent);
+    transition: transform 0.3s ease;
+}
+
+.svc-benefits-grid .svc-benefit-card:nth-child(3n+1) {
+    --svc-benefit-accent: #16a34a;
+}
+
+.svc-benefits-grid .svc-benefit-card:nth-child(3n+2) {
+    --svc-benefit-accent: #059669;
+}
+
+.svc-benefits-grid .svc-benefit-card:nth-child(3n+3) {
+    --svc-benefit-accent: #0d9488;
 }
 
 .svc-benefit-card:hover .svc-benefit-icon {
-    transform: scale(1.12) rotate(-4deg);
-    background: rgba(22, 163, 74, 0.18);
+    transform: scale(1.1) rotate(-4deg);
 }
 
 .svc-benefit-card h4 {
@@ -499,7 +542,7 @@
     justify-content: space-between;
     gap: 28px;
     flex-wrap: wrap;
-    background: linear-gradient(135deg, #16a34a, #84cc16);
+    background: linear-gradient(90deg, #2563eb, #16a34a);
     border-radius: 0;
     box-shadow: 0 25px 55px -20px rgba(22, 163, 74, 0.35);
     position: relative;
