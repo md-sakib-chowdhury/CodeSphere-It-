@@ -32,11 +32,11 @@
 
 .svc-hero {
     position: relative;
-    min-height: 480px;
+    min-height: 400px;
     display: flex;
     align-items: center;
     overflow: hidden;
-    padding: 190px 0 64px;
+    padding: 170px 0 56px;
 }
 
 .svc-hero-bg {
@@ -128,30 +128,55 @@
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Intro heading/text now lives inside the hero, as a floating
-   pill-style card so it reads as part of the banner, not a
-   separate flat section below it. */
+/* Intro heading/text now lives inside the hero, as a light glass
+   card so it contrasts against the green banner instead of
+   blending into it. */
 .svc-hero-intro {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(6px);
     border-radius: 18px;
-    padding: clamp(24px, 4vw, 36px) clamp(24px, 5vw, 48px);
+    padding: clamp(24px, 4vw, 34px) clamp(24px, 5vw, 44px);
     max-width: 780px;
+    box-shadow: 0 24px 50px -16px rgba(6, 20, 10, 0.35);
     animation: svcFadeUp 0.8s ease both, svcFloat 5s ease-in-out 0.8s infinite;
 }
 
+.svc-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--svc-green-light);
+    background: rgba(22, 163, 74, 0.08);
+    border: 1px solid rgba(22, 163, 74, 0.25);
+    padding: 6px 12px 6px 10px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+}
+
+.svc-hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--svc-green-light);
+    flex-shrink: 0;
+}
+
 .svc-intro-heading {
-    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+    font-size: clamp(1.35rem, 2.6vw, 1.8rem);
     font-weight: 800;
     margin: 0 0 12px;
-    color: #fff;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    color: var(--svc-text);
 }
 
 .svc-intro-text {
-    color: rgba(255, 255, 255, 0.88);
-    font-size: 0.98rem;
+    color: var(--svc-text-muted);
+    font-size: 0.96rem;
     line-height: 1.7;
     margin: 0;
 }
