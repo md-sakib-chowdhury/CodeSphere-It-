@@ -42,10 +42,14 @@
 .svc-hero-bg {
     position: absolute;
     inset: 0;
+}
+
+/* Mode A (default): filled green/teal/lime diagonal gradient */
+.svc-hero-bg--gradient {
     background: linear-gradient(135deg, #0d9488 0%, #16a34a 55%, #65a30d 100%);
 }
 
-.svc-hero-bg::before {
+.svc-hero-bg--gradient::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -57,7 +61,7 @@
     mask-image: radial-gradient(circle at 70% 30%, black, transparent 70%);
 }
 
-.svc-hero-bg::after {
+.svc-hero-bg--gradient::after {
     /* soft decorative glow orbs, purely visual */
     content: '';
     position: absolute;
@@ -66,6 +70,21 @@
         radial-gradient(circle at 88% 15%, rgba(255, 255, 255, 0.18), transparent 40%),
         radial-gradient(circle at 8% 85%, rgba(255, 255, 255, 0.12), transparent 45%);
     pointer-events: none;
+}
+
+/* Mode B: an uploaded photo instead of the gradient */
+.svc-hero-bg--image {
+    background-size: cover;
+    background-position: center;
+    background-color: #0a1210;
+}
+
+/* Image mode needs a stronger dark wash for text/card contrast,
+   since a photo doesn't guarantee the same readability as the
+   flat gradient. */
+.svc-hero-bg--image+.svc-hero-overlay {
+    background:
+        linear-gradient(180deg, rgba(6, 12, 10, 0.35) 0%, rgba(6, 12, 10, 0.6) 100%);
 }
 
 .svc-hero-overlay {
