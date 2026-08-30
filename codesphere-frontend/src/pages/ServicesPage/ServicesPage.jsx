@@ -826,7 +826,7 @@ const DEFAULT_PAGE_HEADER = {
     heroSubtitle: 'MERN stack development, e-commerce, and custom software — built by a team that ships and stays around to support it.',
     introHeading: 'Software That Fits the Way You Actually Work',
     introText: "AMANAH IT builds full-stack web applications, e-commerce platforms, and custom software using the MERN stack — React, Node.js, Express, and MongoDB. Every project is scoped around a real business problem, not a template. Below is what we handle end-to-end, from the first wireframe to production deployment.",
-    heroBgType: 'gradient', // 'gradient' | 'image'
+    heroBgType: 'image', // always 'image' now — gradient only remains as an internal fallback when no image is set
     heroImage: '',
 };
 
@@ -853,9 +853,19 @@ const DEFAULT_BOTTOM_CTA = {
     buttonLink: '/contact',
 };
 
+const PAGE_HEADER_CACHE_KEY = 'amanahit_svc_page_header';
+
+const getInitialPageHeader = () => {
+    try {
+        const cached = localStorage.getItem(PAGE_HEADER_CACHE_KEY);
+        if (cached) return { ...DEFAULT_PAGE_HEADER, ...JSON.parse(cached) };
+    } catch { /* ignore bad/blocked storage */ }
+    return DEFAULT_PAGE_HEADER;
+};
+
 export default function ServicesPage() {
     const [services, setServices] = useState(FALLBACK_SERVICES);
-    const [pageHeader, setPageHeader] = useState(DEFAULT_PAGE_HEADER);
+    const [pageHeader, setPageHeader] = useState(getInitialPageHeader);
     const [benefits, setBenefits] = useState(DEFAULT_BENEFITS);
     const [ctaStrip, setCtaStrip] = useState(DEFAULT_CTA_STRIP);
     const [bottomCta, setBottomCta] = useState(DEFAULT_BOTTOM_CTA);
@@ -872,7 +882,11 @@ export default function ServicesPage() {
                     const nonEmpty = Object.fromEntries(
                         Object.entries(d.servicesPageHeader).filter(([, v]) => v !== '' && v != null)
                     );
-                    setPageHeader(prev => ({ ...prev, ...nonEmpty }));
+                    setPageHeader(prev => {
+                        const merged = { ...prev, ...nonEmpty };
+                        try { localStorage.setItem(PAGE_HEADER_CACHE_KEY, JSON.stringify(merged)); } catch { /* ignore */ }
+                        return merged;
+                    });
                 }
                 if (d.servicesPageBenefits) setBenefits({ ...DEFAULT_BENEFITS, ...d.servicesPageBenefits });
                 if (d.servicesPageCtaStrip) setCtaStrip({ ...DEFAULT_CTA_STRIP, ...d.servicesPageCtaStrip });
