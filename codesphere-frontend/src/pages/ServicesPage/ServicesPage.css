@@ -431,6 +431,7 @@
     background: linear-gradient(270deg, #0d9488, #16a34a, #0d9488);
     background-size: 200% 200%;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     animation: svcBorderFlow 4s linear infinite;
