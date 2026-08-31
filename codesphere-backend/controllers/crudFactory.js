@@ -18,6 +18,12 @@ const deleteImage = async (publicId) => {
     if (publicId) await cloudinary.uploader.destroy(publicId);
 };
 
+// req theke socket.io instance ber kore shob connected client ke event pathano
+const emitUpdate = (req, modelName, action, payload) => {
+    const io = req.app.get('io');
+    if (io) io.emit('dataUpdated', { model: modelName, action, payload });
+};
+
 const createCRUD = (Model, imageField = null) => ({
     getAll: async (req, res) => {
         try {
@@ -41,6 +47,7 @@ const createCRUD = (Model, imageField = null) => ({
                 data[imageField + 'PublicId'] = publicId;
             }
             const item = await Model.create(data);
+            emitUpdate(req, Model.modelName, 'create', item);
             res.status(201).json(item);
         } catch (err) { res.status(400).json({ message: err.message }); }
     },
@@ -56,6 +63,7 @@ const createCRUD = (Model, imageField = null) => ({
                 data[imageField + 'PublicId'] = publicId;
             }
             const updated = await Model.findByIdAndUpdate(req.params.id, data, { new: true });
+            emitUpdate(req, Model.modelName, 'update', updated);
             res.json(updated);
         } catch (err) { res.status(400).json({ message: err.message }); }
     },
@@ -65,6 +73,7 @@ const createCRUD = (Model, imageField = null) => ({
             if (!item) return res.status(404).json({ message: 'Not found' });
             if (imageField && item[imageField + 'PublicId']) await deleteImage(item[imageField + 'PublicId']);
             await item.deleteOne();
+            emitUpdate(req, Model.modelName, 'delete', { _id: req.params.id });
             res.json({ message: 'Deleted' });
         } catch (err) { res.status(500).json({ message: err.message }); }
     },
