@@ -270,12 +270,21 @@
 .svc-card::before {
     content: attr(data-index);
     position: absolute;
-    top: 14px;
-    right: 18px;
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: 0.02em;
-    color: rgba(255, 255, 255, 0.28);
+    top: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 24px;
+    padding: 0 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
     z-index: 2;
     line-height: 1;
 }
@@ -299,18 +308,30 @@
     pointer-events: none;
 }
 
-/* 4-way green-shade rotation — mirrors the accent palette used
-   throughout the Service Detail page (green / emerald / teal / lime) */
+.svc-card-head::before {
+    /* subtle dot-grid texture so the header isn't a flat empty gradient */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.35) 1px, transparent 1px);
+    background-size: 16px 16px;
+    background-position: -4px -4px;
+    mask-image: radial-gradient(circle at 100% 0%, black, transparent 65%);
+    -webkit-mask-image: radial-gradient(circle at 100% 0%, black, transparent 65%);
+    pointer-events: none;
+}
+
+/* 3 solid colors, no gradient mixing — lime / dark forest / medium green */
 .svc-card.tone-a .svc-card-head {
-    background: linear-gradient(135deg, #16a34a, #059669);
+    background: #a3c93a;
 }
 
 .svc-card.tone-b .svc-card-head {
-    background: linear-gradient(135deg, #059669, #0d9488);
+    background: #0f4d2e;
 }
 
 .svc-card.tone-c .svc-card-head {
-    background: linear-gradient(135deg, #0d9488, #65a30d);
+    background: #2ea44f;
 }
 
 .svc-card-icon {
