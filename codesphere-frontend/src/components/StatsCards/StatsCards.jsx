@@ -58,8 +58,44 @@
 //         </section>
 //     );
 // }import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
+// import api from '../../utils/api';
+// import './StatsCards.css';
+
+// const DEFAULT_CARDS = [
+//     { value: '28+', label: 'Projects Built', desc: 'Real-world MERN stack projects shipped and deployed.', tone: 1 },
+//     { value: '2+', label: 'Years of Craft', desc: 'Building with the MERN stack since 2024.', tone: 2 },
+//     { value: 'MERN', label: 'Core Stack', desc: 'MongoDB, Express, React, Node — our specialty end to end.', tone: 3 },
+//     { value: '100%', label: 'Commitment', desc: 'Every project gets our full focus, start to finish.', tone: 4 },
+// ];
+
+// export default function StatsCards() {
+//     const [cards, setCards] = useState(DEFAULT_CARDS);
+
+//     useEffect(() => {
+//         api.get('/home-sections').then(r => {
+//             if (r.data?.statsCards?.length) setCards(r.data.statsCards);
+//         }).catch(() => { });
+//     }, []);
+
+//     return (
+//         <section className="stats-cards section" id="stats-cards">
+//             <div className="container stats-cards-grid">
+//                 {cards.map((c, i) => (
+//                     <div key={c._id || i} className={`stat-card-box tone-${c.tone || (i % 4) + 1}`}>
+//                         <div className="stat-card-glow" />
+//                         <div className="stat-card-value">{c.value}</div>
+//                         <div className="stat-card-label">{c.label}</div>
+//                         <p className="stat-card-desc">{c.desc}</p>
+//                     </div>
+//                 ))}
+//             </div>
+//         </section>
+//     );
+// }
 import { useState, useEffect } from 'react';
 import api from '../../utils/api';
+import socket from '../../utils/socket';
 import './StatsCards.css';
 
 const DEFAULT_CARDS = [
@@ -76,6 +112,15 @@ export default function StatsCards() {
         api.get('/home-sections').then(r => {
             if (r.data?.statsCards?.length) setCards(r.data.statsCards);
         }).catch(() => { });
+
+        // 🔴 admin panel theke card add/edit/delete/save korle instantly update, refresh lagbe na
+        const handleUpdate = (event) => {
+            if (event.model !== 'HomeSections') return;
+            if (event.payload?.statsCards?.length) setCards(event.payload.statsCards);
+        };
+
+        socket.on('dataUpdated', handleUpdate);
+        return () => socket.off('dataUpdated', handleUpdate);
     }, []);
 
     return (
