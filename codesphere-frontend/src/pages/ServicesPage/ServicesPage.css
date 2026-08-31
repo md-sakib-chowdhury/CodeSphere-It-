@@ -580,6 +580,8 @@
     color: var(--svc-text-muted);
     font-size: 0.92rem;
     line-height: 1.6;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 /* ---------------- Bottom CTA ---------------- */
