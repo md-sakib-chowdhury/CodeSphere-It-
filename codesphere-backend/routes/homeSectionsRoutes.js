@@ -207,7 +207,6 @@ router.put('/', protect, checkPermission('manageHomeSections'), async (req, res)
         if (!h) h = new HomeSections();
         const data = { ...req.body };
 
-        // WhatWeOffer image upload (jodi notun base64 image dewa hoy)
         if (data.whatWeOffer?.image?.startsWith('data:')) {
             if (h.whatWeOffer?.imagePublicId) {
                 const cloudinary = require('cloudinary').v2;
@@ -218,7 +217,6 @@ router.put('/', protect, checkPermission('manageHomeSections'), async (req, res)
             data.whatWeOffer.imagePublicId = publicId;
         }
 
-        // KeyCompetency image upload
         if (data.keyCompetency?.image?.startsWith('data:')) {
             if (h.keyCompetency?.imagePublicId) {
                 const cloudinary = require('cloudinary').v2;
@@ -229,7 +227,6 @@ router.put('/', protect, checkPermission('manageHomeSections'), async (req, res)
             data.keyCompetency.imagePublicId = publicId;
         }
 
-        // WhyChooseUs images upload (array of 2)
         if (Array.isArray(data.whyChooseUs?.images)) {
             for (let i = 0; i < data.whyChooseUs.images.length; i++) {
                 const img = data.whyChooseUs.images[i];
@@ -246,7 +243,6 @@ router.put('/', protect, checkPermission('manageHomeSections'), async (req, res)
             }
         }
 
-        // LatestActivities cards image upload (jotota card thake totota loop hobe)
         if (Array.isArray(data.latestActivities?.cards)) {
             for (let i = 0; i < data.latestActivities.cards.length; i++) {
                 const card = data.latestActivities.cards[i];
@@ -265,6 +261,11 @@ router.put('/', protect, checkPermission('manageHomeSections'), async (req, res)
 
         Object.assign(h, data);
         await h.save();
+
+        // 🔴 shob connected client (homepage + admin) ke instant update pathano
+        const io = req.app.get('io');
+        if (io) io.emit('dataUpdated', { model: 'HomeSections', action: 'update', payload: h });
+
         res.json(h);
     } catch (err) { res.status(500).json({ message: err.message }); }
 });
