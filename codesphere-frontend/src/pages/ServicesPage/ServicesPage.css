@@ -156,7 +156,7 @@
     background: rgba(255, 255, 255, 0.94);
     border: 1px solid rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(6px);
-    border-radius: 18px;
+    border-radius: 0;
     padding: clamp(24px, 4vw, 34px) clamp(24px, 5vw, 44px);
     max-width: 780px;
     margin-bottom: -145px;
@@ -201,6 +201,8 @@
     font-size: 0.96rem;
     line-height: 1.7;
     margin: 0;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 @keyframes svcFadeUp {
