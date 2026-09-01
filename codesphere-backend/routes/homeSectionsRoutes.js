@@ -259,6 +259,30 @@ router.put('/', protect, checkPermission('manageHomeSections'), async (req, res)
             }
         }
 
+        // 🔴 FIX: servicesPageHeader.heroImage — age eta Cloudinary te upload hoto na,
+        // raw base64 shorashori DB te save hoye document ke onek MB baniye felto,
+        // fole /home-sections GET request onek slow/hang hoye jeto.
+        if (data.servicesPageHeader?.heroImage?.startsWith('data:')) {
+            if (h.servicesPageHeader?.heroImagePublicId) {
+                const cloudinary = require('cloudinary').v2;
+                await cloudinary.uploader.destroy(h.servicesPageHeader.heroImagePublicId).catch(() => { });
+            }
+            const { url, publicId } = await uploadImage(data.servicesPageHeader.heroImage);
+            data.servicesPageHeader.heroImage = url;
+            data.servicesPageHeader.heroImagePublicId = publicId;
+        }
+
+        // 🔴 FIX: serviceDetailBenefits.image — same issue, same fix
+        if (data.serviceDetailBenefits?.image?.startsWith('data:')) {
+            if (h.serviceDetailBenefits?.imagePublicId) {
+                const cloudinary = require('cloudinary').v2;
+                await cloudinary.uploader.destroy(h.serviceDetailBenefits.imagePublicId).catch(() => { });
+            }
+            const { url, publicId } = await uploadImage(data.serviceDetailBenefits.image);
+            data.serviceDetailBenefits.image = url;
+            data.serviceDetailBenefits.imagePublicId = publicId;
+        }
+
         Object.assign(h, data);
         await h.save();
 
