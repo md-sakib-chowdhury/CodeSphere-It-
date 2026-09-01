@@ -10,7 +10,17 @@ cloudinary.config({
 
 const uploadImage = async (base64) => {
     if (!base64 || !base64.startsWith('data:')) return { url: base64, publicId: '' };
-    const result = await cloudinary.uploader.upload(base64, { folder: 'codesphere' });
+    const result = await cloudinary.uploader.upload(base64, {
+        folder: 'codesphere',
+        // 🔴 FIX: auto-optimize — quality/format Cloudinary nijei best choose kore,
+        // ar khub boro image hole max 1920px width e resize kore. Eta upload
+        // size onek kome (kajei site e load hoyeo fast hoy), original quality
+        // te kono lokkhoniyo pathok chokhe pore na.
+        quality: 'auto',
+        fetch_format: 'auto',
+        width: 1920,
+        crop: 'limit',
+    });
     return { url: result.secure_url, publicId: result.public_id };
 };
 
