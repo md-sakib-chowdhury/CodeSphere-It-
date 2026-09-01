@@ -1138,6 +1138,7 @@ import {
     FiArrowRight, FiCheckCircle, FiZap, FiShield, FiHeadphones, FiTrendingUp, FiClock,
 } from 'react-icons/fi';
 import api from '../../utils/api';
+import socket from '../../utils/socket';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import './ServiceDetails.css';
@@ -1259,9 +1260,7 @@ const DEFAULT_BENEFITS = {
         { icon: 'FiHeadphones', title: '24/7 Dedicated Support', text: 'Benefit from round-the-clock technical support and rapid response times, ensuring critical business issues are resolved swiftly at any hour.' },
         { icon: 'FiTrendingUp', title: 'Intelligent Automation', text: 'Integrate advanced AI workflows and cloud-based automations into your daily systems to accelerate decision-making and eliminate repetitive tasks.' },
     ],
-    // optional full-width banner image under the grid — leave blank to hide it
     image: '',
-    // optional closing paragraph shown right under the banner image
     closingText: "At Amanah IT, we're dedicated to providing top-notch technology solutions that help businesses thrive in today's fast-paced digital world. With tailored solutions and an expert team behind you, you can focus on growing your business while we handle your technology needs. Don't let IT challenges hold you back — contact us today and let's build something great together.",
 };
 
@@ -1287,20 +1286,35 @@ export default function ServiceDetails() {
     const [sidebarCta, setSidebarCta] = useState(DEFAULT_SIDEBAR_CTA);
     const [bottomCta, setBottomCta] = useState(DEFAULT_BOTTOM_CTA);
 
-    useEffect(() => {
+    const fetchServices = () => {
         api.get('/services')
             .then(r => { if (r.data?.length) setServices(r.data); })
             .catch(() => { /* keep fallback content */ });
+    };
 
-        api.get('/home-sections')
-            .then(r => {
-                const d = r.data || {};
-                if (d.serviceDetailProcess?.steps?.length) setProcess({ ...DEFAULT_PROCESS, ...d.serviceDetailProcess });
-                if (d.serviceDetailBenefits?.items?.length) setBenefits({ ...DEFAULT_BENEFITS, ...d.serviceDetailBenefits });
-                if (d.serviceDetailSidebarCta) setSidebarCta({ ...DEFAULT_SIDEBAR_CTA, ...d.serviceDetailSidebarCta });
-                if (d.serviceDetailBottomCta) setBottomCta({ ...DEFAULT_BOTTOM_CTA, ...d.serviceDetailBottomCta });
-            })
-            .catch(() => { /* keep defaults */ });
+    const applyHomeSections = (d) => {
+        if (!d) return;
+        if (d.serviceDetailProcess?.steps?.length) setProcess({ ...DEFAULT_PROCESS, ...d.serviceDetailProcess });
+        if (d.serviceDetailBenefits?.items?.length) setBenefits({ ...DEFAULT_BENEFITS, ...d.serviceDetailBenefits });
+        if (d.serviceDetailSidebarCta) setSidebarCta({ ...DEFAULT_SIDEBAR_CTA, ...d.serviceDetailSidebarCta });
+        if (d.serviceDetailBottomCta) setBottomCta({ ...DEFAULT_BOTTOM_CTA, ...d.serviceDetailBottomCta });
+    };
+
+    useEffect(() => {
+        fetchServices();
+        api.get('/home-sections').then(r => applyHomeSections(r.data)).catch(() => { });
+
+        // 🔴 admin panel theke change korle instantly update, refresh lagbe na
+        const handleUpdate = (event) => {
+            if (event.model === 'HomeSections') {
+                applyHomeSections(event.payload);
+            } else if (event.model === 'Service') {
+                fetchServices();
+            }
+        };
+
+        socket.on('dataUpdated', handleUpdate);
+        return () => socket.off('dataUpdated', handleUpdate);
     }, []);
 
     const service = services.find(s => s.slug === slug);
