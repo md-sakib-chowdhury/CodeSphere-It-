@@ -48,6 +48,11 @@ router.post('/', protect, async (req, res) => {
             data.imagePublicId = publicId;
         }
         const service = await Service.create(data);
+
+        // 🔴 shob connected client ke instant update pathano
+        const io = req.app.get('io');
+        if (io) io.emit('dataUpdated', { model: 'Service', action: 'create', payload: service });
+
         res.status(201).json(service);
     } catch (err) { res.status(500).json({ message: err.message }); }
 });
@@ -69,6 +74,11 @@ router.put('/:id', protect, async (req, res) => {
 
         Object.assign(existing, data);
         await existing.save();
+
+        // 🔴 shob connected client ke instant update pathano
+        const io = req.app.get('io');
+        if (io) io.emit('dataUpdated', { model: 'Service', action: 'update', payload: existing });
+
         res.json(existing);
     } catch (err) { res.status(500).json({ message: err.message }); }
 });
@@ -80,7 +90,13 @@ router.delete('/:id', protect, async (req, res) => {
         if (service.imagePublicId) {
             await cloudinary.uploader.destroy(service.imagePublicId).catch(() => { });
         }
+        const deletedId = service._id;
         await service.deleteOne();
+
+        // 🔴 shob connected client ke instant update pathano
+        const io = req.app.get('io');
+        if (io) io.emit('dataUpdated', { model: 'Service', action: 'delete', payload: { _id: deletedId } });
+
         res.json({ message: 'Deleted' });
     } catch (err) { res.status(500).json({ message: err.message }); }
 });
