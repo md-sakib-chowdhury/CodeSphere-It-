@@ -206,6 +206,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiCode, FiShoppingCart, FiLayout, FiServer, FiCloud, FiSmartphone } from 'react-icons/fi';
 import api from '../../utils/api';
+import socket from '../../utils/socket';
 import './Services.css';
 
 const ICONS = { FiCode, FiShoppingCart, FiLayout, FiServer, FiCloud, FiSmartphone };
@@ -230,11 +231,29 @@ export default function Services() {
     const [services, setServices] = useState(DEFAULTS);
     const [header, setHeader] = useState(DEFAULT_HEADER);
 
-    useEffect(() => {
+    const fetchServices = () => {
         api.get('/services').then(r => { if (r.data.length) setServices(r.data); }).catch(() => { });
+    };
+
+    useEffect(() => {
+        fetchServices();
         api.get('/home-sections').then(r => {
             if (r.data?.servicesHeader) setHeader({ ...DEFAULT_HEADER, ...r.data.servicesHeader });
         }).catch(() => { });
+
+        // 🔴 admin panel theke change korle instantly update, refresh lagbe na
+        const handleUpdate = (event) => {
+            if (event.model === 'HomeSections') {
+                if (event.payload?.servicesHeader) {
+                    setHeader({ ...DEFAULT_HEADER, ...event.payload.servicesHeader });
+                }
+            } else if (event.model === 'Service') {
+                fetchServices();
+            }
+        };
+
+        socket.on('dataUpdated', handleUpdate);
+        return () => socket.off('dataUpdated', handleUpdate);
     }, []);
 
     const getIcon = (name) => {
