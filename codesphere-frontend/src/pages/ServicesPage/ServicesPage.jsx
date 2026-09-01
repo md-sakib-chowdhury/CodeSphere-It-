@@ -751,6 +751,7 @@ import {
     FiArrowRight, FiShield, FiZap, FiHeadphones, FiCheckCircle,
 } from 'react-icons/fi';
 import api from '../../utils/api';
+import socket from '../../utils/socket';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import './ServicesPage.css';
@@ -826,7 +827,7 @@ const DEFAULT_PAGE_HEADER = {
     heroSubtitle: 'MERN stack development, e-commerce, and custom software — built by a team that ships and stays around to support it.',
     introHeading: 'Software That Fits the Way You Actually Work',
     introText: "AMANAH IT builds full-stack web applications, e-commerce platforms, and custom software using the MERN stack — React, Node.js, Express, and MongoDB. Every project is scoped around a real business problem, not a template. Below is what we handle end-to-end, from the first wireframe to production deployment.",
-    heroBgType: 'image', // always 'image' now — gradient only remains as an internal fallback when no image is set
+    heroBgType: 'image',
     heroImage: '',
 };
 
@@ -870,29 +871,44 @@ export default function ServicesPage() {
     const [ctaStrip, setCtaStrip] = useState(DEFAULT_CTA_STRIP);
     const [bottomCta, setBottomCta] = useState(DEFAULT_BOTTOM_CTA);
 
-    useEffect(() => {
+    const fetchServices = () => {
         api.get('/services')
             .then(r => { if (r.data?.length) setServices(r.data); })
             .catch(() => { /* keep fallback content */ });
+    };
 
-        api.get('/home-sections')
-            .then(r => {
-                const d = r.data || {};
-                if (d.servicesPageHeader) {
-                    const nonEmpty = Object.fromEntries(
-                        Object.entries(d.servicesPageHeader).filter(([, v]) => v !== '' && v != null)
-                    );
-                    setPageHeader(prev => {
-                        const merged = { ...prev, ...nonEmpty };
-                        try { localStorage.setItem(PAGE_HEADER_CACHE_KEY, JSON.stringify(merged)); } catch { /* ignore */ }
-                        return merged;
-                    });
-                }
-                if (d.servicesPageBenefits) setBenefits({ ...DEFAULT_BENEFITS, ...d.servicesPageBenefits });
-                if (d.servicesPageCtaStrip) setCtaStrip({ ...DEFAULT_CTA_STRIP, ...d.servicesPageCtaStrip });
-                if (d.servicesPageBottomCta) setBottomCta({ ...DEFAULT_BOTTOM_CTA, ...d.servicesPageBottomCta });
-            })
-            .catch(() => { /* keep defaults */ });
+    const applyHomeSections = (d) => {
+        if (!d) return;
+        if (d.servicesPageHeader) {
+            const nonEmpty = Object.fromEntries(
+                Object.entries(d.servicesPageHeader).filter(([, v]) => v !== '' && v != null)
+            );
+            setPageHeader(prev => {
+                const merged = { ...prev, ...nonEmpty };
+                try { localStorage.setItem(PAGE_HEADER_CACHE_KEY, JSON.stringify(merged)); } catch { /* ignore */ }
+                return merged;
+            });
+        }
+        if (d.servicesPageBenefits) setBenefits({ ...DEFAULT_BENEFITS, ...d.servicesPageBenefits });
+        if (d.servicesPageCtaStrip) setCtaStrip({ ...DEFAULT_CTA_STRIP, ...d.servicesPageCtaStrip });
+        if (d.servicesPageBottomCta) setBottomCta({ ...DEFAULT_BOTTOM_CTA, ...d.servicesPageBottomCta });
+    };
+
+    useEffect(() => {
+        fetchServices();
+        api.get('/home-sections').then(r => applyHomeSections(r.data)).catch(() => { });
+
+        // 🔴 admin panel theke change korle instantly update, refresh lagbe na
+        const handleUpdate = (event) => {
+            if (event.model === 'HomeSections') {
+                applyHomeSections(event.payload);
+            } else if (event.model === 'Service') {
+                fetchServices();
+            }
+        };
+
+        socket.on('dataUpdated', handleUpdate);
+        return () => socket.off('dataUpdated', handleUpdate);
     }, []);
 
     return (
