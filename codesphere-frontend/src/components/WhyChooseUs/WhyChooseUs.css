@@ -64,6 +64,9 @@
     line-height: 1.8;
     margin-bottom: 1.75rem;
     max-width: 460px;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
 }
 
 .why-btn {
@@ -162,6 +165,7 @@
     .why-sub {
         margin-left: auto;
         margin-right: auto;
+        text-align: center;
     }
 }
 
