@@ -214,11 +214,26 @@
 
 .svcd-section-title::before {
     content: '';
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background: var(--svcd-green);
     flex-shrink: 0;
+    animation: svcd-dot-ping 1.8s ease-in-out infinite;
+}
+
+@keyframes svcd-dot-ping {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.55);
+    }
+
+    50% {
+        transform: scale(1.25);
+        box-shadow: 0 0 0 6px rgba(22, 163, 74, 0);
+    }
 }
 
 .svcd-main {
@@ -979,6 +994,7 @@
         transition: none;
     }
 
+    .svcd-section-title::before,
     .svcd-process-title::before {
         animation: none;
     }
