@@ -1,134 +1,208 @@
-.key-competency {
-    background: var(--gray-50);
+/* ============================================================
+   WHY CHOOSE SECTION
+   Class names unchanged. Fixes broken words, calmer image glow.
+   ============================================================ */
+
+.why-choose {
+    background: #fff;
 }
 
-.key-competency .section-label {
+.why-row {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.why-choose .section-label {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--blue-600);
-    background: linear-gradient(135deg, var(--blue-50), var(--blue-100));
-    border: none;
-    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
-    padding: 0.5rem 1.25rem 0.5rem 1rem;
+    font-size: 0.8rem;
     font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #2563eb;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    border: 1px solid #bfdbfe;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    box-shadow: 0 2px 8px -2px rgba(37, 99, 235, 0.2);
+    position: relative;
+    overflow: hidden;
 }
 
-.key-competency .section-label::before {
+.why-choose .section-label::before {
     content: '';
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: var(--blue-600);
+    background: #2563eb;
     flex-shrink: 0;
-    animation: dotPulse 1.8s ease-in-out infinite;
+    animation: label-pulse 1.8s ease-out infinite;
 }
 
-@keyframes dotPulse {
+@keyframes label-pulse {
     0% {
         box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.5);
     }
 
-    70% {
+    70%,
+    100% {
         box-shadow: 0 0 0 6px rgba(37, 99, 235, 0);
     }
-
-    100% {
-        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
-    }
 }
 
-.kc-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3.5rem;
-    align-items: center;
-}
-
-.kc-title {
-    font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+.why-title {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
     font-weight: 800;
     color: var(--gray-900);
-    margin: 1rem 0 1rem;
-    line-height: 1.25;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    margin: 1rem 0 1.25rem;
+    text-wrap: balance;
 }
 
-.kc-sub {
+/* Left-aligned, no hyphenation: no more "deliv-ers" word breaks
+   and no wide gaps between words */
+.why-sub {
     font-size: 1rem;
     color: var(--gray-600);
     line-height: 1.8;
-    margin-bottom: 2rem;
-    max-width: 480px;
-    text-align: justify;
-    text-justify: inter-word;
-    hyphens: auto;
+    margin-bottom: 1.9rem;
+    max-width: 460px;
+    text-align: left;
+    hyphens: none;
+    -webkit-hyphens: none;
+    text-wrap: pretty;
 }
 
-.kc-circles {
+/* ---------------- Button ---------------- */
+
+.why-btn {
+    font-size: 0.95rem;
+    padding: 0.85rem 1.75rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 20px -8px rgba(34, 197, 94, 0.55);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.why-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+}
+
+.why-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 26px -8px rgba(34, 197, 94, 0.6);
+}
+
+.why-btn:hover::before {
+    left: 125%;
+}
+
+.why-btn:active {
+    transform: translateY(0);
+}
+
+.why-btn:focus-visible {
+    outline: 2px solid #16a34a;
+    outline-offset: 3px;
+}
+
+/* ---------------- Images ---------------- */
+
+.why-images {
     display: flex;
-    gap: 1.75rem;
-    flex-wrap: wrap;
+    gap: 1.5rem;
 }
 
-.circle-stat {
+.why-img-card {
+    flex: 1;
     text-align: center;
 }
 
-.circle-label {
-    margin-top: 0.75rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--gray-700);
-    max-width: 110px;
-}
-
-.kc-img-wrap {
-    position: relative;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-}
-
-.kc-img-wrap img {
+/* Static soft border; the glow now appears only on hover instead of
+   pulsing forever, which looked busy next to the text */
+.why-img-card img {
     width: 100%;
-    aspect-ratio: 4/3.2;
+    aspect-ratio: 3/4;
     object-fit: cover;
-    display: block;
+    border-radius: var(--radius-md);
+    border: 2px solid rgba(34, 197, 94, 0.35);
+    position: relative;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.05), 0 18px 30px -16px rgba(15, 23, 42, 0.25);
+    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.kc-img-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
-    color: #fff;
-    padding: 1.5rem;
-    font-size: 0.95rem;
+.why-img-card:hover img {
+    border-color: rgba(34, 197, 94, 0.9);
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15), 0 22px 36px -14px rgba(34, 197, 94, 0.4);
+    transform: translateY(-4px);
 }
 
-.kc-img-caption strong {
-    color: var(--green-400);
+.why-img-card p {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    letter-spacing: -0.005em;
 }
+
+/* ---------------- Responsive ---------------- */
 
 @media (max-width: 1023px) {
-    .kc-row {
+    .why-row {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 2rem;
+        text-align: center;
     }
 
-    .kc-circles {
-        justify-content: center;
+    .why-sub {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
     }
 }
 
 @media (max-width: 479px) {
-    .kc-circles {
-        gap: 1rem;
-        justify-content: space-between;
+    .why-images {
+        flex-direction: column;
     }
 
-    .circle-stat svg {
-        width: 100px;
-        height: 100px;
+    .why-img-card img {
+        aspect-ratio: 16/10;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .why-btn,
+    .why-btn::before,
+    .why-img-card img {
+        transition: none;
+    }
+
+    .why-choose .section-label::before {
+        animation: none;
+    }
+
+    .why-btn:hover,
+    .why-img-card:hover img {
+        transform: none;
     }
 }
