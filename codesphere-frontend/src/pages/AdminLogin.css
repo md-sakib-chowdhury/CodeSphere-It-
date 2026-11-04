@@ -1,6 +1,14 @@
-/* .admin-login {
+/* ============================================================
+   ADMIN LOGIN — light polish of the original design
+   Class names unchanged, so your JSX works as-is.
+   ============================================================ */
+
+.admin-login {
     min-height: 100vh;
-    background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+    background:
+        radial-gradient(circle at 12% 18%, rgba(37, 99, 235, 0.1), transparent 40%),
+        radial-gradient(circle at 88% 82%, rgba(34, 197, 94, 0.12), transparent 42%),
+        linear-gradient(135deg, #eff6ff, #f0fdf4);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -8,14 +16,40 @@
 }
 
 .login-card {
+    position: relative;
+    overflow: hidden;
     background: #fff;
     border: 1px solid var(--blue-100);
     border-radius: var(--radius-xl);
-    padding: 2.5rem;
+    padding: 2.75rem 2.5rem 2.5rem;
     width: 100%;
     max-width: 420px;
     box-shadow: var(--shadow-xl);
     text-align: center;
+    animation: loginCardIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* thin brand bar on top */
+.login-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--blue-600), var(--green-500));
+}
+
+@keyframes loginCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .login-logo {
@@ -23,24 +57,30 @@
 }
 
 .login-logo span {
-    font-size: 1.3rem;
+    display: inline-block;
+    font-size: 1.4rem;
     font-weight: 800;
+    letter-spacing: -0.02em;
     font-family: var(--font-display);
     background: linear-gradient(135deg, var(--blue-600), var(--green-500));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    padding: 0.2rem 0.1rem;
 }
 
 .login-card h2 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
     color: var(--gray-900);
     margin-bottom: 0.5rem;
 }
 
 .login-card p {
     color: var(--gray-500);
-    font-size: 0.9rem;
+    font-size: 0.92rem;
+    line-height: 1.6;
     margin-bottom: 2rem;
 }
 
@@ -51,320 +91,116 @@
 
 .form-group label {
     display: block;
-    font-size: 0.85rem;
-    font-weight: 500;
+    font-size: 0.84rem;
+    font-weight: 600;
     color: var(--gray-700);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.45rem;
 }
 
 .form-group input {
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 0.78rem 1rem;
+    background: #f8fafc;
     border: 1.5px solid var(--gray-200);
     border-radius: var(--radius-md);
-    font-size: 0.9rem;
-    transition: var(--transition);
+    font-size: 0.92rem;
+    color: var(--gray-900);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
     outline: none;
 }
 
+.form-group input::placeholder {
+    color: var(--gray-400, #9ca3af);
+}
+
+.form-group input:hover {
+    border-color: var(--gray-300, #d1d5db);
+}
+
 .form-group input:focus {
+    background: #fff;
     border-color: var(--blue-400);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.form-group input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 40px #f8fafc inset;
+    -webkit-text-fill-color: var(--gray-900);
 }
 
 .login-btn {
     width: 100%;
     justify-content: center;
-    padding: 0.875rem;
+    padding: 0.9rem;
     font-size: 0.95rem;
-} */
- /* ============================================================
-   ADMIN LOGIN
-   Class names unchanged, so your JSX works as-is.
-   Light brand look: soft blue/green glow, clean card, gradient CTA.
-   ============================================================ */
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, #2563eb, #22c55e);
+    box-shadow: 0 10px 22px -8px rgba(37, 99, 235, 0.55);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, opacity 0.2s ease;
+}
 
- .admin-login {
-     min-height: 100vh;
-     background:
-         radial-gradient(circle at 15% 20%, rgba(37, 99, 235, 0.14), transparent 40%),
-         radial-gradient(circle at 85% 80%, rgba(34, 197, 94, 0.16), transparent 42%),
-         linear-gradient(135deg, #eff6ff, #f0fdf4);
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     padding: 1.25rem;
-     position: relative;
-     overflow: hidden;
- }
+/* shine sweep on hover */
+.login-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+}
 
- /* faint grid, fading toward the edges */
- .admin-login::before {
-     content: '';
-     position: absolute;
-     inset: 0;
-     background-image:
-         linear-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px),
-         linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
-     background-size: 44px 44px;
-     -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, #000 20%, transparent 75%);
-     mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, #000 20%, transparent 75%);
-     pointer-events: none;
- }
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 28px -8px rgba(37, 99, 235, 0.6);
+}
 
- /* slow-floating color orb */
- .admin-login::after {
-     content: '';
-     position: absolute;
-     width: 360px;
-     height: 360px;
-     border-radius: 50%;
-     top: -120px;
-     right: -100px;
-     background: radial-gradient(circle, rgba(34, 197, 94, 0.22), transparent 68%);
-     filter: blur(10px);
-     pointer-events: none;
-     animation: loginOrb 14s ease-in-out infinite alternate;
- }
+.login-btn:hover::before {
+    left: 125%;
+}
 
- @keyframes loginOrb {
-     from {
-         transform: translate3d(0, 0, 0) scale(1);
-     }
+.login-btn:active {
+    transform: translateY(0);
+}
 
-     to {
-         transform: translate3d(-40px, 50px, 0) scale(1.12);
-     }
- }
+.login-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
 
- /* ---------------- Card ---------------- */
+.login-btn:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.35);
+    outline-offset: 3px;
+}
 
- .login-card {
-     position: relative;
-     z-index: 1;
-     background: rgba(255, 255, 255, 0.92);
-     backdrop-filter: blur(14px);
-     -webkit-backdrop-filter: blur(14px);
-     border: 1px solid rgba(255, 255, 255, 0.9);
-     outline: 1px solid var(--blue-100);
-     outline-offset: -1px;
-     border-radius: var(--radius-xl);
-     padding: 2.75rem 2.5rem 2.5rem;
-     width: 100%;
-     max-width: 430px;
-     box-shadow:
-         0 2px 4px rgba(15, 23, 42, 0.04),
-         0 30px 60px -20px rgba(15, 23, 42, 0.25);
-     text-align: center;
-     overflow: hidden;
-     animation: loginCardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
- }
+@media (max-width: 479px) {
+    .login-card {
+        padding: 2.25rem 1.5rem 2rem;
+    }
+}
 
- /* brand gradient bar on top */
- .login-card::before {
-     content: '';
-     position: absolute;
-     top: 0;
-     left: 0;
-     right: 0;
-     height: 4px;
-     background: linear-gradient(90deg, #2563eb, #22c55e);
- }
+@media (prefers-reduced-motion: reduce) {
+    .login-card {
+        animation: none;
+    }
 
- @keyframes loginCardIn {
-     from {
-         opacity: 0;
-         transform: translateY(18px) scale(0.985);
-     }
+    .login-btn,
+    .login-btn::before,
+    .form-group input {
+        transition: none;
+    }
 
-     to {
-         opacity: 1;
-         transform: translateY(0) scale(1);
-     }
- }
-
- /* ---------------- Logo ---------------- */
-
- .login-logo {
-     margin-bottom: 1.6rem;
- }
-
- .login-logo span {
-     display: inline-block;
-     font-size: 1.45rem;
-     font-weight: 800;
-     letter-spacing: -0.02em;
-     font-family: var(--font-display);
-     background: linear-gradient(135deg, var(--blue-600), var(--green-500));
-     -webkit-background-clip: text;
-     -webkit-text-fill-color: transparent;
-     background-clip: text;
-     padding: 0.2rem 0.1rem;
- }
-
- /* ---------------- Heading ---------------- */
-
- .login-card h2 {
-     font-size: 1.65rem;
-     font-weight: 800;
-     letter-spacing: -0.025em;
-     color: var(--gray-900);
-     margin-bottom: 0.5rem;
- }
-
- .login-card p {
-     color: var(--gray-500);
-     font-size: 0.92rem;
-     line-height: 1.6;
-     margin-bottom: 2rem;
- }
-
- /* ---------------- Form ---------------- */
-
- .form-group {
-     text-align: left;
-     margin-bottom: 1.25rem;
- }
-
- .form-group label {
-     display: block;
-     font-size: 0.82rem;
-     font-weight: 600;
-     letter-spacing: 0.01em;
-     color: var(--gray-700);
-     margin-bottom: 0.45rem;
- }
-
- .form-group input {
-     width: 100%;
-     padding: 0.8rem 1rem;
-     background: #f8fafc;
-     border: 1.5px solid var(--gray-200);
-     border-radius: var(--radius-md);
-     font-size: 0.92rem;
-     color: var(--gray-900);
-     transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-     outline: none;
- }
-
- .form-group input::placeholder {
-     color: var(--gray-400, #9ca3af);
- }
-
- .form-group input:hover {
-     border-color: var(--gray-300, #d1d5db);
- }
-
- .form-group input:focus {
-     background: #fff;
-     border-color: var(--blue-400);
-     box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
- }
-
- /* Browser autofill keeps the same look */
- .form-group input:-webkit-autofill {
-     -webkit-box-shadow: 0 0 0 40px #f8fafc inset;
-     -webkit-text-fill-color: var(--gray-900);
- }
-
- /* Optional: shown only if your JSX renders an error element with one of these classes */
- .login-error,
- .form-error,
- .error-message {
-     background: #fef2f2;
-     border: 1px solid #fecaca;
-     color: #b91c1c;
-     font-size: 0.85rem;
-     font-weight: 500;
-     padding: 0.7rem 0.9rem;
-     border-radius: var(--radius-md);
-     margin-bottom: 1.25rem;
-     text-align: left;
- }
-
- /* ---------------- Button ---------------- */
-
- .login-btn {
-     width: 100%;
-     justify-content: center;
-     padding: 0.9rem;
-     font-size: 0.95rem;
-     font-weight: 700;
-     letter-spacing: 0.01em;
-     border: none;
-     border-radius: var(--radius-md);
-     color: #fff;
-     background: linear-gradient(135deg, #2563eb, #22c55e);
-     box-shadow: 0 10px 22px -8px rgba(37, 99, 235, 0.55);
-     position: relative;
-     overflow: hidden;
-     cursor: pointer;
-     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, opacity 0.2s ease;
- }
-
- .login-btn::before {
-     /* shine sweep on hover */
-     content: '';
-     position: absolute;
-     top: 0;
-     left: -75%;
-     width: 50%;
-     height: 100%;
-     background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-     transform: skewX(-20deg);
-     transition: left 0.6s ease;
- }
-
- .login-btn:hover {
-     transform: translateY(-2px);
-     box-shadow: 0 16px 28px -8px rgba(37, 99, 235, 0.6);
- }
-
- .login-btn:hover::before {
-     left: 125%;
- }
-
- .login-btn:active {
-     transform: translateY(0);
- }
-
- .login-btn:disabled {
-     opacity: 0.7;
-     cursor: not-allowed;
-     transform: none;
- }
-
- .login-btn:focus-visible {
-     outline: 3px solid rgba(37, 99, 235, 0.35);
-     outline-offset: 3px;
- }
-
- /* ---------------- Small screens ---------------- */
-
- @media (max-width: 479px) {
-     .login-card {
-         padding: 2.25rem 1.5rem 2rem;
-     }
-
-     .login-card h2 {
-         font-size: 1.45rem;
-     }
- }
-
- @media (prefers-reduced-motion: reduce) {
-
-     .login-card,
-     .admin-login::after {
-         animation: none;
-     }
-
-     .login-btn,
-     .login-btn::before,
-     .form-group input {
-         transition: none;
-     }
-
-     .login-btn:hover {
-         transform: none;
-     }
- }
+    .login-btn:hover {
+        transform: none;
+    }
+}
