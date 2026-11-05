@@ -1,20 +1,12 @@
 /* ============================================================
-<<<<<<< HEAD
-   SERVICES SECTION (home page) — light polish pass
-=======
    SERVICES SECTION (home page) — professional
->>>>>>> b8e0c8f (one new services)
    Class names unchanged. Per-card color still comes from the
    inline --accent variable, exactly as before.
    Design rules: restrained color, one hover idea, clear hierarchy.
    ============================================================ */
 
 .services {
-<<<<<<< HEAD
-    background: linear-gradient(180deg, #f5f7f9 0%, #f1f4f7 100%);
-=======
     background: linear-gradient(180deg, #f6f8fa 0%, #f1f4f7 100%);
->>>>>>> b8e0c8f (one new services)
     position: relative;
     overflow: hidden;
     /* extra top space keeps content clear of the green strip above */
@@ -63,10 +55,6 @@
     margin: 1.1rem auto 0;
     max-width: 560px;
     line-height: 1.75;
-<<<<<<< HEAD
-    /* avoids broken words like "cutting-edge" and orphan lines */
-=======
->>>>>>> b8e0c8f (one new services)
     hyphens: none;
     -webkit-hyphens: none;
     text-wrap: balance;
@@ -143,11 +131,7 @@
     animation-delay: 0.16s;
 }
 
-<<<<<<< HEAD
-/* top accent bar: a short stub at rest, full width on hover */
-=======
 /* top accent bar: short stub at rest, full width on hover */
->>>>>>> b8e0c8f (one new services)
 .service-card::before {
     content: '';
     position: absolute;
@@ -156,11 +140,7 @@
     width: 48px;
     height: 3px;
     background: var(--accent);
-<<<<<<< HEAD
-    transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-=======
     transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
->>>>>>> b8e0c8f (one new services)
     z-index: 2;
 }
 
@@ -182,15 +162,9 @@
 
 .service-card:hover,
 .service-card:focus-within {
-<<<<<<< HEAD
-    transform: translateY(-6px);
-    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.05), 0 24px 44px -16px rgba(15, 23, 42, 0.2);
-    border-color: color-mix(in srgb, var(--accent) 35%, var(--gray-200));
-=======
     transform: translateY(-5px);
     box-shadow: 0 2px 4px rgba(15, 23, 42, 0.05), 0 28px 48px -18px rgba(15, 23, 42, 0.22);
     border-color: color-mix(in srgb, var(--accent) 38%, var(--gray-200));
->>>>>>> b8e0c8f (one new services)
 }
 
 .service-card:hover::before,
@@ -200,11 +174,7 @@
 
 .service-card:hover::after,
 .service-card:focus-within::after {
-<<<<<<< HEAD
-    opacity: 0.12;
-=======
     opacity: 0.1;
->>>>>>> b8e0c8f (one new services)
 }
 
 /* ---------------- Icon ---------------- */
@@ -251,14 +221,6 @@
     line-height: 1.3;
     margin: 0;
     text-wrap: balance;
-<<<<<<< HEAD
-    transition: color 0.3s ease;
-}
-
-.service-card:hover .service-title {
-    color: var(--accent);
-=======
->>>>>>> b8e0c8f (one new services)
 }
 
 .service-desc {
@@ -335,17 +297,9 @@
     font-weight: 700;
     display: inline-flex;
     align-items: center;
-<<<<<<< HEAD
-    gap: 0.35rem;
-    padding: 0.5rem 1rem;
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--accent) 10%, transparent);
-    transition: gap 0.25s ease, background 0.25s ease, color 0.25s ease;
-=======
     gap: 0.4rem;
     padding: 0.2rem 0;
     border-radius: 4px;
->>>>>>> b8e0c8f (one new services)
     width: fit-content;
     background-image: linear-gradient(currentColor, currentColor);
     background-repeat: no-repeat;
@@ -376,12 +330,7 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
-<<<<<<< HEAD
-    /* if the card count is odd, the last card spans the row
-       instead of sitting alone on the left */
-=======
     /* odd card count: the last card spans the row instead of sitting alone */
->>>>>>> b8e0c8f (one new services)
     .service-card:last-child:nth-child(odd) {
         grid-column: 1 / -1;
     }
