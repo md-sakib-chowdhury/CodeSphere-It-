@@ -1,16 +1,26 @@
 /* ============================================================
+<<<<<<< HEAD
    SERVICES SECTION (home page) — light polish pass
+=======
+   SERVICES SECTION (home page) — professional
+>>>>>>> b8e0c8f (one new services)
    Class names unchanged. Per-card color still comes from the
    inline --accent variable, exactly as before.
+   Design rules: restrained color, one hover idea, clear hierarchy.
    ============================================================ */
 
 .services {
+<<<<<<< HEAD
     background: linear-gradient(180deg, #f5f7f9 0%, #f1f4f7 100%);
+=======
+    background: linear-gradient(180deg, #f6f8fa 0%, #f1f4f7 100%);
+>>>>>>> b8e0c8f (one new services)
     position: relative;
     overflow: hidden;
     /* extra top space keeps content clear of the green strip above */
     padding-top: 160px !important;
     padding-bottom: 5.5rem;
+    border-bottom: 1px solid var(--gray-200);
 }
 
 /* subtle dot-grid texture */
@@ -18,12 +28,12 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(circle, var(--gray-200) 1px, transparent 1px);
+    background-image: radial-gradient(circle, var(--gray-300, #d1d5db) 1px, transparent 1px);
     background-size: 28px 28px;
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 55% at 50% 0%, #000 25%, transparent 75%);
+    mask-image: radial-gradient(ellipse 80% 55% at 50% 0%, #000 25%, transparent 75%);
     pointer-events: none;
-    opacity: 0.6;
+    opacity: 0.45;
 }
 
 .services .container {
@@ -38,11 +48,25 @@
     margin-bottom: 3.75rem;
 }
 
+/* short brand bar under the section title */
+.services .section-header .section-title::after {
+    content: '';
+    display: block;
+    width: 56px;
+    height: 4px;
+    border-radius: 999px;
+    margin: 1.1rem auto 0;
+    background: linear-gradient(90deg, #2563eb, #22c55e);
+}
+
 .section-header .section-sub {
-    margin: 0 auto;
+    margin: 1.1rem auto 0;
     max-width: 560px;
     line-height: 1.75;
+<<<<<<< HEAD
     /* avoids broken words like "cutting-edge" and orphan lines */
+=======
+>>>>>>> b8e0c8f (one new services)
     hyphens: none;
     -webkit-hyphens: none;
     text-wrap: balance;
@@ -97,20 +121,20 @@
     background: var(--white);
     border: 1px solid var(--gray-200);
     border-radius: var(--radius-lg);
-    padding: 2.25rem 2rem 2rem;
+    padding: 2.4rem 2.1rem 2.1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
+    gap: 0.95rem;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 6px 16px -8px rgba(15, 23, 42, 0.08);
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-        border-color 0.35s ease;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 20px -12px rgba(15, 23, 42, 0.1);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.4s ease;
     animation: fadeInUp 0.55s ease both;
 }
 
-/* gentle stagger so cards don't pop in all at once */
+/* gentle stagger */
 .service-card:nth-child(3n+2) {
     animation-delay: 0.08s;
 }
@@ -119,7 +143,11 @@
     animation-delay: 0.16s;
 }
 
+<<<<<<< HEAD
 /* top accent bar: a short stub at rest, full width on hover */
+=======
+/* top accent bar: short stub at rest, full width on hover */
+>>>>>>> b8e0c8f (one new services)
 .service-card::before {
     content: '';
     position: absolute;
@@ -128,31 +156,41 @@
     width: 48px;
     height: 3px;
     background: var(--accent);
+<<<<<<< HEAD
     transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+=======
+    transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+>>>>>>> b8e0c8f (one new services)
     z-index: 2;
 }
 
-/* soft corner glow, tinted by --accent */
+/* soft corner glow tinted by --accent */
 .service-card::after {
     content: '';
     position: absolute;
-    top: -50px;
-    right: -50px;
-    width: 150px;
-    height: 150px;
+    top: -60px;
+    right: -60px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     background: var(--accent);
     opacity: 0;
-    filter: blur(44px);
-    transition: opacity 0.4s ease;
+    filter: blur(48px);
+    transition: opacity 0.45s ease;
     pointer-events: none;
 }
 
 .service-card:hover,
 .service-card:focus-within {
+<<<<<<< HEAD
     transform: translateY(-6px);
     box-shadow: 0 2px 4px rgba(15, 23, 42, 0.05), 0 24px 44px -16px rgba(15, 23, 42, 0.2);
     border-color: color-mix(in srgb, var(--accent) 35%, var(--gray-200));
+=======
+    transform: translateY(-5px);
+    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.05), 0 28px 48px -18px rgba(15, 23, 42, 0.22);
+    border-color: color-mix(in srgb, var(--accent) 38%, var(--gray-200));
+>>>>>>> b8e0c8f (one new services)
 }
 
 .service-card:hover::before,
@@ -162,25 +200,31 @@
 
 .service-card:hover::after,
 .service-card:focus-within::after {
+<<<<<<< HEAD
     opacity: 0.12;
+=======
+    opacity: 0.1;
+>>>>>>> b8e0c8f (one new services)
 }
 
 /* ---------------- Icon ---------------- */
 
 .service-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
+    width: 58px;
+    height: 58px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     position: relative;
     z-index: 1;
-    margin-bottom: 0.35rem;
-    background: color-mix(in srgb, var(--accent) 12%, white) !important;
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent);
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    margin-bottom: 0.45rem;
+    background: color-mix(in srgb, var(--accent) 11%, white) !important;
+    box-shadow:
+        inset 0 0 0 1px color-mix(in srgb, var(--accent) 24%, transparent),
+        0 6px 14px -8px color-mix(in srgb, var(--accent) 50%, transparent);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
         background 0.35s ease,
         box-shadow 0.35s ease;
 }
@@ -189,7 +233,7 @@
 .service-card:focus-within .service-icon {
     transform: translateY(-2px);
     background: var(--accent) !important;
-    box-shadow: 0 10px 20px -8px color-mix(in srgb, var(--accent) 60%, transparent);
+    box-shadow: 0 12px 22px -8px color-mix(in srgb, var(--accent) 65%, transparent);
 }
 
 .service-card:hover .service-icon svg,
@@ -200,24 +244,27 @@
 /* ---------------- Text ---------------- */
 
 .service-title {
-    font-size: 1.2rem;
+    font-size: 1.22rem;
     font-weight: 700;
     color: var(--gray-900);
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
     line-height: 1.3;
     margin: 0;
     text-wrap: balance;
+<<<<<<< HEAD
     transition: color 0.3s ease;
 }
 
 .service-card:hover .service-title {
     color: var(--accent);
+=======
+>>>>>>> b8e0c8f (one new services)
 }
 
 .service-desc {
-    font-size: 0.92rem;
+    font-size: 0.93rem;
     color: var(--gray-600);
-    line-height: 1.7;
+    line-height: 1.72;
     margin: 0;
     text-align: left;
     hyphens: none;
@@ -229,19 +276,19 @@
 
 .service-features {
     list-style: none;
-    padding: 1rem 0 0;
-    margin: 0.25rem 0 0;
+    padding: 1.1rem 0 0;
+    margin: 0.35rem 0 0;
     display: flex;
     flex-direction: column;
-    gap: 0.65rem;
+    gap: 0.7rem;
     border-top: 1px solid var(--gray-200);
 }
 
 .service-features li {
     display: flex;
     align-items: flex-start;
-    gap: 0.65rem;
-    font-size: 0.86rem;
+    gap: 0.7rem;
+    font-size: 0.87rem;
     font-weight: 500;
     color: var(--gray-700, var(--gray-600));
     line-height: 1.5;
@@ -279,26 +326,38 @@
 
 .service-footer {
     margin-top: auto;
-    padding-top: 1rem;
+    padding-top: 1.1rem;
 }
 
+/* text-style link with an animated underline, calmer than a pill */
 .service-link {
-    font-size: 0.86rem;
+    font-size: 0.88rem;
     font-weight: 700;
     display: inline-flex;
     align-items: center;
+<<<<<<< HEAD
     gap: 0.35rem;
     padding: 0.5rem 1rem;
     border-radius: 999px;
     background: color-mix(in srgb, var(--accent) 10%, transparent);
     transition: gap 0.25s ease, background 0.25s ease, color 0.25s ease;
+=======
+    gap: 0.4rem;
+    padding: 0.2rem 0;
+    border-radius: 4px;
+>>>>>>> b8e0c8f (one new services)
     width: fit-content;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    background-position: 0 100%;
+    transition: gap 0.3s ease, background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.service-link:hover {
-    gap: 0.6rem;
-    background: var(--accent);
-    color: #fff !important;
+.service-link:hover,
+.service-card:hover .service-link {
+    gap: 0.65rem;
+    background-size: 100% 2px;
 }
 
 .service-link:focus-visible {
@@ -317,8 +376,12 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
+<<<<<<< HEAD
     /* if the card count is odd, the last card spans the row
        instead of sitting alone on the left */
+=======
+    /* odd card count: the last card spans the row instead of sitting alone */
+>>>>>>> b8e0c8f (one new services)
     .service-card:last-child:nth-child(odd) {
         grid-column: 1 / -1;
     }
@@ -355,7 +418,7 @@
     }
 
     .service-card {
-        padding: 1.75rem 1.5rem;
+        padding: 1.85rem 1.5rem;
     }
 }
 
