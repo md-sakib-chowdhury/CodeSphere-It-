@@ -1,66 +1,96 @@
 /* ============================================================
-   ADMIN LOGIN — light polish of the original design
+   ADMIN LOGIN — smart look
    Class names unchanged, so your JSX works as-is.
+   Gradient hairline border, tighter type, refined inputs and button.
    ============================================================ */
 
 .admin-login {
     min-height: 100vh;
     background:
-        radial-gradient(circle at 12% 18%, rgba(37, 99, 235, 0.1), transparent 40%),
-        radial-gradient(circle at 88% 82%, rgba(34, 197, 94, 0.12), transparent 42%),
-        linear-gradient(135deg, #eff6ff, #f0fdf4);
+        radial-gradient(circle at 10% 15%, rgba(37, 99, 235, 0.1), transparent 38%),
+        radial-gradient(circle at 90% 85%, rgba(34, 197, 94, 0.12), transparent 40%),
+        linear-gradient(135deg, #f1f6ff, #f1fcf5);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
-}
-
-.login-card {
+    padding: 1.25rem;
     position: relative;
     overflow: hidden;
-    background: #fff;
-    border: 1px solid var(--blue-100);
-    border-radius: var(--radius-xl);
-    padding: 2.75rem 2.5rem 2.5rem;
-    width: 100%;
-    max-width: 420px;
-    box-shadow: var(--shadow-xl);
-    text-align: center;
-    animation: loginCardIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* thin brand bar on top */
+/* very faint grid that fades out toward the edges */
+.admin-login::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+    background-size: 40px 40px;
+    -webkit-mask-image: radial-gradient(ellipse 55% 55% at 50% 50%, #000 15%, transparent 75%);
+    mask-image: radial-gradient(ellipse 55% 55% at 50% 50%, #000 15%, transparent 75%);
+    pointer-events: none;
+}
+
+/* ---------------- Card ---------------- */
+
+/* 1px gradient hairline border (padding-box / border-box trick) */
+.login-card {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    width: 100%;
+    max-width: 410px;
+    padding: 2.6rem 2.4rem 2.3rem;
+    text-align: center;
+    border: 1px solid transparent;
+    border-radius: var(--radius-xl);
+    background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(135deg, rgba(37, 99, 235, 0.4), rgba(226, 232, 240, 0.9) 45%, rgba(34, 197, 94, 0.4)) border-box;
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.04),
+        0 8px 20px -8px rgba(15, 23, 42, 0.1),
+        0 36px 60px -28px rgba(15, 23, 42, 0.3);
+    animation: loginCardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* short brand accent on top, centered */
 .login-card::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 72px;
+    height: 3px;
+    border-radius: 0 0 4px 4px;
     background: linear-gradient(90deg, var(--blue-600), var(--green-500));
 }
 
 @keyframes loginCardIn {
     from {
         opacity: 0;
-        transform: translateY(16px);
+        transform: translateY(14px) scale(0.99);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
+/* ---------------- Logo + heading ---------------- */
+
 .login-logo {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.4rem;
 }
 
 .login-logo span {
     display: inline-block;
     font-size: 1.4rem;
     font-weight: 800;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
     font-family: var(--font-display);
     background: linear-gradient(135deg, var(--blue-600), var(--green-500));
     -webkit-background-clip: text;
@@ -70,41 +100,48 @@
 }
 
 .login-card h2 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 800;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
     color: var(--gray-900);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.45rem;
 }
 
 .login-card p {
     color: var(--gray-500);
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     line-height: 1.6;
-    margin-bottom: 2rem;
+    margin-bottom: 1.9rem;
+    text-wrap: balance;
 }
+
+/* ---------------- Form ---------------- */
 
 .form-group {
     text-align: left;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.1rem;
 }
 
 .form-group label {
     display: block;
-    font-size: 0.84rem;
-    font-weight: 600;
-    color: var(--gray-700);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--gray-600);
     margin-bottom: 0.45rem;
 }
 
 .form-group input {
     width: 100%;
-    padding: 0.78rem 1rem;
+    padding: 0.8rem 1rem;
     background: #f8fafc;
-    border: 1.5px solid var(--gray-200);
-    border-radius: var(--radius-md);
-    font-size: 0.92rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    font-size: 0.93rem;
     color: var(--gray-900);
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03) inset;
     transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
     outline: none;
 }
@@ -128,25 +165,48 @@
     -webkit-text-fill-color: var(--gray-900);
 }
 
+/* Shown only if your JSX renders an error element with one of these classes */
+.login-error,
+.form-error,
+.error-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-left: 3px solid #ef4444;
+    color: #b91c1c;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    margin-bottom: 1.1rem;
+    text-align: left;
+}
+
+/* ---------------- Button ---------------- */
+
 .login-btn {
     width: 100%;
     justify-content: center;
-    padding: 0.9rem;
+    margin-top: 0.4rem;
+    padding: 0.92rem;
     font-size: 0.95rem;
     font-weight: 700;
     letter-spacing: 0.01em;
     color: #fff;
     border: none;
-    border-radius: var(--radius-md);
-    background: linear-gradient(135deg, #2563eb, #22c55e);
-    box-shadow: 0 10px 22px -8px rgba(37, 99, 235, 0.55);
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2563eb 0%, #1d9a8a 55%, #22c55e 100%);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.25) inset,
+        0 12px 24px -10px rgba(37, 99, 235, 0.6);
     position: relative;
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, opacity 0.2s ease;
 }
 
-/* shine sweep on hover */
 .login-btn::before {
     content: '';
     position: absolute;
@@ -161,7 +221,9 @@
 
 .login-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 16px 28px -8px rgba(37, 99, 235, 0.6);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.25) inset,
+        0 18px 30px -10px rgba(37, 99, 235, 0.65);
 }
 
 .login-btn:hover::before {
@@ -173,7 +235,7 @@
 }
 
 .login-btn:disabled {
-    opacity: 0.7;
+    opacity: 0.65;
     cursor: not-allowed;
     transform: none;
 }
@@ -183,9 +245,15 @@
     outline-offset: 3px;
 }
 
+/* ---------------- Small screens ---------------- */
+
 @media (max-width: 479px) {
     .login-card {
-        padding: 2.25rem 1.5rem 2rem;
+        padding: 2.2rem 1.4rem 1.9rem;
+    }
+
+    .login-card h2 {
+        font-size: 1.4rem;
     }
 }
 
