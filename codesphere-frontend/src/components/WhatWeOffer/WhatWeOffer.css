@@ -1,3 +1,8 @@
+/* ============================================================
+   WHAT WE OFFER — light polish
+   Class names unchanged, so your JSX works as-is.
+   ============================================================ */
+
 .what-we-offer {
     background: #fff;
 }
@@ -5,40 +10,36 @@
 .wwo-row {
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
-    gap: 3.5rem;
+    gap: clamp(2.5rem, 5vw, 3.5rem);
     align-items: center;
 }
 
-/* ==========================================================================
-   🎯 WAVE MOTION WITH SPECIFIED COLORS (#9fc52d & GREEN)
-   ========================================================================== */
+/* ---------------- Wave image frame ---------------- */
+/* Animated gradient border + softly morphing shape (kept from your design) */
+
 .wwo-img-wrap {
     position: relative;
     border-radius: 45% 55% 60% 40% / 50% 45% 55% 50%;
     aspect-ratio: 1/1;
     padding: 6px;
-    /* এই প্যাডিংটি বর্ডারের উইড্থ হিসেবে কাজ করবে */
-
-    /* 💡 প্যারট গ্রিনের জায়গায় আপনার দেওয়া #9fc52d এবং মেইন সবুজের গ্রেডিয়েন্ট কম্বিনেশন */
+    /* acts as the border width */
     background: linear-gradient(135deg, #16a34a, #9fc52d, #22c55e, #a7d134);
     background-size: 200% 200%;
-
-    /* ঢেউয়ের মতো আঁকাবাঁকা মোশন এবং কালার চেঞ্জিং এনিমেশন */
-    animation: moveWaveShape 7s ease-in-out infinite alternate, waveGradient 4s ease infinite;
+    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.05), 0 30px 50px -24px rgba(22, 163, 74, 0.45);
+    animation: moveWaveShape 9s ease-in-out infinite alternate, waveGradient 6s ease infinite;
 }
 
 .wwo-img-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* ইমেজটির বর্ডার রেডিয়াসও ব্যাকগ্রাউন্ডের সাথে ম্যাচ করে ঢেউ খেলবে */
+    display: block;
     border-radius: 45% 55% 60% 40% / 50% 45% 55% 50%;
-    animation: moveWaveShape 7s ease-in-out infinite alternate;
     background: #fff;
-    /* ইমেজের পেছনে সাদা ব্যাকগ্রাউন্ড গ্যাপ ফিল করতে */
+    /* fills the gap behind the image */
+    animation: moveWaveShape 9s ease-in-out infinite alternate;
 }
 
-/* কালারগুলোকে ডানে-বামে ঢেউয়ের মতো নাড়ানোর এনিমেশন */
 @keyframes waveGradient {
     0% {
         background-position: 0% 50%;
@@ -53,7 +54,6 @@
     }
 }
 
-/* বর্ডারটির শেপ অনবরত পরিবর্তন করে সাগরের ঢেউয়ের মতো মোশন তৈরি করার কী-ফ্রেম */
 @keyframes moveWaveShape {
     0% {
         border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
@@ -72,11 +72,9 @@
     }
 }
 
-/* ========================================================================== */
+/* ---------------- Label ---------------- */
+/* Pulsing dot before the "What We Offer" label (scoped to this section) */
 
-/* ==========================================================================
-   🔵 PULSING DOT BEFORE "WHAT WE OFFER" LABEL (scoped to this section only)
-   ========================================================================== */
 .what-we-offer .section-label {
     position: relative;
     display: inline-flex;
@@ -88,48 +86,54 @@
 .what-we-offer .section-label::before {
     content: '';
     position: absolute;
-    left: 8px;
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
     width: 8px;
     height: 8px;
     border-radius: 50%;
     background: #3b82f6;
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6), 0 0 6px 1px rgba(59, 130, 246, 0.8);
-    animation: wwoPulseDot 1.8s ease-in-out infinite;
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.55);
+    animation: wwoPulseDot 1.8s ease-out infinite;
 }
 
 @keyframes wwoPulseDot {
     0% {
-        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6), 0 0 6px 1px rgba(59, 130, 246, 0.8);
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.55);
     }
 
-    70% {
-        box-shadow: 0 0 0 8px rgba(59, 130, 246, 0), 0 0 6px 1px rgba(59, 130, 246, 0.8);
-    }
-
+    70%,
     100% {
-        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0), 0 0 6px 1px rgba(59, 130, 246, 0.8);
+        box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
     }
 }
+
+/* ---------------- Text ---------------- */
 
 .wwo-title {
     font-size: clamp(1.75rem, 3.5vw, 2.5rem);
     font-weight: 800;
     color: var(--gray-900);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
     margin: 1rem 0 1rem;
+    text-wrap: balance;
 }
 
+/* Left-aligned, no hyphenation: no more "dy-namic" breaks or wide gaps */
 .wwo-sub {
     font-size: 1rem;
     color: var(--gray-600);
     line-height: 1.8;
     margin-bottom: 2rem;
     max-width: 480px;
-    text-align: justify;
-    text-justify: inter-word;
-    hyphens: auto;
+    text-align: left;
+    hyphens: none;
+    -webkit-hyphens: none;
+    text-wrap: pretty;
 }
+
+/* ---------------- Offer list ---------------- */
 
 .wwo-list {
     display: flex;
@@ -155,19 +159,32 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* icon fills solid when its row is hovered */
+.wwo-item:hover .wwo-icon {
+    background: var(--green-600);
+    border-color: var(--green-600);
+    color: #fff;
+    transform: translateY(-2px);
 }
 
 .wwo-item h3 {
     font-size: 1.05rem;
     font-weight: 700;
+    letter-spacing: -0.01em;
     color: var(--gray-900);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.35rem;
 }
 
 .wwo-item p {
     font-size: 0.9rem;
     color: var(--gray-600);
     line-height: 1.65;
+    hyphens: none;
+    -webkit-hyphens: none;
+    text-wrap: pretty;
 }
 
 .wwo-btn {
@@ -175,9 +192,8 @@
     padding: 0.85rem 1.85rem;
 }
 
-/* ==========================================
-   RESPONSIVE LAYOUTS
-   ========================================== */
+/* ---------------- Responsive ---------------- */
+
 @media (max-width: 1023px) {
     .wwo-row {
         grid-template-columns: 1fr;
@@ -193,6 +209,27 @@
 @media (max-width: 479px) {
     .wwo-img-wrap {
         padding: 4px;
-        /* মোবাইলে বর্ডার সাইজ সামান্য কমানো হলো */
+        /* slightly thinner border on phones */
+    }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .wwo-img-wrap,
+    .wwo-img-wrap img {
+        animation: none;
+    }
+
+    .what-we-offer .section-label::before {
+        animation: none;
+    }
+
+    .wwo-icon {
+        transition: none;
+    }
+
+    .wwo-item:hover .wwo-icon {
+        transform: none;
     }
 }
